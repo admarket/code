@@ -136,7 +136,7 @@
                   <button class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></button>
                   <button class="btn tip"   title="切换身份"><i class="icon-refresh"></i></button>
                   <button class="btn tip"   title="设置"><i class="icon-cog"></i></button>
-                  <a class="btn tip"  title="退出" href="<{spUrl c=main a=logout}>">
+                  <a class="btn tip"  title="退出" href="<{spUrl c=sub a=logout}>">
                     <i class="icon-off"></i>
                   </a>
                 </p>
