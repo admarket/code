@@ -12,7 +12,6 @@ class cuser extends spController
 		$password=$this->spArgs("password");
 		$conditions = array("email" => $email , "password" => $password);
 		$result = $user->findAll($conditions); 
-		//dump($result); // 查看结果，
 		if($result){
 			$_SESSION['user'] = $result[0];
 			echo true;
@@ -91,5 +90,31 @@ class cuser extends spController
         $_SESSION['user']['account'] = $account;
         $_SESSION['user']['type'] = $type;
         echo true; // 首页
+    }
+
+    function uploadHeadimg(){
+    	$filename=$_FILES['file']['name'];
+        $ext=end(explode('.', $filename));
+	  $arg = array(
+		APP_PATH.'/img/head/',
+		$_SESSION["user"]["id"]
+		);
+		$upFlie=spClass("uploadFile", $arg); // 注意第二个参数是数组
+	    $result=$upFlie->upload_file($_FILES['file']);
+	    $msg=$upFlie->errmsg;
+	    if($result){
+	    	$user = spClass("user");
+	    	$id=$_SESSION['user']['id']; 
+	    	$conditions = array("id"=>$id); // 查找email是$email的记录
+	        $newrow = array(
+	                'headimg' => $id.".".$ext,  // 然后将这条记录的name改成“喜羊羊”    
+	        );
+	        $user->update($conditions, $newrow); // 更新记录
+	        $_SESSION['user']['headimg'] = $id.".".$ext;
+	     echo "true";
+	    }else {
+	     echo "false".$msg."123";
+	    }
+		
     }
 }

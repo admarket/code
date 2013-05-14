@@ -50,7 +50,7 @@
           <div class="span3 left-bar">
             <div class="row-fluid category">
                   <div class="span4" align="center">
-                     <img src="/img/head/1.jpg" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
+                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title"><{$smarty.session.user.name}></p>               
                   </div> 
                   <div class="span8" style="padding:10px;">
@@ -147,22 +147,18 @@
             </div>
           </div>
           <div class="span9 main-body" >
-            <div class="row-fluid">
-              <div id="chart1" class="span7" style="min-width: 200px; height: 300px; margin: 0 auto"></div>
-              <div id="chart2" class="span5" style="min-width: 200px; height: 300px; margin: 0 auto"></div>
-            </div>
-             
+            <div id="chart"  style="width:100%; height: 300px; margin: 0 auto"></div>
              <div class="tabbable"> <!-- Only required for left/right tabs -->
               <ul class="nav nav-tabs" style="position:relative;">
               <{foreach from=$projects item=project name=projectCount}>   
               
                   <{if $smarty.foreach.projectCount.index == 0}>
                     <li class="active">
-                     <a href="#tab<{$smarty.foreach.projectCount.index}>" data-toggle="tab"><{$project.name}> </a>
+                     <a class="sec" data-index="<{$smarty.foreach.projectCount.index}>" href="#tab<{$smarty.foreach.projectCount.index}>" data-toggle="tab"><{$project.name}> </a>
                      </li>
                   <{else}>
                      <li>
-                      <a href="#tab<{$smarty.foreach.projectCount.index}>" data-toggle="tab"><{$project.name}> </a>
+                      <a class="sec"  data-index="<{$smarty.foreach.projectCount.index}>" href="#tab<{$smarty.foreach.projectCount.index}>" data-toggle="tab"><{$project.name}> </a>
                     </li>
                   <{/if}>
               <{/foreach}>
@@ -185,6 +181,7 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
+                        <th>序号</th>
                         <th>广告位</th>
                         <th>格式</th>
                         <th>长*宽</th>
@@ -199,6 +196,7 @@
                       <{foreach from=$project.detail item=advertise name=adCount}> 
                         <{if $advertise.project == $project.id}>
                         <tr>
+                          <td><{$smarty.foreach.adCount.index}></td>
                           <td>
                               <p class="title" ><a class="editable"
                                data-pk="<{$advertise.id}>"
@@ -575,6 +573,49 @@ $("#btn-saveAddAdvertise").click(function(){
   }
 });
 
+
+function stringToJSON(obj){   
+  return eval('(' + obj + ')');   
+} 
+var datas=[];//图表数据
+var sums=0;
+function loadData(jsonData){
+   if(jsonData){//从客户端异步获取数据，然后处理
+      var records=jsonData;
+      for(var i in records){ 
+        var profits;
+        if(i==0){
+            profits={
+              name:records[i].name,
+              type: 'column',
+              visible:true,
+              shadow:true,
+              data:[]
+            };
+        } else{
+          profits={
+            name:records[i].name,
+            type: 'column',
+            visible:false,
+            shadow:true,
+            data:[]
+           };
+        }
+        
+        for(var j in records[i].detail){
+          var dataDetail={
+            name:records[i].detail[j].title,
+            y:parseInt(records[i].detail[j].profit)
+          };
+          profits.data.push(dataDetail);
+          //profits.data=dataDetail;
+        }
+       datas.push(profits);
+      }//end for
+      var tempSum=0;
+   }//end if
+ 
+}
 $(function () {
     $('.editable').editable({
         type: 'text',
@@ -586,107 +627,88 @@ $(function () {
             alert(response);
         },
         validate: function(value) {
-        if($.trim(value) == '') {
-            return '该字段不能为空';
+          if($.trim(value) == '') {
+              return '该字段不能为空';
+          }
+          else if($.trim(value).length>50) {
+              return '长度不能超过50';
+          }
         }
-        else if($.trim(value).length>50) {
-            return '长度不能超过50';
-        }
-    }
-  });
-  Highcharts.setOptions({ 
-            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#EC4F4F'] 
-        }); 
-        $('#chart1').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: '广告收益概览',
-                style:{                     //样式
-                fontSize: '14px'
-                }
-            },
-            tooltip: {
-              valueSuffix: '¥'
-           },
-            xAxis: {
-                categories: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10','11','12']
-            },
-            yAxis: {
-              title: {
-                  text: '人民币 (元)'
-              },
-              plotLines: [{
-                  value: 0,
-                  width: 1,
-                  color: '#808080'
-              }]
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: '站酷网',
-                shadow:true,
-                data: [5, 3, 4, 7, 2,4,2,7,9,3,6,3]
-            }, {
-                name: '设计师之家',
-                shadow:true,
-                visible:false,
-                data: [2, 2, 3, 2, 1,2, 2, 3, 2, 1,6,3]
-            }, {
-                name: '模板360',
-                shadow:true,
-                visible:false,
-                data: [3, 4, 4, 2, 5,3, 4, 4, 2, 5,2,7]
-            }]
-        });
-        //-----------------------------
-
-         $('#chart2').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: true
-                
-            },
-            title: {
-                text: '收益百分比',
-                style:{                     //样式
-                fontSize: '14px'
-                }
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-              percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    shadow:true,
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+    });
+    Highcharts.setOptions({ 
+                    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#EC4F4F'] 
+                }); 
+    $.ajax({ url: "<{spUrl c=cproject a=GetJsonData}>", success: function(data){
+            loadData(stringToJSON(data));
+                $('#chart').highcharts({
+                    chart: {
+                      layout: 'vertical',
+                      type:'column',
+                    },
+                    title: {
+                        text: '广告位收入',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    
+                    yAxis: {
+                        title: {
+                            text: '人民币 (元)'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: '¥'
+                    },
+                    plotOptions: {
+                        column: {
+                            cursor: 'pointer',
+                            shadow:true,
+                            dataLabels: {
+                                enabled: true,
+                                color: '#000000',
+                                fontSize: '14px',
+                                connectorColor: '#000000',
+                                formatter: function() {
+                                    return '<b>'+ this.y +' ￥</b>';
+                                }
+                            }
                         }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                shadow:true,
-                data: [
-                    ['站酷网',   45.0],
-                    ['设计师之家',       25.8],
-                    ['模板网',   29.2]
-                ]
-            }]
-        });
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        
+                    },
+                    series: datas
+                });
+                
+                // the button action
+                var chartBox = $('#chart').highcharts();
+                    
+                $(".sec").click(function(){
+                  var index=parseInt($(this).attr("data-index"));
+                  for(var i in chartBox.series){
+                      if(i!=index){
+                        chartBox.series[i].hide();
+                      }
+                       else{
+                        chartBox.series[i].show();
+                       }
+                  }
+                   
+                });
+            }
+        });//end ajax
+       
     });
  
     </script>

@@ -20,12 +20,15 @@
     <div class="header">
       <div class="container">
         <div class="row-fluid">
-          <div class="span7"><a href="/"><img src="/img/budgetup-small.png"/></a></div>
-          <div class="span5">
+          <div class="span6">
+            <a href="/"><img src="/img/budgetup-small.png"/></a>
+          </div>
+          <div class="span6">
               <ul class="nav nav-pills nav-head">
                 <li class="active">
                   <a href="<{spUrl c=sub a=dashboard}>">账户概况</a>
                 </li>
+                <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
                 <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
                 <li><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
@@ -41,7 +44,7 @@
           <div class="span3 left-bar">
             <div class="row-fluid category">
                   <div class="span4" align="center">
-                     <img src="/img/head/1.jpg" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
+                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title">
                       <{$smarty.session.user.name}>
                     </p>               
@@ -177,7 +180,7 @@ $(function () {
               type:'column',
             },
             title: {
-                text: '账户概览',
+                text: '账户年度收支概览',
                 x: -20 //center
             },
             subtitle: {
@@ -204,22 +207,22 @@ $(function () {
             legend: {
                 
             },
-            series: [{
+             series: [{
                 name: '账户余额：100',
                 data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-                type: 'spline',
+                type: 'column',
                 shadow:true
 
             }, {
                 name: '收入：1802',
                 data: [20, 28, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 5],
-                type: 'spline',
+                type: 'column',
                 shadow:true
   
             }, {
                 name: '支出：1702',
                 data: [9, 4, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 10],
-                type: 'spline',
+                type: 'column',
                 shadow:true
               
             }, {

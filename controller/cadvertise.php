@@ -2,25 +2,25 @@
 class cadvertise extends spController
 {
 	
-	function AddAdvertise(){//添加广告项目
-		$advertise = spClass("advertise");
-		$newrow = array(
-                        'project' => $this->spArgs('advertiseProject'),
-                        'title' => $this->spArgs('advertiseName'),
-                        'content' => $this->spArgs('advertiseContent'),
-                        'format' => $this->spArgs('format'),
-                        'width'=> $this->spArgs('advertiseWidth'),
-                        'height'=> $this->spArgs('advertiseHeight'),
-                        'price'=> $this->spArgs('advertisePrice'),
+      	function AddAdvertise(){//添加广告项目
+      		$advertise = spClass("advertise");
+      		$newrow = array(
+                              'project' => $this->spArgs('advertiseProject'),
+                              'title' => $this->spArgs('advertiseName'),
+                              'content' => $this->spArgs('advertiseContent'),
+                              'format' => $this->spArgs('format'),
+                              'width'=> $this->spArgs('advertiseWidth'),
+                              'height'=> $this->spArgs('advertiseHeight'),
+                              'price'=> $this->spArgs('advertisePrice'),
 
-                );
-                $result=$advertise->create($newrow);
-                if($result){
-                	echo 1;
-                }  else{
-                	echo 0;
-                }
-	}
+                      );
+                      $result=$advertise->create($newrow);
+                      if($result){
+                      	echo 1;
+                      }  else{
+                      	echo 0;
+                      }
+      	}
         function RemoveAdvertise(){//添加广告项目
                 $advertise = spClass("advertise");
                 $conditions = array(

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>九尾狐 - 广告位管理</title>
@@ -49,7 +49,7 @@
           <div class="span3 left-bar">
             <div class="row-fluid category">
                   <div class="span4" align="center">
-                     <img src="/img/head/1.jpg" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
+                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title"><{$smarty.session.user.name}></p>               
                   </div> 
                   <div class="span8" style="padding:10px;">
@@ -147,8 +147,8 @@
           </div>
           <div class="span9 main-body" >
             <div class="row-fluid">
-              <div id="chart1" class="span7" style="min-width: 200px; height: 300px; margin: 0 auto"></div>
-              <div id="chart2" class="span5" style="min-width: 200px; height: 300px; margin: 0 auto"></div>
+              <div id="chart1" class="span7" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
+              <div id="chart2" class="span5" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
             </div>
              
              <div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -184,17 +184,20 @@
                           <td>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                               <div class="fileupload-new thumbnail" style="border:solid 1px #ccc;width: 50px; height: 50px;background-color:#ededed;">
-                                <img src="/img/ads/<{$project.id}>.<{$project.logo}>" />
+                                <img src="/img/ads/<{$project.logo}>" />
                               </div>
-                              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 80px; height: 60px;"></div>
+                              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
                               <div>
-                                <span class="btn btn-small btn-file tip btn-upload-logo" title="更新logo">
-                                  <span class="fileupload-new" style="font-size:12px;">
-                                    <i class="icon-upload"></i> logo</span>
-                                  <span class="fileupload-exists" style="font-size:12px;">
-                                    <i class="icon-upload"></i> logo</span>
-                                  <input type="file" name="logo" />
-                                </span>
+                                <form method="post" action="<{spUrl c=cproject a=UpateLogo}>" enctype="multipart/form-data">
+                                  <span class="btn btn-small btn-file tip btn-upload-logo" title="更新logo">
+                                    <span class="fileupload-new" style="font-size:12px;">
+                                      <i class="icon-upload"></i> logo</span>
+                                    <span class="fileupload-exists" style="font-size:12px;">
+                                      <i class="icon-upload"></i> logo</span>
+                                    <input type="file" name="logo" class="upload-logo" />
+                                    <input type="hidden" name="id"  value="<{$project.id}>"/>
+                                  </span>
+                                </form>
                               </div>
                             </div>
                           </td>
@@ -393,7 +396,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            
+            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
             return false;
         }
         
@@ -480,6 +483,25 @@ $('.textarea-editable').editable({
     }
   });
 $('.btn-upload-logo').hide();
+$(".upload-logo").change(function(){
+       var obj = $(this).val();
+       var uploadForm = $(this).parent().parent();
+        var options = {  
+            success : function(data) {  
+                //alert(data);  
+            },  
+            error : function(result) {  
+                alert(result);  
+            }  
+        };  
+        if(pre!=obj&&validateImage(obj)) {
+            $(uploadForm).ajaxSubmit(options);
+        }
+        else{
+            //alert("error");
+        }
+      });
+
 $('.tip').tooltip();
 $("#btn-addProject").click(function(){
   $('#form-addProject').modal();
@@ -546,115 +568,155 @@ $("#btn-saveAddProject").click(function(){
   };
    
 });
+
+function stringToJSON(obj){   
+  return eval('(' + obj + ')');   
+} 
+var datas1=[];//图表1数据
+var datas2=[];//图表2数据
+var sums=0;
+function loadData(jsonData){
+   if(jsonData){//从客户端异步获取数据，然后处理
+      var records=jsonData;
+      for(var i in records){  
+        var sum=0;
+        for(var j in records[i].detail){
+          sum +=parseInt(records[i].detail[j].profit);
+          sums+=parseInt(records[i].detail[j].profit);
+        }
+        var data1={
+            name: records[i].name,
+            shadow:true,
+            data: [sum] 
+        };
+        var data2=[records[i].name,sum];
+        datas2.push(data2);
+        datas1.push(data1);
+      }//end for
+      var tempSum=0;
+    for(var k in datas2){
+        var temp=((datas2[k][1]/sums).toFixed(2))*100;
+        datas2[k][1]=Math.round(temp);
+        tempSum+=datas2[k][1];
+    }
+   }//end if
+ 
+}
 $(function () {
   $('.editable').editable({
-    type: 'text',
-    disabled:true,
-    emptytext:'空数据',
-    url: '<{spUrl c=cproject a=UpdateProject}>',
-    success: function(response, newValue) {
-      if(!response.success) 
-        alert(response);
-    },
-    validate: function(value) {
-        if($.trim(value) == '') {
-            return '该字段不能为空';
+      type: 'text',
+      disabled:true,
+      emptytext:'空数据',
+      url: '<{spUrl c=cproject a=UpdateProject}>',
+      success: function(response, newValue) {
+        if(!response.success) 
+          alert(response);
+      },
+      validate: function(value) {
+          if($.trim(value) == '') {
+              return '该字段不能为空';
+          }
+          else if($.trim(value).length>50) {
+              return '长度不能超过20';
+          }
         }
-        else if($.trim(value).length>50) {
-            return '长度不能超过20';
-        }
-      }
-});
+  });
   Highcharts.setOptions({ 
-            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#EC4F4F'] 
-        }); 
-        $('#chart1').highcharts({
-            chart: {
-                 type: 'areaspline'
-            },
-            title: {
-                text: '广告收益概览',
-                style:{                     //样式
-                fontSize: '14px'
-                }
-            },
-            tooltip: {
-              valueSuffix: '¥'
-           },
-            xAxis: {
-                categories: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10','11','12']
-            },
-            yAxis: {
-              title: {
-                  text: '人民币 (元)'
-              },
-              
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: '站酷网',
-                shadow:true,
-                data: [5, 3, 4, 7, 2,4,2,7,9,3,6,3]
-            }, {
-                name: '设计师之家',
-                visible:false,
-                shadow:true,
-                data: [2, 2, 3, 2, 1,2, 2, 3, 2, 1,6,3]
-            }, {
-                name: '模板360',
-                visible:false,
-                shadow:true,
-                data: [3, 4, 4, 2, 5,3, 4, 4, 2, 5,2,7]
-            }]
-        });
-        //-----------------------------
-
-         $('#chart2').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: true
-                
-            },
-            title: {
-                text: '收益百分比',
-                style:{                     //样式
-                fontSize: '14px'
-                }
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-              percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    shadow:true,
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#EC4F4F'] 
+            });
+  $.ajax({ url: "<{spUrl c=cproject a=GetJsonData}>", success: function(data){
+            loadData(stringToJSON(data));
+           
+            
+            $('#chart1').highcharts({
+                chart: {
+                     type: 'column'
+                },
+                title: {
+                    text: '广告收益概览',
+                    style:{                     //样式
+                    fontSize: '14px'
+                    }
+                },
+                tooltip: {
+                  valueSuffix: '¥'
+               },
+               
+                yAxis: {
+                   
+                  title: {
+                      text: '人民币 (元)'
+                  } 
+                },
+                plotOptions: {
+                    column: {
+                        cursor: 'pointer',
+                        shadow:true,
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            fontSize: '14px',
+                            connectorColor: '#000000',
+                            formatter: function() {
+                                return '<b>'+ this.y +' ￥</b>';
+                            }
                         }
                     }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                shadow:true,
-                data: [
-                    ['站酷网',   45.0],
-                    ['设计师之家',       25.8],
-                    ['模板网',   29.2]
-                ]
-            }]
-        });
+                },
+                credits: {
+                    enabled: false
+                },
+                series:datas1
+
+            });
+            //-----------------------------
+
+             $('#chart2').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: true
+                    
+                },
+                title: {
+                    text: '收益百分比',
+                    style:{                     //样式
+                    fontSize: '14px'
+                    }
+                },
+                tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                  percentageDecimals: 1
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        shadow:true,
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            fontSize: '14px',
+                            connectorColor: '#000000',
+                            formatter: function() {
+                                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                            }
+                        }
+                    }
+                },
+                credits: {
+                        enabled: false
+                    },
+                series: [{
+                    type: 'pie',
+                    name: '收益比例',
+                    shadow:true,
+                    data:datas2
+                }]
+            });
+        }
     });
+});
  
     </script>
   </body>

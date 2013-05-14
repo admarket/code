@@ -33,9 +33,7 @@ class sub extends spController
         $finance = spClass("finance");
         $conditions = array("user_id" => $_SESSION['user']['id']);
         $this->records = $finance->spPager($this->spArgs('page', 1), 5)->findAll($conditions,'time DESC'); 
-        $conditionJson = array("user_id" => $_SESSION['user']['id']);
-        $recordsJson = $finance->findAll($conditionJson); 
-        $this->json=json_encode($recordsJson);
+        
         $this->pager = $finance->spPager()->getPager();
         //dump($records);
         $this->display("user/finance.php"); // 财务统计

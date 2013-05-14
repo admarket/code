@@ -227,7 +227,7 @@
                        return false;
                   }
        else{
-        var reg =  "^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$";验证邮箱的正则表达式
+        var reg =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(!reg.test($.trim($("#email").val()))){
             $("#email-msg").html("邮箱格式不正确！");
             $("#email-msg").css("color","red");

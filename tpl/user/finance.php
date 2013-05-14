@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>九尾狐 - 账户概况</title>
@@ -21,14 +21,15 @@
     <div class="header">
       <div class="container">
         <div class="row-fluid">
-          <div class="span7">
+          <div class="span6">
             <a href="/"><img src="/img/budgetup-small.png"/></a>
           </div>
-          <div class="span5">
-             <ul class="nav nav-pills nav-head">
+          <div class="span6">
+              <ul class="nav nav-pills nav-head">
                 <li>
                   <a href="<{spUrl c=sub a=dashboard}>">账户概况</a>
                 </li>
+                <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
                 <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <li class="active"><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
                 <li><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
@@ -44,7 +45,7 @@
           <div class="span3 left-bar">
             <div class="row-fluid category">
                   <div class="span4" align="center">
-                     <img src="/img/head/1.jpg" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
+                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title"><{$smarty.session.user.name}></p>               
                   </div> 
                   <div class="span8" style="padding:10px;">
@@ -141,19 +142,22 @@
             </div>
           </div>
           <div class="span9 main-body" >
-            <p class="btn-group" style="padding-left:20px;">
-              <button class="btn btn-success tip" id="btn-income"   title="充值">
-                <i class="icon-plus  icon-white"></i> &yen;</button>
-              <button class="btn btn-danger tip" id="btn-outcome"  title="提现">
-                <i class="icon-minus  icon-white"></i> &yen; </button>
-            </p>
-
+           
             <div id="chart" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
             <div class="tabbable"> <!-- Only required for left/right tabs -->
-              <ul class="nav nav-tabs">
+              
+              <ul class="nav nav-tabs" style="position:relative;">
                 <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">全部记录</a></li>
                 <li><a href="#sec-income" data-toggle="tab" id="tab-income">收入</a></li>
                 <li><a href="#sec-outcome" data-toggle="tab" id="tab-outcome">支出</a></li>
+                <span class="btn-group" style="position:absolute;right:0;">
+                        <a id="btn-income" class="btn btn-small btn-success tip" id="btn-addAdvertise" title="充值">
+                          <i class="icon-plus"></i> 充值
+                        </a>
+                         <a  id="btn-outcome"   class="btn btn-small btn-danger tip"  id="editable" title="提现">
+                          <i class="icon-hand-left" ></i> 提现
+                        </a>
+                </span>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active"  id="sec-sum">
@@ -380,7 +384,7 @@ function loadData(data){
           // }else{
           //   incomes.push(0);
           // }
-          outcomes.push(parseFloat(records[i].number));
+          outcomes.push(0-parseFloat(records[i].number));
           sum-=parseFloat(records[i].number);
           
         }
@@ -412,46 +416,53 @@ function loadData(data){
  
 }
 $(function () {
-    loadData(<{$json}>);
-     $('#chart').highcharts({
-          title: {
-              text: '财务统计报表',
-              x: -20 //center
-          },
-          yAxis: {
-              title: {
-                  text: '人民币 (元)'
-              },
-              plotLines: [{
-                  value: 0,
-                  width: 1,
-                  color: '#808080'
-              }]
-          },
-          tooltip: {
-              valueSuffix: '¥'
-          },
-          series: datas
-      });
+  $.ajax({ url: "<{spUrl c=cfinance a=getJsonData}>", success: function(data){
+        loadData(stringToJSON(data));
+        $('#chart').highcharts({
+                title: {
+                    text: '财务统计报表',
+                    x: -20 //center
+                },
+                yAxis: {
+                    title: {
+                        text: '人民币 (元)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '¥'
+                },
+                credits: {
+                        enabled: false
+                    },
+                series: datas
+            });
 
-    // the button action
-    var chartBox = $('#chart').highcharts();
-        
-    $("#tab-income").click(function(){
-      chartBox.series[0].hide();
-      chartBox.series[1].show();
-      chartBox.series[2].hide();
+          // the button action
+          var chartBox = $('#chart').highcharts();
+              
+          $("#tab-income").click(function(){
+            chartBox.series[0].hide();
+            chartBox.series[1].show();
+            chartBox.series[2].hide();
+          });
+          $("#tab-outcome").click(function(){
+            chartBox.series[0].hide();
+            chartBox.series[1].hide();
+            chartBox.series[2].show();
+          });
+          $("#tab-sum").click(function(){
+            chartBox.series[0].show();
+            chartBox.series[1].hide();
+            chartBox.series[2].hide();
+          });
+      }
     });
-    $("#tab-outcome").click(function(){
-      chartBox.series[0].hide();
-      chartBox.series[1].hide();
-      chartBox.series[2].show();
-    });
-    $("#tab-sum").click(function(){
-      chartBox.series[0].show();
-      chartBox.series[1].hide();
-      chartBox.series[2].hide();
-    });
+    
 });
 //]]>  
 

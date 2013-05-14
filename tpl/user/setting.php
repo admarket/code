@@ -22,12 +22,13 @@
     <div class="header">
       <div class="container">
         <div class="row-fluid">
-          <div class="span7"><a href="/"><img src="/img/budgetup-small.png"/></a></div>
-          <div class="span5">
+          <div class="span6"><a href="/"><img src="/img/budgetup-small.png"/></a></div>
+          <div class="span6">
               <ul class="nav nav-pills nav-head">
                 <li>
                   <a href="<{spUrl c=sub a=dashboard}>">账户概况</a>
                 </li>
+                <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
                 <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
                 <li class="active"><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
@@ -43,7 +44,7 @@
           <div class="span3 left-bar">
             <div class="row-fluid category">
                   <div class="span4" align="center">
-                     <img src="/img/head/<{$smarty.session.user.id}>.jpg" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
+                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title">
                       <{$smarty.session.user.name}>
                     </p>               
@@ -197,12 +198,12 @@
 
               <div class="span6" align="center">
                 <p>
-                  <img src="/img/head/<{$smarty.session.user.id}>.jpg" id="head-img" class="img-rounded img-polaroid  thumbnail" style="width:80px;height:80px;">
+                  <img src="/img/head/<{$smarty.session.user.headimg}>" id="head-img" class="img-rounded img-polaroid  thumbnail" style="width:80px;height:80px;">
                   <div>
-                    <form id="headimgform" method="post" action="<{spUrl c=tool a=upFile}>" enctype="multipart/form-data"> 
+                    <form id="headimgform" method="post" action="<{spUrl c=cuser a=uploadHeadimg}>" enctype="multipart/form-data"> 
                       <div class="fileupload fileupload-new" data-provides="fileupload">
                       <div>
-                        <span class="btn btn-file btn-small">
+                        <span class="btn btn-file btn-small" id="btn-upload">
                           <span class="fileupload-new">更换头像</span>                   
                           <input type="file" name="file" id="file" />
                         </span>
@@ -364,10 +365,11 @@ $("#btn-save").click(function(){
    });
 var pre="";   //标记前一个上传的文件
 $("#file").change(function(){
+        $("#btn-upload").button('正在上传...');
         var obj = $("#file").val();
         var options = {  
             success : function(data) {  
-                alert('成功上传！');  
+                //alert(data);  
             },  
             error : function(result) {  
                 //alert(result);  
