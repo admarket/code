@@ -177,7 +177,7 @@ $(function () {
         $('#chart').highcharts({
             chart: {
               layout: 'vertical',
-              type:'column',
+              type:'column'
             },
             title: {
                 text: '账户年度收支概览',
