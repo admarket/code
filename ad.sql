@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 05 月 14 日 11:10
+-- 生成日期: 2013 年 05 月 18 日 12:58
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `advertise` (
   `state` tinyint(4) NOT NULL DEFAULT '0',
   `saleUrl` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=32 ;
 
 --
 -- 转存表中的数据 `advertise`
@@ -47,12 +47,16 @@ CREATE TABLE IF NOT EXISTS `advertise` (
 
 INSERT INTO `advertise` (`id`, `project`, `title`, `content`, `format`, `width`, `height`, `price`, `profit`, `state`, `saleUrl`) VALUES
 (2, 1, '首页左侧顶部广告', '首页左侧顶部LOGO旁边的图片为', 1, 22, 100, 3000.3, 300, 1, ''),
-(3, 2, '首页左侧顶部', '位于首页左侧顶部LOGO旁边', 1, 150, 100, 350, 0, 0, ''),
-(4, 0, 'fasdfasf', 'dsffsdf', 2, 123, 122, 11, 0, 0, ''),
-(5, 0, 'sdfsfa', '111', 2, 11, 11, 11, 0, 0, ''),
-(6, 0, 'dsfsf', '2132131', 0, 1112, 2323, 232323, 0, 0, ''),
+(3, 2, '首页左侧顶部', '位于首页左侧顶部LOGO旁边', 1, 150, 100, 350, 10, 0, ''),
 (13, 1, '下边栏广告', '下边栏广告，导航栏左侧', 1, 300, 200, 120, 0, 0, ''),
-(24, 2, '首页LOGO旁边', '黄金广告位，点击率和展示高', 1, 200, 100, 300, 0, 0, '');
+(24, 2, '首页LOGO旁边', '黄金广告位，点击率和展示高', 1, 200, 100, 300, 600, 1, ''),
+(25, 15, '测试1', '测试1', 1, 200, 200, 180, 180, 1, ''),
+(26, 16, '测试', '1', 1, 1, 1, 1, 100, 1, ''),
+(27, 1, '次奥测试', '的的说法', 1, 2, 2, 2, 20, 0, ''),
+(28, 1, '是打发的说法', '2', 1, 2, 2, 2, 55, 0, ''),
+(29, 1, '3', '3', 1, 3, 3, 3, 65, 0, ''),
+(30, 1, '4', '4', 1, 4, 4, 4, 32, 0, ''),
+(31, 1, '5', '5', 1, 5, 5, 5, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -122,21 +126,22 @@ CREATE TABLE IF NOT EXISTS `project` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `logo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `logo` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0.png',
   `category` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
   `verify` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `project`
 --
 
 INSERT INTO `project` (`id`, `name`, `url`, `description`, `logo`, `category`, `owner`, `verify`) VALUES
-(1, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', 'png', 1, 10, 0),
-(2, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', 'jpg', 7, 10, 0),
-(13, '按时大大', 'http://www.baidu.com', '阿萨德', 'jpg', 1, 10, 0);
+(1, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0),
+(2, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', '2.png', 7, 10, 0),
+(15, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0),
+(16, '测试', 'http://www.baidu.com', '测试', '16.jpg', 1, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -153,18 +158,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `payment` smallint(6) NOT NULL DEFAULT '0',
   `account` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `balance` double NOT NULL DEFAULT '0',
+  `headimg` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default.jpg',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `verify` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `payment`, `account`, `balance`, `time`, `verify`) VALUES
-(1, '张三丰', 'zhangsanfeng@mail.com', '123456', 0, 0, 'zhangsanfeng@mail.com', 12.03, '2013-04-28 16:00:00', 0),
-(10, '任宝占', 'winter_2000@126.com', '111111', 0, 0, 'winter_2000@126.com', 1000, '2013-05-03 14:52:08', 1);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `payment`, `account`, `balance`, `headimg`, `time`, `verify`) VALUES
+(1, '张三丰', 'zhangsanfeng@mail.com', '123456', 0, 0, 'zhangsanfeng@mail.com', 12.03, 'default.jpg', '2013-04-28 16:00:00', 0),
+(10, '任宝占', 'winter_2000@126.com', '111111', 0, 0, 'winter_2000@126.com', 1000, '10.jpg', '2013-05-03 14:52:08', 1),
+(11, 'dfdsfs', 'sdfsf@m.com', '111111', 0, 0, 'dsfsdfds', 0, 'default.jpg', '2013-05-14 11:50:23', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
