@@ -14,7 +14,7 @@ class sub extends spController
     }
     function admanage(){
         $project = spClass("project");
-        $projectConditions = array("owner" => $_SESSION['user']['id']);
+        $conditions = array("owner" => $_SESSION['user']['id']);
         $this->projects = $project->spLinker()->findAll($conditions);
 
         $category = spClass("category");
@@ -23,7 +23,7 @@ class sub extends spController
     }
     function sitemanage(){
         $project = spClass("project");
-        $projectConditions = array("owner" => $_SESSION['user']['id']);
+        $conditions = array("owner" => $_SESSION['user']['id']);
         $this->projects = $project->spLinker()->findAll($conditions);
         $category = spClass("category");
         $this->categories=$category->findAll();
