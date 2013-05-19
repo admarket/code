@@ -173,6 +173,15 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `payment`, `accou
 (10, '任宝占', 'winter_2000@126.com', '111111', 0, 0, 'winter_2000@126.com', 1000, '10.jpg', '2013-05-03 14:52:08', 1),
 (11, 'dfdsfs', 'sdfsf@m.com', '111111', 0, 0, 'dsfsdfds', 0, 'default.jpg', '2013-05-14 11:50:23', 0);
 
+CREATE TABLE if not exists recharge_info
+(id bigint primary key AUTO_INCREMENT comment '充值编号',
+user_id bigint not null comment '充值人编号',
+cash bigint not null comment '充值金额，以分为单位',
+r_status tinyint not null comment '记录状态',
+gmt_create TIMESTAMP comment '创建时间',
+gmt_modified TIMESTAMP comment '最后修改时间'
+)ENGINE=INNODB DEFAULT CHARSET=utf8
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
