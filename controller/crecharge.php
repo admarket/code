@@ -1,5 +1,5 @@
 <?php
-require_once("../tpl/alipay/alipay_submit.class.php");
+require_once("../tpl/alipay/lib/alipay_submit.class.php");
 class crecharge extends spController
 {
 	
