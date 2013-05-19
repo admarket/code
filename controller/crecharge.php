@@ -4,7 +4,7 @@ require_once(APP_PATH.'/tpl/alipay/lib/alipay_submit.class.php');
 class crecharge extends spController
 {
 
-    public function xx() {
+    public function createRecharge() {
         $uid = $_SESSION['user']['id'];
         $cash = $this->spArgs('cash') * 100;
         echo "uid:".$uid."\n";

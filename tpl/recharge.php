@@ -152,7 +152,7 @@
             <li class="last">3、确认完成</li>
         </ol>
     </div>
-    <form name="alipayment" action="<{spUrl c=crecharge a=xx}>" method="post" target="_blank">
+    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
         <div id="body" style="clear:left">
                 <dt>付款金额：</dt>
                 <dd>
