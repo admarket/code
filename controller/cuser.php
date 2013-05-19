@@ -20,6 +20,10 @@ class cuser extends spController
 		}//登录	
 	}
 
+    function recharge() {
+        $this->display("recharge.php");
+    }
+
     function register(){
         $user = spClass("user");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
