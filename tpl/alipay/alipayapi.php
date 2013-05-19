@@ -26,33 +26,34 @@ require_once("lib/alipay_submit.class.php");
 
 /**************************请求参数**************************/
 
-        //商户订单号
-        $out_trade_no = $_POST['WIDout_trade_no'];
-        //商户网站订单系统中唯一订单号，必填
+if(!isset($_SESSION['user']['id'])) {
+    //调回登陆页面
+}
 
-        //订单名称
-        $subject = $_POST['WIDsubject'];
-        //必填
+$uid = $_SESSION['user']['id'];
+$cash = $_REQUEST['cash'] * 100;
 
-        //付款金额
-        $total_fee = $_POST['WIDtotal_fee'];
-        //必填
+$recharge = spClass("recharge");
 
-        //订单描述
-        $body = $_POST['WIDbody'];
+$out_trade_no = $recharge->create(array("uid"=>$uid,"cash"=>$cash));
 
-        //商品展示地址
-        $show_url = $_POST['WIDshow_url'];
-        //需以http://开头的完整路径，例如：http://www.xxx.com/myorder.html
+$subject = $uid."充值".$out_trade_no;
 
-        //防钓鱼时间戳
-        $anti_phishing_key = "";
-        //若要使用请调用类文件submit中的query_timestamp函数
+$total_fee = $cash;
 
-        //客户端的IP地址
-        $exter_invoke_ip = "";
-        //非局域网的外网IP地址，如：221.0.0.1
+$body = "JIUWEIHU".$out_trade_no;
 
+
+$show_url = "WIDshow_url";
+//需以http://开头的完整路径，例如：http://www.xxx.com/myorder.html
+
+//防钓鱼时间戳
+$anti_phishing_key = "";
+//若要使用请调用类文件submit中的query_timestamp函数
+
+//客户端的IP地址
+$exter_invoke_ip = "";
+//非局域网的外网IP地址，如：221.0.0.1
 
 /************************************************************/
 

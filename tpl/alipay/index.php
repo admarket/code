@@ -168,7 +168,7 @@ ul,ol{
 				<li class="last">3、确认完成</li>
             </ol>
         </div>
-        <form name="alipayment" action="alipayapi.php" method="post" target="_blank">
+        <form name="alipayment" action="<{spUrl c=crecharge a=xx}>" method="post" target="_blank">
             <div id="body" style="clear:left">
                 <dl class="content">
                     <dt>商户订单号：</dt>
@@ -188,7 +188,7 @@ ul,ol{
                     <dt>付款金额：</dt>
                     <dd>
                         <span class="null-star">*</span>
-                        <input size="30" name="WIDtotal_fee" />
+                        <input size="30" name="cash" />
                         <span>必填
 </span>
                     </dd>
