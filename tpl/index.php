@@ -36,15 +36,17 @@
         </div>
         <!--nav-head content-->
         <ul class="nav nav-tabs nav-head">
-          <li class="active" >
-            <a href="#" style="font-weight:bold;background-color:#fdfdfd;">热点</a>
-          </li>
-          <li><a  href="#">网站</a></li>
-          <li><a  href="#">博客</a></li>
-          <li><a  href="#">应用</a></li>
-          <li><a  href="#">微博</a></li>
-          <li><a  href="#">邮件</a></li>
-          <li><a  href="#">订阅</a></li>
+           <{foreach from=$types item=type name=typeCount}>
+               <{if $smarty.foreach.typeCount.index == 0}>
+                    <li  class="active">
+                      <a   style="font-weight:bold;background-color:#fdfdfd;" 
+                       href="#"><{$type.name}></a>
+                    </li>
+                  <{else}>
+                      <li><a  href="#"><{$type.name}></a></li>
+                  <{/if}>
+           <{/foreach}>  
+         
         </ul>
       </div>
     </div>
@@ -67,15 +69,14 @@
                     </div>
                 </li>
                 <li class="active"><a href="#">所有分类</a></li>
-                <li><a href="#">小说文学</a></li>
-                <li><a href="#">游戏娱乐</a></li>
-                <li><a href="#">社区论坛</a></li>
-                <li><a href="#">博客空间</a></li>
-                <li><a href="#">视频音乐</a></li>
-                <li><a href="#">查询搜索</a></li>
-                <li><a href="#">资源下载</a></li>
-                <li><a href="#">网盘空间</a></li>
-                <li><a href="#">其他类别</a></li>
+                 <{foreach from=$types item=type name=typeCount}>
+                    <{foreach from=$type.categories item=category name=categoryCount}>
+                        <li>
+                          <a href="<{spUrl c=main a=result type=$type.id category=$category.id}>">
+                            <{$category.name}></a></li>
+                    <{/foreach}>  
+                <{/foreach}>  
+                
               </ul>
           </div>
           <div class="span9 main-body">
@@ -86,9 +87,9 @@
             <div>
               <div class="banner">
                   <ul>
-                      <li>
+                      <li  style="padding:0;margin:0">
                         <div class="row-fluid">
-                        <ul class="thumbnails ads">
+                        <ul class="thumbnails ads">fsd
                           <li class="span3">
                             <div class="thumbnail ad">
                               <div class="row">
@@ -248,145 +249,63 @@
             <div class="page-header">
               <h5><span class="badge badge-warning">New</span> 最新加入</h5>
             </div>
-            <div class="row-fluid">
-                        <ul class="thumbnails ads">
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/3.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
+            <div class="row-fluid" style="padding:0px;margin:0px;">
+                        <ul class="ads">
+                            
+                          <{foreach from=$projects item=project name=projectCount}>
+                            <li class="span3">
+                              <a class="ad">
+                                <div class="row">
+                                  <div class="span4 offset2">
+                                    <img class="img-rounded img-polaroid" src="/img/ads/<{$project.logo}>" alt="">
+                                    <h6 align="center" style="color:#0088cc;"><{$project.name}></h6>
+                                  </div>
+                                  
+                                  <div class="span5 offset1">
+                                    <h6><span class="label blue"><{$project.type.name}></span></h6>
+                                    <p>全球排名：<{$project.alexa}></p>
+                                  </div>
                                 </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label blue">博客</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/6.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/5.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/4.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label blue">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-               </div>   
-               <div class="row-fluid">
-                        <ul class="thumbnails ads">
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/3.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label  blue"><i class="icon-envelope  icon-white"></i></span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/6.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">博客</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/5.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label  yellow">微博</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/4.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label  red">应用</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
+                              </a>
+                            </li>
+                          <{/foreach}>
+                          
                         </ul>
                       </div>
-                      <div class="pagination" align="center" >
+                      <div class="pagination" align="center" > 
                         <ul>
-                          <li><a href="#">Prev</a></li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                          <li><a href="#">Next</a></li>
+                        <{if $pager}>
+                        <!--在当前页不是第一页的时候，显示前页和上一页-->
+                        <{if $pager.current_page != $pager.first_page}>
+                        <li>
+                          <a href="<{spUrl c=main a=result  page=$pager.first_page}>">首页</a>
+                        </li> 
+                        <li>
+                          <a href="<{spUrl c=main a=result   page=$pager.prev_page}>">上一页</a> 
+                        </li>
+                        <{/if}>
+                        <!--开始循环页码，同时如果循环到当前页则不显示链接-->
+                        <{foreach from=$pager.all_pages item=thepage}>
+                                <{if $thepage != $pager.current_page}>
+                                        <li>
+                                          <a href="<{spUrl c=main a=result   page=$thepage}>"><{$thepage}></a>
+                                        </li>
+                                <{else}>
+                                        <li><a><b><{$thepage}></b></a></li>
+                                <{/if}>
+                        <{/foreach}>
+                        <!--在当前页不是最后一页的时候，显示下一页和后页-->
+                        <{if $pager.current_page != $pager.last_page}> 
+                        <li>
+                          <a href="<{spUrl c=main a=result  page=$pager.next_page}>">下一页</a>
+                        </li>
+                        <li>
+                          <a href="<{spUrl c=main a=result  page=$pager.last_page}>">末页</a>
+                        </li>
+                        <{/if}>
+                        <{/if}>
                         </ul>
-                      </div>     
+                      </div>    
           </div>
 
         </div>

@@ -21,5 +21,13 @@ class project extends spModel
                                 'fkey' => 'id', // 对应表的关联字段
                                 'enabled' => true
                 ),
+                'type' => array(
+                                'type' => 'hasone',   // 一对多关联，一个用户可能属于多个用户组
+                                'map' => 'type',    // 关联的标识
+                                'mapkey' => 'type',  // 关联的字段
+                                'fclass' => 'type', // 对应表的数据类是m_group
+                                'fkey' => 'id', // 对应表的关联字段
+                                'enabled' => true
+                ),
         );
 }

@@ -2,12 +2,20 @@
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
-	"db" => array( // 数据库设置
+	'db' => array( // 数据库设置
                 'host' => 'localhost',  // 数据库地址，一般都可以是localhost
                 'login' => 'root', // 数据库用户名
                 'password' => '', // 数据库密码
                 'database' => 'ad', // 数据库的库名称
         ),
+    'launch' => array( // 加入挂靠点，以便开始使用Url_ReWrite的功能
+        'router_prefilter' => array(
+            array('spUrlRewrite', 'setReWrite'),  // 对路由进行挂靠，处理转向地址
+        ),
+        'function_url' => array(
+            array("spUrlRewrite", "getReWrite"),  // 对spUrl进行挂靠，让spUrl可以进行Url_ReWrite地址的生成
+        ),
+    ),
 	 'view' => array(
                 'enabled' => TRUE, // 开启Smarty
                 'config' =>array(
@@ -31,6 +39,17 @@ $spConfig = array(
                         'log_file' => '',       //日志文件
                         'time_out' => 30,       //超时时间
                 ),
+                 // 以下是Url_ReWrite的设置
+                 'spUrlRewrite' => array(
+                     'hide_default' => false, // 隐藏默认的main/index名称，但这前提是需要隐藏的默认动作是无GET参数的
+                     'args_path_info' => false, // 地址参数是否使用path_info的方式，默认否
+                     'suffix' => '.html', // 生成地址的结尾符
+                     'sep'=>'/',
+                     'map' => array(
+                         'alipay_return' => 'calipay@alipayReturn',
+                         'alipay_notify' => 'calipay@alipayNotify'
+                     ),
+                 ),
         ),
 );
 header("Content-type: text/html; charset=utf-8"); 

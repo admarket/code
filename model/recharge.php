@@ -49,7 +49,7 @@ class recharge extends spModel
               return false;
           }
           $user = spClass("user");
-          $addBalanceResult = $user->addBlance($rechargeDO['u_id'],$rechargeDO['cash']);
+          $addBalanceResult = $user->addBalance($rechargeDO['user_id'],$rechargeDO['cash']);
           if (!$addBalanceResult) {
               $this->query("ROLLBACK");
               return false;

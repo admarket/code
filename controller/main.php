@@ -2,8 +2,25 @@
 class main extends spController
 {
 	function index(){
-		$this->display("index.php"); // 首页
+        $type = spClass('type');
+        $project=spClass('project');
+        $this->types = $type->spLinker()->findAll();
+        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 12)->findAll();
+        $this->pager = $project->spPager()->getPager();
+        $this->display("index.php"); // 首页
 	}
+    function result(){
+        $type = spClass('type');
+        $project=spClass('project');
+        $conditions = array(
+            "category" => $this->spArgs("category")
+            );
+        $this->currentCategory=$this->spArgs("category");
+        $this->types = $type->spLinker()->findAll();
+        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll($conditions);
+        $this->pager = $project->spPager()->getPager();
+        $this->display("result.php"); // 首页
+    }
 	function login(){
 		if(!isset($_SESSION["user"])){
             $this->display("signin.php"); // 登录

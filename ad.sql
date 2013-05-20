@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 05 月 18 日 12:58
+-- 生成日期: 2013 年 05 月 20 日 22:52
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -53,7 +53,7 @@ INSERT INTO `advertise` (`id`, `project`, `title`, `content`, `format`, `width`,
 (25, 15, '测试1', '测试1', 1, 200, 200, 180, 180, 1, ''),
 (26, 16, '测试', '1', 1, 1, 1, 1, 100, 1, ''),
 (27, 1, '次奥测试', '的的说法', 1, 2, 2, 2, 20, 0, ''),
-(28, 1, '是打发的说法', '2', 1, 2, 2, 2, 55, 0, ''),
+(28, 1, '是打发的说法', '2', 1, 2, 200, 2, 55, 0, ''),
 (29, 1, '3', '3', 1, 3, 3, 3, 65, 0, ''),
 (30, 1, '4', '4', 1, 4, 4, 4, 32, 0, ''),
 (31, 1, '5', '5', 1, 5, 5, 5, 0, 0, '');
@@ -67,6 +67,7 @@ INSERT INTO `advertise` (`id`, `project`, `title`, `content`, `format`, `width`,
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
 
@@ -74,18 +75,18 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- 转存表中的数据 `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, '新闻门户'),
-(2, '游戏娱乐'),
-(3, '社区论坛'),
-(4, '博客空间'),
-(5, '视频音乐'),
-(6, '查询搜索'),
-(7, '资源下载'),
-(8, '网盘空间'),
-(9, '小说文学'),
-(10, '应用平台'),
-(20, '其他类别');
+INSERT INTO `category` (`id`, `name`, `type`) VALUES
+(1, '新闻门户', 1),
+(2, '游戏娱乐', 1),
+(3, '社区论坛', 1),
+(4, '博客空间', 1),
+(5, '视频音乐', 1),
+(6, '查询搜索', 1),
+(7, '资源下载', 1),
+(8, '网盘空间', 1),
+(9, '小说文学', 1),
+(10, '应用平台', 1),
+(20, '其他类别', 1);
 
 -- --------------------------------------------------------
 
@@ -130,18 +131,77 @@ CREATE TABLE IF NOT EXISTS `project` (
   `category` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
   `verify` int(11) NOT NULL DEFAULT '0',
+  `alexa` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
 
 --
 -- 转存表中的数据 `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `url`, `description`, `logo`, `category`, `owner`, `verify`) VALUES
-(1, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0),
-(2, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', '2.png', 7, 10, 0),
-(15, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0),
-(16, '测试', 'http://www.baidu.com', '测试', '16.jpg', 1, 10, 0);
+INSERT INTO `project` (`id`, `name`, `url`, `description`, `logo`, `category`, `owner`, `verify`, `alexa`, `type`) VALUES
+(1, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(2, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', '2.png', 7, 10, 0, 1000232, 1),
+(15, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(16, '测试', 'http://www.baidu.com', '测试', '16.png', 1, 10, 0, 1922253, 1),
+(17, '都是', 'http://www.baidu.com', '短发多发点梵蒂冈地方', '17.jpg', 1, 10, 0, 0, 1),
+(18, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(19, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(20, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(21, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(22, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', '2.png', 7, 10, 0, 1000232, 1),
+(23, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(24, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(25, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(26, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(27, '站酷', 'http://www.zcool.com.cn', '中国最具人气的大型综合性设计网站，聚集了中国绝大部分的专业设计师、艺术院校师生、潮流艺术家等年轻创意人群，是国内最活跃的原创设计交流平台。会员交流涉及：艺术创作、广告创意、交互设计、影视动漫、时尚文化等诸多创意产业', '1.png', 1, 10, 0, 100000, 1),
+(28, '新测试', 'http://www.baidu.com', '士大夫士大夫', '15.jpg', 1, 10, 0, 2042223, 1),
+(29, '模板王', 'http://www.mobanwang.com/', '提供网页模板，网页图标，网页特效，中文字体等网页设计素材下载，为广大网友制作网页提供网站模板素材免费下载参考。', '2.png', 7, 10, 0, 1000232, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `recharge_info`
+--
+
+CREATE TABLE IF NOT EXISTS `recharge_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '充值编号',
+  `user_id` bigint(20) NOT NULL COMMENT '充值人编号',
+  `cash` bigint(20) NOT NULL COMMENT '充值金额，以分为单位',
+  `r_status` tinyint(4) NOT NULL COMMENT '记录状态',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `recharge_info`
+--
+
+INSERT INTO `recharge_info` (`id`, `user_id`, `cash`, `r_status`, `gmt_create`, `gmt_modified`) VALUES
+(1, 10, 300000, 1, '2013-05-19 09:20:51', '2013-05-19 09:20:51'),
+(2, 10, 300000, 1, '2013-05-19 09:25:51', '2013-05-19 09:25:51'),
+(3, 10, 300000, 1, '2013-05-19 09:26:07', '2013-05-19 09:26:07');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `type`
+--
+
+CREATE TABLE IF NOT EXISTS `type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `type`
+--
+
+INSERT INTO `type` (`id`, `name`) VALUES
+(1, '网站');
 
 -- --------------------------------------------------------
 
@@ -172,15 +232,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `payment`, `accou
 (1, '张三丰', 'zhangsanfeng@mail.com', '123456', 0, 0, 'zhangsanfeng@mail.com', 12.03, 'default.jpg', '2013-04-28 16:00:00', 0),
 (10, '任宝占', 'winter_2000@126.com', '111111', 0, 0, 'winter_2000@126.com', 1000, '10.jpg', '2013-05-03 14:52:08', 1),
 (11, 'dfdsfs', 'sdfsf@m.com', '111111', 0, 0, 'dsfsdfds', 0, 'default.jpg', '2013-05-14 11:50:23', 0);
-
-CREATE TABLE if not exists recharge_info
-(id bigint primary key AUTO_INCREMENT comment '充值编号',
-user_id bigint not null comment '充值人编号',
-cash bigint not null comment '充值金额，以分为单位',
-r_status tinyint not null comment '记录状态',
-gmt_create TIMESTAMP comment '创建时间',
-gmt_modified TIMESTAMP comment '最后修改时间'
-)ENGINE=INNODB DEFAULT CHARSET=utf8
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
