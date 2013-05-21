@@ -5,6 +5,7 @@ class main extends spController
         $type = spClass('type');
         $project=spClass('project');
         $this->types = $type->spLinker()->findAll();
+        $this->currentCategory=1;
         $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 12)->findAll();
         $this->pager = $project->spPager()->getPager();
         $this->display("index.php"); // 首页
@@ -12,12 +13,19 @@ class main extends spController
     function result(){
         $type = spClass('type');
         $project=spClass('project');
-        $conditions = array(
-            "category" => $this->spArgs("category")
-            );
+        $conditions=" 1=1";
+        if($this->spArgs("category")!=1){
+             $conditions =$conditions." and category=".$this->spArgs("category");
+        }
+        $keyword=trim($this->spArgs("keyword"));
+        dump($conditions);
+        if(isset($keyword)){
+            $conditions = $conditions.' and title like '.$project->escape('%'.$keyword.'%');
+        }
+        dump($conditions);
         $this->currentCategory=$this->spArgs("category");
         $this->types = $type->spLinker()->findAll();
-        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll($conditions);
+        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll($conditions,"id asc");
         $this->pager = $project->spPager()->getPager();
         $this->display("result.php"); // 首页
     }
