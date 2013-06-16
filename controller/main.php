@@ -8,6 +8,7 @@ class main extends spController
         $this->currentCategory=1;
         $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 12)->findAll();
         $this->pager = $project->spPager()->getPager();
+        $this->hots =  $project -> findAll(null,'alexa ASC',null,"0,12");
         $this->display("index.php"); // 首页
 	}
     function result(){
@@ -17,12 +18,11 @@ class main extends spController
         if($this->spArgs("category")!=1){
              $conditions =$conditions." and category=".$this->spArgs("category");
         }
-        $keyword=trim($this->spArgs("keyword"));
-        dump($conditions);
-        if(isset($keyword)){
-            $conditions = $conditions.' and title like '.$project->escape('%'.$keyword.'%');
+        $this->keyword=trim($this->spArgs("keyword"));
+        if(!isset($keyword)){
+            $conditions = $conditions.' and (name like '.$project->escape('%'.$this->keyword.'%');
+            $conditions= $conditions." or description like ".$project->escape('%'.$this->keyword.'%').')';
         }
-        dump($conditions);
         $this->currentCategory=$this->spArgs("category");
         $this->types = $type->spLinker()->findAll();
         $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll($conditions,"id asc");
@@ -50,4 +50,13 @@ class main extends spController
                 $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
                 echo $result;
         }
+    function detail(){
+        $type = spClass('type');
+        $project=spClass('project');
+        $conditions =" id=".$this->spArgs("project");
+        $this->currentCategory=1;
+        $this->types = $type->spLinker()->findAll();
+        $this->project = $project->spLinker()->find($conditions);
+        $this->display("detail.php"); // 注册 
+    }
 }

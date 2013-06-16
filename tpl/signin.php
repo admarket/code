@@ -3,13 +3,15 @@
   <head>
     <title>九尾狐 - 用户登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--<link rel="stylesheet" href="/css/font-awesome.min.css">-->
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
     <![endif]-->
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    
     <link href="/css/style2.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
@@ -32,7 +34,7 @@
 
           <div class="control-group">
                 <div id="alert-msg" class="alert alert-error ">
-                  <strong>验证失败！</strong> 用户邮箱或密码错误!请重新输入.
+                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;验证失败！</strong> 用户邮箱或密码错误!请重新输入.
                 </div>
                 <!-- Text input-->
                 <label class="control-label" for="input01">邮箱：</label>
@@ -50,7 +52,7 @@
                 <label class="control-label">密码：</label>
                 <div class="controls">
                   <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock"></i></span>
+                    <span class="add-on"><i class="icon-key"></i></span>
                     <input class="input-xlarge" placeholder="输入您的登录密码" id="txt-password" type="password">
                   </div>
                   <p class="help-block"></p>
@@ -97,8 +99,8 @@
         </div>
       </div>
     </div>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(".btn").click(function(){
           $(".btn").button('loading');

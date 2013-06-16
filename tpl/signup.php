@@ -3,21 +3,22 @@
   <head>
     <title>九尾狐 - 用户注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
      <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
     <![endif]-->
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/style2.css" rel="stylesheet" media="screen">
+    
+    <link href="/css/style2.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
     <div class="header">
       <div class="container">
         <div class="row-fluid">
-          <div class="span4 "><a href="/"><img src="img/budgetup.png"/></a></div>
+          <div class="span4 "><a href="/"><img src="/img/budgetup.png"/></a></div>
         </div>
       </div>
     </div>
@@ -28,11 +29,17 @@
             <div id="legend" class="">
                 <h3>用户注册</h3>
                 <div class="row-fluid">
-                  <div class="span4"><span class="badge badge-success">1.</span>填写基本信息</div>
-                  <div class="span4"><span class="badge" id="second">2.</span>验证邮箱</div>
-                  <div class="span4"><span class="badge">3.</span>完成注册</div>
+                  <div class="span4">
+                    <span class="badge badge-success">
+                    1.
+                    </span><i class=" icon-edit"></i>&nbsp;填写基本信息
+                    </div>
+                  <div class="span4"><span class="badge" id="second">2.</span>
+                    <i class=" icon-legal"></i>&nbsp;验证邮箱</div>
+                  <div class="span4"><span class="badge">3.</span>
+                    <i class=" icon-check"></i>&nbsp;完成注册</div>
                 </div>
-                <div class="progress progress-striped active">
+                <div class="progress active">
                   <div class="bar" style="width:30%;"></div>
                 </div>
             </div>
@@ -212,8 +219,8 @@
         <a href="#" id="verifyAddress" class="btn btn-primary">立刻去验证</a>
       </div>
     </div>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+   <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       var emailcheck=false;
       var passwordcheck=false;

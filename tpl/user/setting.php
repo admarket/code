@@ -25,11 +25,17 @@
           <div class="span6"><a href="/"><img src="/img/budgetup-small.png"/></a></div>
           <div class="span6">
               <ul class="nav nav-pills nav-head">
+                <{if $smarty.session.user.type==1}>
+                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
+                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
+                <{else }>
+                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
+                  <li><a href="<{spUrl c=sub a=effect}>">效果分析</a></li>
+                <{/if}>
                 <li>
-                  <a href="<{spUrl c=sub a=dashboard}>">账户概况</a>
+                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(3)</span>
+                  </a>
                 </li>
-                <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
                 <li class="active"><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
                 <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
@@ -47,7 +53,9 @@
                      <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
                     <p class="title">
                       <{$smarty.session.user.name}>
-                    </p>               
+
+                    </p>
+                                
                   </div> 
                   <div class="span8" style="padding:10px;" >
                     <div class="title">&nbsp;账户余额：</div>
@@ -65,8 +73,14 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;网站：</div>
-                    <p>2</p>
+                    <div class=" title">&nbsp;当前身份：</div>
+                    <p>
+                       <{if $smarty.session.user.type==0}>
+                         广告客户
+                         <{else}>
+                         广告商
+                        <{/if}>
+                    </p>
                   </div>
                   
                 </div>
@@ -76,8 +90,14 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;广告位：</div>
-                    <p>23</p>
+                    <div class=" title">&nbsp;验证状态：</div>
+                    <p>
+                         <{if $user.verify==0}>
+                        未验证
+                         <{else}>
+                         已验证
+                        <{/if}>
+                    </p>
                   </div>
                   
                 </div>
@@ -90,8 +110,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;已售：</div>
-                    <p>10</p>
+                    <div class=" title">&nbsp;网站：</div>
+                    <p><{$projectCount}></p>
                   </div>
                   
                 </div>
@@ -101,8 +121,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;未售：</div>
-                    <p>13</p>
+                    <div class=" title">&nbsp;广告位：</div>
+                    <p><{$adCount}></p>
                   </div>
                   
                 </div>
@@ -115,8 +135,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;月流量：</div>
-                    <p>36786 IP</p>
+                    <div class=" title">&nbsp;已出售：</div>
+                    <p><{$soldAd}></p>
                   </div>
                   
                 </div>
@@ -126,8 +146,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;点击率：</div>
-                    <p>18%</p>
+                    <div class=" title">&nbsp;广告收入：</div>
+                    <p><{$profits|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -135,10 +155,10 @@
             <!-- Bootstrap -->
              <div style="padding-left:0px;">
                  <p class="btn-group">
-                  <button class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></button>
-                  <button class="btn tip"   title="切换身份"><i class="icon-refresh"></i></button>
-                  <button class="btn tip"   title="设置"><i class="icon-cog"></i></button>
-                  <button class="btn tip" title="退出"><i class="icon-off"></i></button>
+                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
+                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
+                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
+                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
                 </p>
               </div>
             </div>
@@ -154,7 +174,7 @@
                     <label>真实姓名：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-user"></i></span>
-                      <span class="input-xlarge uneditable-input tip" title="如需修改请联系管理员">
+                      <span class="input-xlarge uneditable-input tip" title="如需修改请联系客服人员">
                         <{$smarty.session.user.name}>
                       </span>
                     </div>
@@ -174,20 +194,20 @@
                     <div class="box tip" style="width:70%;" title="点击左侧按钮切换身份">
                       
                       <label class="radio" style="font-size:12px;">
-                        <{if $smarty.session.user.type==0}>
+                        <{if $user.type==0}>
                         <input type="radio" name="type" id="type1" value="0" checked>
                          <{else}>
                          <input type="radio" name="type" id="type1" value="0">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;广告消费者 - 购买广告位&nbsp;
+                        <i class="icon-user"></i>&nbsp;广告客户 - 购买广告位&nbsp;
                       </label>
                       <label class="radio"  style="font-size:12px;">
-                        <{if $smarty.session.user.type==1}>
+                        <{if $user.type==1}>
                         <input type="radio" name="type" id="type1" value="1" checked>
                          <{else}>
                          <input type="radio" name="type" id="type1" value="1">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;广告销售商 - 出售广告位 &nbsp;
+                        <i class="icon-user"></i>&nbsp;广告商 - 出售广告位 &nbsp;
                       </label>
                       
                     </div>
@@ -271,6 +291,12 @@
      <p>如果需要更改真实姓名，请用注册邮箱发送邮件联系管理员更改.</p>
 </div>
 <script type="text/javascript">
+$('#share').popover({
+  placement:'right',
+  title:'',
+  content:'fuck',
+  html:true
+});
 var passwordcheck=false;
 var accountcheck=false;
 $("#head-img").attr("src","/img/head/<{$smarty.session.user.id}>.jpg?id="+Math.random());

@@ -8,6 +8,10 @@
 .c{background-color: #FF9655;}
 .d{background-color: #FFF263;}
 .e{background-color: #6AF9C4;}
+.red-color{color: #EC4F4F;}
+.blue-color{color: #058DC7;}
+.green-color{color:#07733f;}
+.orange-color{color: #ed4306;}
 .msg{display: none;color:red;}
 .btn{font-weight: bold;}
 .header{padding:10px;}
@@ -27,8 +31,8 @@ width: 98%;margin-left: 10px;}
 a{color: #c33e00;}
 .box{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff; padding:10px;
 width: 98%;margin: 15px 0px;}
-.table td{vertical-align: middle;}
-.table .title{color: #058DC7;}
+.table td{vertical-align: middle;padding:10px 20px;}
+
 .nav-tabs .active{font-weight: bold;}
 .tabbable{padding: 20px;}
 .tabbable .table{padding: 0px;margin: 0;}

@@ -54,20 +54,22 @@
     <div class="section">
       <div class="container">
         <!--intro content-->
-        <div class="alert alert-info intro">
+        <div class="alert alert-info intro" style="display:block;">
           如果您有任何疑问，请关注我们的新浪微博,与我们进行互动。
           <a href="#" class="close" data-dismiss="alert">&times;</a>
         </div>
         <div class="row-fluid">
            <div class="span3  nav-bar" >
             <!--nav-bar content-->
-              <ul class="nav nav-list side-bar" id="nav-bar">
-                <li class="nav-header" style="border-bottom:solid 1px #eee;">
-                    <div class="input-append" style="margin-left:-10px;">
-                      <input class="span10" id="appendedInputButton" type="text"  placeholder="输入关键词查找…">
-                      <button class="btn" type="button"><i class="icon-search"></i></button>
+               <div style="border-bottom:solid 1px #eee;">
+                    <div class="input-append"  style="width:90%;margin:10px;">
+                      <form action="<{spUrl c=main a=result}>" method="post">
+                      <input  style="width:80%;" name="keyword"  type="text"  placeholder="输入关键词查找…" value="<{$keyword}>">
+                      <input  name="category"  type="hidden" value="<{$currentCategory}>">
+                      <button class="btn" type="submit"><i class="icon-search"></i></button>
                     </div>
-                </li>
+                </div>
+              <ul class="nav nav-list side-bar" id="nav-bar" style="margin:0;">
                  <{foreach from=$types item=type name=typeCount}>
                     <{foreach from=$type.categories item=category name=categoryCount}>
                          <{if $currentCategory==$category.id}>
@@ -86,132 +88,65 @@
           </div>
           <div class="span9 main-body">
             <!--Body content-->
-            <div class="page-header">
-              <h5><span class="badge badge-important">Hot</span> 热门广告位</h5>
-            </div>
-            <div>
-              <div class="banner">
-                  <ul>
-                      <li  style="padding:0;margin:0">
-                        <div class="row-fluid">
-                        <ul class="ads">
-                          <li class="span3">
-                            <div class="ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/3.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label blue">博客</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/6.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/5.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                         
-                        </ul>
-               </div>  
-                      </li>
-                      
-                      <li>
-                        <div class="row-fluid">
-                        <ul class="thumbnails ads">
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/3.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label blue">博客</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/6.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="span3">
-                            <div class="thumbnail ad">
-                              <div class="row">
-                                <div class="span4 offset2">
-                                  <img class="img-rounded img-polaroid" src="/img/ads/5.png" alt="">
-                                  <h6 align="center" style="color:#0088cc;">站酷</h6>
-                                </div>
-                                
-                                <div class="span6">
-                                  <h6><span class="label green">网站</span></h6>
-                                  <p>全球排名：11,123,100</p>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          
-                        </ul>
-               </div>  
-                      </li>
-                  </ul>
+            <div class="page-header"  style="position:relative;">
+              <h6><span class="badge badge-important">Hot</span> 热门广告位</h6>
+               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
+                <a class="btn btn-mini" href="<{spUrl c=main a=result type=$type.id category=1}>">
+                  <i class="icon-circle-arrow-right"></i>&nbsp; 更多
+                </a>
               </div>
             </div>
+            <div  class="row-fluid" style="padding:0px;margin:0px;">
+              <ul class="ads slideshow"  style="width:100%;"> 
+                    <{if $hots eq ""}>
+                        暂无数据
+                    <{/if}>
+                   <{foreach from=$hots item=hot name=hotCount}>
+
+                       <{if $smarty.foreach.hotCount.iteration % 4  == 1 }>
+                          <{assign var=flag value=1}>
+                        <div style="width:100%;">
+                       <{/if}>
+                           <div>
+                       
+                            <li class="span3">
+                              <a class="ad" href="<{spUrl c=main a=detail project=$hot.id}>">
+                                <div class="row">
+                                  <div class="span4 offset2">
+                                    <img class="img-rounded img-polaroid" src="/img/ads/<{$hot.logo}>" alt="">
+                                    <h6 align="center" style="color:#0088cc;"><{$hot.name}></h6>
+                                  </div>
+                                  
+                                  <div class="span5 offset1">
+                                    <h6><span class="label label-important">热门</span></h6>
+                                    <p><div>全球排名：</div><{$hot.alexa|number_format}></p>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                      
+                          </div>     
+                        <{if $smarty.foreach.hotCount.iteration % 4  == 0}>
+                        </div>
+                       <{/if}>
+                   <{/foreach}>
+              </ul>
+              
+            </div>
             <div class="page-header">
-              <h5><span class="badge badge-warning">New</span> 最新加入</h5>
+              <h6><span class="badge badge-warning">New</span> 最新加入</h6>
             </div>
             <div class="row-fluid" style="padding:0px;margin:0px;">
                         <ul class="ads">
-                            
+                             <{if $projects eq ""}>
+                                暂无数据
+                            <{/if}>
                           <{foreach from=$projects item=project name=projectCount}>
-                            <{if $projectCount.index%4==0}>
+                       
                             <div>
-                             <{/if}>
+  
                             <li class="span3">
-                              <a class="ad">
+                              <a class="ad"  href="<{spUrl c=main a=detail project=$project.id}>">
                                 <div class="row">
                                   <div class="span4 offset2">
                                     <img class="img-rounded img-polaroid" src="/img/ads/<{$project.logo}>" alt="">
@@ -225,9 +160,9 @@
                                 </div>
                               </a>
                             </li>
-                             <{if $projectCount.index%4==0}>
+                           
                             </div>
-                             <{/if}>
+                         
                           <{/foreach}>
                           
                         </ul>
@@ -286,16 +221,15 @@
     </div>
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="//unslider.com/unslider.js"></script>
+    <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $('.tip').tooltip();
       $(function() {
-          $('.banner').unslider({
-            arrows: false,
-            fluid: true,
-            dots: true              //  Support responsive design. May break non-responsive designs
-          });
+           $('.slideshow').cycle({
+                 fx:      'turnDown', 
+                 delay:   -2000  
+            });
       });
     </script>
   </body>

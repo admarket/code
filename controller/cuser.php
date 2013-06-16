@@ -6,24 +6,29 @@ class cuser extends spController
 		$this->display("index.php"); // 首页
 	}
 
+	//登录
 	function login(){
 		$user = spClass("user");
+		
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
 		$password=$this->spArgs("password");
 		$conditions = array("email" => $email , "password" => $password);
+
 		$result = $user->findAll($conditions); 
 		if($result){
 			$_SESSION['user'] = $result[0];
 			echo true;
 		}else{
 			echo false;
-		}//登录	
+		}	
 	}
 
+	//充值
     function recharge() {
         $this->display("recharge.php");
     }
 
+    //注册
     function register(){
         $user = spClass("user");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
@@ -55,6 +60,7 @@ class cuser extends spController
 		} //注册//注册
     }
 
+    //验证注册用户是否已注册
     function isExist(){
     	$user = spClass("user");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
@@ -67,6 +73,8 @@ class cuser extends spController
 			echo false;
 		} //检查email是否重复
     }
+
+    //验证邮箱
     function verify(){
     	$user = spClass("user");
     	$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
@@ -77,6 +85,7 @@ class cuser extends spController
         $user->update($conditions, $newrow); // 更新记录
         $this->display("user/dashboard.php"); // 首页
     }
+    //保存设置
     function save(){
     	$user = spClass("user");
     	$id=$_SESSION['user']['id']; 
@@ -96,10 +105,11 @@ class cuser extends spController
         echo true; // 首页
     }
 
+    //上传头像
     function uploadHeadimg(){
     	$filename=$_FILES['file']['name'];
         $ext=end(explode('.', $filename));
-	  $arg = array(
+	  	$arg = array(
 		APP_PATH.'/img/head/',
 		$_SESSION["user"]["id"]
 		);
@@ -120,5 +130,17 @@ class cuser extends spController
 	     echo "false".$msg."123";
 	    }
 		
+    }
+
+    //切换身份
+    function changeIdentity(){
+
+    	if($_SESSION['user']['type']==0){
+    		$_SESSION['user']['type'] = 1;
+    	}else{
+    		$_SESSION['user']['type'] = 0;
+    	}
+    	//$this->jump($_SERVER['HTTP_REFERER']);跳转到之前的页面
+    	$this->jump(spUrl('sub', 'dashboard')); // 跳转到首页
     }
 }

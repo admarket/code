@@ -60,16 +60,17 @@
         </div>
         <div class="row-fluid">
           <div class="span3  nav-bar" >
-            <!--nav-bar content-->
-              <ul class="nav nav-list side-bar" id="nav-bar">
-                <li class="nav-header" style="border-bottom:solid 1px #eee;">
-                    <div class="input-append" style="margin-left:-10px;">
+            <div style="border-bottom:solid 1px #eee;">
+                    <div class="input-append"  style="width:90%;margin:10px;">
                       <form action="<{spUrl c=main a=result}>" method="post">
-                      <input class="span10" name="keyword" id="appendedInputButton" type="text"  placeholder="输入关键词查找…">
-                      <input class="span10" name="category" id="appendedInputButton" type="hidden" value="<{$currentCategory}>">
+                      <input  style="width:80%;" name="keyword"  type="text"  placeholder="输入关键词查找…" value="<{$keyword}>">
+                      <input  name="category"  type="hidden" value="<{$currentCategory}>">
                       <button class="btn" type="submit"><i class="icon-search"></i></button>
                     </div>
-                </li>
+                </div>
+            <!--nav-bar content-->
+              <ul class="nav nav-list side-bar" id="nav-bar">
+                
                  <{foreach from=$types item=type name=typeCount}>
                     <{foreach from=$type.categories item=category name=categoryCount}>
                          <{if $currentCategory==$category.id}>
@@ -89,7 +90,7 @@
           <div class="span9 main-body">
             <!--Body content-->
             <div class="page-header" style="position:relative;">
-              <h5><span class="badge badge-success">Result</span> 查询结果</h5>
+              <h6><span class="badge badge-success">Result</span> 查询结果</h6>
               <div class="btn-group" style="position:absolute;right:0;top:0px;">
                 <button class="btn btn-mini"><i class="icon-sort"></i>&nbsp; 排名</button>
                 <button class="btn btn-mini"><i class="icon-sort"></i>&nbsp; 价格</button>
@@ -98,13 +99,15 @@
             </div>
             <div class="row-fluid" style="padding:0px;margin:0px;">
                         <ul class="ads">
-                            
+                            <{if $projects eq ""}>
+                                暂无数据
+                            <{/if}>
                           <{foreach from=$projects item=project name=projectCount}>
                            <{if $projectCount.index%4==0}>
                             <div>
                              <{/if}>
                             <li class="span3">
-                              <a class="ad">
+                              <a class="ad"   href="<{spUrl c=main a=detail project=$project.id}>">
                                 <div class="row">
                                   <div class="span4 offset2">
                                     <img class="img-rounded img-polaroid" src="/img/ads/<{$project.logo}>" alt="">
@@ -130,17 +133,17 @@
                         <!--在当前页不是第一页的时候，显示前页和上一页-->
                         <{if $pager.current_page != $pager.first_page}>
                         <li>
-                          <a href="<{spUrl c=main a=result  page=$pager.first_page category=$currentCategory}>">首页</a>
+                          <a href="<{spUrl c=main a=result  page=$pager.first_page category=$currentCategory keyword=$keyword}>">首页</a>
                         </li> 
                         <li>
-                          <a href="<{spUrl c=main a=result   page=$pager.prev_page category=$currentCategory}>">上一页</a> 
+                          <a href="<{spUrl c=main a=result   page=$pager.prev_page category=$currentCategory keyword=$keyword}>">上一页</a> 
                         </li>
                         <{/if}>
                         <!--开始循环页码，同时如果循环到当前页则不显示链接-->
                         <{foreach from=$pager.all_pages item=thepage}>
                                 <{if $thepage != $pager.current_page}>
                                         <li>
-                                          <a href="<{spUrl c=main a=result   page=$thepage category=$currentCategory}>"><{$thepage}></a>
+                                          <a href="<{spUrl c=main a=result   page=$thepage category=$currentCategory keyword=$keyword}>"><{$thepage}></a>
                                         </li>
                                 <{else}>
                                         <li><a><b><{$thepage}></b></a></li>
@@ -149,10 +152,10 @@
                         <!--在当前页不是最后一页的时候，显示下一页和后页-->
                         <{if $pager.current_page != $pager.last_page}> 
                         <li>
-                          <a href="<{spUrl c=main a=result  page=$pager.next_page category=$currentCategory}>">下一页</a>
+                          <a href="<{spUrl c=main a=result  page=$pager.next_page category=$currentCategory keyword=$keyword}>">下一页</a>
                         </li>
                         <li>
-                          <a href="<{spUrl c=main a=result  page=$pager.last_page category=$currentCategory}>">末页</a>
+                          <a href="<{spUrl c=main a=result  page=$pager.last_page category=$currentCategory keyword=$keyword}>">末页</a>
                         </li>
                         <{/if}>
                         <{/if}>
@@ -178,16 +181,12 @@
     </div>
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="//unslider.com/unslider.js"></script>
+    <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $('.tip').tooltip();
       $(function() {
-          $('.banner').unslider({
-            arrows: false,
-            fluid: true,
-            dots: true              //  Support responsive design. May break non-responsive designs
-          });
+          
       });
     </script>
   </body>

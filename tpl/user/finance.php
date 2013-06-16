@@ -26,11 +26,17 @@
           </div>
           <div class="span6">
               <ul class="nav nav-pills nav-head">
+                <{if $smarty.session.user.type==1}>
+                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
+                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
+                <{else }>
+                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
+                  <li><a href="<{spUrl c=sub a=effect}>">效果分析</a></li>
+                <{/if}>
                 <li>
-                  <a href="<{spUrl c=sub a=dashboard}>">账户概况</a>
+                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(3)</span>
+                  </a>
                 </li>
-                <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <li class="active"><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
                 <li><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
                 <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
@@ -63,8 +69,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;广告位：</div>
-                    <p>18</p>
+                    <div class=" title">&nbsp;广告收益：</div>
+                    <p><{$adIncome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -74,8 +80,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;已售：</div>
-                    <p>10</p>
+                    <div class=" title">&nbsp;广告支出：</div>
+                    <p><{$adOutcome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -88,8 +94,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;本月收入：</div>
-                    <p>10,100 &yen;</p>
+                    <div class=" title">&nbsp;累计充值：</div>
+                    <p><{$handIncome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -99,8 +105,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;累计收入：</div>
-                    <p>20 &yen;</p>
+                    <div class=" title">&nbsp;累计提现：</div>
+                    <p><{$handOutcome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -113,8 +119,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;月流量：</div>
-                    <p>36786 IP</p>
+                    <div class=" title">&nbsp;总收入：</div>
+                    <p><{$sumIncome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -124,8 +130,8 @@
                     <span>&nbsp;</span>                
                   </div> 
                   <div class="span10">
-                    <div class=" title">&nbsp;点击率：</div>
-                    <p>18%</p>
+                    <div class=" title">&nbsp;总支出：</div>
+                    <p><{$sumOutcome|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -133,10 +139,10 @@
             <!-- Bootstrap -->
              <div style="padding-left:0px;">
                  <p class="btn-group">
-                  <button class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></button>
-                  <button class="btn tip"   title="切换身份"><i class="icon-refresh"></i></button>
-                  <button class="btn tip"   title="设置"><i class="icon-cog"></i></button>
-                  <button class="btn tip" title="退出"><i class="icon-off"></i></button>
+                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
+                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
+                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
+                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
                 </p>
               </div>
             </div>
@@ -175,19 +181,23 @@
                       <{foreach from=$records item=record}>
                         <tr>
                         <td>
-                            <{if $record.type == 0}>
-                            收入
-                            <{elseif $record.type == "1"}>
-                            支出
+                            <{if $record.type == 00}>
+                            广告收益
+                            <{elseif  $record.type == "01"}>
+                            充值
+                             <{elseif  $record.type == "10"}>
+                            广告支出
+                              <{elseif  $record.type == "11"}>
+                            提现
                             <{else}>
                             未知类型
                             <{/if}>
                         </td>
 
                         <td>
-                          <{if $record.type == 0}>
+                          <{if  substr($record.type,0,1) == 0}>
                           +
-                          <{elseif $record.type == "1"}>
+                          <{elseif  substr($record.type,0,1) == "1"}>
                             -
                             <{else}>
                             未知类型
@@ -215,13 +225,17 @@
                     </thead>
                     <tbody>
                        <{foreach from=$records item=record}>
-                         <{if $record.type == 0}>
+                         <{if  substr($record.type,0,1) == 0}>
                             <tr>
-                            <td>收入</td>
-                            <td>+ <{$record.number}> &yen;</td>
-                            <td><{$record.balance}> &yen;</td>
-                            <td><{$record.time}></td>
-                            <td><{$record.remark}></td>
+                               <{if $record.type == "00"}>
+                              <td>广告收益</td>
+                               <{elseif  $record.type == "01"}>
+                              <td>充值</td>
+                               <{/if}>
+                              <td>+ <{$record.number}> &yen;</td>
+                              <td><{$record.balance}> &yen;</td>
+                              <td><{$record.time}></td>
+                              <td><{$record.remark}></td>
                           </tr>
                         <{/if}>
                       <{/foreach}>
@@ -243,9 +257,13 @@
                     <tbody>
                      
                        <{foreach from=$records item=record}>
-                         <{if $record.type == 1}>
-                            <tr>
-                            <td>支出</td>
+                         <{if substr($record.type,0,1) == "1"}>
+                          <tr>
+                              <{if $record.type == "10"}>
+                              <td>广告支出</td>
+                             <{elseif  $record.type == "11"}>
+                              <td>提现</td>
+                             <{/if}>
                             <td>- <{$record.number}> &yen;</td>
                             <td><{$record.balance}> &yen;</td>
                             <td><{$record.time}></td>
@@ -366,7 +384,7 @@ function loadData(data){
    if(data){//从客户端异步获取数据，然后处理
     var records=data;
     for(var i in records){
-        if(records[i].type==0){
+        if(records[i].type.substring(0,1)=="0"){
           income+=parseFloat(records[i].number);
           incomes.push(parseFloat(records[i].number));
           // if(i>0){
@@ -377,7 +395,7 @@ function loadData(data){
           sum+=parseFloat(records[i].number);
           
         }
-        else if(records[i].type==1){
+        else if(records[i].type.substring(0,1)=="1"){
           outcome+=parseFloat(records[i].number);
           // if(i>0){
           //   incomes.push(parseFloat(incomes[i-1]));
