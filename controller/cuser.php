@@ -9,6 +9,7 @@ class cuser extends spController
 	//登录
 	function login(){
 		$user = spClass("user");
+		$message = spClass("message");
 		
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
 		$password=$this->spArgs("password");
@@ -17,6 +18,13 @@ class cuser extends spController
 		$result = $user->findAll($conditions); 
 		if($result){
 			$_SESSION['user'] = $result[0];
+			$conditions2 = array(
+            "receiver" => $_SESSION['user']['id'],
+            "state" => 0,
+            );
+			$unReadMessages=$message->findAll($conditions2);
+	        $unRead=count($unReadMessages);
+	        $_SESSION['unread'] = $unRead;
 			echo true;
 		}else{
 			echo false;
@@ -137,10 +145,12 @@ class cuser extends spController
 
     	if($_SESSION['user']['type']==0){
     		$_SESSION['user']['type'] = 1;
+    		$this->jump(spUrl('sub', 'sitemanage')); // 跳转到首页
     	}else{
     		$_SESSION['user']['type'] = 0;
+    		$this->jump(spUrl('sub', 'product')); // 跳转到首页
     	}
     	//$this->jump($_SERVER['HTTP_REFERER']);跳转到之前的页面
-    	$this->jump(spUrl('sub', 'dashboard')); // 跳转到首页
+    	
     }
 }

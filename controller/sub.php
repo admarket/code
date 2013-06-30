@@ -3,9 +3,9 @@ class sub extends spController
 {
     function dashboard(){
         if($_SESSION['user']['type']==0){
-            $this->display("user/advertiser/product.php"); // 用户面板   
+            $this->jump(spUrl('sub', 'product')); // 跳转到首页
         }else{
-            $this->display("user/publisher/sitemanage.php"); // 用户面板   
+            $this->jump(spUrl('sub', 'sitemanage')); // 跳转到首页
         }
     	
     }
@@ -77,7 +77,59 @@ class sub extends spController
         $this->display("user/publisher/admanage.php"); // 广告管理
     }
     function inbox(){
+        $message = spClass("message");
+        $conditions=" receiver=".$_SESSION['user']['id'];
+        $countMessage=$message->findAll($conditions," id desc ");
+
+        $this->msgCount=count($countMessage);//总数
+
+        $this->unread=0;//未读
+        $this->read=0;//已读
+        $this->notice=0;//系统通知
+        $this->personal=0;//私人信息
+        $this->broadcast=0;//系统公告
+        foreach ($countMessage as  $value) {
+            if($value['state']==0){
+                $this->unread+=1;
+            }
+            if($value['state']==1){
+                $this->read+=1;
+            }
+            if($value['type']==1){
+                $this->notice+=1;
+            }
+            if($value['type']==2){
+                $this->personal+=1;
+            }
+            if($value['type']==3){
+                $this->broadcast+=1;
+            }
+        }
+        $state=$this->spArgs('state');
+        $type=$this->spArgs('type');
+        if(isset($state)){
+            if($state!=2){
+                $conditions=$conditions." and state=".$state;
+            }
+            $this->state=$state;
+        }else{
+            $this->state=2;
+        }
+        if(isset($type)){
+            if($type!=0){
+               $conditions=$conditions." and type=".$type;
+            }
+            $this->type=$type;
+        }else{
+            $this->type=0;
+        }
+
+        $messages = $message->spLinker()->spPager($this->spArgs('page', 1), 8)->findAll($conditions," id desc ");
+        $this->messages=$messages;
+
+        $this->pager = $message->spPager()->getPager();
         $this->display("user/inbox.php"); // 广告管理
+        
     }
     function sitemanage(){
         $project = spClass("project");
@@ -188,11 +240,30 @@ class sub extends spController
         $project = spClass("project");
         $conditions = array("buyer" => $_SESSION['user']['id']);
         $trades = $trade->spLinker()->findAll($conditions);
-
+        $this->tradeCount=count($trades);//交易总数
+        $this->sumFee=0;//总推广费用
+        $this->videoNum=0;//视频广告
+        $this->textNum=0;//文字广告
+        $this->picNum=0;//图片广告
+        $this->expire=0;//即将到期
         foreach ($trades as &$trade) { 
             $condition = array("id" => $trade['advertise']['project']);
             $tempProject=$project->find($condition);
             $trade['project']=$tempProject;
+
+            $this->sumFee+=$trade['price']*$trade['number'];
+            if($trade['process']>=90){
+                $this->expire+=1;
+            }
+            if($trade['advertise']['format']==0){
+                $this->textNum+=1;
+            }
+             if($trade['advertise']['format']==1){
+                $this->picNum+=1;
+            }
+             if($trade['advertise']['format']==2){
+                $this->videoNum+=1;
+            }
         }
 
         $this->trades=$trades;

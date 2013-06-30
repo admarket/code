@@ -53,7 +53,13 @@ class main extends spController
     function detail(){
         $type = spClass('type');
         $project=spClass('project');
-        $conditions =" id=".$this->spArgs("project");
+        $product=spClass('product');
+        if(isset($_SESSION['user'])){
+            $conditions =" id=".$this->spArgs("project");
+            $productConditions =" owner=". $_SESSION['user']['id'];
+            $this->products=$product->findAll($productConditions);
+        }
+        
         $this->currentCategory=1;
         $this->types = $type->spLinker()->findAll();
         $this->project = $project->spLinker()->find($conditions);

@@ -31,10 +31,10 @@
                   <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <{else }>
                    <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                  <li><a href="<{spUrl c=sub a=effect}>">效果分析</a></li>
+                  <li><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
                 <{/if}>
                 <li>
-                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(3)</span>
+                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<{$smarty.session.unread}>)</span>
                   </a>
                 </li>
                 <li class="active"><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>

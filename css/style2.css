@@ -5,11 +5,16 @@
 .yellow{background-color: #DDDF00;}
 .red{background-color: #EC4F4F;}
 .red-color{color: #EC4F4F;}
+.blue-color{color: #058DC7;}
+.green-color{color:#07733f;}
+.orange-color{color: #ed4306;}
+.gray-color{color: #f6f6f6;}
 .a{background-color: #24CBE5;}
 .b{background-color: #64E572;}
 .c{background-color: #FF9655;}
 .d{background-color: #FFF263;}
 .e{background-color: #6AF9C4;}
+.title{font-weight: bold;}
 .ad{padding:10px;border: solid 1px #ccc;border-radius: 5px;box-shadow: 0px 0px 1px #ccc;
 margin:0px 0 20px 0;background-color: #f8f8f8;cursor: pointer;display: block;color:#555;
 font-size: 12px;min-width: 20%;}
