@@ -1,7 +1,10 @@
 <?php
+require_once('PasswordHash.php');
 class cuser extends spController
 {
-	
+	var $hash_cost_log2 = 8;
+	var $hash_portable = FALSE;
+
 	function index(){
 		$this->display("index.php"); // 首页
 	}
@@ -13,27 +16,47 @@ class cuser extends spController
 		
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
 		$password=$this->spArgs("password");
-		$conditions = array("email" => $email , "password" => $password);
+		$conditions = array("email" => $email);
 
 		$result = $user->findAll($conditions); 
 		if($result){
-			$_SESSION['user'] = $result[0];
-			$conditions2 = array(
-            "receiver" => $_SESSION['user']['id'],
-            "state" => 0,
-            );
-			$unReadMessages=$message->findAll($conditions2);
-	        $unRead=count($unReadMessages);
-	        $_SESSION['unread'] = $unRead;
-			echo true;
-		}else{
-			echo false;
-		}	
+			
+			if ($this->checkPass($password,$result[0]['password'])) {
+				$_SESSION['user'] = $result[0];
+				$conditions2 = array(
+	            "receiver" => $_SESSION['user']['id'],
+	            "state" => 0,
+	            );
+				$unReadMessages=$message->findAll($conditions2);
+		        $unRead=count($unReadMessages);
+		        $_SESSION['unread'] = $unRead;
+				echo true;
+				return;
+			}
+
+		}
+		echo false;
+	}
+
+	//校验密码是否一致
+	function checkPass($password, $passwordInDb) {
+		$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
+		$loginResult = $hasher->CheckPassword($password, $passwordInDb);
+		unset($hasher);
+		return $loginResult;
 	}
 
 	//充值
     function recharge() {
         $this->display("recharge.php");
+    }
+
+    //对原始密码加密
+    function hashPass($originalPass) {
+    	$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
+    	$pass =  $hasher->HashPassword($originalPass);
+    	unset($hasher);
+    	return $pass;
     }
 
     //注册
@@ -44,7 +67,10 @@ class cuser extends spController
 		$name=$this->spArgs("name");
 		$account=$this->spArgs("account");
 		$payment=$this->spArgs("payment");
-		$conditions = array("email" => $email , "password" => $password);
+		$conditions = array("email" => $email);
+
+    	$password = $this->hashPass($password);
+
 		$newrow = array(
                         "email" => $email , 
                         "password" => $password,

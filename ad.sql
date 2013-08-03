@@ -360,15 +360,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
+alter table user modify column password varchar(60);
 --
 -- 转存表中的数据 `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `payment`, `account`, `balance`, `headimg`, `time`, `verify`, `score`) VALUES
-(0, '系统', 'system@jiuweihu.com', '123456', 0, 0, '', 0, 'system.jpg', '2013-06-17 14:32:11', 0, 0),
-(1, '张三丰', 'zhangsanfeng@mail.com', '123456', 1, 0, 'zhangsanfeng@mail.com', 12.03, 'default.jpg', '2013-04-28 16:00:00', 0, 0),
-(10, '任宝占', 'winter_2000@126.com', '111111', 0, 0, 'winter_2000@126.com', 259, '10.jpg', '2013-05-03 14:52:08', 1, 0),
-(11, 'dfdsfs', 'test@test.com', '111111', 1, 0, 'dsfsdfds', 0, 'default.jpg', '2013-05-14 11:50:23', 0, 0);
+(0, '系统', 'system@jiuweihu.com', '$2a$08$3vmoSWYzP0w4WHLQTfE.BuYO5OgowprHOoHPWg.nL187CzswsTW9m', 0, 0, '', 0, 'system.jpg', '2013-06-17 14:32:11', 0, 0),
+(1, '张三丰', 'zhangsanfeng@mail.com', '$2a$08$3vmoSWYzP0w4WHLQTfE.BuYO5OgowprHOoHPWg.nL187CzswsTW9m', 1, 0, 'zhangsanfeng@mail.com', 12.03, 'default.jpg', '2013-04-28 16:00:00', 0, 0),
+(10, '任宝占', 'winter_2000@126.com', '$2a$08$PzWaGmkALRxX0zKOCbHDCe7PtGJlT018BoZkMZKW7v2nVQKuIqbcW', 0, 0, 'winter_2000@126.com', 259, '10.jpg', '2013-05-03 14:52:08', 1, 0),
+(11, 'dfdsfs', 'test@test.com', '$2a$08$PzWaGmkALRxX0zKOCbHDCe7PtGJlT018BoZkMZKW7v2nVQKuIqbcW', 1, 0, 'dsfsdfds', 0, 'default.jpg', '2013-05-14 11:50:23', 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
