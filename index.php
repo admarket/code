@@ -3,10 +3,10 @@ define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
 	'db' => array( // 数据库设置
-                'host' => 'localhost',  // 数据库地址，一般都可以是localhost
-                'login' => 'root', // 数据库用户名
-                'password' => '', // 数据库密码
-                'database' => 'ad', // 数据库的库名称
+                'host' => 'admarket.mysql.rds.aliyuncs.com',  // 数据库地址，一般都可以是localhost
+                'login' => 'eadmarket', // 数据库用户名
+                'password' => '1admarket', // 数据库密码
+                'database' => 'eadmarket', // 数据库的库名称
         ),
     'launch' => array( // 加入挂靠点，以便开始使用Url_ReWrite的功能
         'router_prefilter' => array(

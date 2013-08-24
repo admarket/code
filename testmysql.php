@@ -1,5 +1,5 @@
 <?php 
-$link = mysql_connect('hostname','dbuser','dbpassword'); 
+$link = mysql_connect('admarket.mysql.rds.aliyuncs.com','eadmarket','1admarket'); 
 if (!$link) { 
 	die('Could not connect to MySQL: ' . mysql_error()); 
 } 
