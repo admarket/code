@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>九尾狐 - 站内信箱（<{$smarty.session.unread}>未读信息）</title>
+    <title>广告市场 - 用户中心 - 站内信箱（<{$smarty.session.unread}>未读信息）</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -22,7 +22,7 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span6">
-            <a href="/"><img src="/img/budgetup-small.png"/></a>
+            <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
           </div>
           <div class="span6">
               <ul class="nav nav-pills nav-head">
@@ -317,10 +317,10 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span8">
-            ©2013 九尾狐 — 版权所有.<a>隐私声明</a>. 
+            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
           </div>
           <div class="span4">
-            鸣谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
+            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
           </div>
         </div>
       </div>

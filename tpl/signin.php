@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>九尾狐 - 用户登录</title>
+    <title>广告市场  - 用户登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     <div class="header">
       <div class="container">
         <div class="row-fluid">
-          <div class="span4 "><a href="/"><img src="/img/budgetup.png"/></a></div>
+          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
         </div>
       </div>
     </div>
@@ -91,10 +91,10 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span8">
-            ©2013 九尾狐 — 版权所有.<a>隐私声明</a>. 
+            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
           </div>
           <div class="span4">
-            鸣谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
+            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
           </div>
         </div>
       </div>

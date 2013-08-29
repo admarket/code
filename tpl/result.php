@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>九尾狐 - 网络广告位交易市场 </title>
+    <title>广告市场 - 全球首家中文网络广告位交易平台 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -20,7 +20,7 @@
     <div class="header" style="padding-bottom:0;margin-bottom:0;">
       <div class="container">
         <div class="row-fluid">
-          <div class="span4"><a href="/"><img src="/img/budgetup.png"/></a></div>
+          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
           <div class="span3 offset1">如果您有任何疑问，请关注我们的<a class="tip" title="关注我们的新浪微博">新浪微博</a>,与我们进行互动。</div>
           <div class="span3 offset1">
             <{if $smarty.session.user eq '' }>
@@ -107,11 +107,11 @@
                             <div>
                              <{/if}>
                             <li class="span3">
-                              <a class="ad"   href="<{spUrl c=main a=detail project=$project.id}>">
+                              <a class="ad"  title="<{$project.description}>"    href="<{spUrl c=main a=detail project=$project.id}>">
                                 <div class="row">
                                   <div class="span4 offset2">
                                     <img class="img-rounded img-polaroid" src="/img/ads/<{$project.logo}>" alt="">
-                                    <h6 align="center" style="color:#0088cc;"><{$project.name}></h6>
+                                    <h6 align="center" style="color:#0088cc;white-space:nowrap;"><{$project.name}></h6>
                                   </div>
                                   
                                   <div class="span5 offset1">
@@ -171,10 +171,10 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span8">
-            ©2013 九尾狐 — 版权所有.<a>隐私声明</a>. 
+            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
           </div>
           <div class="span4">
-            鸣谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
+            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
           </div>
         </div>
       </div>

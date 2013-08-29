@@ -1,4 +1,4 @@
-﻿body{font-size:12px;}
+﻿body{font-size:12px;font-family: "雅黑","微软雅黑"}
 .orange{background-color: #ED561B;}
 .blue{background-color: #058DC7;}
 .green{background-color: #50B432;}
@@ -13,6 +13,7 @@
 .green-color{color:#07733f;}
 .orange-color{color: #ed4306;}
 .gray-color{color: #f6f6f6;}
+.logo-small{width: 162px;height:40px;}
 .msg{display: none;color:red;}
 .btn{font-weight: bold;}
 .header{padding:10px;}

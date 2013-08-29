@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>九尾狐充值中心</title>
+    <title>广告市场 - 充值中心</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
         *{
@@ -175,7 +175,7 @@
         <ul class="foot-ul">
             <li><font class="note-help">如果您点击“确认”按钮，即表示您同意该次的执行操作。 </font></li>
             <li>
-                九尾狐版权所有 2011-2015
+                ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
             </li>
         </ul>
     </div>
