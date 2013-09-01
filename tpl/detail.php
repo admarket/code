@@ -21,7 +21,7 @@
     <div class="header" style="padding-bottom:0;margin-bottom:0;">
       <div class="container">
         <div class="row-fluid">
-          <div class="span4"><a href="/"><img src="/img/budgetup.png"/></a></div>
+          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
           <div class="span3 offset1">如果您有任何疑问，请关注我们的<a class="tip" title="关注我们的新浪微博">新浪微博</a>,与我们进行互动。</div>
           <div class="span3 offset1">
             <{if $smarty.session.user eq '' }>
@@ -55,10 +55,7 @@
     <div class="section">
       <div class="container">
         <!--intro content-->
-        <div class="alert alert-info intro">
-          如果您有任何疑问，请关注我们的新浪微博,与我们进行互动。
-          <a href="#" class="close" data-dismiss="alert">&times;</a>
-        </div>
+       
         <div class="row-fluid">
           <div class="span3  nav-bar" >
             <div style="border-bottom:solid 1px #eee;">

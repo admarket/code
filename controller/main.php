@@ -65,4 +65,7 @@ class main extends spController
         $this->project = $project->spLinker()->find($conditions);
         $this->display("detail.php"); // 注册 
     }
+    function help(){
+        $this->display("help.html"); // 注册 
+    }
 }

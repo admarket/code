@@ -1,4 +1,4 @@
-﻿body{background-color: #f9f9f9;font-family: "雅黑"}
+﻿body{background-color: #f9f9f9;font-family: "微软雅黑","雅黑","黑体"}
 .orange{background-color: #ED561B;}
 .blue{background-color: #058DC7;}
 .green{background-color: #50B432;}
@@ -20,8 +20,11 @@
 margin:0px 0 20px 0;background-color: #f8f8f8;cursor: pointer;display: block;color:#555;
 font-size: 12px;min-width: 20%;}
 .ad img{width: 50px;height: 50px;}
-
-.box{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff; padding:15px;
+.nav-stacked li{position: relative;}
+.nav-stacked li a{color:  #058DC7;padding-left: 30px;}
+.nav-stacked li a.active{color:  #fff;background-color: #0088cc;}
+.nav-stacked li i{position: absolute;top:10px;right: 10px;color: #ccc;}
+.box{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radiuks: 5px; background-color: #fff; padding:15px;
 width: 98%;margin: 15px 0px;}
 .help-block{font-size: 12px;color: #999;}
 .header{padding:20px; border-bottom:solid 1px #ededed; background-color: #fff;}
@@ -40,7 +43,6 @@ a{color: #c33e00;}
 
 a{ cursor: pointer;}
 a:hover{color: #c33e00;}
-
 
 .section .row-fluid{margin: 10px;padding: 20px 0px;}
 .section{ padding: 20px;}

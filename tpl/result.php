@@ -54,10 +54,22 @@
     <div class="section">
       <div class="container">
         <!--intro content-->
-        <div class="alert alert-info intro">
-          如果您有任何疑问，请关注我们的新浪微博,与我们进行互动。
-          <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <div class="alert alert-info intro" style="display:block;font-size:14px;padding:15px 10px 5px 10px;margin-bottom:0px;">
+          <a href="#" class="close" data-dismiss="alert" style="font-size:12px;">&times;</a>
+          <span class="row-fluid" style="padding:0px;margin:0px;">
+              <span class="span6" style="padding:0px;margin-left:10px;">
+                <a class="blue-color" href="<{spUrl c=main a=help}>#buyer">
+                  <i class="icon-user"></i> &nbsp;我是卖家，怎样出售我的广告位？
+                </a>
+              </span>
+              <span class="span5 " style="padding:0px;">
+                <a class="green-color"  href="<{spUrl c=main a=help}>#seller">
+                  <i class="icon-user"></i> &nbsp;我是买家，如何购买广告位？</span> 
+                </a>
+          </span>
+          
         </div>
+
         <div class="row-fluid">
           <div class="span3  nav-bar" >
             <div style="border-bottom:solid 1px #eee;">
