@@ -54,8 +54,8 @@ class main extends spController
         $type = spClass('type');
         $project=spClass('project');
         $product=spClass('product');
+        $conditions =" id=".$this->spArgs("project");
         if(isset($_SESSION['user'])){
-            $conditions =" id=".$this->spArgs("project");
             $productConditions =" owner=". $_SESSION['user']['id'];
             $this->products=$product->findAll($productConditions);
         }
