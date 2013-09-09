@@ -1,9 +1,6 @@
 <?php
-require_once('PasswordHash.php');
 class cuser extends spController
 {
-	var $hash_cost_log2 = 8;
-	var $hash_portable = FALSE;
 
 	function index(){
 		$this->display("index.php"); // 首页
@@ -40,10 +37,8 @@ class cuser extends spController
 
 	//校验密码是否一致
 	function checkPass($password, $passwordInDb) {
-		$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
-		$loginResult = $hasher->CheckPassword($password, $passwordInDb);
-		unset($hasher);
-		return $loginResult;
+		$passwordAfter = $this->hashPass($password);
+		return $passwordAfter == $passwordInDb;
 	}
 
 	//充值
@@ -53,10 +48,7 @@ class cuser extends spController
 
     //对原始密码加密
     function hashPass($originalPass) {
-    	$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
-    	$pass =  $hasher->HashPassword($originalPass);
-    	unset($hasher);
-    	return $pass;
+    	return md5($originalPass);
     }
 
     //注册
@@ -84,7 +76,7 @@ class cuser extends spController
 			$result = $user->findAll($conditions); 
 			//dump($result); // 查看结果，
 			if($result){
-				$_SESSION['user'] = $result[0];
+				//$_SESSION['user'] = $result[0];
 				echo true;
 			}else{
 				echo false;
