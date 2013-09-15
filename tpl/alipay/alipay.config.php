@@ -29,11 +29,11 @@ $alipay_config['key']			= "javb9gt6k9kzuj1kfgv0exx4niqnyolu";
 $alipay_config['payment_type'] = "1";
 //必填，不能修改
 //服务器异步通知页面路径
-$alipay_config['notify_url'] = "http://localhost:8888/tpl/alipay/notify_url.php";
+$alipay_config['notify_url'] = "http://www.eadmarket.com/alipay_notify.html";
 //需http://格式的完整路径，不能加?id=123这类自定义参数
 
 //页面跳转同步通知页面路径
-$alipay_config['return_url'] = "http://127.0.0.1:8888/tpl/alipay/return_url.php";
+$alipay_config['return_url'] = "http://www.eadmarket.com/alipay_return.html";
 //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 //系统公共的支付宝帐户
