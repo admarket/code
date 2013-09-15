@@ -27,7 +27,7 @@ class recharge extends spModel
    * 完成特定的充值记录，同时增加充值金额到当前人额账户上,
    * 为了数据完整性，其中开启了事务，为了处理并发修改问题，使用了mysql乐观锁
    */
-  public function finish($rechargeId) {
+  public function finish($rechargeId,$totalFee) {
       $rechargeDO = $this->findBy("id",$rechargeId);
       if (is_null($rechargeDO)) {
         return false;
@@ -40,7 +40,8 @@ class recharge extends spModel
           $condition = array("id"=>$rechargeId,"r_status"=>$r_status);
           $finish_recharge_result = $this->update($condition,
               array("r_status"=>$this->recharge_status_finish,
-              "gmt_modified"=>date("Y-m-d H:i:s")
+              "gmt_modified"=>date("Y-m-d H:i:s"),
+              "cash"=>$totalFee
               )
           );
           $updateCount = $this->affectedRows() >= 1;
@@ -49,7 +50,7 @@ class recharge extends spModel
               return false;
           }
           $user = spClass("user");
-          $addBalanceResult = $user->addBalance($rechargeDO['user_id'],$rechargeDO['cash']);
+          $addBalanceResult = $user->addBalance($rechargeDO['user_id'],$totalFee);
           if (!$addBalanceResult) {
               $this->query("ROLLBACK");
               return false;

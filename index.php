@@ -4,6 +4,7 @@ define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
 	'db' => array( // 数据库设置
                 'host' => 'admarket.mysql.rds.aliyuncs.com',  // 数据库地址，一般都可以是localhost
+                'port' => '3306', //数据库服务器端口号
                 'login' => 'eadmarket', // 数据库用户名
                 'password' => '1admarket', // 数据库密码
                 'database' => 'eadmarket', // 数据库的库名称
@@ -46,8 +47,8 @@ $spConfig = array(
                      'suffix' => '.html', // 生成地址的结尾符
                      'sep'=>'/',
                      'map' => array(
-                         'alipay_return' => 'calipay@alipayReturn',
-                         'alipay_notify' => 'calipay@alipayNotify'
+                         'alipay_return' => 'crecharge@alipayReturn',
+                         'alipay_notify' => 'crecharge@alipayNotify'
                      ),
                  ),
         ),

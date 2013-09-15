@@ -20,10 +20,10 @@
  
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //合作身份者id，以2088开头的16位纯数字
-$alipay_config['partner']		= trim('');
+$alipay_config['partner']		= "2088011541482927";
 
 //安全检验码，以数字和字母组成的32位字符
-$alipay_config['key']			= trim('');
+$alipay_config['key']			= "javb9gt6k9kzuj1kfgv0exx4niqnyolu";
 
 //支付类型
 $alipay_config['payment_type'] = "1";
@@ -37,7 +37,7 @@ $alipay_config['return_url'] = "http://127.0.0.1:8888/tpl/alipay/return_url.php"
 //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 //系统公共的支付宝帐户
-$alipay_config['seller_email'] = trim("liuyongpo@gmail.com");
+$alipay_config['seller_email'] = "eadmarket@gmail.com";
 
 //签名方式 不需修改
 $alipay_config['sign_type']    = strtoupper('MD5');

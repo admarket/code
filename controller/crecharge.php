@@ -6,16 +6,17 @@ class crecharge extends spController
 
     public function createRecharge() {
         $uid = $_SESSION['user']['id'];
-        $cash = $this->spArgs('cash') * 100;
-        echo "uid:".$uid."\n";
-        $recharge = spClass("recharge");
-
-        $out_trade_no = $recharge->create(array("uid"=>$uid,"cash"=>$cash));
-        echo "out_trade_no:".$out_trade_no;
-
-        $subject = $uid."充值".$out_trade_no;
+        $cash = $this->spArgs('cash');
 
         $total_fee = $cash;
+
+        //echo "uid:".$uid."\n";
+        $recharge = spClass("recharge");
+        $cashFen = $cash * 100;
+        $out_trade_no = $recharge->create(array("uid"=>$uid,"cash"=>$cashFen));
+        //echo "out_trade_no:".$out_trade_no;
+
+        $subject = "会员".$uid."充值";
 
         $body = "JIUWEIHU".$out_trade_no;
 
@@ -29,24 +30,24 @@ class crecharge extends spController
 //客户端的IP地址
         $exter_invoke_ip = "";
 //非局域网的外网IP地址，如：221.0.0.1
-        $alipay_config['partner']		= trim('');
+        $alipay_config['partner']		= "2088011541482927";
 
 //安全检验码，以数字和字母组成的32位字符
-        $alipay_config['key']			= trim('');
+        $alipay_config['key']			= "javb9gt6k9kzuj1kfgv0exx4niqnyolu";
 
 //支付类型
         $alipay_config['payment_type'] = "1";
 //必填，不能修改
 //服务器异步通知页面路径
-        $alipay_config['notify_url'] = "http://localhost:8888/tpl/alipay/notify_url.php";
+        $alipay_config['notify_url'] = "http://localhost:8888/alipay_notify.html";
 //需http://格式的完整路径，不能加?id=123这类自定义参数
 
 //页面跳转同步通知页面路径
-        $alipay_config['return_url'] = "http://127.0.0.1:8888/tpl/alipay/return_url.php";
+        $alipay_config['return_url'] = "http://127.0.0.1:8888/alipay_return.html";
 //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 //系统公共的支付宝帐户
-        $alipay_config['seller_email'] = trim("liuyongpo@gmail.com");
+        $alipay_config['seller_email'] = "eadmarket@gmail.com";
 
 //签名方式 不需修改
         $alipay_config['sign_type']    = strtoupper('MD5');
@@ -100,13 +101,15 @@ class crecharge extends spController
             //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
 
             //商户订单号
-
             $out_trade_no = $this->spArgs('out_trade_no');
 
             //支付宝交易号
-
             $trade_no = $this->spArgs('trade_no');
 
+            //交易金额，以元为单位，实际成交额以支付宝返回为准
+            $total_fee = $this->spArgs('total_fee');
+
+            $total_fee_fen = $total_fee * 100;
             //交易状态
             $trade_status = $this->spArgs('trade_status');
 
@@ -116,11 +119,11 @@ class crecharge extends spController
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
                 $recharge = spClass("recharge");
-                $result = $recharge->finish($out_trade_no);
-                echo "result".$result;
+                $result = $recharge->finish($out_trade_no,$total_fee_fen);
+                //echo "result".$result;
             }
             else {
-                echo "trade_status=".$trade_status;
+                //echo "trade_status=".$trade_status;
             }
 
             echo "验证成功<br />";
@@ -150,17 +153,18 @@ class crecharge extends spController
             //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
 
             //商户订单号
-
             $out_trade_no = $this->spArgs('out_trade_no');
 
             //支付宝交易号
-
             $trade_no =$this->spArgs('trade_no');
 
+            //交易金额，以元为单位，实际成交额以支付宝返回为准
+            $total_fee = $this->spArgs('total_fee');
+            $total_fee_fen = $total_fee * 100;
             //交易状态
             $trade_status = $this->spArgs('trade_status');
 
-            echo "result".$out_trade_no;
+            //echo "result".$out_trade_no;
             if($trade_status == 'TRADE_FINISHED') {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
@@ -171,8 +175,8 @@ class crecharge extends spController
                 //1、开通了普通即时到账，买家付款成功后。
                 //2、开通了高级即时到账，从该笔交易成功时间算起，过了签约时的可退款时限（如：三个月以内可退款、一年以内可退款等）后。
                 $recharge = spClass("recharge");
-                $result = $recharge->finish($out_trade_no);
-                echo "result".$result;
+                $result = $recharge->finish($out_trade_no, $total_fee_fen);
+                //echo "result".$result;
                 //调试用，写文本函数记录程序运行情况是否正常
                 logResult("finished one trade: ".$out_trade_no);
             }
@@ -184,8 +188,8 @@ class crecharge extends spController
                 //注意：
                 //该种交易状态只在一种情况下出现——开通了高级即时到账，买家付款成功后。
                 $recharge = spClass("recharge");
-                $result = $recharge->finish($out_trade_no);
-                echo "result".$result;
+                $result = $recharge->finish($out_trade_no, $total_fee_fen);
+                //echo "result".$result;
                 //调试用，写文本函数记录程序运行情况是否正常
                 logResult("trade success, out_trade_no is: ".$out_trade_no );
             }
