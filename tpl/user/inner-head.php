@@ -7,19 +7,19 @@
           <div class="span6">
               <ul class="nav nav-pills nav-head">
                 <{if $smarty.session.user.type==1}>
-                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
+                  <li <{if $current=="sitemanage"}>class="active"<{/if}> ><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
+                  <li <{if $current=="admanage"}>class="active"<{/if}>><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                 <{else }>
-                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                  <li><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
+                   <li <{if $current=="product"}>class="active"<{/if}>><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
+                  <li <{if $current=="effect"}>class="active"<{/if}>><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
                 <{/if}>
-                <li>
+                <li <{if $current=="inbox"}>class="active"<{/if}>>
                   <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<{$smarty.session.unread}>)</span>
                   </a>
                 </li>
-                <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
-                <li class="active"><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
-                <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
+                <li <{if $current=="finance"}>class="active"<{/if}>><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
+                <li <{if $current=="setting"}>class="active"<{/if}>><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
+                <li <{if $current=="logout"}>class="active"<{/if}>><a href="<{spUrl c=sub a=logout}>">退出</a></li>
               </ul>
           </div>
         </div>

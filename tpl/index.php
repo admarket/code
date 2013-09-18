@@ -67,7 +67,7 @@
                   <i class="icon-user"></i> &nbsp;我是买家，如何购买广告位？</span> 
                 </a>
           </span>
-          
+          <div class="clearfix clear" style="clear:both;"></div>
         </div>
         <div class="row-fluid">
            <div class="span3  nav-bar" >

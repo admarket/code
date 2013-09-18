@@ -302,9 +302,9 @@ function checkPassword(){
             $("#password-msg").css("color","red");
             return false;
         }else{
-               if($.trim($("#password").val()).length<6||$.trim($("#password").val()).length>20){
+               if($.trim($("#password").val()).length<6||$.trim($("#password").val()).length>50){
                   $('#password-msg').show();
-                  $("#password-msg").html("密码长度必须是6-20位");
+                  $("#password-msg").html("密码长度必须是6-50位");
                   $("#password-msg").css("color","red");
                   return false;
                }else{

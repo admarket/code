@@ -37,6 +37,8 @@ class sub extends spController
         $this->adCount=$adCount;
         $this->soldAd=$soldAd;
         $this->profits=$profits;
+
+        $this->current="setting";//设置当前导航状态
         $this->display("user/setting.php"); // 设置
     }
     function admanage(){
@@ -74,6 +76,7 @@ class sub extends spController
         $this->beVerified=$beVerified;
         $this->profits=$profits;
 
+        $this->current="admanage";//设置当前导航状态
         $this->display("user/publisher/admanage.php"); // 广告管理
     }
     function inbox(){
@@ -128,6 +131,8 @@ class sub extends spController
         $this->messages=$messages;
 
         $this->pager = $message->spPager()->getPager();
+
+        $this->current="inbox";//设置当前导航状态
         $this->display("user/inbox.php"); // 广告管理
         
     }
@@ -168,6 +173,7 @@ class sub extends spController
             $this->avgProfit=$this->sumProfit/$this->projectCount;
         }
         
+        $this->current="sitemanage";//设置当前导航状态
         $this->display("user/publisher/sitemanage.php"); // 广告管理
     }
     function finance(){
@@ -210,6 +216,8 @@ class sub extends spController
         $this->records = $finance->spPager($this->spArgs('page', 1), 5)->findAll($conditions,'time DESC'); 
         $this->pager = $finance->spPager()->getPager();
         //dump($records);
+
+        $this->current="finance";//设置当前导航状态
         $this->display("user/finance.php"); // 财务统计
     }
     
@@ -217,8 +225,7 @@ class sub extends spController
         $product = spClass("product");
         $conditions = array("owner" => $_SESSION['user']['id']);
         $this->products = $product->spLinker()->findAll($conditions);
-        
-        
+         
         $this->productCount=count($this->products);//产品总数
         $this->sumFee=0;//总推广费用
         $this->sumImpression=0;//总展示次数
@@ -232,6 +239,9 @@ class sub extends spController
         }
         $this->impressPrice=$this->sumFee/$this->sumImpression;
         $this->clickPrice=$this->sumFee/$this->sumClick;
+
+
+        $this->current="product";//设置当前导航状态
         $this->display("user/advertiser/product.php"); // 用户面板   
     }
 
@@ -267,6 +277,8 @@ class sub extends spController
         }
 
         $this->trades=$trades;
+
+        $this->current="effect";//设置当前导航状态
         $this->display("user/advertiser/effect.php"); // 广告管理
     }
    

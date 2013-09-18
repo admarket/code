@@ -525,7 +525,7 @@ $("#btn-saveAddProject").click(function(){
   if (a&&b&&d) {
       var options = {  
               success : function(data) {  
-                alert(data);
+                ///alert(data);
                   if(data==1){
                      location.reload();
                   } 

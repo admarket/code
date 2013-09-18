@@ -303,19 +303,56 @@
     <!--footer content-->
      <!-- load foot tpl -->
     <{include file="foot.php"}>
-    
+
 <div class="modal hide fade" id="form-income">
+   
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>账户充值</h3>
   </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
+  
+  <div class="modal-body" style="padding:10px 20px;">
+    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
+        <div>
+                <p>
+                  <label>充值方式：</label>
+                  <div class="row-fluid tip" style="width:90%;" title="目前仅支持支付宝">
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 2px green;box-shadow:0px 0px 2px #ccc;">
+                      <input type="radio" name="payment" id="payment1" value="0" checked/>
+                      <img src="/img/alipay.ico" width="20" height="20"/>
+                      &nbsp;支付宝&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                      <input type="radio" name="payment" id="payment2" value="1" disabled="disabled"/>
+                      <img src="/img/tenpay.ico" width="20" height="20"/>
+                      &nbsp;财付通&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                    <input type="radio" name="payment" id="payment3" value="2" disabled="disabled"/>
+                    <img src="/img/Unionpay.jpg" width="20" height="20"/>
+                    &nbsp;银联卡&nbsp;
+                    </label>
+                  </div>
+                  <label>付款金额：</label>
+                </p>
+                <p>
+                    <input size="30" id="cash" class="input-large" name="cash" />
+                        <span id="cash-msg">必填，请输入大于0的整数</span>
+                </p>
+                <p>
+                  <button class="btn btn-success" type="submit" id="btn-recharge">确 认</button>
+                </p>
+        </div>
+          </form>
   </div>
+
   <div class="modal-footer">
-    <a href="#" class="btn">关闭</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
+    
   </div>
+  
 </div>
 <div class="modal hide fade" id="form-outcome">
   <div class="modal-header">
@@ -352,7 +389,17 @@ $("#btn-income").click(function(){
 $("#btn-outcome").click(function(){
   $('#form-outcome').modal();
 });
-
+//验证充值金额
+$("#btn-recharge").click(function(){
+  var reg= /^[0-9]*$/;
+      if(!reg.test($.trim($("#cash").val()))){
+            $("#cash-msg").html("充值金额必须为整数，且大于0");
+            $("#cash-msg").css("color","red");
+            return false;
+        }else{
+            return true;
+        }
+});
 
 function loadData(data){
    if(data){//从客户端异步获取数据，然后处理
