@@ -18,33 +18,10 @@
     <script src="/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="header">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span6">
-            <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
-          </div>
-          <div class="span6">
-              <ul class="nav nav-pills nav-head">
-                <{if $smarty.session.user.type==1}>
-                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
-                <{else }>
-                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                  <li><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
-                <{/if}>
-                <li class="active">
-                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<{$smarty.session.unread}>)</span>
-                  </a>
-                </li>
-                <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
-                <li><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
-                <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+     <!-- load head tpl -->
+    <{include file="./user/inner-head.php"}>
+
+    <!-- main section -->
     <div class="section">
       <div class="container">
         <div class="row-fluid">
@@ -313,18 +290,8 @@
       </div>
     </div>
     <!--footer content-->
-    <div class="footer">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span8">
-            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
-          </div>
-          <div class="span4">
-            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- load foot tpl -->
+    <{include file="foot.php"}>
 
 
 <script type='text/javascript'>//<![CDATA[ 

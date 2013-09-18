@@ -16,13 +16,8 @@
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
-    <div class="header">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
-        </div>
-      </div>
-    </div>
+    <!-- load head tpl -->
+    <{include file="head.php"}>
     <div class="section">
       <div class="container"  style="width:500px; padding:60px 0 100px 0;">
          <form class="form-horizontal" action="<{spUrl c=user a=login}>" method="POST">
@@ -87,18 +82,8 @@
       </div>
     </div>
     <!--footer content-->
-    <div class="footer">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span8">
-            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
-          </div>
-          <div class="span4">
-            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- load foot tpl -->
+    <{include file="foot.php"}>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">

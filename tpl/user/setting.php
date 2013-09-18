@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 广告位管理</title>
+    <title>广告市场 - 用户中心 - 基本设置</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -19,33 +19,10 @@
     <script src="/js/jquery.form.js"></script>
   </head>
   <body>
-    <div class="header">
-      <div class="container">
-        <div class="row-fluid">
-           <div class="span6">
-            <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
-          </div>
-          <div class="span6">
-              <ul class="nav nav-pills nav-head">
-                <{if $smarty.session.user.type==1}>
-                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
-                <{else }>
-                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                  <li><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
-                <{/if}>
-                <li>
-                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<{$smarty.session.unread}>)</span>
-                  </a>
-                </li>
-                <li><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
-                <li class="active"><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
-                <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- load head tpl -->
+    <{include file="./user/inner-head.php"}>
+
+    <!-- main section -->
     <div class="section">
       <div class="container">
         <div class="row-fluid">
@@ -201,7 +178,7 @@
                          <{else}>
                          <input type="radio" name="type" id="type1" value="0">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;广告客户 - 购买广告位&nbsp;
+                        <i class="icon-user"></i>&nbsp;我是买家 - 购买广告位&nbsp;
                       </label>
                       <label class="radio"  style="font-size:12px;">
                         <{if $user.type==1}>
@@ -209,7 +186,7 @@
                          <{else}>
                          <input type="radio" name="type" id="type1" value="1">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;广告商 - 出售广告位 &nbsp;
+                        <i class="icon-user"></i>&nbsp;我是卖家 - 出售广告位 &nbsp;
                       </label>
                       
                     </div>
@@ -275,18 +252,9 @@
       </div>
     </div>
     <!--footer content-->
-    <div class="footer">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span8">
-            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
-          </div>
-          <div class="span4">
-            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
-          </div>
-        </div>
-      </div>
-    </div>
+     <!-- load foot tpl -->
+    <{include file="foot.php"}>
+
 <div id="alert-msg" class="alert alert-success " style="position:absolute;top:30%;width:200px;left:40%;box-shadow:0px 0px 2px green;">
       
      <h5> 保存成功！</h5> 

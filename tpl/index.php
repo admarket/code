@@ -223,18 +223,7 @@
       </div>
     </div>
     <!--footer content-->
-    <div class="footer">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span8">
-            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
-          </div>
-          <div class="span4">
-            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <{include file="foot.php"}>
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>

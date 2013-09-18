@@ -66,6 +66,6 @@ class main extends spController
         $this->display("detail.php"); // 注册 
     }
     function help(){
-        $this->display("help.html"); // 注册 
+        $this->display("help.php"); // 注册 
     }
 }

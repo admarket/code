@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 账户概况</title>
+    <title>广告市场 - 用户中心 - 财务管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -18,33 +18,10 @@
     <script src="/js/highcharts.js"></script>
   </head>
   <body>
-    <div class="header">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span6">
-            <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
-          </div>
-          <div class="span6">
-              <ul class="nav nav-pills nav-head">
-                <{if $smarty.session.user.type==1}>
-                  <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                  <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
-                <{else }>
-                   <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                  <li><a href="<{spUrl c=sub a=effect}>">统计分析</a></li>
-                <{/if}>
-                <li>
-                  <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<{$smarty.session.unread}>)</span>
-                  </a>
-                </li>
-                <li class="active"><a href="<{spUrl c=sub a=finance}>">财务统计</a></li>
-                <li><a href="<{spUrl c=sub a=setting}>">基本设置</a></li>
-                <li><a href="<{spUrl c=sub a=logout}>">退出</a></li>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+     <!-- load head tpl -->
+    <{include file="./user/inner-head.php"}>
+
+    <!-- main section -->
     <div class="section">
       <div class="container">
         <div class="row-fluid">
@@ -178,6 +155,12 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <{if $records eq ""}>
+                         <div class="alert" style="border:solid 1px #c09853;display:block;width:92%;position:relative;left:0;font-size:12px;">
+                  
+                        <i class="icon-info-sign"></i>&nbsp;&nbsp;暂无数据内容。
+                        </div>     
+                    <{/if}>
                       <{foreach from=$records item=record}>
                         <tr>
                         <td>
@@ -318,18 +301,9 @@
       </div>
     </div>
     <!--footer content-->
-    <div class="footer">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span8">
-            ©2013 北京九尾狐科技有限公司 — 版权所有.<a>隐私声明</a>. 
-          </div>
-          <div class="span4">
-            致谢：<a>Glyphicons</a> | <a>BootStramp</a> | <a>BootCss</a> | <a>Jquery</a>
-          </div>
-        </div>
-      </div>
-    </div>
+     <!-- load foot tpl -->
+    <{include file="foot.php"}>
+    
 <div class="modal hide fade" id="form-income">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
