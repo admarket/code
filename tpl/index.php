@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>广告市场 - 全球首家中文网络广告位交易平台 </title>
