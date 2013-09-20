@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>广告市场  - 用户注册</title>
@@ -370,8 +370,9 @@
            $("#second").attr("class",'badge badge-success');
           $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
            function(data){
+            
              if(data){
-                $.get("<{spUrl c=main a=email}>",{email:$.trim($("#email").val())},function(data,status){
+                $.post("<{spUrl c=main a=email}>",{email:$.trim($("#email").val())},function(data,status){
                   //alert("Data: " + data + "\nStatus: " + status);
                 });
                 $('#verifyAddress').attr("href","http://www."+$.trim($("#email").val().split("@")[1]));

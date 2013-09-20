@@ -410,7 +410,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            //alert(response);
+            alert(response);
         }, 
         source: [
                <{foreach from=$categories item=category name=categoryCount}>
@@ -425,7 +425,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            //alert(response);
+            alert(response);
         },
         validate: function(value) {
         if($.trim(value) == '') {
@@ -443,7 +443,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            //alert(response);
+            alert(response);
         },
         validate: function(value) {
           var reg=new RegExp("(https?|ftp|mms):\/\/([A-z0-9]+[_\-]?[A-z0-9]+\.)*[A-z0-9]+\-?[A-z0-9]+\.[A-z]{2,}(\/.*)*\/?");
@@ -464,7 +464,7 @@ $(".upload-logo").change(function(){
        var uploadForm = $(this).parent().parent();
         var options = {  
             success : function(data) {  
-                //alert(data);  
+                alert(data);  
             },  
             error : function(result) {  
                 alert(result);  
@@ -474,7 +474,7 @@ $(".upload-logo").change(function(){
             $(uploadForm).ajaxSubmit(options);
         }
         else{
-            //alert("error");
+            alert("error");
         }
       });
 
@@ -585,7 +585,7 @@ $(function () {
       url: '<{spUrl c=cproject a=UpdateProject}>',
       success: function(response, newValue) {
         if(!response.success) 
-          //alert(response);
+          alert(response);
       },
       validate: function(value) {
           if($.trim(value) == '') {

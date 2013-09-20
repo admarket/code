@@ -109,7 +109,7 @@ class cuser extends spController
                 'verify' => 1,  // 然后将这条记录的name改成“喜羊羊”
         );
         $user->update($conditions, $newrow); // 更新记录
-        $this->display("user/dashboard.php"); // 首页
+        $this->jump(spUrl('sub', 'dashboard'));
     }
     //保存设置
     function save(){

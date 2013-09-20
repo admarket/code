@@ -360,11 +360,48 @@
     <h3>账户提现</h3>
   </div>
   <div class="modal-body">
-    <p>One fine body…</p>
+    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
+        <div>
+                <p>
+                  <label>提现方式：</label>
+                  <div class="row-fluid tip" style="width:90%;" title="目前仅支持支付宝">
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 2px green;box-shadow:0px 0px 2px #ccc;">
+                      <input type="radio" name="payment" id="payment1" value="0" checked/>
+                      <img src="/img/alipay.ico" width="20" height="20"/>
+                      &nbsp;支付宝&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                      <input type="radio" name="payment" id="payment2" value="1" disabled="disabled"/>
+                      <img src="/img/tenpay.ico" width="20" height="20"/>
+                      &nbsp;财付通&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                    <input type="radio" name="payment" id="payment3" value="2" disabled="disabled"/>
+                    <img src="/img/Unionpay.jpg" width="20" height="20"/>
+                    &nbsp;银联卡&nbsp;
+                    </label>
+                  </div>
+                  <label>付款金额：</label>
+                </p>
+                <p>
+                    <input size="30" id="cash" class="input-large" name="cash" />
+                        <span id="cash-msg">必填，请输入大于0的整数</span>
+                </p>
+                <p>
+                  <button class="btn btn-danger" type="submit" id="btn-recharge">申请提现</button>
+                </p>
+                         <div style="display:block;width:85%;position:relative;left:0;font-size:12px;">
+                  
+                        <i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：广告收入默认在当月月底下月月初提现到您的默认提现账号，手动申请提现需要等待1-3个工作日才能到账，请耐心等待，如有疑问，请联系本站客服QQ。
+                        </div>     
+        </div>
+          </form>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn">关闭</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
+
   </div>
 </div>
 <script type='text/javascript'>//<![CDATA[ 

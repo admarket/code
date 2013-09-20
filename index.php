@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
@@ -30,13 +30,13 @@ $spConfig = array(
          'ext' => array(  // 扩展使用的配置根目录
                 'spEmail' => array( //邮件扩展的基本设置
                         'debug' => TRUE, //调试模式
-                        'host_name' => 'winter_2000@126.com', //邮件主机名
-                        'smtp_host' => 'smtp.126.com',  //SMTP服务器
+                        'host_name' => 'eadmarket.com', //邮件主机名
+                        'smtp_host' => 'smtp.biz.mail.qq.com',  //SMTP服务器
                         'smtp_port' => '25',    //SMTP端口
                         'auth' => TRUE, //身份验证
-                        'from' => 'winter_2000@126.com', //发件邮箱
-                        'user' => 'winter_2000@126.com',      //用户名
-                        'pass' => 'a130509',       //密码
+                        'from' => 'system@eadmarket.com', //发件邮箱
+                        'user' => 'system@eadmarket.com',      //用户名
+                        'pass' => '1admarket',       //密码
                         'log_file' => '',       //日志文件
                         'time_out' => 30,       //超时时间
                 ),

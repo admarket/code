@@ -170,6 +170,7 @@ class spEmail {
 		foreach ($MXHOSTS as $host) {
 			//$this->log_write("Trying to ".$host.":".$this->smtp_port."\n");
 			$this->sock = @fsockopen($host, $this->smtp_port, $errno, $errstr, $this->time_out);
+			var_dump($this->sock);
 			if (!($this->sock && $this->smtp_ok())) {
 				$this->log_write("Warning: Cannot connect to mx host ".$host."\n");
 				$this->log_write("Error: ".$errstr." (".$errno.")\n");

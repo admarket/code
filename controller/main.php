@@ -34,7 +34,7 @@ class main extends spController
             $this->display("signin.php"); // 登录
         }
         else{
-        	$this->display("user/dashboard.php"); // 用户面板   
+        	$this->jump(spUrl('sub', 'dashboard'));   
         }
 	}
     function register(){
@@ -43,9 +43,10 @@ class main extends spController
     function email() {
                 $mail = spClass('spEmail');
                 $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
-                $address="http://localhost/index.php?c=cuser&a=verify&email=".$email;
-                $mailsubject = "九尾狐账户注册验证邮箱";//邮件主题
-                $mailbody = "<h4> 请点击下面验证地址进行验证：</h4>"."<p> <a href=".$address.">".$address."<a></p>";//邮件内容
+                $address="http://www.eadmarket.com/index.php?c=cuser&a=verify&email=".$email;
+                $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
+                $mailsubject = "广告市场注册验证邮箱";//邮件主题
+                $mailbody = "<h4> 请点击下面验证地址进行验证：</h4>"."<p> <a href=".$address.">".$address."<a></p>".$addition;//邮件内容
                 $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
                 $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
                 echo $result;
