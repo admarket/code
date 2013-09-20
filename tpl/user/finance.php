@@ -336,11 +336,11 @@
                     &nbsp;银联卡&nbsp;
                     </label>
                   </div>
-                  <label>付款金额：</label>
+                  <label>充值金额：</label>
                 </p>
                 <p>
-                    <input size="30" id="cash" class="input-large" name="cash" />
-                        <span id="cash-msg">必填，请输入大于0的整数</span>
+                    <input size="30" id="recharge-txt" class="input-large" name="cash" />
+                        <span id="recharge-msg">必填，请输入大于0的整数</span>
                 </p>
                 <p>
                   <button class="btn btn-success" type="submit" id="btn-recharge">确 认</button>
@@ -360,7 +360,7 @@
     <h3>账户提现</h3>
   </div>
   <div class="modal-body">
-    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
+    <form name="alipayment" action="<{spUrl c=ccash a=addCash}>" method="post">
         <div>
                 <p>
                   <label>提现方式：</label>
@@ -384,14 +384,14 @@
                     &nbsp;银联卡&nbsp;
                     </label>
                   </div>
-                  <label>付款金额：</label>
+                  <label>提现金额：</label>
                 </p>
                 <p>
-                    <input size="30" id="cash" class="input-large" name="cash" />
+                    <input size="30" id="cash-txt" class="input-large" name="amount" />
                         <span id="cash-msg">必填，请输入大于0的整数</span>
                 </p>
                 <p>
-                  <button class="btn btn-danger" type="submit" id="btn-recharge">申请提现</button>
+                  <button class="btn btn-danger" type="button" id="btn-cash">申请提现</button>
                 </p>
                          <div style="display:block;width:85%;position:relative;left:0;font-size:12px;">
                   
@@ -426,16 +426,69 @@ $("#btn-income").click(function(){
 $("#btn-outcome").click(function(){
   $('#form-outcome').modal();
 });
+//验证提现金额
+$("#btn-cash").click(function(){
+  var flag=false;
+  var reg= /^[0-9]*$/;
+  if($.trim($("#cash-txt").val())==""){
+            $("#cash-msg").html("提现金额不能为空");
+            $("#cash-msg").css("color","red");
+            flag=false;
+        }else{
+             
+            if(!reg.test($.trim($("#cash-txt").val()))){
+                  $("#cash-msg").html("提现金额必须为整数，且大于0");
+                  $("#cash-msg").css("color","red");
+                  flag=false;
+              }else{
+                  $.post("<{spUrl c=ccash a=checkCash}>",{amount:$.trim($("#cash-txt").val())},function(data,status){
+                     if(data!="1"){
+
+                         $("#cash-msg").html("提现金额超出您的账户余额！");
+                        $("#cash-msg").css("color","red");
+                        flag=false;
+                     }else{
+                        $("#cash-msg").html("验证通过！");
+                        $("#cash-msg").css("color","green");
+                         flag=true;
+                         if(flag){
+                             $.post("<{spUrl c=ccash a=addCash}>",{amount:$.trim($("#cash-txt").val())},function(data,status){
+                                         if(data=="1"){
+                                              alert("申请提现成功，请耐心等待1-3个工作日。如有疑问请及时联系我们的客服人员");
+                                         }else{
+                                           alert("网络异常导致提现申请失败，请联系我们的客服人员");
+                                         }
+                                      });
+                         }
+                     }
+                  });
+                  
+              }
+        }
+   
+     
+});
+
 //验证充值金额
 $("#btn-recharge").click(function(){
-  var reg= /^[0-9]*$/;
-      if(!reg.test($.trim($("#cash").val()))){
-            $("#cash-msg").html("充值金额必须为整数，且大于0");
-            $("#cash-msg").css("color","red");
+    var reg= /^[0-9]*$/;
+  if($.trim($("#recharge-txt").val())==""){
+            $("#recharge-msg").html("充值金额不能为空");
+            $("#recharge-msg").css("color","red");
             return false;
         }else{
-            return true;
+           if(!reg.test($.trim($("#recharge-txt").val()))){
+            $("#recharge-msg").html("充值金额必须为整数，且大于0");
+            $("#recharge-msg").css("color","red");
+            return false;
+            }else{
+                    $("#recharge-msg").html("验证通过！");
+                    $("#recharge-msg").css("color","green");
+                    return true;
+            }
         }
+
+
 });
 
 function loadData(data){

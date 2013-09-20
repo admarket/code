@@ -169,11 +169,11 @@
                     </label>
                     <label class="radio" style="font-size:12px;">
                       <img src="/img/tenpay.ico" width="20">
-                      <input type="radio" name="payment" id="payment2" value="1">
+                      <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
                       &nbsp;财付通&nbsp;
                     </label>
                     <label class="radio" style="font-size:12px;">
-                    <input type="radio" name="payment" id="payment3" value="2" >
+                    <input type="radio" name="payment" id="payment3" value="2"  disabled="disabled">
                     <img src="/img/Unionpay.jpg" width="20">
                     &nbsp;银联卡&nbsp;
                     </label>
