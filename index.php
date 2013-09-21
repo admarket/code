@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
@@ -48,7 +48,8 @@ $spConfig = array(
                      'sep'=>'/',
                      'map' => array(
                          'alipay_return' => 'crecharge@alipayReturn',
-                         'alipay_notify' => 'crecharge@alipayNotify'
+                         'alipay_notify' => 'crecharge@alipayNotify',
+                         'active_member' => 'cuser@verify',
                      ),
                  ),
         ),
