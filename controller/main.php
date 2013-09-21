@@ -43,9 +43,8 @@ class main extends spController
     function email() {
                 $mail = spClass('spEmail');
                 $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
-                //$address="http://www.eadmarket.com/index.php?c=cuser&a=verify&email=".$email;
-                $address="www.eadmarket.com/active_member.html?ticket=5ksyi3io8L0DFaO1UvaFLsMk5nI4IEdNUROUJKJ5P38l6JBVTQl5%2BubF%2B4KAhH5O2bFTXWxNGSdEus%2BRjizjTA%3D%3D
-";
+                $emailx=$this->encryptEmail($email);
+                $address="http://www.eadmarket.com/active_member.html?ticket=".$emailx;
                 $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
                 $mailsubject = "广告市场注册验证邮箱";//邮件主题
                 $mailbody = "<h4> 请点击下面验证地址进行验证：</h4>"."<p> <a href=".$address.">".$address."<a></p>".$addition;//邮件内容
@@ -53,6 +52,17 @@ class main extends spController
                 $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
                 echo $result;
         }
+    //加密加密字符串中的email
+    function encryptEmail($orginalEmail) {
+        $date = date("Ymd H:i:s",time());
+        $orginalEmail = $orginalEmail."&".$date;
+        $encrypttedEmail = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", $orginalEmail, MCRYPT_MODE_CBC,"8105547186756005");
+        //$encrypttedEmail = $orginalEmail;
+        $encrypttedEmail = base64_encode($encrypttedEmail);
+        $encrypttedEmail = urlencode($encrypttedEmail);
+        return $encrypttedEmail;
+    }
+
     function detail(){
         $type = spClass('type');
         $project=spClass('project');

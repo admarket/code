@@ -109,14 +109,22 @@ class cuser extends spController
     //验证邮箱
     function verify(){
     	$user = spClass("user");
-    	$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
+    	$email=$this->spArgs("ticket"); // 用spArgs接收spUrl传过来的email
+    	$email=$this->decryptEmail($email);
     	$conditions = array("email"=>$email); // 查找email是$email的记录
         $newrow = array(
                 'verify' => 1,  // 然后将这条记录的name改成“喜羊羊”
         );
         $user->update($conditions, $newrow); // 更新记录
-        $this->jump(spUrl('sub', 'dashboard'));
+        $this->jump(spUrl('main', 'login'));
     }
+    //解密获取加密字符串中的email
+    function decryptEmail($crypttedEmail) {
+    	$emailContainer = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", urldecode(base64_decode($crypttedEmail)), MCRYPT_MODE_CBC,"8105547186756005");
+    	$elements = explode("&", $emailContainer);
+    	return $elements[0];
+    }
+
     //保存设置
     function save(){
     	$user = spClass("user");
