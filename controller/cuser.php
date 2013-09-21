@@ -70,20 +70,26 @@ class cuser extends spController
                         "account" => $account ,
                         "payment" => $payment,
                 );
-		$result = $user->create($newrow); 
-		//dump($result); // 查看结果，
-		if($result){
-			$result = $user->findAll($conditions); 
+		$result = $user->findAll($conditions); //查询该邮箱是否已经被注册
+		if(!$result){//如果未被注册，则注册
+			$result = $user->create($newrow); 
 			//dump($result); // 查看结果，
 			if($result){
-				//$_SESSION['user'] = $result[0];
-				echo true;
+				$result = $user->findAll($conditions); 
+				//dump($result); // 查看结果，
+				if($result){
+					//$_SESSION['user'] = $result[0];
+					echo true;
+				}else{
+					echo false;
+				}//登录	
 			}else{
 				echo false;
-			}//登录	
+			} //注册//注册
 		}else{
 			echo false;
-		} //注册//注册
+		}
+		
     }
 
     //验证注册用户是否已注册
@@ -94,9 +100,9 @@ class cuser extends spController
 		$result = $user->findAll($conditions); 
 		//dump($result); // 查看结果，
 		if($result){
-			echo true;
+			echo "1";
 		}else{
-			echo false;
+			echo "0";
 		} //检查email是否重复
     }
 

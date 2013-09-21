@@ -148,7 +148,7 @@
                   <input type="text" id="name" placeholder="输入您的真实姓名"/>
                 </div>
                 <p>
-                  <p class="help-block" id="name-msg">请务必填写真实姓名，否则影响提现</p>
+                  <span class="help-block" id="name-msg">请务必填写真实姓名，否则影响提现</span>
                 </p>
                 <label>账号：</label>
                 <div class="input-prepend">
@@ -156,7 +156,7 @@
                   <input type="text" id="account" placeholder="输入您的提现账号">
                 </div>
                 <p>
-                  <p class="help-block" id="account-msg">请输入与下面提现方式相应的账号</p>
+                  <span class="help-block" id="account-msg">请输入与下面提现方式相应的账号</span>
                 </p>
                 <div>
                   <p></p>
@@ -230,7 +230,7 @@
           
           $.post("<{spUrl c=cuser a=isExist}>", { email: $.trim($("#email").val())},
              function(data){
-               if(data){
+               if(data=="1"){
                   $("#email-msg").html("该邮箱已经被注册！");
                   $("#email-msg").css("color","red");
                   return false;
@@ -244,6 +244,7 @@
        }
       }
       function checkPassword(){
+        passwordcheck=false;
         if($.trim($("#password").val())==""){
                       $("#password-msg").html("密码不能为空！");
                       $("#password-msg").css("color","red");
@@ -269,6 +270,7 @@
         }
       }
       function checkRepassword(){
+        repasswordcheck=false;
          if($.trim($("#repassword").val())!=$.trim($("#password").val())){
               $("#repassword-msg").html("密码与之前输入不一致！");
               $("#repassword-msg").css("color","red");
@@ -280,6 +282,7 @@
           }
       }
       function checkName(){
+        namecheck=false;
          if($.trim($("#name").val())==""){
               $("#name-msg").html("真实姓名不能为空！");
               $("#name-msg").css("color","red");
@@ -296,6 +299,7 @@
           }
       }
       function checkAccount(){
+        accountcheck=false;
          if($.trim($("#account").val())==""){
               $("#account-msg").html("账号不能为空！");
               $("#account-msg").css("color","red");
@@ -355,35 +359,39 @@
       });
 
       $("#btn-register").click(function(){
-
-        checkEmail();
-        checkPassword();
-        checkRepassword();
-        checkName();
-        checkAccount();
-        if(emailcheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck){//如果检查通过
-          
-          $("#btn-register").button('loading');
-          $(".bar").animate({ 
-                  width: "66%"
-                }, 1000 );
-           $("#second").attr("class",'badge badge-success');
-          $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
-           function(data){
+        if($('#btn-register').attr("disabled")!="disabled"){//如果按钮是可用状态，则触发点击事件
+          checkEmail();
+          checkPassword();
+          checkRepassword();
+          checkName();
+          checkAccount();
+          if(emailcheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck){//如果检查通过
             
-             if(data){
-                $.post("<{spUrl c=main a=email}>",{email:$.trim($("#email").val())},function(data,status){
-                  //alert("Data: " + data + "\nStatus: " + status);
-                });
-                $('#verifyAddress').attr("href","http://www."+$.trim($("#email").val().split("@")[1]));
-                $('.modal').modal('show');
-             }else{
-                alert("网络问题导致发送邮件失败");
-             }
-           });
-        }else{
-          $('#btn-register').button('toggle');
-          $('#btn-register').button('reset'); 
+            $("#btn-register").button('loading');
+            $(".bar").animate({ 
+                    width: "66%"
+                  }, 1000 );
+             $("#second").attr("class",'badge badge-success');
+            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
+             function(data){
+              
+               if(data){
+                  $('#btn-register').attr('class',"btn btn-success disabled");
+                  $('#btn-register').attr("disabled","disabled");
+                  $.post("<{spUrl c=main a=email}>",{email:$.trim($("#email").val())},function(data,status){
+                    //alert("Data: " + data + "\nStatus: " + status);
+                  });
+                  $('#verifyAddress').attr("href","http://www."+$.trim($("#email").val().split("@")[1]));
+                  $('.modal').modal('show');
+
+               }else{
+                  alert("网络问题导致发送邮件失败");
+               }
+             });
+          }else{
+            $('#btn-register').button('toggle');
+            $('#btn-register').button('reset'); 
+          }
         }
       });
     </script>
