@@ -101,6 +101,103 @@ class cproduct extends spController
 		$records = $product->findAll($conditions); 
 		echo json_encode($records);
 	}
+    function getJsonProduct(){
+        $product = spClass("product");
+        $conditions = array("id" => $this->spArgs('id'));
+        $records = $product->find($conditions); 
+        echo json_encode($records);
+    }
+    //上传头像
+    function uploadAdImage(){
+        $filename=$_FILES['file']['name'];
+        $productID=$this->spArgs('id');
+        $endName=explode('.', $filename);
+        $ext=end($endName);
+        $firstName=$productID;
+        $product = spClass("product");
+        $conditions = array("id"=>$productID); // 查找email是$email的记录
+        $result=$product->find($conditions);
+        $pos=strpos($result['image'],'a'); 
+        if($pos){
+             $firstName=$firstName.'b';
+        }          
+        else{
+            $firstName=$firstName.'a';
+        }
 
+        $arg = array(
+        APP_PATH.'/img/adcontent/image',
+        $firstName
+        );
+        $upFlie=spClass("uploadFile", $arg); // 注意第二个参数是数组
+        $result=$upFlie->upload_file($_FILES['file']);
+        $msg=$upFlie->errmsg;
+            if($result){
+                $product = spClass("product");
+                $conditions = array("id"=>$productID); // 查找email是$email的记录
+                $newrow = array(
+                        'image' => $firstName.".".$ext,  // 然后将这条记录的name改成“喜羊羊”    
+                );
+                $product->update($conditions, $newrow); // 更新记录
+             echo $firstName.".".$ext;
+            }else {
+             echo "0".$msg."123";
+            }
+        
+    }
+    function uploadAdVideo(){
+        $filename=$_FILES['file']['name'];
+        $productID=$this->spArgs('id');
+        $endName=explode('.', $filename);
+        $ext=end($endName);
+        $firstName=$productID;
+        $product = spClass("product");
+        $conditions = array("id"=>$productID); // 查找email是$email的记录
+        $result=$product->find($conditions);
+        $pos=strpos($result['video'],'a'); 
+        if($pos){
+             $firstName=$firstName.'b';
+        }          
+        else{
+            $firstName=$firstName.'a';
+        }
+
+        $arg = array(
+        APP_PATH.'/img/adcontent/video',
+        $firstName
+        );
+        $random=rand();
+        $upFlie=spClass("uploadFile", $arg); // 注意第二个参数是数组
+        $result=$upFlie->upload_file($_FILES['file']);
+        $msg=$upFlie->errmsg;
+            if($result){
+                $product = spClass("product");
+                $conditions = array("id"=>$productID); // 查找email是$email的记录
+                $newrow = array(
+                        'video' => $firstName.".".$ext,  // 然后将这条记录的name改成“喜羊羊”    
+                );
+                $product->update($conditions, $newrow); // 更新记录
+             echo $firstName.".".$ext;
+            }else {
+             echo "0".$msg."123";
+            }
+        
+    }
+    function upDateAdTxt(){
+        $productID=$this->spArgs('id');
+        $txt=$this->spArgs('txt');
+        $product = spClass("product");
+        $conditions = array("id"=>$productID); // 查找email是$email的记录
+        $newrow = array(
+                'txt' => $txt,  // 然后将这条记录的name改成“喜羊羊”    
+        );
+        $result=$product->update($conditions, $newrow); // 更新记录
+        if($result){
+            echo "1";
+        }else{
+            echo "0";
+        }
+        
+    }
     
 }

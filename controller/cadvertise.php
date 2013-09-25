@@ -79,6 +79,25 @@ class cadvertise extends spController
                         echo 0;
                 }
         }
-
+        
+        function GetADCode(){
+          //查询广告位基本信息
+          $advertise = spClass("advertise");
+          $conditions = array("id"=>$this->spArgs('aid')); // 根据id查找指定的广告位
+          $result=$advertise->spLinker()->find($conditions);
+          echo "var advertise=";
+          echo json_encode($result);
+          echo ";";
+          ////如果广告位状态为已经出售，查询交易信息
+          if($result['state']!='0'){
+              $trade = spClass("trade");
+            $conditions = array("advertise"=>$this->spArgs('aid')); // 根据id查找指定的广告位
+            $result=$trade->spLinker()->find($conditions);
+            echo "var trade=";
+            echo json_encode($result);
+            echo ";";
+          }
+          
+        }
     
 }

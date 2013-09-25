@@ -23,7 +23,7 @@
  	public function __construct($save_path = './upload/',$file_name = 'date',$allow_types = '') {
 		$this->file_name   = $file_name;//重命名方式代表以时间命名，其他则使用给予的名称
 		$this->save_path   = (preg_match('/\/$/',$save_path)) ? $save_path : $save_path . '/';
-		$this->allow_types = $allow_types == '' ? 'jpg|gif|png|zip|rar' : $allow_types;
+		$this->allow_types = $allow_types == '' ? 'jpg|gif|png|zip|rar|swf' : $allow_types;
  	}
 
  	/**

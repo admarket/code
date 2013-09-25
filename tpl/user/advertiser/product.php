@@ -194,14 +194,19 @@
                                data-name="productName"> 
                                <{$product.name}></a>
                              </p>
-                              <div>
+                              <p>
                                 <a  class="url-editable"
                                data-pk="<{$product.id}>"
                                data-type="text"
                                data-name="productUrl">
                                 <{$product.url}>
                                 </a>
-                              </div>
+                              </p>
+                              <p data-pk="<{$product.id}>"><strong>广告内容：</strong>
+                                <a href="#txt-content" class="btn btn-mini tip btn-adcontent" title="文字格式"><i class="icon-font icon-small"></i></a>
+                                <a href="#video-content-obj" class="btn btn-mini tip btn-adcontent" title="图片格式"><i class="icon-picture icon-small"></i></a>
+                                <a href="#txt-content" class="btn btn-mini tip btn-adcontent" title="视频格式"><i class="icon-film icon-small"></i></a>
+                              </p>
                           </td>
                           <td>
                             <{$product.impression|number_format}>
@@ -290,8 +295,8 @@
               <form id="headimgform" method="post" action="<{spUrl c=tool a=upFile}>" enctype="multipart/form-data"> 
                 <div class="fileupload fileupload-new" data-provides="fileupload" data-uploadtype="image">
                   <div class="fileupload-new thumbnail" style="border:solid 1px #ccc;width: 50px; height: 50px;background-color:#ededed;padding:5px;">
-                    <img src="/img/ads/0.png" style="width: 150px; height: 150px;"/></div>
-                  <div class="fileupload-preview fileupload-exists thumbnail" style="border:solid 1px #ccc;width: 150px; height: 150px;background-color:#ededed;padding:5px;"></div>
+                    <img src="/img/ads/0.png" style="width: 50px; height: 50px;"/></div>
+                  <div class="fileupload-preview fileupload-exists thumbnail" style="border:solid 1px #ccc;width: 50px; height: 50px;background-color:#ededed;padding:5px;"></div>
                   <div>
                     <span class="btn btn-small btn-file tip" title="上传Logo">
                       <span class="fileupload-new" style="font-size:12px;">
@@ -336,6 +341,83 @@
     </div>
   
 </div>
+<div class="modal hide fade" id="form-adcontent" style="top:20%;">
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>广告显示内容管理</h5>
+    </div>
+    <div class="modal-body">
+      
+                  <div>
+                    <form id="imageform" method="post" action="<{spUrl c=cproduct a=uploadAdImage}>" enctype="multipart/form-data"> 
+                      
+                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
+                        <p>
+                        图片广告预览板：
+                      </p>
+                      <input type="hidden" name="id" value="" class="currentProduct"/>
+                        <div><img id="image-content" src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail"></div>
+                        <div class="fileupload fileupload-new" data-provides="fileupload"></div>
+                        <div>
+                          <span class="btn btn-file btn-small" id="btn-upload">
+                            <span class="fileupload-new">更换广告图片</span>                   
+                            <input type="file" name="file" id="file-image" />
+                          </span>
+                        </div>
+                      </div>
+                      
+                    </form>
+                    <form id="videoform" method="post" action="<{spUrl c=cproduct a=uploadAdVideo}>" enctype="multipart/form-data"> 
+                     
+                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
+                      <p>
+                        视频广告预览板：
+                      </p>
+                        <input type="hidden" name="id" value="" class="currentProduct"/>
+                        <div>
+                          <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
+                             <param name="Play" value="false" />
+                             <embed autostart="false" play="false" id="video-content-emb" play=false src="/img/adcontent/video/default.swf" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+                             <div>浏览器插件缺失导致播放失败，请联系管理人员</div>
+                          </object>
+                        </div>
+                        <div class="fileupload fileupload-new" data-provides="fileupload"></div>
+                        <div>
+                          <span class="btn btn-file btn-small" id="btn-upload">
+                            <span class="fileupload-new">更换广告视频</span>                   
+                            <input type="file" name="file" id="file-video" />
+                          </span>
+                        </div>
+                      </div>
+                      
+                    </form>
+                    <form id="txtform" method="post" action="<{spUrl c=cproduct a=upDateAdTxt}>" enctype="multipart/form-data"> 
+                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
+                          <p>
+                            文字广告预览板：
+                          </p>
+                          <input type="hidden" name="id" value="" class="currentProduct"/>
+                          <textarea id="txt-content" name="txt" style="width:90%;" ></textarea>
+                          <div>
+                            <a class="btn btn-file btn-small" id="btn-txt">
+                              更换广告文字
+                            </a>
+                          </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+    </div>
+    <div class="modal-footer row" style="text-align:left;margin:-10px 0;" align="left">
+      <strong class="span3" class="display:inline-block;"><i class="icon-info-sign"></i>&nbsp;&nbsp;上传进度：
+        <span class="progress span6 tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;width:30%;display:inline-block;" title="20%">
+          <span class="bar bar-success" style="width:20%;"></span>
+        </span>
+      </strong>
+      
+     <span class=" span3">没有文件</span>
+    </div>
+</div>
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
 <script type="text/javascript">
@@ -348,10 +430,10 @@ $("#file-logo-add").change(function(){
         var obj = $("#file-logo-add").val();
         var options = {  
             success : function(data) {  
-                //alert('成功上传！');  
+                
             },  
             error : function(result) {  
-               
+               alert(result); 
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
@@ -394,6 +476,27 @@ $("#file-logo-add").change(function(){
             
         //    img.src = file.value;
             //return true;
+        }else{
+            alert("请选择上传的文件!");
+            return false;
+        }
+    }
+    function validateVideo(val) {
+        var tmpFileValue = val.toLowerCase();
+        var reg=/^.*?\.(swf)$/;
+        //校验图片格式
+        if(reg.test(tmpFileValue)){
+            return true;
+        } else {
+            alert("目前仅支持上传swf格式的flash视频！");
+            return false;
+        }
+        
+        //校验图片大小,这段代码需调整浏览器安全级别(调到底级)和添加可信站点(将服务器站点添加到可信站点中)
+        //var imgSize = 1024 * 100; //最大100K
+        //var img = new Image();
+        if(file.value != ""){
+            
         }else{
             alert("请选择上传的文件!");
             return false;
@@ -478,9 +581,106 @@ $(".upload-logo").change(function(){
       });
 
 $('.tip').tooltip();
+//添加网站
 $("#btn-addProject").click(function(){
   $('#form-addProject').modal();
 });
+$("#file-image").change(function(){
+
+  //var pre=$("#image-content").attr("src");
+  var prefix="/img/adcontent/";
+  //$("#image-content").attr("src","file:///"+$("#file-image").val());
+        //$("#btn-upload").button('正在上传...');
+        var obj = $("#file-image").val();
+        var options = {  
+            success : function(data) { 
+                //alert(data);
+                var fullName=prefix+"image/"+data;
+                fullName=fullName.replace(/[\r\n]/g,"");
+                $("#image-content").attr("src",fullName);  
+            },  
+            error : function(result) {   
+                alert(result);  
+            }  
+        };  
+        if(validateImage(obj)) {
+            $('#imageform').ajaxSubmit(options);
+        }
+        else{
+            //alert("error");
+        }
+      });
+$("#file-video").change(function(){
+  //var pre=$("#image-content").attr("src");
+  var prefix="/img/adcontent/";
+  //$("#image-content").attr("src","file:///"+$("#file-image").val());
+        //$("#btn-upload").button('正在上传...');
+        var obj = $("#file-video").val();
+        var options = {  
+            success : function(data) { 
+                var fullName=prefix+"video/"+data;
+                fullName=fullName.replace(/[\r\n]/g,"");
+                var newNode=' <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="'
+                +fullName+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> <param name="Play" value="false" /><embed autostart="false" play="false" id="video-content-emb" play=false src="'
+                +fullName+'" pluginspage="http://www.macromedia.com/go/getflashplayer"/><div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
+                var parent=$("#video-content-obj").parent();
+                parent.empty();
+                parent.html(newNode);
+                //$("#video-content-emb").attr("src",fullName);
+                //$("#video-content-obj").attr("data",fullName);   
+            },  
+            error : function(result) {   
+                alert(result);  
+            }  
+        };  
+        if(validateVideo(obj)) {
+            $('#videoform').ajaxSubmit(options);
+        }
+        else{
+            //alert("error");
+        }
+      });
+$("#btn-txt").click(function(){
+      var txt=$("#txt-content").val();
+      var options = {  
+            success : function(data) { 
+              //alert(data);
+                //$("#video-content-emb").attr("src",fullName);
+                //$("#video-content-obj").attr("data",fullName);   
+            },  
+            error : function(result) {   
+                alert(result);  
+            }  
+        };
+       if(txt.length<20&&txt.length>1) {
+            $('#txtform').ajaxSubmit(options);
+        }
+        else{
+            alert("广告文字的字数只能是2-20之间");
+        }
+  });
+//管理广告内容
+$(".btn-adcontent").click(function(){
+  var prefix="/img/adcontent/";
+  var key=$(this).parent().attr("data-pk");
+  $(".currentProduct").val(key);
+  var currentProduct;
+  $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
+    currentProduct=stringToJSON(data);//数据转换为json格式
+    if(currentProduct){//加载产品信息到弹出窗口
+        $("#image-content").attr("src",prefix+"image/"+currentProduct.image);
+        $("#video-content-obj").attr("data",prefix+"video/"+currentProduct.video);
+        $("#video-content-emb").attr("src",prefix+"video/"+currentProduct.video);
+        $("#txt-content").html(currentProduct.txt);
+    }
+    else{
+      alert("网络原因导致未能加载当前产品信息！");
+    }
+  });
+  $('#form-adcontent').modal();
+});
+
+
 $(".remove").click(function(){
   var obj=this;//这时this指的就是$("#zz")对象 
   $("#form-delete").attr('action',$(obj).attr('url'));

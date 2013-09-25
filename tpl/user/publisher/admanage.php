@@ -16,8 +16,9 @@
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
-
-    <script type="text/javascript" src="/js/excanvas.js"></script>  
+    <style  type="text/css">
+    .textarea{font-size: 12px;}
+    </style>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-fileupload.min.js"></script>
@@ -170,11 +171,11 @@
                         <th>广告位</th>
                         <th>格式</th>
                         <th>长*宽</th>
-                        <th>价格 (&yen;)/月</th>
+                        <th>价格 &yen;/天</th>
                         <th>状态</th>
                         <th>进度</th>
                         <th>累计收入</th>
-                        <th>出售</th>
+                        <th>出售代码</th>
                         <th>操作</th>
                       </tr>
                     </thead>
@@ -242,7 +243,12 @@
                             <{$advertise.profit}> &yen; 
                           </td>
                           <td>
-                            <a class="btn btn-mini btn-success  tip" title="获取出售代码">
+                            <a class="btn btn-mini btn-success copy"
+                             data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
+                             data-content='<textarea class="textarea"><div class="admarket_ad" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
+                             <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=3"></script>
+                             <script type="text/javascript" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
+                             </textarea>'>
                               <i class="icon-shopping-cart"></i> 
                             </a>
                           </td>
@@ -319,7 +325,7 @@
                 <label class="control-label" for="input01">价格：</label>
                 <span class="add-on">&yen;</span>
                 <input class="input-mini"  id="advertisePrice" name="advertisePrice" type="text" placeholder="0.00">
-                <span class="add-on">/月</span>
+                <span class="add-on">/天</span>
               </div>
                <div id="advertisePrice-msg" class="msg">不能为空，正数数字</div>
             </div>
@@ -383,6 +389,8 @@
 </div>
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
+<script src="/js/ZeroClipboard.js"></script>
+<script src="/js/ZeroClipboard.swf"></script>
 <script type="text/javascript">
 $('.tip').tooltip();
 
@@ -466,7 +474,11 @@ $('.select-editable').editable({
  //enable / disable
 $('#editable').click(function() {
        $('.editable').editable('toggleDisabled');
-   }); 
+   });
+$('.copy').popover();
+$('.copy').click(function(){
+    $(".textarea").select();
+  });
 $('.tip').tooltip();
 $("#btn-addProject").click(function(){
   $('#form-addProject').modal();

@@ -8,7 +8,7 @@ class ctrade extends spController
 		$records = $trade->findAll($conditions); 
 		echo json_encode($records);
 	}
-
+	
 	function BuyAd(){
 		$trade = spClass("trade");
 		$advertiseID=$this->spArgs("advertise"); // 用spArgs接收spUrl传过来的ID

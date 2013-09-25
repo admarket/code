@@ -365,15 +365,16 @@ $("#file").change(function(){
         var obj = $("#file").val();
         var options = {  
             success : function(data) {  
-                //alert(data);  
+                //alert(data); 
+                location.reload();  
             },  
             error : function(result) {  
-                //alert(result);  
+                alert(result);  
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
             $('#headimgform').ajaxSubmit(options);
-            location.reload(); 
+            
         }
         else{
             //alert("error");

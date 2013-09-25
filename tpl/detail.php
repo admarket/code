@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>九尾狐 - 网络广告位交易市场 </title>
+    <title>广告市场 -  <{$project.name}>的所有广告位</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
