@@ -323,13 +323,13 @@
 </div>
 
 <div class="modal hide fade" id="form-confirm" style="top:20%;">
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>是否确认删除数据？</h5>
+  </div>
   <form action="<{spUrl c=cadvertise a=AddAdvertise}>" id="form-delete" method="post">
     <div class="modal-body">
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h5>是否确认删除数据？</h5>
-    </div>
-    
-    <div class="modal-footer" style="margin:0;top:-20px;">
+      
       <form action="post" method=""  id="action-confirm">
        <a  class="btn btn-small btn-danger" id="btn-confirm">
         <i class="icon-ok"></i> 确认
@@ -339,10 +339,14 @@
       </a>
       </form>
     </div>
+    
+    <div class="modal-footer" style="margin:0;top:-20px;">
+      
+    </div>
   
 </div>
 <div class="modal hide fade" id="form-adcontent" style="top:20%;">
-  <div class="modal-header">
+    <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h5>广告显示内容管理</h5>
     </div>
@@ -375,7 +379,7 @@
                       </p>
                         <input type="hidden" name="id" value="" class="currentProduct"/>
                         <div>
-                          <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
+                          <object style="background-color:#fff;padding:5px;border:solid 1px #ccc;border-radius:5px;" id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
                              <param name="Play" value="false" />
                              <embed autostart="false" play="false" id="video-content-emb" play=false src="/img/adcontent/video/default.swf" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
                              <div>浏览器插件缺失导致播放失败，请联系管理人员</div>
@@ -420,6 +424,7 @@
 </div>
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
+<script src="/js/jquery.message.js"></script>
 <script type="text/javascript">
 $('.fileupload').fileupload({
   uploadtype:"image"
@@ -430,10 +435,10 @@ $("#file-logo-add").change(function(){
         var obj = $("#file-logo-add").val();
         var options = {  
             success : function(data) {  
-                
+                $.msg('上传成功！','color:green;');
             },  
             error : function(result) {  
-               alert(result); 
+               $.msg('上传失败！'+result); 
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
@@ -453,7 +458,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+            $.msg("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
             return false;
         }
         
@@ -477,7 +482,7 @@ $("#file-logo-add").change(function(){
         //    img.src = file.value;
             //return true;
         }else{
-            alert("请选择上传的文件!");
+            $.msg("请选择上传的文件!");
             return false;
         }
     }
@@ -488,7 +493,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            alert("目前仅支持上传swf格式的flash视频！");
+            $.msg("目前仅支持上传swf格式的flash视频！");
             return false;
         }
         
@@ -498,7 +503,7 @@ $("#file-logo-add").change(function(){
         if(file.value != ""){
             
         }else{
-            alert("请选择上传的文件!");
+            $.msg("请选择上传的文件!");
             return false;
         }
     }
@@ -512,7 +517,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg('编辑成功！','color:green;');
         }, 
         source: [
                <{foreach from=$categories item=category name=categoryCount}>
@@ -527,7 +532,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+             $.msg('编辑成功！','color:green;');
         },
         validate: function(value) {
         if($.trim(value) == '') {
@@ -545,7 +550,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproduct a=updateProduct}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+             $.msg('编辑成功！','color:green;');
         },
         validate: function(value) {
           var reg=new RegExp("(https?|ftp|mms):\/\/([A-z0-9]+[_\-]?[A-z0-9]+\.)*[A-z0-9]+\-?[A-z0-9]+\.[A-z]{2,}(\/.*)*\/?");
@@ -566,10 +571,10 @@ $(".upload-logo").change(function(){
        var uploadForm = $(this).parent().parent();
         var options = {  
             success : function(data) {  
-                //alert(data);  
+                 $.msg('上传成功！','color:green;');  
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg('上传失败！'+result);  
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
@@ -594,13 +599,13 @@ $("#file-image").change(function(){
         var obj = $("#file-image").val();
         var options = {  
             success : function(data) { 
-                //alert(data);
+                $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"image/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");
                 $("#image-content").attr("src",fullName);  
             },  
             error : function(result) {   
-                alert(result);  
+                $.msg('上传失败！'+result);  
             }  
         };  
         if(validateImage(obj)) {
@@ -618,6 +623,7 @@ $("#file-video").change(function(){
         var obj = $("#file-video").val();
         var options = {  
             success : function(data) { 
+              $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"video/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");
                 var newNode=' <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="'
@@ -630,7 +636,7 @@ $("#file-video").change(function(){
                 //$("#video-content-obj").attr("data",fullName);   
             },  
             error : function(result) {   
-                alert(result);  
+                $.msg('上传失败！'+result);  
             }  
         };  
         if(validateVideo(obj)) {
@@ -644,19 +650,20 @@ $("#btn-txt").click(function(){
       var txt=$("#txt-content").val();
       var options = {  
             success : function(data) { 
-              //alert(data);
+              $.msg('保存成功！','color:green;'); 
                 //$("#video-content-emb").attr("src",fullName);
                 //$("#video-content-obj").attr("data",fullName);   
             },  
             error : function(result) {   
-                alert(result);  
+                $.msg('保存失败！'+result);  
             }  
         };
        if(txt.length<20&&txt.length>1) {
             $('#txtform').ajaxSubmit(options);
         }
         else{
-            alert("广告文字的字数只能是2-20之间");
+            alert("广告文字的字数只能是2-20之间！");
+            $.msg("广告文字的字数只能是2-20之间！");
         }
   });
 //管理广告内容
@@ -668,13 +675,14 @@ $(".btn-adcontent").click(function(){
   $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
     currentProduct=stringToJSON(data);//数据转换为json格式
     if(currentProduct){//加载产品信息到弹出窗口
+        $.msg('加载成功！','color:green;'); 
         $("#image-content").attr("src",prefix+"image/"+currentProduct.image);
         $("#video-content-obj").attr("data",prefix+"video/"+currentProduct.video);
         $("#video-content-emb").attr("src",prefix+"video/"+currentProduct.video);
         $("#txt-content").html(currentProduct.txt);
     }
     else{
-      alert("网络原因导致未能加载当前产品信息！");
+      $.msg("网络原因导致未能加载当前产品信息！");
     }
   });
   $('#form-adcontent').modal();
@@ -695,9 +703,10 @@ $("#btn-confirm").click(function(){
                 if(data==1){
                    location.reload();
                 } 
+                $.msg('删除成功！','color:green;'); 
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         }; 
   $('#form-delete').ajaxSubmit(options);
@@ -725,13 +734,11 @@ $("#btn-saveAddProject").click(function(){
   if (a&&b&&d) {
       var options = {  
               success : function(data) {  
-                ///alert(data);
-                  if(data==1){
-                     location.reload();
-                  } 
+                $.msg('添加成功！','color:green;');
+                location.reload();
               },  
               error : function(result) {  
-                  alert(result);  
+                  $.msg(result);  
               }  
           }; 
     $('#form-product').ajaxSubmit(options);
@@ -777,7 +784,7 @@ $(function () {
       url: '<{spUrl c=cproduct a=updateProduct}>',
       success: function(response, newValue) {
         if(!response.success) 
-          alert(response);
+          $.msg('编辑成功！','color:green;');
       },
       validate: function(value) {
           if($.trim(value) == '') {

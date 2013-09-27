@@ -389,8 +389,7 @@
 </div>
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
-<script src="/js/ZeroClipboard.js"></script>
-<script src="/js/ZeroClipboard.swf"></script>
+<script src="/js/jquery.message.js"></script>
 <script type="text/javascript">
 $('.tip').tooltip();
 
@@ -399,7 +398,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg("编辑成功！",'color:green;');
         }, 
         source: {
                 0:"文字",
@@ -414,7 +413,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
         if($.trim(value) == '') {
@@ -432,7 +431,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
         if(isNaN($.trim(value))) {
@@ -450,7 +449,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
           var reg="^((https|http|ftp|rtsp|mms)?://)"  
@@ -499,7 +498,7 @@ $("#btn-confirm").click(function(){
                 } 
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         }; 
   $('#form-delete').ajaxSubmit(options);
@@ -513,7 +512,7 @@ $("#btn-saveAddProject").click(function(){
                 } 
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         }; 
   $('#form-project').ajaxSubmit(options);
@@ -559,7 +558,7 @@ $("#btn-saveAddAdvertise").click(function(){
                   } 
               },  
               error : function(result) {  
-                  alert(result);  
+                  $.msg(result);  
               }  
           }; 
     $('#form-advertise').ajaxSubmit(options);
@@ -621,7 +620,7 @@ $(function () {
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
           if($.trim(value) == '') {

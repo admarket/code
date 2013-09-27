@@ -3,7 +3,8 @@ class cproduct extends spController
 {
 	function addProduct(){
 		$filename=$_FILES['show']['name'];
-        $ext=end(explode('.', $filename));
+        $tempName=explode('.', $filename);
+        $ext=end($tempName);
 		$newrow = array(
                         'name' => $this->spArgs('productName'),
                         'url' => $this->spArgs('productUrl'),

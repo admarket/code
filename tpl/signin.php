@@ -61,7 +61,7 @@
                 <!-- Button -->
                 <div class="controls">
                   <span>
-                    <a class="btn btn-primary" data-toggle="button"  data-loading-text="登录中..." >
+                    <a class="btn btn-primary" data-toggle="button"  data-loading-text="正在验证..." >
                       登录</a>
                   </span>
                   <label class="checkbox inline" style="width:50%;margin-left:20px;">
@@ -86,16 +86,19 @@
     <{include file="foot.php"}>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
       $(".btn").click(function(){
           $(".btn").button('loading');
           $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
            function(data){
              if(data){
-              $("#alert-msg").hide();
+              //$("#alert-msg").hide();
+              $.msg("验证成功！正在跳转中...",'color:green;');
                 window.location.href="<{spUrl c=sub a=dashboard}>";
              }else{
-              $("#alert-msg").show();
+              $.msg("用户名或密码错误！");
+              //$("#alert-msg").show();
               $('.btn').button('toggle');
               $('.btn').button('reset');
              }

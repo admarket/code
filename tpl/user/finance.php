@@ -404,6 +404,7 @@
 
   </div>
 </div>
+<script src="/js/jquery.message.js"></script>
 <script type='text/javascript'>//<![CDATA[ 
  $('.tip').tooltip();
  Highcharts.setOptions({ 
@@ -448,15 +449,14 @@ $("#btn-cash").click(function(){
                         $("#cash-msg").css("color","red");
                         flag=false;
                      }else{
-                        $("#cash-msg").html("验证通过！");
-                        $("#cash-msg").css("color","green");
+                        $('#form-outcome').modal('hide');
                          flag=true;
                          if(flag){
                              $.post("<{spUrl c=ccash a=addCash}>",{amount:$.trim($("#cash-txt").val())},function(data,status){
                                          if(data=="1"){
-                                              alert("申请提现成功，请耐心等待1-3个工作日。如有疑问请及时联系我们的客服人员");
+                                              $.msg('申请提现成功，请耐心等待1-3个工作日。','color:green;');
                                          }else{
-                                           alert("网络异常导致提现申请失败，请联系我们的客服人员");
+                                              $.msg('网络异常导致提现申请失败');
                                          }
                                       });
                          }

@@ -339,6 +339,7 @@
 </div>
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
+<script src="/js/jquery.message.js"></script>
 <script type="text/javascript">
 $('.fileupload').fileupload({
   uploadtype:"image"
@@ -349,10 +350,10 @@ $("#file-logo-add").change(function(){
         var obj = $("#file-logo-add").val();
         var options = {  
             success : function(data) {  
-                //alert('成功上传！');  
+              $.msg('上传成功！','color:green;');  
             },  
             error : function(result) {  
-               
+               $.msg(result);
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
@@ -372,7 +373,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+            $.msg("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
             return false;
         }
         
@@ -396,7 +397,7 @@ $("#file-logo-add").change(function(){
         //    img.src = file.value;
             //return true;
         }else{
-            alert("请选择上传的文件!");
+            $.msg("请选择上传的文件!");
             return false;
         }
     }
@@ -410,7 +411,7 @@ $('.select-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg('编辑成功！','color:green;');
         }, 
         source: [
                <{foreach from=$categories item=category name=categoryCount}>
@@ -425,7 +426,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+           $.msg('编辑成功！','color:green;');
         },
         validate: function(value) {
         if($.trim(value) == '') {
@@ -443,7 +444,7 @@ $('.textarea-editable').editable({
         url: '<{spUrl c=cproject a=UpdateProject}>',
         success: function(response, newValue) {
           if(!response.success) 
-            alert(response);
+            $.msg('编辑成功！','color:green;');
         },
         validate: function(value) {
           var reg=new RegExp("(https?|ftp|mms):\/\/([A-z0-9]+[_\-]?[A-z0-9]+\.)*[A-z0-9]+\-?[A-z0-9]+\.[A-z]{2,}(\/.*)*\/?");
@@ -464,17 +465,17 @@ $(".upload-logo").change(function(){
        var uploadForm = $(this).parent().parent();
         var options = {  
             success : function(data) {  
-                alert(data);  
+                $.msg('上传成功！','color:green;');  
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
             $(uploadForm).ajaxSubmit(options);
         }
         else{
-            alert("error");
+            //$.msg('文件格式不正确！');
         }
       });
 
@@ -498,7 +499,7 @@ $("#btn-confirm").click(function(){
                 } 
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         }; 
   $('#form-delete').ajaxSubmit(options);
@@ -535,7 +536,7 @@ $("#btn-saveAddProject").click(function(){
                   } 
               },  
               error : function(result) {  
-                  alert(result);  
+                  $.msg(result);  
               }  
           }; 
     $('#form-project').ajaxSubmit(options);
@@ -585,7 +586,7 @@ $(function () {
       url: '<{spUrl c=cproject a=UpdateProject}>',
       success: function(response, newValue) {
         if(!response.success) 
-          alert(response);
+          $.msg('编辑成功！','color:green;');
       },
       validate: function(value) {
           if($.trim(value) == '') {

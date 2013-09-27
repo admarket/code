@@ -14,9 +14,7 @@
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico"> 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.form.js"></script>
+    
   </head>
   <body>
     <!-- load head tpl -->
@@ -227,17 +225,17 @@
                           <div class="span5 tip" title="目前仅支持支付宝">
                             <label class="radio" style="font-size:12px;">
                               <input type="radio" name="payment" id="payment1" value="0" checked>
-                              <img src="/img/alipay.ico" width="20">
+                              <img src="/img/alipay.ico" width="20" height="20">
                               &nbsp;支付宝&nbsp;
                             </label>
                             <label class="radio" style="font-size:12px;">
-                              <img src="/img/tenpay.ico" width="20">
+                              <img src="/img/tenpay.ico" width="20" height="20">
                               <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
                               &nbsp;财付通&nbsp;
                             </label>
                             <label class="radio" style="font-size:12px;">
                             <input type="radio" name="payment" id="payment3" value="2" disabled="disabled">
-                            <img src="/img/Unionpay.jpg" width="20">
+                            <img src="/img/Unionpay.ico" width="20" height="20">
                             &nbsp;银联卡&nbsp;
                             </label>
                           </div>
@@ -255,11 +253,10 @@
      <!-- load foot tpl -->
     <{include file="foot.php"}>
 
-<div id="alert-msg" class="alert alert-success " style="position:absolute;top:30%;width:200px;left:40%;box-shadow:0px 0px 2px green;">
-      
-     <h5> 保存成功！</h5> 
-     <p>如果需要更改真实姓名，请用注册邮箱发送邮件联系管理员更改.</p>
-</div>
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.form.js"></script>
+<script src="/js/jquery.message.js"></script>
 <script type="text/javascript">
 $('#share').popover({
   placement:'right',
@@ -273,7 +270,6 @@ $("#head-img").attr("src","/img/head/<{$smarty.session.user.id}>.jpg?id="+Math.r
 $('.tip').tooltip();
 $('#password-msg').hide();
 $('#account-msg').hide();
-$('#alert-msg').hide();
 $("#password").focus(function(){//恢复初始状态
     passwordcheck=false;
     $('#password-msg').hide();
@@ -341,18 +337,10 @@ $("#btn-save").click(function(){
         $.post("<{spUrl c=cuser a=save}>", {  password:$.trim($("#password").val()),account: $.trim($("#account").val()),type: $('input[name="type"]:checked').val()},
            function(data){
              if(data){
-                $('#alert-msg').show().delay(1500);
-                $("#alert-msg").animate({ 
-                  top: "-30px"
-                }, 300 ,function(){
-                  $('#alert-msg').hide();
-                  $('#alert-msg').css('top',"30%");
-                  $('#alert-msg').css('left',"40%");
-                });
-                
+                $.msg('保存成功！','color:green;');
              }
              else{
-                alert("网络问题导致保存失败");
+                $.msg("网络问题导致保存失败!");
              }
            });
       }
@@ -369,7 +357,7 @@ $("#file").change(function(){
                 location.reload();  
             },  
             error : function(result) {  
-                alert(result);  
+                $.msg(result);  
             }  
         };  
         if(pre!=obj&&validateImage(obj)) {
@@ -389,7 +377,7 @@ $("#file").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+            $.msg("只能上传jpg、jpeg、png、bmp或gif格式的图片！"); 
             return false;
         }
         
@@ -413,7 +401,7 @@ $("#file").change(function(){
         //    img.src = file.value;
             //return true;
         }else{
-            alert("请选择上传的文件!");
+            $.msg("请选择上传的文件!"); 
             return false;
         }
     }
