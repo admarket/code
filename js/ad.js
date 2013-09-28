@@ -54,21 +54,22 @@ var style='width:'+advertise.width+'px;height:'+advertise.height+'px;cursor:poin
             //videoURI=baseURL+"img/adcontent/video/selling.swf";
             targetURL=baseURL+"?c=main&a=detail&project="+advertise.base.id;
         }
+
         else if(advertise.state=="1"&&trade!="undefined"){//如果广告位已经被出售，则显示广告内容
             var product=trade.product;
             txtURI=product.txt;
             imageURI=baseURL+"img/adcontent/image/"+product.image;
             videoURI=baseURL+"img/adcontent/video/"+product.video;
-            targetURL=product.url;
+            targetURL=baseURL+'?c=cadvertise&a=clicked&aid='+advertise.id;
             //加载广告内容
             if(advertise.format==0){
                 adcontent=txtURI;
             }
             else if(advertise.format==1){
-                adcontent='<a target="_blank" href="'+targetURL+'"><img  width="'+advertise.width+'" height="'+advertise.height+'"  src="'+imageURI+'"/></a>';
+                adcontent='<img  width="'+advertise.width+'" height="'+advertise.height+'"  src="'+imageURI+'"/>';
             }
             else if(advertise.format==2){
-                adcontent='<object url="'+targetURL+'" onmousedown="goto(this);" width="'+advertise.width+'" height="'+advertise.height+'" type="application/x-shockwave-flash" data="'+videoURI+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">';
+                adcontent='<object width="'+advertise.width+'" height="'+advertise.height+'" type="application/x-shockwave-flash" data="'+videoURI+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">';
                 adcontent+='<embed src="'+videoURI+'"  width="'+advertise.width+'" height="'+advertise.height+'"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
                 adcontent+='<div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
             }

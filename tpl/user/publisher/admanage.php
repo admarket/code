@@ -246,7 +246,7 @@
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
                              data-content='<textarea class="textarea"><div class="admarket_ad" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
-                             <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=3"></script>
+                             <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
                              <script type="text/javascript" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>
                               <i class="icon-shopping-cart"></i> 
