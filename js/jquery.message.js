@@ -7,7 +7,7 @@
  * http://jquery.malsup.com/license.html
  * Requires: jQuery v1.3.1 or later
  */
-$.msg=function(txt,style,obj){
+$.msg=function(txt,style,obj,delay){
 	var container=$('#jquery-beauty-msg');
 	if(container.length<=0){
 		$("body").append('<div style="clear:both;"></div><div id="jquery-beauty-msg"></div>');

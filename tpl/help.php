@@ -23,8 +23,8 @@
         <!--nav bar content-->
          <div class="span3 bs-docs-sidebar" data-spy="affix" >
           <ul class="nav nav-tabs nav-stacked" style="background-color:#fff;box-shadow:0px 1px 1px #ddd;border-radius:5px;">
-            <li><a href="#overview" class="active"><i class="icon-chevron-right"></i> 我是卖家</a></li>
-            <li><a href="#transitions"><i class="icon-chevron-right"></i> 我是买家</a></li>
+            <li><a href="#seller" class="active"><i class="icon-chevron-right"></i> 我是卖家</a></li>
+            <li><a href="#buyer"><i class="icon-chevron-right"></i> 我是买家</a></li>
             
             <li><a href="#question"><i class="icon-chevron-right"></i> 常见问题</a></li>
             <li><a href="#privacy"><i class="icon-chevron-right"></i> 隐私条款</a></li>

@@ -319,21 +319,23 @@
 </div>
 
 <div class="modal hide fade" id="form-confirm" style="top:20%;">
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>是否确认删除数据？</h5>
+  </div>
   <form action="<{spUrl c=cadvertise a=AddAdvertise}>" id="form-delete" method="post">
     <div class="modal-body">
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h5>是否确认删除数据？</h5>
-    </div>
-    
-    <div class="modal-footer" style="margin:0;top:-20px;">
-      <form action="post" method=""  id="action-confirm">
        <a  class="btn btn-small btn-danger" id="btn-confirm">
         <i class="icon-ok"></i> 确认
       </a>
       <a  class="btn btn-small cancel" id="btn-cancel">
         <i class="icon-remove"></i> 取消
       </a>
-      </form>
+      
+    </div>
+    </form>
+    <div class="modal-footer" style="margin:0;top:-20px;">
+      
     </div>
   
 </div>
@@ -495,6 +497,7 @@ $("#btn-confirm").click(function(){
   var options = {  
             success : function(data) {  
                 if(data==1){
+                  $.msg('删除成功！','color:green;');
                    location.reload();
                 } 
             },  

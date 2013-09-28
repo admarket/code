@@ -226,6 +226,7 @@
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
       $('.tip').tooltip();
       var txt="";
@@ -268,13 +269,13 @@
                       function(data){
                          if(data){
                             if(data=="1"){
-                              alert('购买成功！');
+                              $.msg('购买成功！','color:green;');
                               location.reload();
                             }else{
-                              alert(data);
+                              $.msg('网络原因导致购买失败！');
                             }
                          }else{
-                            alert('发送请求失败！');
+                            $.msg('发送请求失败！');
                          }
                      });
                 });

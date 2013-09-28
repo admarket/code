@@ -64,11 +64,12 @@
                     <a class="btn btn-primary" data-toggle="button"  data-loading-text="正在验证..." >
                       登录</a>
                   </span>
-                  <label class="checkbox inline" style="width:50%;margin-left:20px;">
-                    <input type="checkbox" checked="checked" id="inlineCheckbox2" value="option2"> 
+                  <span class="checkbox inline" style="margin-left:20px;">
+                    <input type="checkbox" checked="checked" id="cookieCheck" value="option2"> 
                     <span style="margin-right:20px;">记住我</span>
-                    <a>忘记密码？</a>
-                  </label>
+                    <a href="<{spUrl c=main a=forget}>">忘记密码？</a>
+                  </span>
+                  
                 </div>
               </div>
 
@@ -88,12 +89,25 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
+    var CookieStr = document.cookie;
+    if(CookieStr.indexOf('email')>=0){
+      var GetName = '';
+      if(CookieStr.indexOf('=')>=0&&CookieStr.indexOf(';')>=0){
+        GetName =CookieStr.split('=')[1].split(';')[0]; //获取到cookie中 的值
+      }
+      
+       $("#txt-email").val(GetName);
+    } 
+    
       $(".btn").click(function(){
           $(".btn").button('loading');
           $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
            function(data){
              if(data){
               //$("#alert-msg").hide();
+              if($("#cookieCheck").attr("checked")){//添加cookie
+                document.cookie="email="+$("#txt-email").val();
+              }
               $.msg("验证成功！正在跳转中...",'color:green;');
                 window.location.href="<{spUrl c=sub a=dashboard}>";
              }else{

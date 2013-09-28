@@ -81,4 +81,7 @@ class main extends spController
     function help(){
         $this->display("help.php"); // 注册 
     }
+    function forget(){
+        $this->display("forget.php"); // 找回密码 
+    }
 }

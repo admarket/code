@@ -27,8 +27,10 @@ class cuser extends spController
 				$unReadMessages=$message->findAll($conditions2);
 		        $unRead=count($unReadMessages);
 		        $_SESSION['unread'] = $unRead;
-				echo true;
+				echo "1";
 				return;
+			}else{
+				echo false;
 			}
 
 		}
@@ -183,6 +185,31 @@ class cuser extends spController
     		$this->jump(spUrl('sub', 'product')); // 跳转到首页
     	}
     	//$this->jump($_SERVER['HTTP_REFERER']);跳转到之前的页面
+    	
+    }
+    //找回密码
+    function forget(){
+    	$user = spClass("user");
+		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
+		$conditions = array("email" => $email);
+		$result = $user->find($conditions); 
+		if($result){
+			$password=$result['password'];
+			$mail = spClass('spEmail');
+	        $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
+	        $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
+	        $mailsubject = "广告市场-找回密码";//邮件主题
+	        $mailbody = "<h4> 您的账户当前密码是：</h4>"."<p> <a>".$password."<a></p>".$addition;//邮件内容
+	        $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
+	        $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
+	        if($result){
+	        	echo "successful";
+	        }else{
+	        	echo "未知原因导致邮件发送失败！";
+	        }
+		}else{
+			echo "该邮箱尚未注册！";
+		}
     	
     }
 }
