@@ -532,6 +532,7 @@ $("#btn-saveAddProject").click(function(){
       var options = {  
               success : function(data) {  
                   if(data==1){
+                     $.msg('添加成功！','color:green;');
                      location.reload();
                   } 
               },  

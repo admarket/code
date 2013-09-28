@@ -109,7 +109,7 @@
                   <div class="span3" style="padding-top:10px;">
                     <div>
                         <i class="icon-flag icon-large " style="color:#EC4F4F;"></i>
-                        <span> <{$project.alexa|number_format}></span>
+                        <span> <{$project.localRank|number_format}></span>
                     </div>
                     <div style="color:#666;font-weight:normal;font-size:12px;letter-spacing:3px;">地区网站排名</div>
                   </div>

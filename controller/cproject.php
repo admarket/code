@@ -5,13 +5,23 @@ class cproject extends spController
 	function AddProject(){//添加广告项目
 		
         $filename=$_FILES['logo']['name'];
-        $ext=end(explode('.', $filename));
+        $tempName=explode('.', $filename);
+        $ext=end($tempName);
+
+        $prefixUrl='http://data.alexa.com/data/ezdy01DOo100QI?cli=10&dat=snba&ver=7.0&cdt=alx_vw=20&wid=16865&act=00000000000&ss=1024x768&bw=775&t=0&ttl=1125&vis=1&rq=2&url='.$this->spArgs('projectUrl');
+        $data = file_get_contents($prefixUrl);
+        $result=simplexml_load_string($data);
+        $alexa=(array)$result->SD[1]->REACH['RANK'];
+        $local=(array)$result->SD[1]->COUNTRY->attributes()[2];
+
 		$newrow = array(
                         'name' => $this->spArgs('projectName'),
                         'url' => $this->spArgs('projectUrl'),
                         'description' => $this->spArgs('projectDescription'),
                         'category' => $this->spArgs('projectCategory'),
                         'owner'=> $_SESSION['user']['id'],
+                        'alexa'=>$alexa[0],
+                        'localRank'=>$local[0],
                         'logo'=>$ext,
                 );
         $project = spClass("project");
