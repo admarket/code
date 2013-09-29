@@ -606,7 +606,6 @@ $(function () {
             });
   $.ajax({ url: "<{spUrl c=cproject a=GetJsonData}>", success: function(data){
             loadData(stringToJSON(data));
-           
             
             $('#chart1').highcharts({
                 chart: {

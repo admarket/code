@@ -34,7 +34,7 @@ function getsmall(a,b){
 // } 
 //获取页面内的所有广告位
 var ads=document.getElementsByClassName("admarket_ad");
-var baseURL="http://localhost/";
+var baseURL="http://www.eadmarket.com/";
 if(ads!=null&&ads!="undefined"){
 var style='width:'+advertise.width+'px;height:'+advertise.height+'px;cursor:pointer;'
             +'background-color:#eee;border:solid 1px #ccc;color:#515151;border-radius:5px;box-shadow:0 0 1px #ccc;'

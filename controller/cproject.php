@@ -12,7 +12,7 @@ class cproject extends spController
         $data = file_get_contents($prefixUrl);
         $result=simplexml_load_string($data);
         $alexa=(array)$result->SD[1]->REACH['RANK'];
-        $local=(array)$result->SD[1]->COUNTRY->attributes()[2];
+        $local=(array)$result->SD[1]->COUNTRY['RANK'];
 
 		$newrow = array(
                         'name' => $this->spArgs('projectName'),
