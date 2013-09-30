@@ -114,14 +114,20 @@ class cuser extends spController
     function isExistPhone(){
     	$user = spClass("user");
 		$phone=$this->spArgs("phone"); // 用spArgs接收spUrl传过来的ID
-		$conditions = array("phone" => $phone);
-		$result = $user->findAll($conditions); 
-		//dump($result); // 查看结果，
-		if($result){
-			echo "1";
-		}else{
+		if($phone==$_SESSION['user']['mobilephone']){
 			echo "0";
-		} //检查email是否重复
+		}else{
+			$conditions = array("mobilephone" => $phone);
+			$notIncludeSelf=$this->spArgs("phone");
+			$result = $user->findAll($conditions); 
+			//dump($result); // 查看结果，
+			if($result){
+				echo "1";
+			}else{
+				echo "0";
+			} //检查email是否重复
+		}
+		
     }
 
     //验证邮箱
@@ -147,20 +153,29 @@ class cuser extends spController
     function save(){
     	$user = spClass("user");
     	$id=$_SESSION['user']['id']; 
-    	//$password=$this->spArgs("password"); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
+    	$phone=$this->spArgs("phone"); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
     	$account=$this->spArgs("account");//提现账号
 		$type=$this->spArgs("type");//身份类型
     	$conditions = array("id"=>$id); // 查找email是$email的记录
         $newrow = array(
-                //'password' => $this->hashPass($password),  // 然后将这条记录的name改成“喜羊羊”
+                'mobilephone' => $phone,  // 然后将这条记录的name改成“喜羊羊”
                 'account' => $account,
                 'type' => $type,
         );
-        $user->update($conditions, $newrow); // 更新记录
-        //$_SESSION['user']['password'] = $password;
-        $_SESSION['user']['account'] = $account;
-        $_SESSION['user']['type'] = $type;
-        echo true; // 首页
+        $checkconditions = array("mobilephone" => $phone);
+		$result = $user->findAll($checkconditions); 
+        if($phone!=$_SESSION['user']['mobilephone']){
+			if($result){
+				echo "操作失败：该手机号码已经被注册！";
+			}
+        }else{
+        	$user->update($conditions, $newrow); // 更新记录
+	        $_SESSION['user']['mobilephone'] = $phone;
+	        $_SESSION['user']['account'] = $account;
+	        $_SESSION['user']['type'] = $type;
+	        echo "1"; // 首页
+        }
+        
     }
 
     //上传头像

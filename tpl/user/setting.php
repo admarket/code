@@ -163,8 +163,10 @@
                     <label>手机：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-mobile-phone icon-large"></i></span>
-                      <input type="text" class="input-xlarge " value="<{$smarty.session.user.mobilephone}>"/>
+                      <input type="text" class="input-xlarge " id="phone" value="<{$smarty.session.user.mobilephone}>"/>
+                      
                     </div>
+                    <p class="help-block" id="phone-msg">请输入有效手机号码</p>
                     <label>密码：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-lock"></i></span>
@@ -271,6 +273,8 @@ $('#share').popover({
 });
 var passwordcheck=false;
 var accountcheck=false;
+var phonecheck=false;
+var ajaxFlag=false;
 $("#head-img").attr("src","/img/head/<{$smarty.session.user.id}>.jpg?id="+Math.random());
 $('.tip').tooltip();
 $('#password-msg').hide();
@@ -287,7 +291,25 @@ $("#account").focus(function(){//恢复初始状态
     $("#account-msg").html("请输入与下面提现方式相应的账号");
     $("#account-msg").css("color","#999"); 
 });
-
+function checkPhone(){
+        if($.trim($("#phone").val())==""){
+                      $("#phone-msg").html("手机号码不能为空！");
+                      $("#phone-msg").css("color","red");
+                       return false;
+                  }
+       else{
+        var reg =  /^[1][0-9]\d{9}$/;
+        if(!reg.test($.trim($("#phone").val()))){
+            $("#phone-msg").html("手机号码格式不正确！");
+            $("#phone-msg").css("color","red");
+            return false;
+        }else{
+                  phonecheck=true;
+                  return true;
+          
+        }
+       }
+      }
 function checkPassword(){
         if($.trim($("#password").val())==""){
                       $('#password-msg').show();
@@ -335,20 +357,22 @@ function checkPassword(){
           }
       }
 $("#btn-save").click(function(){
-      checkPassword();
+      //checkPassword();
       checkAccount();
-      if(passwordcheck&&accountcheck){//如果检查通过
-        $("#btn-save").button('loading');
-        $.post("<{spUrl c=cuser a=save}>", {  password:$.trim($("#password").val()),account: $.trim($("#account").val()),type: $('input[name="type"]:checked').val()},
-           function(data){
-             if(data){
-                $.msg('保存成功！','color:green;');
-             }
-             else{
-                $.msg("网络问题导致保存失败!");
-             }
-           });
-      }
+      checkPhone();
+      if(phonecheck&&accountcheck){//如果检查通过
+          $("#btn-save").button('loading');
+          
+            $.post("<{spUrl c=cuser a=save}>", {  phone:$.trim($("#phone").val()),account: $.trim($("#account").val()),type: $('input[name="type"]:checked').val()},
+             function(data){
+               if(data.indexOf("操作失败")<0){
+                  $.msg('保存成功！','color:green;');
+               }
+               else{
+                  $.msg(data);
+               }
+             });
+        }
      $('#btn-save').button('toggle');
      $('#btn-save').button('reset'); 
    });
