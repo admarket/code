@@ -185,7 +185,7 @@ class cuser extends spController
 	        $_SESSION['user']['headimg'] = $id.".".$ext;
 	     echo "true";
 	    }else {
-	     echo "false".$msg."123";
+	     echo "操作失败：".$msg;
 	    }
 		
     }

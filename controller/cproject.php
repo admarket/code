@@ -43,7 +43,7 @@ class cproject extends spController
                 $project->update($conditions, $newrow); // 更新记录
              echo 1;
             }else {
-             echo "false".$msg;
+             echo "操作失败：".$msg;
             } 
         }   
         	
@@ -103,7 +103,8 @@ class cproject extends spController
 
     function UpateLogo(){
         $filename=$_FILES['logo']['name'];
-        $ext=end(explode('.', $filename));
+        $tempName=explode('.', $filename);
+        $ext=end($tempName);
         $arg = array(
         APP_PATH.'/img/ads/',
         $this->spArgs('id')
@@ -121,7 +122,7 @@ class cproject extends spController
             $project->update($conditions, $newrow); // 更新记录
          echo "true";
         }else {
-         echo "false".$msg;
+         echo "操作失败：".$msg;
         }
         
     }

@@ -359,7 +359,14 @@ $("#file").change(function(){
         var options = {  
             success : function(data) {  
                 //alert(data); 
-                location.reload();  
+                if(data.indexOf("操作失败")<0) {
+                  $.msg('上传成功！','color:green;'); 
+                  location.reload(); 
+                } 
+                else{
+                  $.msg(data);
+                }
+                 
             },  
             error : function(result) {  
                 $.msg(result);  

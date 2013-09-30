@@ -351,8 +351,13 @@ var pre="";   //标记前一个上传的文件
 $("#file-logo-add").change(function(){
         var obj = $("#file-logo-add").val();
         var options = {  
-            success : function(data) {  
-              $.msg('上传成功！','color:green;');  
+            success : function(data) {
+              if(data.indexOf("操作失败")<0) {
+                $.msg('上传成功！','color:green;'); 
+              } 
+               else{
+                $.msg(data);
+               }
             },  
             error : function(result) {  
                $.msg(result);
@@ -463,11 +468,17 @@ $('.textarea-editable').editable({
   });
 $('.btn-upload-logo').hide();
 $(".upload-logo").change(function(){
+
        var obj = $(this).val();
        var uploadForm = $(this).parent().parent();
         var options = {  
             success : function(data) {  
-                $.msg('上传成功！','color:green;');  
+                if(data.indexOf("操作失败")<0) {
+                $.msg('上传成功！','color:green;'); 
+                } 
+               else{
+                $.msg(data);
+               }
             },  
             error : function(result) {  
                 $.msg(result);  

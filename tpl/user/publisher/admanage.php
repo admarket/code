@@ -510,9 +510,12 @@ $("#btn-confirm").click(function(){
 $("#btn-saveAddProject").click(function(){
    var options = {  
             success : function(data) {  
-                if(data==1){
+                if(data=="1"){
                    location.reload();
                 } 
+                else{
+                  $.msg(data);  
+                }
             },  
             error : function(result) {  
                 $.msg(result);  
