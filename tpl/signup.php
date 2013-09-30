@@ -47,9 +47,19 @@
                         <div class="input-prepend">
                           <span class="add-on"><i class="icon-envelope"></i></span>
                           <input id="email" type="text" placeholder="输入您的邮箱地址" class="input-xlarge">
-                          <i class="icon-ok ok" id="email-ok" style="">dfs</i>
                         </div>
                         <p class="help-block" id="email-msg">请输入有效邮箱</p>
+                      </div>
+                </div>
+                <div  class="control-group">
+                      <!-- Text input-->
+                      <label class="control-label" for="input01">手机号码：</label>
+                      <div class="controls">
+                        <div class="input-prepend">
+                          <span class="add-on"><i class="icon-mobile-phone icon-large"></i></span>
+                          <input id="phone" type="text" placeholder="输入您的手机号码" class="input-xlarge">
+                        </div>
+                        <p class="help-block" id="phone-msg">请输入有效手机号码</p>
                       </div>
                 </div>
                 <div class="control-group">
@@ -164,17 +174,17 @@
                   <div class="span5">
                     <label class="radio" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
-                      <img src="/img/alipay.ico" width="20px" height="20px"/>
+                      <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                       &nbsp;支付宝&nbsp;
                     </label>
                     <label class="radio" style="font-size:12px;">
-                      <img src="/img/tenpay.ico" width="20px" height="20px"/>
+                      <img src="/img/tenpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                       <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
                       &nbsp;财付通&nbsp;
                     </label>
                     <label class="radio" style="font-size:12px;">
                     <input type="radio" name="payment" id="payment3" value="2"  disabled="disabled">
-                    <img src="/img/Unionpay.ico" width="20" height="20"/>
+                    <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                     &nbsp;银联卡&nbsp;
                     </label>
                   </div>
@@ -214,6 +224,7 @@
       var repasswordcheck=false;
       var namecheck=false;
       var accountcheck=false;
+      var phonecheck=false;
       function checkEmail(){
         if($.trim($("#email").val())==""){
                       $("#email-msg").html("邮箱不能为空！");
@@ -228,15 +239,42 @@
             return false;
         }else{
           
-          $.post("<{spUrl c=cuser a=isExist}>", { email: $.trim($("#email").val())},
+          $.post("<{spUrl c=cuser a=isExistEmail}>", { email: $.trim($("#email").val())},
              function(data){
                if(data=="1"){
                   $("#email-msg").html("该邮箱已经被注册！");
                   $("#email-msg").css("color","red");
                   return false;
                }else{
-                  $('#email-ok').css("display","inline");
                   emailcheck=true;
+                  return true;
+               }
+             });
+        }
+       }
+      }
+      function checkPhone(){
+        if($.trim($("#phone").val())==""){
+                      $("#phone-msg").html("手机号码不能为空！");
+                      $("#phone-msg").css("color","red");
+                       return false;
+                  }
+       else{
+        var reg =  /^[1][0-9]\d{9}$/;
+        if(!reg.test($.trim($("#phone").val()))){
+            $("#phone-msg").html("手机号码格式不正确！");
+            $("#phone-msg").css("color","red");
+            return false;
+        }else{
+          
+          $.post("<{spUrl c=cuser a=isExistPhone}>", { phone: $.trim($("#phone").val())},
+             function(data){
+               if(data=="1"){
+                  $("#phone-msg").html("该手机号码已经被注册！");
+                  $("#phone-msg").css("color","red");
+                  return false;
+               }else{
+                  phonecheck=true;
                   return true;
                }
              });
@@ -323,6 +361,14 @@
           $("#email-msg").html("请输入有效邮箱");
           $("#email-msg").css("color","#999");
          }); 
+      $("#phone").blur(function(){//验证
+        checkPhone();
+      }); 
+      $("#phone").focus(function(){//恢复初始状态
+          phonecheck=false;
+          $("#phone-msg").html("请输入有效手机号码");
+          $("#phone-msg").css("color","#999");
+         });
 
       $("#password").blur(function(){//验证
         checkPassword();
@@ -365,14 +411,15 @@
           checkRepassword();
           checkName();
           checkAccount();
-          if(emailcheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck){//如果检查通过
+          checkPhone();
+          if(emailcheck&&phonecheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck){//如果检查通过
             
             $("#btn-register").button('loading');
             $(".bar").animate({ 
                     width: "66%"
                   }, 1000 );
              $("#second").attr("class",'badge badge-success');
-            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
+            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
              function(data){
               
                if(data){

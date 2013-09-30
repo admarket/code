@@ -44,7 +44,7 @@ class main extends spController
                 $mail = spClass('spEmail');
                 $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
                 $emailx=$this->encryptEmail($email);
-                $address="http://www.eadmarket.com/active_member.html?ticket=".$emailx;
+                $address="http://".$_SERVER['SERVER_NAME'].spUrl('cuser', 'verify')."?ticket=".$emailx;
                 $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
                 $mailsubject = "广告市场注册验证邮箱";//邮件主题
                 $mailbody = "<h4> 请点击下面验证地址进行验证：</h4>"."<p> <a href=".$address.">".$address."<a></p>".$addition;//邮件内容

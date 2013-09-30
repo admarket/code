@@ -233,7 +233,7 @@
                           <td>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$advertise.process}>%">
                               <div class="bar bar-success" style="width: <{$advertise.process}>%;">
-                               <{$advertise.process}>%
+                               <{$advertise.endTime-$smarty.now}>%
                              </div>
                                
                             </div>
@@ -245,7 +245,7 @@
                           <td>
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
-                             data-content='<textarea class="textarea"><div class="admarket_ad" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
+                             data-content='<textarea class="textarea"><span class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></span>
                              <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
                              <script type="text/javascript" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>

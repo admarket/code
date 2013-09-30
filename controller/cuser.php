@@ -57,10 +57,12 @@ class cuser extends spController
     function register(){
         $user = spClass("user");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
+		$phone=$this->spArgs("phone");
 		$password=$this->spArgs("password");
 		$name=$this->spArgs("name");
 		$account=$this->spArgs("account");
 		$payment=$this->spArgs("payment");
+
 		$conditions = array("email" => $email);
 
     	$password = $this->hashPass($password);
@@ -70,6 +72,7 @@ class cuser extends spController
                         "password" => $password,
                         "name" => $name,
                         "account" => $account ,
+                        "mobilephone"=>$phone,
                         "payment" => $payment,
                 );
 		$result = $user->findAll($conditions); //查询该邮箱是否已经被注册
@@ -95,10 +98,23 @@ class cuser extends spController
     }
 
     //验证注册用户是否已注册
-    function isExist(){
+    function isExistEmail(){
     	$user = spClass("user");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
 		$conditions = array("email" => $email);
+		$result = $user->findAll($conditions); 
+		//dump($result); // 查看结果，
+		if($result){
+			echo "1";
+		}else{
+			echo "0";
+		} //检查email是否重复
+    }
+    //验证注册用户是否已注册
+    function isExistPhone(){
+    	$user = spClass("user");
+		$phone=$this->spArgs("phone"); // 用spArgs接收spUrl传过来的ID
+		$conditions = array("phone" => $phone);
 		$result = $user->findAll($conditions); 
 		//dump($result); // 查看结果，
 		if($result){
@@ -118,7 +134,7 @@ class cuser extends spController
                 'verify' => 1,  // 然后将这条记录的name改成“喜羊羊”
         );
         $user->update($conditions, $newrow); // 更新记录
-        $this->jump(spUrl('main', 'login'));
+        $this->jump(spUrl('sub', 'dashboard'));
     }
     //解密获取加密字符串中的email
     function decryptEmail($crypttedEmail) {
@@ -131,17 +147,17 @@ class cuser extends spController
     function save(){
     	$user = spClass("user");
     	$id=$_SESSION['user']['id']; 
-    	$password=$this->spArgs("password"); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
+    	//$password=$this->spArgs("password"); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
     	$account=$this->spArgs("account");//提现账号
 		$type=$this->spArgs("type");//身份类型
     	$conditions = array("id"=>$id); // 查找email是$email的记录
         $newrow = array(
-                'password' => $password,  // 然后将这条记录的name改成“喜羊羊”
+                //'password' => $this->hashPass($password),  // 然后将这条记录的name改成“喜羊羊”
                 'account' => $account,
                 'type' => $type,
         );
         $user->update($conditions, $newrow); // 更新记录
-        $_SESSION['user']['password'] = $password;
+        //$_SESSION['user']['password'] = $password;
         $_SESSION['user']['account'] = $account;
         $_SESSION['user']['type'] = $type;
         echo true; // 首页
@@ -194,11 +210,16 @@ class cuser extends spController
 		$conditions = array("email" => $email);
 		$result = $user->find($conditions); 
 		if($result){
-			$password=$result['password'];
 			$mail = spClass('spEmail');
 	        $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
 	        $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
 	        $mailsubject = "广告市场-找回密码";//邮件主题
+	        $password = $this->create_password(12);
+		    $newPassword=$this->hashPass($password);
+		    $newrow = array(
+	                'password' => $newPassword,  // 然后将这条记录的name改成“喜羊羊”    
+	        );
+	        $user->update($conditions, $newrow); // 更新记录
 	        $mailbody = "<h4> 您的账户当前密码是：</h4>"."<p> <a>".$password."<a></p>".$addition;//邮件内容
 	        $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
 	        $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
@@ -212,4 +233,13 @@ class cuser extends spController
 		}
     	
     }
+    function create_password($pw_length = 8)  
+	{  
+		$randpwd='';
+	    for ($i = 0; $i < 12; $i++)  
+		    {  
+		        $randpwd .= chr(mt_rand(33, 126));  
+		    } 
+	    return $randpwd;  
+	}  
 }

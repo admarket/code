@@ -160,11 +160,16 @@
                       <span class="add-on"><i class="icon-envelope"></i></span>
                       <span class="input-xlarge uneditable-input"><{$smarty.session.user.email}></span>
                     </div>
-                    
+                    <label>手机：</label>
+                    <div class="input-prepend">
+                      <span class="add-on"><i class="icon-mobile-phone icon-large"></i></span>
+                      <span class="input-xlarge uneditable-input"><{$smarty.session.user.mobilephone}></span>
+                    </div>
                     <label>密码：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-lock"></i></span>
-                      <input type="password" id="password" value="<{$smarty.session.user.password}>"></span>
+                      <span class="input uneditable-input">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                      <a class="btn btn-primary">修改密码</a>
                     </div>
                     <p class="help-block" id="password-msg">请输入6-20位字母和数字组合</p>
                    <label>默认身份：</label>
@@ -223,19 +228,19 @@
                         <div>
                           <label>提现方式：</label>
                           <div class="span5 tip" title="目前仅支持支付宝">
-                            <label class="radio" style="font-size:12px;">
+                           <label class="radio" style="font-size:12px;">
                               <input type="radio" name="payment" id="payment1" value="0" checked>
-                              <img src="/img/alipay.ico" width="20" height="20">
+                              <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                               &nbsp;支付宝&nbsp;
                             </label>
                             <label class="radio" style="font-size:12px;">
-                              <img src="/img/tenpay.ico" width="20" height="20">
+                              <img src="/img/tenpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                               <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
                               &nbsp;财付通&nbsp;
                             </label>
                             <label class="radio" style="font-size:12px;">
-                            <input type="radio" name="payment" id="payment3" value="2" disabled="disabled">
-                            <img src="/img/Unionpay.ico" width="20" height="20">
+                            <input type="radio" name="payment" id="payment3" value="2"  disabled="disabled">
+                            <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                             &nbsp;银联卡&nbsp;
                             </label>
                           </div>

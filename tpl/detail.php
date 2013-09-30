@@ -272,7 +272,7 @@
                               $.msg('购买成功！','color:green;');
                               location.reload();
                             }else{
-                              $.msg('网络原因导致购买失败！');
+                              $.msg(data);
                             }
                          }else{
                             $.msg('发送请求失败！');

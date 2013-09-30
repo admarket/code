@@ -15,6 +15,8 @@ class ctrade extends spController
 		$product=$this->spArgs("product");
 		$price=intval($this->spArgs("price"));
 		$number=intval($this->spArgs("number"));
+		$startTime = time();  // 当前时间戳
+   		$endTime = strtotime("+'.$number.' days", $startTime);  // 30天后的时间戳 
 		$buyer=$_SESSION['user']['id'];
 		$seller=$this->spArgs("seller");
 		$newTrade = array(
@@ -22,6 +24,7 @@ class ctrade extends spController
                         "product" => $product,
                         "price" => $price,
                         "number" => $number ,
+                        "endTime" =>date("Y-m-d H:i:s", $endTime), // 格式化日期
                         "buyer" => $buyer,
                         "seller"=>$seller
                 );
@@ -41,6 +44,8 @@ class ctrade extends spController
 			$adCheck=$user->find($conditions);
 			if($adCheck["state"]==1){
 				echo '该广告位已经出售，请选择其他广告位';
+			}else if($product=""||$product==0){
+				echo '请先添加您的产品！';
 			}else{
 				//更新广告位状态为出售
 				 $newrow = array(

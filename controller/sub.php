@@ -1,6 +1,12 @@
 <?php
 class sub extends spController
 {
+     public function __construct(){
+        parent::__construct(); // 要先启动父类的构造函数
+        if($_SESSION['user']==""){
+            $this->jump(spUrl('main', 'login'));
+        }
+    }
     function dashboard(){
         if($_SESSION['user']['type']==0){
             $this->jump(spUrl('sub', 'product')); // 跳转到首页
