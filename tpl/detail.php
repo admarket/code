@@ -22,7 +22,9 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
-          <div class="span3 offset1">如果您有任何疑问，请关注我们的<a class="tip" title="关注我们的新浪微博">新浪微博</a>,与我们进行互动。</div>
+          <div class="span3 offset1">
+            如果您有任何疑问，请联系我们的<a  target='_blank' href="http://wpa.qq.com/msgrd?V=1&Uin=4006776" class="tip" title="点击发送消息">客服QQ</a>,与我们进行互动。
+          </div>
           <div class="span3 offset1">
             <{if $smarty.session.user eq '' }>
               <a class="btn btn-success" href="<{spUrl c=main a=register}>">注册</a>

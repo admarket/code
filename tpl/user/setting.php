@@ -163,7 +163,7 @@
                     <label>手机：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-mobile-phone icon-large"></i></span>
-                      <span class="input-xlarge uneditable-input"><{$smarty.session.user.mobilephone}></span>
+                      <input type="text" class="input-xlarge " value="<{$smarty.session.user.mobilephone}>"/>
                     </div>
                     <label>密码：</label>
                     <div class="input-prepend">

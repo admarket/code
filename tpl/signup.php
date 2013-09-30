@@ -212,7 +212,6 @@
         <p id="verifyContent">我们已经发送了一封验证邮件到您的注册邮箱，请查看邮箱进行验证，完成注册…</p>
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn">关闭</a>
         <a href="#" id="verifyAddress" class="btn btn-primary">立刻去验证</a>
       </div>
     </div>

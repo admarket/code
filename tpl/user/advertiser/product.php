@@ -412,13 +412,9 @@
                   </div>
     </div>
     <div class="modal-footer row" style="text-align:left;margin:-10px 0;" align="left">
-      <strong class="span3" class="display:inline-block;"><i class="icon-info-sign"></i>&nbsp;&nbsp;上传进度：
-        <span class="progress span6 tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;width:30%;display:inline-block;" title="20%">
-          <span class="bar bar-success" style="width:20%;"></span>
-        </span>
-      </strong>
+
       
-     <span class=" span3">没有文件</span>
+
     </div>
 </div>
 <script src="/js/highcharts.js"></script>
@@ -569,8 +565,12 @@ $(".upload-logo").change(function(){
        var obj = $(this).val();
        var uploadForm = $(this).parent().parent();
         var options = {  
-            success : function(data) {  
-                 $.msg('上传成功！','color:green;');  
+            success : function(data) { 
+                if(data.indexOf("操作失败")<0){ 
+                 $.msg('上传成功！','color:green;'); 
+                } else{
+                  $.msg(data); 
+                }
             },  
             error : function(result) {  
                 $.msg('上传失败！'+result);  
@@ -598,10 +598,15 @@ $("#file-image").change(function(){
         var obj = $("#file-image").val();
         var options = {  
             success : function(data) { 
+              if(data.indexOf("操作失败")<0){
                 $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"image/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");
                 $("#image-content").attr("src",fullName);  
+              }else{
+                $.msg(data); 
+              }
+                
             },  
             error : function(result) {   
                 $.msg('上传失败！'+result);  
@@ -622,15 +627,20 @@ $("#file-video").change(function(){
         var obj = $("#file-video").val();
         var options = {  
             success : function(data) { 
-              $.msg('上传成功！','color:green;'); 
-                var fullName=prefix+"video/"+data;
-                fullName=fullName.replace(/[\r\n]/g,"");
-                var newNode=' <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="'
-                +fullName+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> <param name="Play" value="false" /><embed autostart="false" play="false" id="video-content-emb" play=false src="'
-                +fullName+'" pluginspage="http://www.macromedia.com/go/getflashplayer"/><div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
-                var parent=$("#video-content-obj").parent();
-                parent.empty();
-                parent.html(newNode);
+              if(data.indexOf("操作失败")<0){
+                  $.msg('上传成功！','color:green;'); 
+                  var fullName=prefix+"video/"+data;
+                  fullName=fullName.replace(/[\r\n]/g,"");
+                  var newNode=' <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="'
+                  +fullName+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> <param name="Play" value="false" /><embed autostart="false" play="false" id="video-content-emb" play=false src="'
+                  +fullName+'" pluginspage="http://www.macromedia.com/go/getflashplayer"/><div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
+                  var parent=$("#video-content-obj").parent();
+                  parent.empty();
+                  parent.html(newNode);
+                }else{
+                  $.msg(data);  
+                }
+              
                 //$("#video-content-emb").attr("src",fullName);
                 //$("#video-content-obj").attr("data",fullName);   
             },  
@@ -674,7 +684,6 @@ $(".btn-adcontent").click(function(){
   $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
     currentProduct=stringToJSON(data);//数据转换为json格式
     if(currentProduct){//加载产品信息到弹出窗口
-        $.msg('加载成功！','color:green;'); 
         $("#image-content").attr("src",prefix+"image/"+currentProduct.image);
         $("#video-content-obj").attr("data",prefix+"video/"+currentProduct.video);
         $("#video-content-emb").attr("src",prefix+"video/"+currentProduct.video);
@@ -733,8 +742,13 @@ $("#btn-saveAddProject").click(function(){
   if (a&&b&&d) {
       var options = {  
               success : function(data) {  
-                $.msg('添加成功！','color:green;');
-                location.reload();
+                if(data.indexOf("操作失败")<0){
+                  $.msg('添加成功！','color:green;');
+                  location.reload();
+                }else{
+                  $.msg(data);  
+                }
+                
               },  
               error : function(result) {  
                   $.msg(result);  

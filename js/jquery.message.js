@@ -14,7 +14,7 @@ $.msg=function(txt,style,obj,delay){
 		container=$('#jquery-beauty-msg');
 	}
 	var containerStyle='color:#e1282b;font-family:"微软雅黑";font-weight:bold;font-size:20px;text-shadow:5px 5px 10px #bbb;'
-			+'text-align:center;margin:0;padding-top:20%;width:100%;word-break:break-all;';
+			+'text-align:center;margin:0;padding-top:20%;width:100%;word-break:break-all;z-index:100000;';
 	
 	if(obj!="undefined"&&obj!=null){
 		containerStyle+='position:relative;top:'+$(obj).attr('top')+';left:'+$(obj).attr('left')+';';

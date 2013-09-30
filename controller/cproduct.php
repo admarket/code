@@ -29,7 +29,7 @@ class cproduct extends spController
                 $product->update($conditions, $newrow); // 更新记录
              echo 1;
             }else {
-             echo "false".$msg;
+             echo  "操作失败：".$msg;
             } 
         }   
 	}
@@ -75,7 +75,8 @@ class cproduct extends spController
 	}
 	function updateShown(){
 		$filename=$_FILES['shown']['name'];
-        $ext=end(explode('.', $filename));
+        $tempName=explode('.', $filename);
+        $ext=end($tempName);
         $arg = array(
         APP_PATH.'/img/show/',
         $this->spArgs('id')
@@ -91,9 +92,9 @@ class cproduct extends spController
                     'shown' => $id.".".$ext,  // 然后将这条记录的name改成“喜羊羊”    
             );
             $product->update($conditions, $newrow); // 更新记录
-         echo "true";
+         echo "1";
         }else {
-         echo "false".$msg;
+         echo "操作失败：".$msg;
         }
 	}
 	function getJsonData(){
@@ -142,7 +143,7 @@ class cproduct extends spController
                 $product->update($conditions, $newrow); // 更新记录
              echo $firstName.".".$ext;
             }else {
-             echo "0".$msg."123";
+             echo "操作失败：".$msg;
             }
         
     }

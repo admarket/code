@@ -4,7 +4,7 @@
   */
  class uploadFile {
 
- 	public $max_size = '1000000';//设置上传文件大小
+ 	public $max_size = 10*1024*1024;//设置上传文件大小
  	public $file_name = 'date';//重命名方式代表以时间命名，其他则使用给予的名称
  	public $allow_types;//允许上传的文件扩展名，不同文件类型用“|”隔开
  	public $errmsg = '';//错误信息
@@ -42,9 +42,9 @@
 		switch ($error) {
 			case 0 : $this->errmsg = '';
 				break;
-			case 1 : $this->errmsg = '超过了php.ini中文件大小';
+			case 1 : $this->errmsg = '超过了'.MAX_FILE_SIZE.'B文件大小';
 				break;
-			case 2 : $this->errmsg = '超过了MAX_FILE_SIZE 选项指定的文件大小';
+			case 2 : $this->errmsg = '超过了'.MAX_FILE_SIZE.'B文件大小';
 				break;
 	 	    case 3 : $this->errmsg = '文件只有部分被上传';
 				break;
