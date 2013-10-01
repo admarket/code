@@ -174,8 +174,8 @@
                       <a class="btn btn-primary">修改密码</a>
                     </div>
                     <p class="help-block" id="password-msg">请输入6-20位字母和数字组合</p>
-                   <label>默认身份：</label>
-                    <div class="box tip" style="width:70%;" title="点击左侧按钮切换身份">
+                   <label>默认界面：</label>
+                    <div class="box tip" style="width:70%;" title="选择登录后默认界面">
                       
                       <label class="radio" style="font-size:12px;">
                         <{if $user.type==0}>
