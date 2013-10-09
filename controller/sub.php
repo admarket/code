@@ -231,8 +231,12 @@ class sub extends spController
         $product = spClass("product");
         $conditions = array("owner" => $_SESSION['user']['id']);
         $this->products = $product->spLinker()->findAll($conditions);
-         
-        $this->productCount=count($this->products);//产品总数
+         if($this->products){
+             $this->productCount=count($this->products);//产品总数
+         }
+        else{
+            $this->productCount=0;
+        }
         $this->sumFee=0;//总推广费用
         $this->sumImpression=0;//总展示次数
         $this->sumClick=0;//总点击次数

@@ -246,14 +246,10 @@
                       <{/foreach}>   
                     </tbody>
                   </table>  
-                   <div class="alert" style="border:solid 1px #c09853;display:block;width:92%;position:relative;left:0;font-size:12px;">
-                  
-                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：</strong> 本站禁止传播违反国家法律法规、社会道德以及虚假的产品信息，一旦发现将进行删除处理。
-                  </div>     
+                       
                 </div> 
                
               </div>
-            
           </div>
           
         </div>
