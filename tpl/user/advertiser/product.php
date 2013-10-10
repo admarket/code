@@ -595,6 +595,7 @@ $("#file-image").change(function(){
         var options = {  
             success : function(data) { 
               if(data.indexOf("操作失败")<0){
+                alert(data);
                 $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"image/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");

@@ -183,7 +183,7 @@
                       <{foreach from=$project.detail item=advertise name=adCount}> 
                         <{if $advertise.project == $project.id}>
                         <tr>
-                          <td><{$smarty.foreach.adCount.index}></td>
+                          <td><{$smarty.foreach.adCount.index+1}></td>
                           <td>
                               <p class="title" ><a class="editable"
                                data-pk="<{$advertise.id}>"

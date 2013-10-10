@@ -17,7 +17,6 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/js/excanvas.js"></script>  
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-fileupload.min.js"></script>
@@ -266,9 +265,9 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-link"></i></span>
-              <input id="projectUrl" name="projectUrl" type="text" placeholder="http://输入您的网站地址" class="input-xlarge">
+              <input id="projectUrl" name="projectUrl" type="text" value="http://" placeholder="http://输入您的网站地址" class="input-xlarge">
             </div>
-            <div id="projectUrl-msg" class="msg">网址不能为空，且带有http://的网址，如http://www.baidu.com</div>
+            <div id="projectUrl-msg" class="msg">网址不能为空，且带有http://的网址，如http://www.eadmarket.com</div>
           </div>
           <label class="control-label" for="input01">分类：</label>
           <div class="controls">
@@ -282,8 +281,8 @@
             </div>
           </div>
           <label><i class="icon-info-sign"></i> 网站简介：</label>
-          <textarea rows="3" id="projectDescription" name="projectDescription" class="input-xlarge" placeholder="少于100字"></textarea>
-          <div id="projectDescription-msg" class="msg">简介不能为空，且长度小于100</div>
+          <textarea rows="3" id="projectDescription" name="projectDescription" class="input-xlarge" placeholder="少于300字"></textarea>
+          <div id="projectDescription-msg" class="msg">简介不能为空，且长度小于300</div>
         </fieldset>
         <div class="span3 offset1">
           <p>
@@ -439,8 +438,8 @@ $('.textarea-editable').editable({
         if($.trim(value) == '') {
             return '该字段不能为空';
         }
-        else if($.trim(value).length>200) {
-            return '长度不能超过200';
+        else if($.trim(value).length>300) {
+            return '长度不能超过300';
         }
     }
   });
@@ -534,7 +533,7 @@ $("#btn-saveAddProject").click(function(){
   }else{
     b=true;
   }
-  if($.trim($('#projectDescription').val())==""||$.trim($('#projectDescription').val()).length>100){
+  if($.trim($('#projectDescription').val())==""||$.trim($('#projectDescription').val()).length>300){
       $('#projectDescription-msg').css("display","block");
   }else{
     c=true;
@@ -544,8 +543,8 @@ $("#btn-saveAddProject").click(function(){
   }
   if (a&&b&&c&&d) {
       var options = {  
-              success : function(data) {  
-                  if(data==1){
+              success : function(data) { 
+                  if(data.indexOf('操作失败')<0){
                      $.msg('添加成功！','color:green;');
                      location.reload();
                   } 

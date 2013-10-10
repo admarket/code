@@ -420,7 +420,6 @@
              $("#second").attr("class",'badge badge-success');
             $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
              function(data){
-              
                if(data){
                   $('#btn-register').attr('class',"btn btn-success disabled");
                   $('#btn-register').attr("disabled","disabled");

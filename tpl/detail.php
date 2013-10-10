@@ -141,7 +141,7 @@
                         <th>广告位</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;格式</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;长*宽</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;价格 (&yen;)/月</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;价格 (&yen;)/天</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
                       </tr>
                     </thead>
@@ -238,7 +238,7 @@
             <{elseif $products eq ''}>
             txt="请先&nbsp;&nbsp;<a href='<{spUrl c=sub a=product}>'' class='btn-small btn title'>添加产品</a>&nbsp;&nbsp;后购买";
             <{else}>
-              txt='<form>购买数量：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-legal"></i></span><select name="number" class="numberSelect" style="margin-top:10px;font-size:10px;width:70px;" class="input-mini"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>   </select><span class="add-on"  style="margin-top:10px;font-size:10px;">个月</span></div><br/>推广产品：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-calendar"></i></span><select name="productSelect" class="productSelect" style="margin-top:10px;font-size:10px;width:100px;" class="input-small">';
+              txt='<form>购买数量：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-legal"></i></span><select name="number" class="numberSelect" style="margin-top:10px;font-size:10px;width:70px;" class="input-mini"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>   </select><span class="add-on"  style="margin-top:10px;font-size:10px;">天</span></div><br/>推广产品：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-calendar"></i></span><select name="productSelect" class="productSelect" style="margin-top:10px;font-size:10px;width:100px;" class="input-small">';
                <{foreach from=$products item=product name=prodCount}> 
               txt+='<option value="<{$product.id}>"><{$product.name}></option>';
                 <{/foreach}>
