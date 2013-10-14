@@ -177,14 +177,35 @@ class cuser extends spController
         if($phone!=$_SESSION['user']['mobilephone']){
 			if($result){
 				echo "操作失败：该手机号码已经被注册！";
-			}
-        }else{
-        	$user->update($conditions, $newrow); // 更新记录
-	        $_SESSION['user']['mobilephone'] = $phone;
-	        $_SESSION['user']['account'] = $account;
-	        $_SESSION['user']['type'] = $type;
-	        echo "1"; // 首页
-        }
+	        }else{
+	        	$user->update($conditions, $newrow); // 更新记录
+		        $_SESSION['user']['mobilephone'] = $phone;
+		        $_SESSION['user']['account'] = $account;
+		        $_SESSION['user']['type'] = $type;
+		        echo "1"; // 首页
+	        }
+	    }else{
+	        	echo "1"; // 首页
+	    }
+        
+    }
+    function changePassword(){
+    	$user = spClass("user");
+    	$id=$_SESSION['user']['id']; 
+    	$oldPassword=$this->hashPass($this->spArgs("oldPassword")); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
+    	$newPassword=$this->hashPass($this->spArgs("newPassword"));//提现账号
+    	$conditions = array("id"=>$id,"password"=>$oldPassword); // 查找email是$email的记录
+        $newrow = array(
+                'password' => $newPassword,  // 然后将这条记录的name改成“喜羊羊”
+        );
+		$result = $user->findAll($conditions); 
+			if(!$result){
+				echo "操作失败：旧密码错误！请检查后重新输入";
+	        }else{
+	        	$user->update($conditions, $newrow); // 更新记录
+		        $_SESSION['user']['password'] = $newPassword;
+		        echo "1"; // 首页
+	        }
         
     }
 

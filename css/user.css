@@ -17,6 +17,7 @@
 .msg{display: none;color:red;}
 .btn{font-weight: bold;}
 .header{padding:10px;}
+.modal-header{background-color: #f6f6f6;border-radius: 5px 5px 0 0;border-bottom: solid 1px #ddd;}
 .header .span3{margin-top:30px;}
 .header .btn{ font-weight: bold; width: 50px;}
 .header .container{border-bottom:solid 1px #ededed; }

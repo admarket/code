@@ -107,7 +107,8 @@
                  
                   <div class="span3" style="padding-top:10px;">
                     <div>
-                        <i class="icon-globe icon-large icon-spin" style="color:#058DC7;"></i> <{$project.alexa|number_format}>
+                        <i class="icon-globe icon-large icon-spin" style="color:#058DC7;"></i>
+                         <span><{$project.alexa|number_format}></span>
                     </div>
                     <div style="color:#666;font-weight:normal;font-size:12px;letter-spacing:3px;">世界网站排名</div>
                   </div>

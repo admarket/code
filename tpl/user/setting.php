@@ -171,9 +171,8 @@
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-lock"></i></span>
                       <span class="input uneditable-input">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
-                      <a class="btn btn-primary">修改密码</a>
+                      <a id="btn-changePwd" class="btn btn-primary">修改密码</a>
                     </div>
-                    <p class="help-block" id="password-msg">请输入6-20位字母和数字组合</p>
                    <label>默认界面：</label>
                     <div class="box tip" style="width:70%;" title="选择登录后默认界面">
                       
@@ -259,7 +258,48 @@
     <!--footer content-->
      <!-- load foot tpl -->
     <{include file="foot.php"}>
+<div class="modal hide fade" id="form-changePwd">
+   
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>修改密码</h3>
+  </div>
+  
+  <div class="modal-body" style="padding:10px 20px;">
+    <form name="alipayment" action="<{spUrl c=cuser a=changePassword}>" method="post" target="_blank">
+        <div>
+                <p>
+                  <label>旧密码:</label>
+                </p>
+                <p>
+                    <input size="30" type="password" placeholder="请输入旧的密码" id="oldPassword" class="input-large" name="oldPassword" />
+                </p>
+                <p>
+                  <label>新密码:</label>
+                </p>
+                <p>
+                    <input size="30" type="password"  placeholder="请输入新的密码" id="password" class="input-large" name="newPassword" />
+                        <span id="password-msg">必填,6-20位数字字母组合</span>
+                </p>
+                <p>
+                  <label>确认新密码:</label>
+                </p>
+                <p>
+                    <input size="30" type="password"  placeholder="请再次输入新的密码" id="repassword" class="input-large" name="repassword" />
+                        <span id="repassword-msg">输入与上面相同的密码</span>
+                </p>
+                <p>
+                  <a class="btn btn-success"  id="btn-savePwd">确认修改</a>
+                </p>
+        </div>
+          </form>
+  </div>
 
+  <div class="modal-footer">
+    
+  </div>
+  
+</div>
 <script src="/js/jquery-1.9.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.form.js"></script>
@@ -272,18 +312,32 @@ $('#share').popover({
   html:true
 });
 var passwordcheck=false;
+var repasswordcheck=false;
 var accountcheck=false;
 var phonecheck=false;
 var ajaxFlag=false;
 $("#head-img").attr("src","/img/head/<{$smarty.session.user.id}>.jpg?id="+Math.random());
 $('.tip').tooltip();
-$('#password-msg').hide();
+$('#password-msg').show();
 $('#account-msg').hide();
+$('#repassword-msg').show();
 $("#password").focus(function(){//恢复初始状态
     passwordcheck=false;
     $('#password-msg').hide();
     $("#password-msg").html("请输入6-20位字母和数字组合");
     $("#password-msg").css("color","#999");
+   }); 
+$("#password").blur(function(){//恢复初始状态
+   checkPassword();
+   }); 
+$("#repassword").focus(function(){//恢复初始状态
+    repasswordcheck=false;
+    $('#repassword-msg').hide();
+    $("#repassword-msg").html("请再次输入新的密码");
+    $("#repassword-msg").css("color","#999");
+   });
+$("#repassword").blur(function(){//恢复初始状态
+   checkRepassword();
    }); 
 $("#account").focus(function(){//恢复初始状态
     accountcheck=false;
@@ -291,10 +345,38 @@ $("#account").focus(function(){//恢复初始状态
     $("#account-msg").html("请输入与下面提现方式相应的账号");
     $("#account-msg").css("color","#999"); 
 });
+$("#btn-changePwd").click(function(){//恢复初始状态
+    $("#oldPassword").val('');
+    $("#password").val('');
+    $("#repassword").val('');
+    $("#password-msg").html("请输入6-20位字母和数字组合");
+    $("#password-msg").css("color","#999");
+    $("#repassword-msg").html("请输入与上面相同的密码");
+    $("#repassword-msg").css("color","#999");
+    $('#form-changePwd').modal();
+});
+$("#btn-savePwd").click(function(){//恢复初始状态
+    checkPassword();
+    checkRepassword();
+    if(passwordcheck&&repasswordcheck){//如果检查通过
+          
+            $.post("<{spUrl c=cuser a=changePassword}>", {  oldPassword:$.trim($("#oldPassword").val()),newPassword: $.trim($("#password").val())},
+             function(data){
+               if(data.indexOf("操作失败")<0){
+                  $.msg('保存成功！','color:green;');
+                  $('#form-changePwd').modal('hide');
+               }
+               else{
+                  $.msg(data);
+               }
+             });
+        }
+});
 function checkPhone(){
         if($.trim($("#phone").val())==""){
                       $("#phone-msg").html("手机号码不能为空！");
                       $("#phone-msg").css("color","red");
+                      phonecheck=false;
                        return false;
                   }
        else{
@@ -302,6 +384,7 @@ function checkPhone(){
         if(!reg.test($.trim($("#phone").val()))){
             $("#phone-msg").html("手机号码格式不正确！");
             $("#phone-msg").css("color","red");
+            phonecheck=false;
             return false;
         }else{
                   phonecheck=true;
@@ -325,9 +408,9 @@ function checkPassword(){
             $("#password-msg").css("color","red");
             return false;
         }else{
-               if($.trim($("#password").val()).length<6||$.trim($("#password").val()).length>50){
+               if($.trim($("#password").val()).length<6||$.trim($("#password").val()).length>20){
                   $('#password-msg').show();
-                  $("#password-msg").html("密码长度必须是6-50位");
+                  $("#password-msg").html("密码长度必须是6-20位");
                   $("#password-msg").css("color","red");
                   return false;
                }else{
@@ -337,6 +420,19 @@ function checkPassword(){
                }
              }
         }
+      }
+      function checkRepassword(){
+        repasswordcheck=false;
+         if($.trim($("#repassword").val())!=$.trim($("#password").val())){
+              $("#repassword-msg").show();
+              $("#repassword-msg").html("密码与之前输入不一致！");
+              $("#repassword-msg").css("color","red");
+               return false;
+          }
+          else{
+            repasswordcheck=true;
+            return true;
+          }
       }
  function checkAccount(){
          if($.trim($("#account").val())==""){
