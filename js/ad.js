@@ -39,7 +39,7 @@ if(ads!=null&&ads!="undefined"){
 var style='width:'+advertise.width+'px;height:'+advertise.height+'px;cursor:pointer;'
             +'background-color:#eee;border:solid 1px #ccc;color:#515151;border-radius:5px;box-shadow:0 0 1px #ccc;'
             +'font-weight:bold;font-family:"微软雅黑";font-size:'+getsmall(advertise.width,advertise.height)/5+'px;over-flow:hidden;'
-            +'vertical-align:text-bottom;text-align:center;position:relative;';
+            +'vertical-align:text-bottom;text-align:center;position:relative;display:inline-block;';
   for(var i=0; i<ads.length; i++){
         var adBox=document.getElementById("admarket_box_"+advertise.id);//广告位容器
         var adcontent="";//广告位内容
@@ -66,12 +66,12 @@ var style='width:'+advertise.width+'px;height:'+advertise.height+'px;cursor:poin
                 adcontent=txtURI;
             }
             else if(advertise.format==1){
-                adcontent='<img  width="'+advertise.width+'" height="'+advertise.height+'"  src="'+imageURI+'"/>';
+                adcontent='<img  width="'+advertise.width+'" height="'+advertise.height+'"  style="width:'+advertise.width+'px;height:'+advertise.height+'px;"  src="'+imageURI+'"/>';
             }
             else if(advertise.format==2){
-                adcontent='<object width="'+advertise.width+'" height="'+advertise.height+'" type="application/x-shockwave-flash" data="'+videoURI+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">';
-                adcontent+='<embed src="'+videoURI+'"  width="'+advertise.width+'" height="'+advertise.height+'"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
-                adcontent+='<div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
+                adcontent='<object style="display:inline-block;" width="'+advertise.width+'" height="'+advertise.height+'" type="application/x-shockwave-flash" data="'+videoURI+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">';
+                adcontent+='<embed  style="display:inline-block;" src="'+videoURI+'"  width="'+advertise.width+'" height="'+advertise.height+'"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
+                adcontent+='<span>浏览器插件缺失导致播放失败，请联系管理人员</span></object>';
             }
         }
         adBox.setAttribute('url',targetURL);

@@ -11,7 +11,7 @@ class cadvertise extends spController
                               'format' => $this->spArgs('format'),
                               'width'=> $this->spArgs('advertiseWidth'),
                               'height'=> $this->spArgs('advertiseHeight'),
-                              'price'=> $this->spArgs('advertisePrice'),
+                              'price'=> $this->spArgs('advertisePrice')*100,
 
                       );
                       $result=$advertise->create($newrow);
@@ -66,7 +66,7 @@ class cadvertise extends spController
                   break;
                 case "advertisePrice":
                   $newrow = array(
-                         'price'=> $this->spArgs('value'),
+                         'price'=> 100*$this->spArgs('value'),
                         );
                   break;
                 default:

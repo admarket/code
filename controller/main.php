@@ -73,10 +73,16 @@ class main extends spController
             $this->products=$product->findAll($productConditions);
         }
         
+
         $this->currentCategory=1;
         $this->types = $type->spLinker()->findAll();
         $this->project = $project->spLinker()->find($conditions);
+        $user=spClass('user');
+        $conditions =" id=".$this->project['owner'];
+        $result=$user->find($conditions);
+        $this->fee=$result['fee'];
         $this->display("detail.php"); // 注册 
+
     }
     function help(){
         $this->display("help.php"); // 注册 

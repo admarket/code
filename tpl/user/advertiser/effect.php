@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 广告效果分析</title>
+    <title>广告市场 - 用户中心 - 购买记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -38,7 +38,7 @@
                   </div> 
                   <div class="span8" style="padding:10px;">
                     <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{$smarty.session.user.balance}> &yen;</h4>
+                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -63,7 +63,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;交易总额：</div>
-                    <p><{$sumFee|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumFee)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -170,7 +170,7 @@
                      
                       <div style="padding:15px 0;text-align:center;" class="span2">
                         <div>
-                            <img class="img-rounded img-polaroid" src="/img/show/<{$trade.project.logo}>" />
+                            <img class="img-rounded img-polaroid" width="50" height="50" style="width:50px;height:50px;" src="/img/ads/<{$trade.project.logo}>" />
                             <p>
                               <{$trade.project.name}>
                             </p>
@@ -184,7 +184,7 @@
                       </div>
                       <div style="padding:15px 0;text-align:center;" class="span2">
                         <div>
-                            <img class="img-rounded img-polaroid" src="/img/ads/<{$trade.product.shown}>" />
+                            <img class="img-rounded img-polaroid" width="50" height="50"  style="width:50px;height:50px;" src="/img/show/<{$trade.product.shown}>" />
                             <p>
                               <{$trade.product.name}>
                             </p>
@@ -222,7 +222,7 @@
                               <p>购买价格：
                              </p>
                               <h4 class="red-color" >
-                               <{$trade.price|number_format}> &yen;/月
+                               <{(0.01*$trade.price)|number_format}> &yen;/天
                               
                               </h4>
                           </td>
@@ -231,7 +231,7 @@
                              </p>
                               <h4 class="green-color" >
                               
-                              <{$trade.number|number_format}>个月
+                              <{$trade.number|number_format}>天
                               </h4>
                            </td>
                           
@@ -241,7 +241,7 @@
                              </p>
                               <h4 class="blue-color" >
                               
-                              <{($trade.price*$trade.number)|number_format}> &yen; 
+                              <{(0.01*($trade.price*$trade.number))|number_format}> &yen; 
                               </h4>
                           </td>
                          
@@ -297,7 +297,7 @@
                              </p>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$trade.process}>%">
                                <{if $trade.process < 90}>
-                              <div class="bar bar-success" style="width: <{$trade.process}>%;">
+                              <div class="bar bar-success" style="width: <{$trade.endTime-$trade.startTime}>%;">
                                 <{elseif ($trade.process >=90 && $trade.process < 100)}>
                                 <div class="bar bar-warning" style="width: <{$trade.process}>%;">
                                  <{else}> 

@@ -3,7 +3,10 @@
   <head>
     <title>广告市场 -  <{$project.name}>的所有广告位</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
+    <meta name="description" 
+    content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
@@ -98,7 +101,7 @@
                     <div class="span8">
                       <h4  style="color:#555;"><{$project.name}></h4>
                       <span>
-                        <a style="color:#ccc;font-weight:normal;" href="<{$project.url}>"><{$project.url}> <i class="icon-eye-open"></i> </a></span>
+                        <a target="_blank" style="color:#ccc;font-weight:normal;" href="<{$project.url}>"><{$project.url}> <i class="icon-eye-open"></i> </a></span>
                     </div> 
                   </div>
                  
@@ -113,7 +116,7 @@
                         <i class="icon-flag icon-large " style="color:#EC4F4F;"></i>
                         <span> <{$project.localRank|number_format}></span>
                     </div>
-                    <div style="color:#666;font-weight:normal;font-size:12px;letter-spacing:3px;">地区网站排名</div>
+                    <div style="color:#666;font-weight:normal;font-size:12px;letter-spacing:3px;">中国网站排名</div>
                   </div>
                 </div>
               
@@ -140,7 +143,7 @@
                         
                         <th>广告位</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;格式</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;长*宽</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;宽*高</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;价格 (&yen;)/天</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
                       </tr>
@@ -178,7 +181,7 @@
                           </td>
                           <td>
                             <div style="padding:10px;">
-                           <{$advertise.price|number_format}> &yen;
+                           <{(0.01*(0.01*$fee+1)*$advertise.price)|number_format}> &yen;
                               </div>
                             </td>
                           
@@ -186,8 +189,8 @@
                           <td>
                            <div style="padding:10px;">
                             <{if $advertise.state == 0}>
-                             <a  tabindex='<{$advertise.id}>' url="<{spUrl c=ctrade a=BuyAd advertise=$advertise.id seller=$advertise.project.owner price=$advertise.price}>"
-                              class="btn btn-small btn-success buy" data-placement="top" data-html="true" data-price="<{$advertise.price}>">
+                             <a  tabindex='<{$advertise.id}>' url="<{spUrl c=ctrade a=BuyAd advertise=$advertise.id seller=$advertise.project.owner price=$advertise.price*0.01}>"
+                              class="btn btn-small btn-success buy" data-placement="top" data-html="true" data-price="<{0.01*(0.01*$fee+1)*$advertise.price}>">
                               <i class=" icon-shopping-cart"></i>&nbsp;购买
                             </a>
                              <{else}>
@@ -235,10 +238,10 @@
       var lastObj=null;
       <{if $smarty.session.user eq '' }>
               txt="请先&nbsp;&nbsp;<a href='<{spUrl c=main a=login}>'' class='btn-small btn title'>登录</a>&nbsp;&nbsp;后购买";
-            <{elseif $products eq ''}>
+            <{elseif $products|@count eq 0}>
             txt="请先&nbsp;&nbsp;<a href='<{spUrl c=sub a=product}>'' class='btn-small btn title'>添加产品</a>&nbsp;&nbsp;后购买";
             <{else}>
-              txt='<form>购买数量：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-legal"></i></span><select name="number" class="numberSelect" style="margin-top:10px;font-size:10px;width:70px;" class="input-mini"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>   </select><span class="add-on"  style="margin-top:10px;font-size:10px;">天</span></div><br/>推广产品：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-calendar"></i></span><select name="productSelect" class="productSelect" style="margin-top:10px;font-size:10px;width:100px;" class="input-small">';
+              txt='<form>购买数量：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-legal"></i></span><select name="number" class="numberSelect" style="margin-top:10px;font-size:10px;width:70px;" class="input-mini"><option value="7">7</option><option value="30">30</option><option value="60">60</option><option value="90">90</option>    </select><span class="add-on"  style="margin-top:10px;font-size:10px;">天</span></div><br/>推广产品：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-calendar"></i></span><select name="productSelect" class="productSelect" style="margin-top:10px;font-size:10px;width:100px;" class="input-small">';
                <{foreach from=$products item=product name=prodCount}> 
               txt+='<option value="<{$product.id}>"><{$product.name}></option>';
                 <{/foreach}>
@@ -267,7 +270,7 @@
                 $('.yes').bind('click', function() {
                    var productVal=$(lastObj).parent().find('.productSelect').val();
                    var numberVal=$(lastObj).parent().find('.numberSelect').val();
-                   $.post(url, { number: numberVal, product: productVal },
+                   $.post(url, { number: numberVal, product: productVal,buyPrice:price},
                       function(data){
                          if(data){
                             if(data=="1"){

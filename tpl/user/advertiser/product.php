@@ -38,7 +38,7 @@
                   </div> 
                   <div class="span8" style="padding:10px;">
                     <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{$smarty.session.user.balance}> &yen;</h4>
+                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -63,7 +63,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;推广费用：</div>
-                    <p><{$sumFee|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumFee)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -102,7 +102,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;展示单价：</div>
-                    <p><{$impressPrice|string_format:'%.2f'}>&nbsp;&yen;/次</p>
+                    <p><{(0.01*$impressPrice)|string_format:'%.2f'}>&nbsp;&yen;/次</p>
                   </div>
                   
                 </div>
@@ -113,7 +113,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;点击单价：</div>
-                    <p><{$clickPrice|number_format}>&nbsp;&yen;/次</p>
+                    <p><{(0.01*$clickPrice)|number_format}>&nbsp;&yen;/次</p>
                   </div>
                   
                 </div>
@@ -221,11 +221,11 @@
                           </td>
                           <td>
                            
-                            <{$product.fee|number_format}>&yen;
+                            <{(0.01*$product.fee)|number_format}>&yen;
                           </td>
                           <td>
                            
-                            <{($product.fee/$product.click)|string_format:'%.2f'}> &yen;/次
+                            <{(0.01*$product.fee/$product.click)|string_format:'%.2f'}> &yen;/次
                           </td>
                           <td>
                            <{if $product.trades|@count eq 0}>
@@ -272,7 +272,7 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-home"></i></span>
-              <input id="productName" name="productName" type="text" placeholder="输入您的网站名称" class="input-xlarge">
+              <input id="productName" name="productName" type="text" placeholder="输入您的产品名称" class="input-xlarge">
             </div>
              <div id="productName-msg" class="msg">名称不能为空，长度小于20</div>
           </div> 
@@ -280,7 +280,7 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-link"></i></span>
-              <input id="productUrl" name="productUrl" type="text" placeholder="http://输入您的网站地址" class="input-xlarge">
+              <input id="productUrl" name="productUrl" type="text" value="http://" placeholder="http://输入您的产品推广地址" class="input-xlarge">
             </div>
             <div id="productUrl-msg" class="msg">即广告链接的推广地址，且带有http://的网址，如http://www.baidu.com</div>
           </div>
@@ -368,10 +368,10 @@
                     </form>
                     <form id="videoform" method="post" action="<{spUrl c=cproduct a=uploadAdVideo}>" enctype="multipart/form-data"> 
                      
-                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
-                      <p>
-                        视频广告预览板：
-                      </p>
+                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:20px;margin:10px 0;">
+                        <p>
+                          视频广告预览板：
+                        </p>
                         <input type="hidden" name="id" value="" class="currentProduct"/>
                         <div>
                           <object style="background-color:#fff;padding:5px;border:solid 1px #ccc;border-radius:5px;" id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
@@ -595,7 +595,6 @@ $("#file-image").change(function(){
         var options = {  
             success : function(data) { 
               if(data.indexOf("操作失败")<0){
-                alert(data);
                 $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"image/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");

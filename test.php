@@ -3,6 +3,7 @@
   <head>
     <title>广告市场  - 测试页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -16,17 +17,29 @@
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
-    <{include "head.php"}>
+    <div class="header" style="padding-bottom:20px;margin-bottom:0;">
+  <div class="container">
+        <div class="row-fluid">
+          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
+        </div>
+       
+  </div>
+</div>
     <div class="section">
       <div class="container"  style="width:90%; padding:20px 0 100px 0;">
         <div class="row-fluid" style="padding:0px;">
         <!--nav bar content-->
-         <div class="span3 bs-docs-sidebar" data-spy="affix" >
-         
+          <div class="span3 bs-docs-sidebar" data-spy="affix" >
+              
+                             
+          </div>
         </div>
         <div class="span9 offset3 box" style="margin-top:0px;border-radius:5px;box-shadow:0px 1px 1px #ddd;padding:20px;line-height:2;">
             <div id="privacy">
-              <p>我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
+              <p> <span class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></span>
+                             <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=54"></script>
+                             <script type="text/javascript" id="admarket_js_54" src="http://www.eadmarket.com/js/ad.js?aid=54"></script>
+                             我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
 <h5>我们承诺做到如下几点：</h5>
 <p>1、严格遵守正确收集和使用用户个人信息条款；履行法律责任，明确使用用户信息目的；数据特殊保护说明中明确规定要保护用户个人信息；根据网站所需依法正确收集和处理用户个人信息；确保个人信息的正确；审核决定保存用户信息的时间限度；确保用户能依法行使个人权利；实施技术和组织安全措施保护用户个人信息。</p>
 <p>2、用户在向网站提前个人信息前，我们努力确保让用户了解以下几点：收集信息的目的；信息的用途；任何接受信息一方的身份和他们使用信息的目的；如何申请复制提交的个人信息。</p>

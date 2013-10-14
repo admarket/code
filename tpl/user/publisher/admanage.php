@@ -41,7 +41,7 @@
                   </div> 
                   <div class="span8" style="padding:10px;">
                     <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{$smarty.session.user.balance}> &yen;</h4>
+                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -116,7 +116,7 @@
                   </div> 
                    <div class="span10">
                     <div class=" title">&nbsp;收益：</div>
-                    <p><{$profits|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$profits)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -169,8 +169,8 @@
                       <tr>
                         <th>序号</th>
                         <th>广告位</th>
-                        <th>格式</th>
-                        <th>长*宽</th>
+                        <th>格&nbsp;式</th>
+                        <th>宽&nbsp;*&nbsp;高</th>
                         <th>价格 &yen;/天</th>
                         <th>状态</th>
                         <th>进度</th>
@@ -211,14 +211,13 @@
                           </td>
                           <td>
                             <a class="number-editable" data-pk="<{$advertise.id}>"
-                               data-name="advertiseWidth"><{$advertise.width}></a> * 
-                            <a  class="number-editable" data-pk="<{$advertise.id}>"
+                               data-name="advertiseWidth"><{$advertise.width}></a> * <a  class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertiseHeight"><{$advertise.height}>
                              </a>
                           </td>
                           <td>
                             <a  class="number-editable" data-pk="<{$advertise.id}>"
-                               data-name="advertisePrice"><{$advertise.price}></a> &yen; </td>
+                               data-name="advertisePrice"><{(0.01*$advertise.price)|number_format}></a> &yen; </td>
                           <td>
                              <{if $advertise.state == 0}>
                             <span class="label label-success"> 
@@ -240,7 +239,7 @@
                             
                           </td>
                           <td>
-                            <{$advertise.profit}> &yen; 
+                            <{(0.01*$advertise.profit)|number_format}> &yen; 
                           </td>
                           <td>
                             <a class="btn btn-mini btn-success copy"

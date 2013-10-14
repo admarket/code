@@ -37,7 +37,7 @@
                   <div class="span8" style="padding:10px;" >
                     <div class="title">&nbsp;账户余额：</div>
                     <h4 style="color:#50B432;" >
-                    <{$smarty.session.user.balance}> &yen;</h4>
+                    <{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -124,7 +124,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;广告收入：</div>
-                    <p><{$profits|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$profits)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>

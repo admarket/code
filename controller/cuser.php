@@ -56,6 +56,7 @@ class cuser extends spController
     //注册
     function register(){
         $user = spClass("user");
+        $message = spClass("message");
 		$email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的ID
 		$phone=$this->spArgs("phone");
 		$password=$this->spArgs("password");
@@ -75,10 +76,19 @@ class cuser extends spController
                         "mobilephone"=>$phone,
                         "payment" => $payment,
                 );
+		
 		$result = $user->findAll($conditions); //查询该邮箱是否已经被注册
 		if(!$result){//如果未被注册，则注册
 			$result = $user->create($newrow); 
-			//dump($result); // 查看结果，
+			$newMessage=array(
+                        "sender" => 0,
+                        "receiver" => $result,
+                        "title"=>"欢迎使用广告市场！",
+                        "content"=>"欢迎您使用广告市场！如果您对本站有任何疑问，或者需要我们的帮助，可以通过QQ联系我们的客服进行沟通。客服QQ：4006776，祝您使用愉快！",
+                        "type" => 1,
+			);
+			$result=$message->create($newMessage); 
+			dump($result); // 查看结果，
 			if($result){
 				$result = $user->findAll($conditions); 
 				//dump($result); // 查看结果，

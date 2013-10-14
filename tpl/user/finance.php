@@ -33,7 +33,7 @@
                   </div> 
                   <div class="span8" style="padding:10px;">
                     <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{$smarty.session.user.balance}> &yen;</h4>
+                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -47,7 +47,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;广告收益：</div>
-                    <p><{$adIncome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$adIncome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -58,7 +58,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;广告支出：</div>
-                    <p><{$adOutcome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$adOutcome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -72,7 +72,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;累计充值：</div>
-                    <p><{$handIncome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$handIncome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -83,7 +83,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;累计提现：</div>
-                    <p><{$handOutcome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$handOutcome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -97,7 +97,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总收入：</div>
-                    <p><{$sumIncome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumIncome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -108,7 +108,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总支出：</div>
-                    <p><{$sumOutcome|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumOutcome)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -185,9 +185,9 @@
                             <{else}>
                             未知类型
                              <{/if}>
-                          <{$record.number}> &yen;
+                          <{(0.01*$record.number)|number_format}> &yen;
                         </td>
-                        <td><{$record.balance}> &yen;</td>
+                        <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                         <td><{$record.time}></td>
                         <td><{$record.remark}></td>
                       </tr>
@@ -215,8 +215,8 @@
                                <{elseif  $record.type == "01"}>
                               <td>充值</td>
                                <{/if}>
-                              <td>+ <{$record.number}> &yen;</td>
-                              <td><{$record.balance}> &yen;</td>
+                              <td>+ <{(0.01*$record.number)|number_format}> &yen;</td>
+                              <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                               <td><{$record.time}></td>
                               <td><{$record.remark}></td>
                           </tr>
@@ -247,8 +247,8 @@
                              <{elseif  $record.type == "11"}>
                               <td>提现</td>
                              <{/if}>
-                            <td>- <{$record.number}> &yen;</td>
-                            <td><{$record.balance}> &yen;</td>
+                            <td>- <{(0.01*$record.number)|number_format}> &yen;</td>
+                            <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                             <td><{$record.time}></td>
                             <td><{$record.remark}></td>
                           </tr>
@@ -495,7 +495,9 @@ function loadData(data){
    if(data){//从客户端异步获取数据，然后处理
     var records=data;
     for(var i in records){
+      records[i].number=0.01*parseFloat(records[i].number);
         if(records[i].type.substring(0,1)=="0"){
+
           income+=parseFloat(records[i].number);
           incomes.push(parseFloat(records[i].number));
           // if(i>0){

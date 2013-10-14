@@ -258,8 +258,8 @@ class sub extends spController
     function effect(){
         $trade = spClass("trade");
         $project = spClass("project");
-        $conditions = array("buyer" => $_SESSION['user']['id']);
-        $trades = $trade->spLinker()->findAll($conditions);
+        $conditions = array("buyer" => $_SESSION['user']['id'],"state"=>0);
+        $trades = $trade->spLinker()->findAll($conditions,'id DESC');
         $this->tradeCount=count($trades);//交易总数
         $this->sumFee=0;//总推广费用
         $this->videoNum=0;//视频广告

@@ -38,7 +38,7 @@
                   </div> 
                   <div class="span8" style="padding:10px;">
                     <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{$smarty.session.user.balance}> &yen;</h4>
+                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
                   </div>
                 
               </div>
@@ -77,7 +77,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;最高收益：</div>
-                    <p><{$maxProfit|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$maxProfit)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -88,7 +88,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;最低收益：</div>
-                    <p><{$minProfit|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$minProfit)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -102,7 +102,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;平均收益：</div>
-                    <p><{$avgProfit|number_format}>&nbsp;&yen;/站</p>
+                    <p><{(0.01*$avgProfit)|number_format}>&nbsp;&yen;/站</p>
                   </div>
                   
                 </div>
@@ -113,7 +113,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总收益：</div>
-                    <p><{$sumProfit|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumProfit)|number_format}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
