@@ -14,16 +14,24 @@ class main extends spController
     function result(){
         $type = spClass('type');
         $project=spClass('project');
-        $conditions=" 1=1";
-        if($this->spArgs("category")!=1){
-             $conditions =$conditions." and category=".$this->spArgs("category");
+        $keyword=$this->spArgs("keyword");
+        $category=$this->spArgs("category");
+        if($keyword==''){
+            $keyword="";
         }
-        $this->keyword=trim($this->spArgs("keyword"));
+        if($category==''){
+            $category="1";
+        }
+        $conditions=" 1=1";
+        if($category!=1){
+             $conditions =$conditions." and category=".$category;
+        }
+        $this->keyword=trim($keyword);
         if(!isset($keyword)){
             $conditions = $conditions.' and (name like '.$project->escape('%'.$this->keyword.'%');
             $conditions= $conditions." or description like ".$project->escape('%'.$this->keyword.'%').')';
         }
-        $this->currentCategory=$this->spArgs("category");
+        $this->currentCategory=$category;
         $this->types = $type->spLinker()->findAll();
         $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll($conditions,"id asc");
         $this->pager = $project->spPager()->getPager();
