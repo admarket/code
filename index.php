@@ -17,6 +17,7 @@ $spConfig = array(
             array("spUrlRewrite", "getReWrite"),  // 对spUrl进行挂靠，让spUrl可以进行Url_ReWrite地址的生成
         ),
     ),
+    'dispatcher_error' => "spController::jump('/404.php');",
 	 'view' => array(
                 'enabled' => TRUE, // 开启Smarty
                 'config' =>array(

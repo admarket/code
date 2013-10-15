@@ -108,9 +108,8 @@
             <!--Body content-->
             <div class="page-header" style="position:relative;">
               <h6><span class="badge badge-success">Result</span> 查询结果</h6>
-              <div class="btn-group" style="position:absolute;right:0;top:0px;">
-                <button class="btn btn-mini"><i class="icon-sort"></i>&nbsp; 排名</button>
-                <button class="btn btn-mini"><i class="icon-sort"></i>&nbsp; 价格</button>
+              <div class="btn-group" style="position:absolute;right:20px;top:0px;">
+
                 <button class="btn btn-mini"><i class="icon-sort"></i>&nbsp; 时间</button>
               </div>
             </div>

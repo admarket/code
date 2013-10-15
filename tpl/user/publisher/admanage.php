@@ -216,8 +216,9 @@
                              </a>
                           </td>
                           <td>
-                            <a  class="number-editable" data-pk="<{$advertise.id}>"
-                               data-name="advertisePrice"><{(0.01*$advertise.price)|number_format}></a> &yen; </td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
+                               data-name="advertisePrice"><{(0.01*$advertise.price)|number_format}></a>&nbsp;&yen;  
+                             <div>+<{$smarty.session.user.fee}>%&nbsp;服务费=&nbsp;<{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}>&yen; </div></td>
                           <td>
                              <{if $advertise.state == 0}>
                             <span class="label label-success"> 
@@ -286,11 +287,12 @@
     <{include file="foot.php"}>
     
 <div class="modal hide fade" id="form-addAdvertise">
-  <form action="<{spUrl c=cadvertise a=AddAdvertise}>" id="form-advertise" method="post">
+  
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h5>添加广告位</h5>
     </div>
+    <form action="<{spUrl c=cadvertise a=AddAdvertise}>" id="form-advertise" method="post">
     <div class="modal-body" style="padding:10px 20px;">
         <fieldset>
           <div class="controls">
@@ -360,12 +362,12 @@
           <div id="advertiseContent-msg" class="msg">不能为空，少于100字</div>
         </fieldset>
     </div>
-    
+      </form>
     <div class="modal-footer" style="padding:20px;">
       <a  class="btn btn-success btn-small submit" id="btn-saveAddAdvertise">
         <i class="icon-save"></i> 保存</a>
     </div>
-  </form>
+
 </div>
 <div class="modal hide fade" id="form-confirm" style="top:20%;">
   <div class="modal-header">
