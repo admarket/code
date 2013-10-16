@@ -269,6 +269,26 @@
             </div>
             <div id="projectUrl-msg" class="msg">网址不能为空，且带有http://的网址，如http://www.eadmarket.com</div>
           </div>
+          <div class="controls row-fluid">
+            <div class="span3">
+               <div class="input-prepend">
+                 <label class="control-label">世界排名：</label>
+                 <span class="add-on"><i class="icon-exchange tip" title="世界排名"></i></span>
+                 <input type='hidden' id="alexa-txt" name='alexa' value='0'/>
+                 <span class="input-mini uneditable-input"   id="alexa" name="advertiseWidth" type="text" placeholder="0">0</span>
+              </div>
+              <div id="advertiseWidth-msg" class="msg">不能为空，正数数字</div>
+            </div>
+            <div class="span3  offset1">
+              <div class="input-prepend">
+                 <label class="control-label">地方排名：</label>
+                 <span class="add-on"><i class="icon-sort tip" title="地方排名"></i></span>
+                 <input type='hidden' id="local-txt" name='local' value='0'/>
+                 <span class="input-mini uneditable-input"  id="local" name="advertiseHeight"  type="text" placeholder="0">0</span>
+              </div>
+              <div id="advertiseHeight-msg" class="msg">不能为空，正数数字</div>
+            </div>
+          </div> 
           <label class="control-label" for="input01">分类：</label>
           <div class="controls">
             <div class="input-prepend">
@@ -494,6 +514,17 @@ $(".upload-logo").change(function(){
 $('.tip').tooltip();
 $("#btn-addProject").click(function(){
   $('#form-addProject').modal();
+});
+$("#projectUrl").blur(function(){
+  $.post("<{spUrl c=cproject a=getAlexa}>",{'projectUrl':$.trim($("#projectUrl").val())}, 
+      function(data){
+
+          $("#alexa-txt").val(data.split(',')[0]);
+          $("#alexa").html(data.split(',')[0]);
+          $("#local-txt").val(data.split(',')[1]);
+          $("#local").html(data.split(',')[1]);
+
+      });
 });
 $(".remove").click(function(){
   var obj=this;//这时this指的就是$("#zz")对象 

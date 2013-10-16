@@ -98,7 +98,6 @@ class ctrade extends spController
 					"user_id" => $_SESSION['user']['id'],
 					"type"=>"10",
 					"number"=>($buyPrice*$number),
-					"balance"=>$newBalance,
 					"remark"=>"广告支出。交易编号：#".$result
 					);
 				$result=$records = $finance->create($newFinance);

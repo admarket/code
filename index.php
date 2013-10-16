@@ -2,6 +2,7 @@
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
+    'mode' => 'release', // 部署模式
 	'db' => array( // 数据库设置
                 'host' => 'admarket.mysql.rds.aliyuncs.com',  // 数据库地址，一般都可以是localhost
                 'port' => '3306', //数据库服务器端口号
@@ -17,7 +18,7 @@ $spConfig = array(
             array("spUrlRewrite", "getReWrite"),  // 对spUrl进行挂靠，让spUrl可以进行Url_ReWrite地址的生成
         ),
     ),
-    'dispatcher_error' => "spController::jump('/404.php');",
+    'dispatcher_error' => "spController::jump('/404.html');",
 	 'view' => array(
                 'enabled' => TRUE, // 开启Smarty
                 'config' =>array(

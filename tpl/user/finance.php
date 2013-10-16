@@ -149,7 +149,6 @@
                       <tr>
                         <th>类型</th>
                         <th>金额</th>
-                        <th>余额</th>
                         <th>时间</th>
                         <th>说明</th>
                       </tr>
@@ -187,7 +186,6 @@
                              <{/if}>
                           <{(0.01*$record.number)|number_format}> &yen;
                         </td>
-                        <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                         <td><{$record.time}></td>
                         <td><{$record.remark}></td>
                       </tr>
@@ -201,7 +199,6 @@
                       <tr>
                         <th>类型</th>
                         <th>金额</th>
-                        <th>余额</th>
                         <th>时间</th>
                         <th>说明</th>
                       </tr>
@@ -216,7 +213,6 @@
                               <td>充值</td>
                                <{/if}>
                               <td>+ <{(0.01*$record.number)|number_format}> &yen;</td>
-                              <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                               <td><{$record.time}></td>
                               <td><{$record.remark}></td>
                           </tr>
@@ -232,7 +228,6 @@
                       <tr>
                         <th>类型</th>
                         <th>金额</th>
-                        <th>余额</th>
                         <th>时间</th>
                         <th>说明</th>
                       </tr>
@@ -248,7 +243,6 @@
                               <td>提现</td>
                              <{/if}>
                             <td>- <{(0.01*$record.number)|number_format}> &yen;</td>
-                            <td><{(0.01*$record.balance)|number_format}> &yen;</td>
                             <td><{$record.time}></td>
                             <td><{$record.remark}></td>
                           </tr>

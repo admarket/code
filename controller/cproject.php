@@ -8,25 +8,25 @@ class cproject extends spController
         $tempName=explode('.', $filename);
         $ext=end($tempName);
 
-        $prefixUrl='http://data.alexa.com/data/ezdy01DOo100QI?cli=10&dat=snba&ver=7.0&cdt=alx_vw=20&wid=16865&act=00000000000&ss=1024x768&bw=775&t=0&ttl=1125&vis=1&rq=2&url='.$this->spArgs('projectUrl');
-        $data = file_get_contents($prefixUrl);
-        $result=simplexml_load_string($data);
-        if(!is_null($result->SD[1])){
-             $alexa=(array)$result->SD[1]->REACH['RANK'];
-             $local=(array)$result->SD[1]->COUNTRY['RANK'];
-        }
-        else{
-            $alexa = array(0 => '0');
-            $local = array(0 => '0');
-        }
+        // $prefixUrl='http://data.alexa.com/data/ezdy01DOo100QI?cli=10&dat=snba&ver=7.0&cdt=alx_vw=20&wid=16865&act=00000000000&ss=1024x768&bw=775&t=0&ttl=1125&vis=1&rq=2&url='.$this->spArgs('projectUrl');
+        // $data = file_get_contents($prefixUrl);
+        // $result=simplexml_load_string($data);
+        // if(!is_null($result->SD[1])){
+        //      $alexa=(array)$result->SD[1]->REACH['RANK'];
+        //      $local=(array)$result->SD[1]->COUNTRY['RANK'];
+        // }
+        // else{
+        //     $alexa = array(0 => '0');
+        //     $local = array(0 => '0');
+        // }
 		$newrow = array(
                         'name' => $this->spArgs('projectName'),
                         'url' => $this->spArgs('projectUrl'),
                         'description' => $this->spArgs('projectDescription'),
                         'category' => $this->spArgs('projectCategory'),
                         'owner'=> $_SESSION['user']['id'],
-                        'alexa'=>$alexa[0],
-                        'localRank'=>$local[0],
+                        'alexa'=>$this->spArgs('alexa'),
+                        'localRank'=>$this->spArgs('local'),
                         'logo'=>$ext,
                 );
         $project = spClass("project");
@@ -53,6 +53,20 @@ class cproject extends spController
         }   
         	
 	}
+    function getAlexa(){
+        $prefixUrl='http://data.alexa.com/data/ezdy01DOo100QI?cli=10&dat=snba&ver=7.0&cdt=alx_vw=20&wid=16865&act=00000000000&ss=1024x768&bw=775&t=0&ttl=1125&vis=1&rq=2&url='.$this->spArgs('projectUrl');
+        $data = file_get_contents($prefixUrl);
+        $result=simplexml_load_string($data);
+        if(!is_null($result->SD[1])){
+             $alexa=(array)$result->SD[1]->REACH['RANK'];
+             $local=(array)$result->SD[1]->COUNTRY['RANK'];
+        }
+        else{
+            $alexa = array(0 => '0');
+            $local = array(0 => '0');
+        }
+        echo $alexa[0].','.$local[0];
+    }
     function RemoveProject(){//添加广告项目
             $project = spClass("project");
             $conditions = array(

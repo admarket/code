@@ -316,7 +316,7 @@ var repasswordcheck=false;
 var accountcheck=false;
 var phonecheck=false;
 var ajaxFlag=false;
-$("#head-img").attr("src","/img/head/<{$smarty.session.user.id}>.jpg?id="+Math.random());
+$("#head-img").attr("src","/img/head/<{$smarty.session.user.headimg}>");
 $('.tip').tooltip();
 $('#password-msg').show();
 $('#account-msg').hide();
