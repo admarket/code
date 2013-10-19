@@ -185,6 +185,10 @@ class cuser extends spController
 		        echo "1"; // 首页
 	        }
 	    }else{
+	    		$user->update($conditions, $newrow); // 更新记录
+		        $_SESSION['user']['mobilephone'] = $phone;
+		        $_SESSION['user']['account'] = $account;
+		        $_SESSION['user']['type'] = $type;
 	        	echo "1"; // 首页
 	    }
         

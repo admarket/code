@@ -173,7 +173,7 @@
                         <th>宽&nbsp;*&nbsp;高</th>
                         <th>价格 &yen;/天</th>
                         <th>状态</th>
-                        <th>进度</th>
+                        <th>交易进度</th>
                         <th>累计收入</th>
                         <th>出售代码</th>
                         <th>操作</th>
@@ -231,15 +231,18 @@
                             <{/if}>
                           </td>
                           <td>
-                            <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$advertise.process}>%">
+                            <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;"
+                             title="<{$advertise.startTime|date_format:'%Y-%m-%d'}>&nbsp;到
+                                &nbsp;<{$advertise.endTime|date_format:'%Y-%m-%d'}>"
+                                >
                               <div class="bar bar-success" style="width: <{$advertise.process}>%;">
-                               <{$advertise.endTime-$smarty.now}>%
+                               <{$advertise.process}>%
                              </div>
-                               
                             </div>
                             
                           </td>
                           <td>
+                             
                             <{(0.01*$advertise.profit)|number_format}> &yen; 
                           </td>
                           <td>

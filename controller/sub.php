@@ -50,7 +50,6 @@ class sub extends spController
     function admanage(){
         $project = spClass("project");
         $conditions = array("owner" => $_SESSION['user']['id']);
-        $this->projects = $project->spLinker()->findAll($conditions);
         $category = spClass("category");
         $this->categories=$category->findAll();
 
@@ -61,9 +60,22 @@ class sub extends spController
         $unsoldAd=0;//未出售广告
         $profits=0;//累计总收益
         $beVerified=0;
-        foreach ($records as $project) { 
+        foreach ($records as &$project) { 
             $adCount=$adCount+count($project['detail']);
-            foreach ($project['detail'] as  $ad) {
+            foreach ($project['detail'] as  &$ad) {
+                if($ad[state]=="1"){
+                    $trade=spClass("trade");
+                    $condition = array("advertise" => $ad['id'],"state"=>0);
+                    $result=$trade->find($condition);
+                    $process=floor((time()-strtotime($result['startTime']))/(strtotime($result['endTime'])-strtotime($result['startTime']))*100);//计算广告出售进度
+                    $ad['startTime']=$result['startTime'];
+                    $ad['endTime']=$result['endTime'];
+                }else{
+                    $process=0;
+                }
+                
+                $ad['process']=$process;
+
                 if($ad['state']==1){
                     $soldAd=$soldAd+1;
                 }
@@ -76,6 +88,7 @@ class sub extends spController
                 $profits=$profits+$ad['profit'];
             }
         }
+        $this->projects=$records;
         $this->adCount=$adCount;
         $this->soldAd=$soldAd;
         $this->unsoldAd=$unsoldAd;
