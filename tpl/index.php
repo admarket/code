@@ -105,7 +105,7 @@
           <div class="span9 main-body">
             <!--Body content-->
             <div class="page-header"  style="position:relative;">
-              <h6><span class="badge badge-important">Hot</span> 热门广告位</h6>
+              <h6><span class="badge badge-important">Hot</span> 热门网站</h6>
                <div class="btn-group" style="position:absolute;right:20px;top:0px;">
                 <a class="btn btn-mini" href="<{spUrl c=main a=result type=$type.id category=1}>">
                   <i class="icon-circle-arrow-right"></i>&nbsp; 更多

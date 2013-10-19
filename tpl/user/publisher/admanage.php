@@ -217,8 +217,8 @@
                           </td>
                           <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
-                               data-name="advertisePrice"><{(0.01*$advertise.price)|number_format}></a>&nbsp;&yen;  
-                             <div>+<{$smarty.session.user.fee}>%&nbsp;服务费=&nbsp;<{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}>&yen; </div></td>
+                               data-name="advertisePrice"><span id="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
+                             <div>+<{$smarty.session.user.fee}>%&nbsp;服务费=&nbsp;<span id="realPrice"><{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
                           <td>
                              <{if $advertise.state == 0}>
                             <span class="label label-success"> 
@@ -435,6 +435,9 @@ $('.select-editable').editable({
         success: function(response, newValue) {
           if(!response.success) 
             $.msg("编辑成功！",'color:green;');
+          var fee=parseInt(<{$smarty.session.user.fee}>);
+          newValue=parseInt(newValue);
+          $('#realPrice').html((0.01*fee+1)*newValue);
         },
         validate: function(value) {
         if(isNaN($.trim(value))) {

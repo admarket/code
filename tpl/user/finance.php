@@ -516,20 +516,20 @@ function loadData(data){
         sums.push(sum);
       }
       var data1={
-          name: '账户余额：'+sum,
+          name: '账户余额',
           data: sums,
           type: 'spline',
           shadow:true
       };
       var data2={
-                      name: '收入：'+income,
+                      name: '收入',
                       data: incomes,
                       type: 'spline',
                       visible:false,
                       shadow:true
                   };
       var data3={
-                      name: '支出：'+outcome,
+                      name: '支出',
                       data: outcomes,
                       type: 'spline',
                       visible:false,

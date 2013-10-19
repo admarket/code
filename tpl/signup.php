@@ -22,12 +22,11 @@
      <!-- load head tpl -->
     <{include file="head.php"}>
     <div class="section" align="center">
-      <div class="container box" align="left" style="padding:20px;">
-         <form class="form-horizontal">
-          <fieldset>
-            <div id="legend" class="">
-                <h3>用户注册</h3>
-                <div class="row-fluid">
+      <div class="container box std-container" align="left" style="padding:20px 40px;">
+         <form>
+            <div id="legend" >
+                <h3 class="title">用户注册</h3>
+                <div class="row-fluid" style="padding:5px;font-size:12px;">
                   <div class="span4">
                     <span class="badge badge-success">
                     1.
@@ -134,25 +133,21 @@
 
       九尾狐会始终致力于在充分保护您隐私的前提下，为您提供更优质的体验和服务。
                          </textarea>
+
                   </div>
+                  <label class="checkbox inline" style="width:100px;margin-left:10px;">
+                  <input type="checkbox" checked="checked" disabled="disabled" id="inlineCheckbox2" value="option2"> 同意注册条款
+                </label>
                 </div>
               </div>
 
               <div class="control-group">
                     <label class="control-label"></label>
 
-                    <!-- Button -->
-                    <div class="controls">
-                      <a class="btn btn-success" id="btn-register" data-toggle="button"  data-loading-text="正在注册...">
-                        注册
-                      </a>
-                      <label class="checkbox inline" style="width:100px;margin-left:20px;">
-                        <input type="checkbox" checked="checked" disabled="disabled" id="inlineCheckbox2" value="option2"> 同意注册条款
-                      </label>
-                    </div>
+                    
               </div>
             </div>
-            <div class="span4 offset1 box" style="padding:20px;">
+            <div class="span5 offset1 box" style="padding:20px;border-radius:5px;">
                 <legend><h5>提现账户</h5></legend>
                 <label>真实姓名：</label>
                 <div class="input-prepend">
@@ -175,7 +170,7 @@
                 <div>
                   <p></p>
                   <label>提现方式：</label>
-                  <div class="span5">
+                  <div class="span5 tip" title="目前仅支持支付宝">
                     <label class="radio" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
                       <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
@@ -197,9 +192,13 @@
 
               
             </div>
-          </fieldset>
         </form>
-        
+        <!-- Button -->
+              <div class="controls" align="center">
+                <a class="btn btn-success" style="width:100px;" id="btn-register" data-toggle="button"  data-loading-text="正在注册...">
+                  立刻注册
+                </a>
+              </div>
       </div>
     </div>
     <!--footer content-->
@@ -222,6 +221,7 @@
    <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    $('.tip').tooltip();
       var emailcheck=false;
       var passwordcheck=false;
       var repasswordcheck=false;

@@ -273,7 +273,7 @@
             <div class="span3">
                <div class="input-prepend">
                  <label class="control-label">世界排名：</label>
-                 <span class="add-on"><i class="icon-exchange tip" title="世界排名"></i></span>
+                 <span class="add-on"><i class="icon-globe tip" title="世界排名"></i></span>
                  <input type='hidden' id="alexa-txt" name='alexa' value='0'/>
                  <span class="input-mini uneditable-input"   id="alexa" name="advertiseWidth" type="text" placeholder="0">0</span>
               </div>
@@ -282,7 +282,7 @@
             <div class="span3  offset1">
               <div class="input-prepend">
                  <label class="control-label">地方排名：</label>
-                 <span class="add-on"><i class="icon-sort tip" title="地方排名"></i></span>
+                 <span class="add-on"><i class="icon-flag tip" title="地方排名"></i></span>
                  <input type='hidden' id="local-txt" name='local' value='0'/>
                  <span class="input-mini uneditable-input"  id="local" name="advertiseHeight"  type="text" placeholder="0">0</span>
               </div>
