@@ -190,8 +190,11 @@
                           <td>
                            <div style="padding:10px;">
                             <{if $advertise.state == 0}>
-                             <a  tabindex='<{$advertise.id}>' url="<{spUrl c=ctrade a=BuyAd advertise=$advertise.id seller=$advertise.project.owner price=$advertise.price*0.01}>"
-                              class="btn btn-small btn-success buy" data-placement="top" data-html="true" data-price="<{0.01*(0.01*$fee+1)*$advertise.price}>">
+                              <{if $smarty.session.user eq '' }>
+                              <a class="btn btn-small btn-success disabled tip"   title="请先登录">
+                               <{else}>
+                               <a class="btn btn-small btn-success" href="<{spUrl c=main a=buy id=$advertise.id}>">
+                                <{/if}>
                               <i class=" icon-shopping-cart"></i>&nbsp;购买
                             </a>
                              <{else}>
@@ -225,67 +228,8 @@
     <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
       $('.tip').tooltip();
-      var txt="";
-      var lastObj=null;
-      <{if $smarty.session.user eq '' }>
-              txt="请先&nbsp;&nbsp;<a href='<{spUrl c=main a=login}>'' class='btn-small btn title'>登录</a>&nbsp;&nbsp;后购买";
-            <{elseif $products|@count eq 0}>
-            txt="请先&nbsp;&nbsp;<a href='<{spUrl c=sub a=product}>'' class='btn-small btn title'>添加产品</a>&nbsp;&nbsp;后购买";
-            <{else}>
-              txt='<form>购买数量：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-legal"></i></span><select name="number" class="numberSelect" style="margin-top:10px;font-size:10px;width:70px;" class="input-mini"><option value="7">7</option><option value="30">30</option><option value="60">60</option><option value="90">90</option>    </select><span class="add-on"  style="margin-top:10px;font-size:10px;">天</span></div><br/>推广产品：<div class="input-prepend input-append"><span class="add-on"  style="margin-top:10px;font-size:10px;"><i class="icon-calendar"></i></span><select name="productSelect" class="productSelect" style="margin-top:10px;font-size:10px;width:100px;" class="input-small">';
-               <{foreach from=$products item=product name=prodCount}> 
-              txt+='<option value="<{$product.id}>"><{$product.name}></option>';
-                <{/foreach}>
-              txt+='</select></div>&nbsp;&nbsp;<div style="font-size:12px;">总价：<span class="title blue-color"><span class="number">1</span>&nbsp;*&nbsp;<span class="price">0</span>&nbsp;&yen;</span>&nbsp;=&nbsp;<span class="title red-color">&nbsp;<span class="total">0</span>&nbsp;&yen;</span></div><div style="padding:10px 0;position:relative;"><a class="btn btn-mini btn-info yes">确定</a><a style="position:absolute;right:10px;" class="btn btn-mini btn-danger cancel">取消</a></div></form>';
-            <{/if}>
-       $('.buy').popover({
-              content:txt,
-              trigger:'click',
-              cantainer:($(this))
-            });
-       $('.buy').click(function(){
-              if(lastObj!=null&&lastObj!=this){
-                  $(lastObj).popover('hide');
-              }
-              lastObj=this;
-              var url=$(lastObj).attr('url');
-              var price=$(lastObj).attr('data-price');
-              $(lastObj).parent().find('.price').html(price);
-              $(lastObj).parent().find('.total').html(price);
 
-                $('.cancel').bind('click', function() {
-                   if(lastObj!=null){
-                      $(lastObj).popover('hide');
-                    }
-                });
-                $('.yes').bind('click', function() {
-                   var productVal=$(lastObj).parent().find('.productSelect').val();
-                   var numberVal=$(lastObj).parent().find('.numberSelect').val();
-                   $.post(url, { number: numberVal, product: productVal,buyPrice:price},
-                      function(data){
-                         if(data){
-                            if(data=="1"){
-                              $.msg('购买成功！','color:green;');
-                              location.reload();
-                            }else{
-                              $.msg(data);
-                            }
-                         }else{
-                            $.msg('发送请求失败！');
-                         }
-                     });
-                });
-                 $('.numberSelect').bind('change', function() {
-                   $(lastObj).parent().parent().find('.number').html($(this).val());
-                   $(lastObj).parent().parent().find('.total').html(parseInt($(this).val())*parseInt(price));
-                });
-            });
-         $('.cancel').click(function(){
-         
-              if(lastObj!=null){
-                  $(lastObj).popover('hide');
-              }
-            });
+
     </script>
   </body>
 </html>

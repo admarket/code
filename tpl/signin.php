@@ -113,7 +113,8 @@
                 document.cookie="email="+$("#txt-email").val();
               }
               $.msg("验证成功！正在跳转中...",'color:green;');
-                window.location.href="<{spUrl c=sub a=dashboard}>";
+              history.go(-1);
+                //window.location.href="<{spUrl c=sub a=dashboard}>";
              }else{
               $.msg("用户名或密码错误！");
               //$("#alert-msg").show();

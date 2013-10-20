@@ -92,6 +92,17 @@ class main extends spController
         $this->display("detail.php"); // 注册 
 
     }
+    function buy(){
+        $advertise=spClass('advertise');
+        $id=$this->spArgs("id");
+        if(!isset($id)){
+             $id=0;
+        }
+        $conditions=" id=".$id;
+        $ad=$advertise->find($conditions);
+        $this->ad=$ad;
+        $this->display("buy.php"); // 注册 
+    }
     function help(){
         $this->display("help.php"); // 注册 
     }

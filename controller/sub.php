@@ -18,7 +18,8 @@ class sub extends spController
     function logout(){
     	unset($_SESSION["user"]);
     	session_destroy();
-    	$this->jump(spUrl('main', 'index')); // 跳转到首页 // 退出   
+        echo "<script type='text/javascript'>history.go(-1)</script>";
+    	//$this->jump(spUrl('main', 'index')); // 跳转到首页 // 退出   
     }
     function setting(){
         $user = spClass("user");
@@ -283,7 +284,12 @@ class sub extends spController
             $condition = array("id" => $trade['advertise']['project']);
             $tempProject=$project->find($condition);
             $trade['project']=$tempProject;
-
+            if($trade['state']==0){
+                $process=floor((time()-strtotime($trade['startTime']))/(strtotime($trade['endTime'])-strtotime($trade['startTime']))*100);//计算广告出售进度
+            }else{
+                $process=0;
+            }
+            $trade['process']=$process;
             $this->sumFee+=$trade['price']*$trade['number'];
             if($trade['process']>=90){
                 $this->expire+=1;

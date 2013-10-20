@@ -26,7 +26,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           <div class="content">
               
               <p class="p">
-               为了保证您能够顺利，广告市场为您提供详细的用户使用手册，方便您的使用。用户使用手册共分为：买家、卖家以及常见使用问题三个部分。如果您在阅读用户使用帮助后，仍然存在疑问，您可以<a href="">联系我们的客服</a><strong><i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：</strong> 点击LOGO即可返回网站首页，不用担心迷路了。
+               为了保证您能够顺利，广告市场为您提供详细的用户使用手册，方便您的使用。用户使用手册共分为：买家、卖家以及常见使用问题三个部分。如果您在阅读用户使用帮助后，仍然存在疑问，请联系我们的客服，我们会尽最大的努力竭诚为您服务。
+               <br/>
               </p>
               <div class="tabbable"> <!-- Only required for left/right tabs -->
                 <ul class="nav nav-tabs" style="padding-left:30%;">
@@ -47,6 +48,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                   
                   <div class="tab-pane active " id="buyer">
                     <p>Howdy, I'm in Section 2.</p>
+                    
                   </div>
                   <div class="tab-pane " id="seller">
                     <p>I'm in Section 1.</p>

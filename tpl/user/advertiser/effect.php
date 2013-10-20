@@ -297,7 +297,7 @@
                              </p>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$trade.process}>%">
                                <{if $trade.process < 90}>
-                              <div class="bar bar-success" style="width: <{$trade.endTime-$trade.startTime}>%;">
+                              <div class="bar bar-success" style="width: <{$trade.process}>%;">
                                 <{elseif ($trade.process >=90 && $trade.process < 100)}>
                                 <div class="bar bar-warning" style="width: <{$trade.process}>%;">
                                  <{else}> 

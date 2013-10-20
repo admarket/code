@@ -484,7 +484,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            $.msg("目前仅支持上传swf格式的flash视频！");
+            $.msg("仅支持swf格式的Flash视频！");
             return false;
         }
         
@@ -667,7 +667,6 @@ $("#btn-txt").click(function(){
             $('#txtform').ajaxSubmit(options);
         }
         else{
-            alert("广告文字的字数只能是2-20之间！");
             $.msg("广告文字的字数只能是2-20之间！");
         }
   });

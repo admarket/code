@@ -159,6 +159,13 @@ class cuser extends spController
     	return $elements[0];
     }
 
+    function checkSession(){
+    	if(isset($_SESSION['user'])){
+    		echo 1;
+    	}else{
+    		echo 0;
+    	}
+    }
     //保存设置
     function save(){
     	$user = spClass("user");
