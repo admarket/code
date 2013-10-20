@@ -74,12 +74,8 @@ class main extends spController
     function detail(){
         $type = spClass('type');
         $project=spClass('project');
-        $product=spClass('product');
         $conditions =" id=".$this->spArgs("project");
-        if(isset($_SESSION['user'])){
-            $productConditions =" owner=". $_SESSION['user']['id'];
-            $this->products=$product->findAll($productConditions);
-        }
+        
         
 
         $this->currentCategory=1;
@@ -99,8 +95,14 @@ class main extends spController
              $id=0;
         }
         $conditions=" id=".$id;
-        $ad=$advertise->find($conditions);
+        $ad=$advertise->spLinker()->find($conditions);
         $this->ad=$ad;
+        
+        $product=spClass('product');
+        if(isset($_SESSION['user'])){
+            $productConditions =" owner=". $_SESSION['user']['id'];
+            $this->products=$product->findAll($productConditions);
+        }
         $this->display("buy.php"); // 注册 
     }
     function help(){

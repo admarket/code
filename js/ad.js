@@ -48,7 +48,7 @@ var style='width:'+advertise.width+'px;height:'+advertise.height+'px;cursor:poin
         var txtURI="";//文字资源地址
         var targetURL="";//广告跳转地址
         if(advertise.state=="0"){//如果广告位没有被出售，则显示默认出售中
-            txtURI="广告位招租";
+            txtURI="广告位出售中";
             adcontent='<span style="position:absolute;top:30%;bottom:30%;left:5%;right:5%;over-flow:hidden;">'+txtURI+'</span>';
             //imageURI=baseURL+"img/adcontent/image/selling.jpg";
             //videoURI=baseURL+"img/adcontent/video/selling.swf";

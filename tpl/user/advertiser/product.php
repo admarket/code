@@ -449,7 +449,7 @@ $("#file-logo-add").change(function(){
         if(reg.test(tmpFileValue)){
             return true;
         } else {
-            $.msg("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+            $.msg("仅支持jpg、png、bmp或gif格式！");
             return false;
         }
         
@@ -667,7 +667,7 @@ $("#btn-txt").click(function(){
             $('#txtform').ajaxSubmit(options);
         }
         else{
-            $.msg("广告文字的字数只能是2-20之间！");
+            $.msg("广告字数是2-20之间！");
         }
   });
 //管理广告内容
@@ -685,7 +685,7 @@ $(".btn-adcontent").click(function(){
         $("#txt-content").html(currentProduct.txt);
     }
     else{
-      $.msg("网络原因导致未能加载当前产品信息！");
+      $.msg("未能加载当前产品信息！");
     }
   });
   $('#form-adcontent').modal();
