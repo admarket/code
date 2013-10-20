@@ -593,6 +593,7 @@ function loadData(jsonData){
    if(jsonData){//从客户端异步获取数据，然后处理
       var records=jsonData;
       for(var i in records){ 
+
         var profits;
         if(i==0){
             profits={
@@ -613,6 +614,7 @@ function loadData(jsonData){
         }
         
         for(var j in records[i].detail){
+           records[i].detail[j].profit=0.01*parseFloat(records[i].detail[j].profit);
           var dataDetail={
             name:records[i].detail[j].title,
             y:parseInt(records[i].detail[j].profit)

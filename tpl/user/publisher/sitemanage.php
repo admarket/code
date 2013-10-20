@@ -602,6 +602,7 @@ function loadData(jsonData){
       for(var i in records){  
         var sum=0;
         for(var j in records[i].detail){
+          records[i].detail[j].profit=0.01*parseFloat(records[i].detail[j].profit);
           sum +=parseInt(records[i].detail[j].profit);
           sums+=parseInt(records[i].detail[j].profit);
         }

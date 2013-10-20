@@ -25,7 +25,7 @@
         <div class="row-fluid">
           <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
           <div class="span3 offset1">
-            如果您有任何疑问，请联系我们的<a  target='_blank' href="http://wpa.qq.com/msgrd?V=1&Uin=4006776" class="tip" title="点击发送消息">客服QQ</a>,与我们进行互动。
+            如果您有疑问，请联系我们的<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>客服</a>,与我们进行互动。
           </div>
           <div class="span3 offset1">
             <{if $smarty.session.user eq '' }>

@@ -1,66 +1,35 @@
-<!DOCTYPE html> <html>   <head>     <title>广告市场  - 用户使用帮助</title>     <meta
-name="viewport" content="width=device-width, initial-scale=1.0">      <meta
-http-equiv="Content-Type" content="text/html; charset=utf-8" />     <meta
-name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>     <meta
-name="description"
-content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">     
-<link href="/css/bootstrap-responsive.css" rel="stylesheet">     
- <link rel="stylesheet" href="/css/font-awesome.min.css">     <!--[if IE 7]>
-<link rel="stylesheet" href="/css/font-awesome-ie7.min.css">     <![endif]-->
-<!-- Bootstrap -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>广告市场  - 法律声明及隐私保护</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
+    <meta name="description" 
+    content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+     <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!-- Bootstrap -->
     
     <link href="/css/style2.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
   </head>
   <body>
      <!-- load head tpl -->
     <{include file="head.php"}>
-              
     <div class="section" align="center">
       <div class="container box std-container" align="left" style="padding:20px 40px;position:relative;">
-          <h3 class="title">用户使用帮助</h3>
+          <h3 class="title">法律声明及隐私保护</h3>
           <div class="content">
-              
               <p class="p">
-               为了保证您能够顺利，广告市场为您提供详细的用户使用手册，方便您的使用。用户使用手册共分为：买家、卖家以及常见使用问题三个部分。如果您在阅读用户使用帮助后，仍然存在疑问，您可以<a href="">联系我们的客服</a><strong><i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：</strong> 点击LOGO即可返回网站首页，不用担心迷路了。
+               广告市场提醒您：在使用广告位交易平台（以下简称广告市场）前，请您务必仔细阅读并透彻理解本声明。您可以选择不使用广告市场，但如果您使用广告市场，您的使用行为将被视为对本声明全部内容的认可。
               </p>
-              <div class="tabbable"> <!-- Only required for left/right tabs -->
-                <ul class="nav nav-tabs" style="padding-left:30%;">
-                  <li class="active" >
-                    <a  class="blue-color" href="#buyer" data-toggle="tab">
-                    <i class="icon-user"></i> &nbsp;我是买家</a>
-                  </li>
-                  <li >
-                    <a class="green-color" href="#seller"  data-toggle="tab">
-                    <i class="icon-user"></i> &nbsp;我是卖家</a>
-                  </li>
-                  <li >
-                    <a href="#question"  data-toggle="tab">
-                      <i class="icon-user"></i> &nbsp;常见问题</a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  
-                  <div class="tab-pane active " id="buyer">
-                    <p>Howdy, I'm in Section 2.</p>
-                  </div>
-                  <div class="tab-pane " id="seller">
-                    <p>I'm in Section 1.</p>
-                  </div>
-                   <div class="tab-pane " id="question">
-                    <p>I'm in Section 1.</p>
-                  </div>
-                </div>
-              </div>
               <h5>知识产权声明：</h5>
-              <div class="alert" style="border:solid 1px #c09853;display:block;width:92%;position:relative;left:0;font-size:12px;">
-                  
-                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：</strong> 点击LOGO即可返回网站首页，不用担心迷路了。
-                </div>
              <p>
               广告市场拥有本网站内所有资料的版权，各分频道权利声明有特殊规定的，从其规定。任何被授权的浏览、复制、打印和传播属于本网站内的资料必须符合以下条件：
               <br/>
@@ -104,7 +73,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                  以上声明仅代表九尾狐科技有限公司做出的初步法律声明，最终解释权归九尾狐科技有限公司。<br/>
                  另外，请不要抄袭我们，种其因者须食其果。
              </p>
-              
+              <img src="/img/seal.png" style="position:absolute;top:10px;right:20px;"/>
           </div>
               
       </div>

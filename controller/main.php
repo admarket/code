@@ -101,6 +101,9 @@ class main extends spController
     function privacy(){
         $this->display("privacy.php"); // 注册 
     }
+    function question(){
+        $this->display("question.php"); // 注册 
+    }
     function forget(){
         $this->display("forget.php"); // 找回密码 
     }
