@@ -65,7 +65,7 @@
                 <!-- Button -->
                 <div class="controls">
                   <span>
-                    <a class="btn btn-primary" data-toggle="button"  data-loading-text="正在验证..." >
+                    <a class="btn btn-primary" id="btn-login" data-toggle="button"  data-loading-text="正在验证..." >
                       登录</a>
                   </span>
                   <span class="checkbox inline" style="margin-left:20px;">
@@ -103,8 +103,8 @@
        $("#txt-email").val(GetName);
     } 
     
-      $(".btn").click(function(){
-          $(".btn").button('loading');
+      $("#btn-login").click(function(){
+          $("#btn-login").button('loading');
           $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
            function(data){
              if(data){
@@ -116,10 +116,12 @@
               history.go(-1);
                 //window.location.href="<{spUrl c=sub a=dashboard}>";
              }else{
-              $.msg("用户名或密码错误！");
+              $.msg("用户名或密码错误！",function(){
+                alert();
+              });
               //$("#alert-msg").show();
-              $('.btn').button('toggle');
-              $('.btn').button('reset');
+              $('#btn-login').button('toggle');
+              $('#btn-login').button('reset');
              }
            });
           

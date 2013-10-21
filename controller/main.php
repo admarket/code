@@ -120,4 +120,7 @@ class main extends spController
     function forget(){
         $this->display("forget.php"); // 找回密码 
     }
+    function test(){
+        $this->display("test.php"); // 找回密码 
+    }
 }

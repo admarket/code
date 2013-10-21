@@ -1,7 +1,12 @@
 <?php
 class cproject extends spController
 {
-	
+	 public function __construct(){
+        parent::__construct(); // 要先启动父类的构造函数
+        if($_SESSION['user']==""){
+            $this->jump(spUrl('main', 'login'));
+        }
+    }
 	function AddProject(){//添加广告项目
 		
         $filename=$_FILES['logo']['name'];

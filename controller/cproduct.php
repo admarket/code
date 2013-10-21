@@ -1,6 +1,12 @@
 <?php
 class cproduct extends spController
 {
+     public function __construct(){
+        parent::__construct(); // 要先启动父类的构造函数
+        if($_SESSION['user']==""){
+            $this->jump(spUrl('main', 'login'));
+        }
+    }
 	function addProduct(){
 		$filename=$_FILES['show']['name'];
         $tempName=explode('.', $filename);

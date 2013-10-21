@@ -9,7 +9,7 @@
             <a href="<{spUrl c=main a=index}>">网站首页</a>&nbsp;-&nbsp;
             <a href="<{spUrl c=main a=help}>">使用帮助</a>&nbsp;-&nbsp;
             <a href="<{spUrl c=main a=privacy}>">法律及隐私</a>&nbsp;-&nbsp;
-            <a href="<{spUrl c=main a=question}>">常见问题</a>&nbsp;-&nbsp;
+            <a href="<{spUrl c=main a=help}>#question">常见问题</a>&nbsp;-&nbsp;
             <a href="<{spUrl c=main a=about}>">关于我们</a>&nbsp;
             <!--<div>
                 <a href="http://www.glyphicons.com/" target="_blank">Glyphicons</a>

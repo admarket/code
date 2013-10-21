@@ -31,81 +31,96 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
               </p>
               <div class="tabbable"> <!-- Only required for left/right tabs -->
                 <ul class="nav nav-tabs" style="padding-left:30%;">
-                  <li class="active" >
+                  <li class="active"  id="buyer-tab" >
                     <a  class="blue-color" href="#buyer" data-toggle="tab">
                     <i class="icon-user"></i> &nbsp;我是买家</a>
                   </li>
-                  <li >
+                  <li  id="seller-tab">
                     <a class="green-color" href="#seller"  data-toggle="tab">
                     <i class="icon-user"></i> &nbsp;我是卖家</a>
                   </li>
-                  <li >
+                  <li id="question-tab">
                     <a href="#question"  data-toggle="tab">
                       <i class="icon-user"></i> &nbsp;常见问题</a>
                   </li>
                 </ul>
                 <div class="tab-content">
                   
+                  <!--buyer content-->
                   <div class="tab-pane active " id="buyer">
-                    <p>Howdy, I'm in Section 2.</p>
-                    
+                    <h4>如何购买广告位？</h4>
+                    <h5>1、添加推广产品</h5>
+                    <p>
+                     进入产品管理页面，点击添加按钮，在弹出的窗口中填写您需要推广的产品相关信息，然后保存<br/>
+                     <img src="/img/help/buy1.png"/><br/>
+                     <img src="/img/help/buy2.png"/><br/>
+                    </p>
+                    <h5>2、添加广告显示内容</h5>
+                    <p>
+                     点击广告内容按钮，在弹出的窗口中上传该产品对应展示的广告内容<br/>
+                     <img src="/img/help/buy3.png"/><br/>
+                     <img src="/img/help/buy4.png"/><br/>
+                    </p>
+                    <h5>3、选择广告位，绑定您想要推广的产品</h5>
+                    <p>
+                     选择在此广告位中推广的产品和购买的天数<br/>
+                     <img src="/img/help/buy5.png"/><br/>
+                     <img src="/img/help/buy6.png"/><br/>
+                    </p>
+                    <h5>4、确认购买信息，支付广告费用</h5>
+                    <p>
+                     点击广告内容按钮，在弹出的窗口中上传该产品对应展示的广告内容<br/>
+                     <img src="/img/help/buy7.png"/><br/>
+                     <img src="/img/help/buy8.png"/><br/>
+                    </p>
+                    <h5>5、广告内容显示</h5>
+                     <p>完成以上步骤以后，您的产品将会自动展示在您购买的广告位中。
+                      <img src="/img/help/sell6.png"/><br/>
+                      <img src="/img/help/sell8.png"/><br/>
+                      </p>
+                      <p>
+                        <span class="red-color">
+                      展示的大小和内容也将会根据卖家的要求自动进行选择。</span><br/><h5>如果您仍然对如何购买广告位感到疑惑，请咨询我们的客服人员，为您做出更为详细的解答。</h5>
+                    </p>
                   </div>
+
+                  <!--seller content-->
                   <div class="tab-pane " id="seller">
-                    <p>I'm in Section 1.</p>
+                    <h4>怎样出售我的广告位？</h4>
+                    <h5>1、添加网站</h5>
+                    <p>
+                     进入网站管理页面，点击添加按钮，在弹出的窗口中填写您的网站相关信息，然后保存。其中网站的排名信息是自动填写的<br/>
+                     <img src="/img/help/sell1.png"/><br/>
+                     <img src="/img/help/sell2.png"/><br/>
+                    </p>
+                    <h5>2、在网站中添加广告位</h5>
+                    <p>
+                     进入广告位管理页面，选择相应的网站选项卡，点击添加按钮，在弹出的窗口中填写您的广告位信息，然后保存。<br/>
+                     <img src="/img/help/sell3.png"/><br/>
+                     <img src="/img/help/sell4.png"/><br/>
+                    </p>
+                    <h5>3、复制广告位出售代码，粘贴到您的网站相应广告位置</h5>
+                    <p>
+                     进入广告位管理页面，选择新增的广告位，点击按钮获取出售代码，复制并粘贴到您的网站相应广告位置。<span class="red-color">您的网站广告位置也会自动显示为广告位出售中</span>。<br/>
+                     <img src="/img/help/sell5.png"/><br/>
+                     <img src="/img/help/sell6.png"/><br/>
+                    </p>
+                    <h5>4、添加完成</h5>
+                     <p>广告位显示的大小和格式是根据您添加时填写的信息显示的。当买家点击该广告位时，将会自动跳转到我们的网站出售页面进行购买。</p>
+                     <img src="/img/help/sell7.png"/><br/>
+                     <img src="/img/help/sell8.png"/><br/>
+                     <p>
+                      完成以上步骤以后，这样您的广告位将会被添加到广告市场中，<span class="red-color">当您的广告位出售后，相应的广告内容将会自动推送到您的网站相应位置。</span><br/><h5>如果您仍然对如何购买广告位感到疑惑，请咨询我们的客服人员，为您做出更为详细的解答。</h5></p>
                   </div>
+
+                  <!--question content-->
                    <div class="tab-pane " id="question">
                     <p>I'm in Section 1.</p>
                   </div>
                 </div>
               </div>
-              <h5>知识产权声明：</h5>
-              <div class="alert" style="border:solid 1px #c09853;display:block;width:92%;position:relative;left:0;font-size:12px;">
-                  
-                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;小提示：</strong> 点击LOGO即可返回网站首页，不用担心迷路了。
-                </div>
-             <p>
-              广告市场拥有本网站内所有资料的版权，各分频道权利声明有特殊规定的，从其规定。任何被授权的浏览、复制、打印和传播属于本网站内的资料必须符合以下条件：
-              <br/>
-              所有的资料和图象均以获得信息为目的；<br/>
-              所有的资料和图象均不得用于商业目的；<br/>
-              所有的资料、图象及其任何部分都必须包括此版权声明；<br/>
-              本网站（www.eadmarket.com）所有的产品、技术与所有程序均属于九尾狐知识产权，在此并未授权。“广告市场”、 “eadmarket”及相关图形等为广告市场的注册商标。
-
-              未经广告市场许可，任何人不得擅自（包括但不限于：以非法的方式复制、传播、展示、镜像、上载、下载）使用，或通过非常规方式（如：恶意干预广告市场数据）影响广告市场的正常服务，任何人不得擅自以软件程序自动获得广告市场数据。否则，广告市场将依法追究法律责任。
-            </p>
-            <h5>权利公告：</h5>
-             <p>
-            广告市场作为全球首家中文广告位交易平台，基于全球互联网向广大网民提供广告位交易服务。
-            根据用户本人的添加内容，广告市场系统会以非人工方式自动向网络推广您的产品和链接，
-            以便用户能够找到和使用您提供的产品信息。“广告市场”自身不存储、控制、
-            编辑或修改被链接的第三方网页上登载、存储、编辑、显示被检索（包括但不限于以文字、图片或音乐等形式出现）
-            的信息的内容或其表现形式。<br/> 
-
-            任何个人或单位如果同时符合以下两个条件：<br/> 
-
-            权利人发现网络用户利用网络服务侵害其合法权益；<br/> 
-            百度的搜索引擎系统以自动检索方式而链接到第三方网站的内容侵犯了上述权利人的合法权益。<br/> 
-            请上述个人或单位务必以书面的通讯方式向百度提交权利通知。 <br/> 
-
-            请注意：如果权利通知的陈述失实，权利通知提交者将承担对由此造成的全部法律责任（包括但不限于赔偿各种费用及律师费）。如果上述个人或单位不确定网络上可获取的资料是否侵犯了其合法权益，百度建议该个人或单位首先咨询专业人士。 
-            </p>
-            <h5>隐私保护：</h5>
-             <p>
-                我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。
-                <br/>我们承诺做到如下几点：
-                <br/>1、严格遵守正确收集和使用用户个人信息条款；履行法律责任，明确使用用户信息目的；数据特殊保护说明中明确规定要保护用户个人信息；根据网站所需依法正确收集和处理用户个人信息；确保个人信息的正确；审核决定保存用户信息的时间限度；确保用户能依法行使个人权利；实施技术和组织安全措施保护用户个人信息。
-                <br/>2、用户在向网站提前个人信息前，我们努力确保让用户了解以下几点：收集信息的目的；信息的用途；任何接受信息一方的身份和他们使用信息的目的；如何申请复制提交的个人信息。
-                <br/>3、我们对我们所连链接的网站不负隐私保护的责任，此声明只适用于在本网站注册的个人用户。
-                <br/>4、我们的IP地址只用于分析趋势、管理网站、跟踪用户活动和收集信息，不用于可识别个人信息的查询。
-                <br/>5、此外，我们使用cookies用于用户兴趣追踪，以便提高网站的服务水平。即便您的浏览器拒绝cookies，您依然可以登陆我们的网站。
-            </p>
-            <p>
-            广告市场一贯高度重视知识产权保护并遵守中国各项知识产权法律、法规和具有约束力的规范性文件。重视正版，打击盗版。请不要向本站发布违反国家法律法规的网站信息及广告内容，我们会保留删除相关信息的权利。
-          </p>
-             <p style="font-weight:bold;">
-                 以上声明仅代表九尾狐科技有限公司做出的初步法律声明，最终解释权归九尾狐科技有限公司。<br/>
-                 另外，请不要抄袭我们，种其因者须食其果。
-             </p>
+             
+            
               
           </div>
               
@@ -114,6 +129,18 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     <!--footer content-->
     <!-- load foot tpl -->
     <{include file="foot.php"}>
-
+   <script type="text/javascript">
+   setTab();
+   function setTab(){
+     if(window.location.hash=="#buy"){
+      $('#buyer-tab a').tab('show');
+     }else if(window.location.hash=="#sell"){
+      $('#seller-tab a').tab('show');
+     }else if(window.location.hash=="#question"){
+      $('#question-tab a').tab('show');
+     }
+   }
+  
+   </script> 
   </body>
 </html>

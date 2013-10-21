@@ -63,13 +63,13 @@
           <a href="#" class="close" data-dismiss="alert" style="font-size:12px;">&times;</a>
           <span class="row-fluid" style="padding:0px;margin:0px;">
               <span class="span6" style="padding:0px;margin-left:10px;">
-                <a class="blue-color" href="<{spUrl c=main a=help}>#buyer">
-                  <i class="icon-user"></i> &nbsp;我是卖家，怎样出售我的广告位？
+                <a class="blue-color" href="<{spUrl c=main a=help}>#buy">
+                  <i class="icon-user"></i> &nbsp;我是买家，如何购买广告位？
                 </a>
               </span>
               <span class="span5 " style="padding:0px;">
-                <a class="green-color"  href="<{spUrl c=main a=help}>#seller">
-                  <i class="icon-user"></i> &nbsp;我是买家，如何购买广告位？</span> 
+                <a class="green-color"  href="<{spUrl c=main a=help}>#sell">
+                  <i class="icon-user"></i> &nbsp;我是卖家，怎样出售我的广告位？</span> 
                 </a>
           </span>
           <div class="clearfix clear" style="clear:both;"></div>
@@ -188,7 +188,7 @@
                           
                         </ul>
                       </div>
-                      <div class="pagination" align="center" > 
+                      <div class="pagination " align="center" style="font-size:12px;"> 
                         <ul>
                         <{if $pager}>
                         <!--在当前页不是第一页的时候，显示前页和上一页-->

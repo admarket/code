@@ -1,7 +1,13 @@
 <?php
 class cadvertise extends spController
 {
-	
+   public function __construct(){
+        parent::__construct(); // 要先启动父类的构造函数
+        if($_SESSION['user']==""){
+            $this->jump(spUrl('main', 'login'));
+        }
+    }
+	       
       	function AddAdvertise(){//添加广告项目
       		$advertise = spClass("advertise");
       		$newrow = array(
