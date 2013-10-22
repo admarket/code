@@ -111,6 +111,18 @@ class ctrade extends spController
 					return false;
 				}
 
+				//发送站内通知
+				$profit=intval($this->spArgs("price"))*intval($this->spArgs("number"));
+				$msgContent="买家购买时间为：".$this->spArgs("number")."天。预计本次广告收入：".$profit."￥。";
+				$message = spClass("message");
+				$newMessage=array(
+                        "sender" => 0,
+                        "receiver" => $_SESSION['user']['id'],
+                        "title"=>"恭喜您，您的广告位已经成功出售！",
+                        "content"=>$msgContent,
+                        "type" => 1,
+				);
+			$result=$message->create($newMessage); 
 				//更新推广费用
 				$product = spClass("product");
 		        $conditions=array("id" => $this->spArgs("product"));

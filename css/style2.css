@@ -14,13 +14,15 @@
 .c{background-color: #FF9655;}
 .d{background-color: #FFF263;}
 .e{background-color: #6AF9C4;}
-.logo{width: 300px;height: 70px;}
+.logo{width: 230px;height: 80px;}
+.logo-small{width: 300px;height: 70px;}
 .title{font-weight: bold;}
 .ad{padding:10px;border: solid 1px #ccc;border-radius: 5px;box-shadow: 0px 0px 1px #ccc;
 margin:0px 0 20px 0;background-color: #f8f8f8;cursor: pointer;display: block;color:#555;
 font-size: 12px;min-width: 20%;}
 .ad img{width: 50px;height: 50px;}
 .table a{display: inline;}
+.table td{min-width:100px; }
 .nav-stacked li{position: relative;}
 .nav-stacked li a{color:  #058DC7;padding-left: 30px;}
 .nav-stacked li a.active{color:  #fff;background-color: #0088cc;}

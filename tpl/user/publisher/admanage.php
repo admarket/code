@@ -217,8 +217,8 @@
                           </td>
                           <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
-                               data-name="advertisePrice"><span id="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
-                             <div>+<{$smarty.session.user.fee}>%&nbsp;服务费=&nbsp;<span id="realPrice"><{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
+                               data-name="advertisePrice"><span class="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
+                             <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
                           <td>
                              <{if $advertise.state == 0}>
                             <span class="label label-success"> 
@@ -232,8 +232,13 @@
                           </td>
                           <td>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;"
-                             title="<{$advertise.startTime|date_format:'%Y-%m-%d'}>&nbsp;到
+                             <{if $advertise.state == 1}>
+                                 title="<{$advertise.startTime|date_format:'%Y-%m-%d'}>&nbsp;到
                                 &nbsp;<{$advertise.endTime|date_format:'%Y-%m-%d'}>"
+                              <{else}>
+                                title="尚未出售"
+                              <{/if}>
+                            
                                 >
                               <div class="bar bar-success" style="width: <{$advertise.process}>%;">
                                <{$advertise.process}>%
@@ -438,18 +443,18 @@ $('.select-editable').editable({
         success: function(response, newValue) {
           if(!response.success) 
             $.msg("编辑成功！",'color:green;');
-          var fee=parseInt(<{$smarty.session.user.fee}>);
+          var fee=parseInt($(this).parent().find('.fee').html());
           newValue=parseInt(newValue);
-          $('#realPrice').html((0.01*fee+1)*newValue);
+          $(this).parent().find('.realPrice').html((0.01*fee+1)*newValue);
         },
         validate: function(value) {
-        if(isNaN($.trim(value))) {
-            return '该字段必须是数字';
+            if(isNaN($.trim(value))) {
+                return '该字段必须是数字';
+            }
+            else if($.trim(value)<0||$.trim(value)>100000000) {
+                return '该字段必须是数字，且为正数';
+            }
         }
-        else if($.trim(value)<0||$.trim(value)>100000000) {
-            return '该字段必须是数字，且为正数';
-        }
-    }
   });
   $('.url-editable').editable({
         type: 'text',

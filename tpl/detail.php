@@ -148,7 +148,7 @@
                           </td>
                           <td>
                             <div style="padding:10px;">
-                           <{(0.01*(0.01*$fee+1)*$advertise.price)|number_format}> &yen;
+                           <{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}> &yen;
                               </div>
                             </td>
                           

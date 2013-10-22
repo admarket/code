@@ -88,7 +88,7 @@ class cuser extends spController
                         "type" => 1,
 			);
 			$result=$message->create($newMessage); 
-			dump($result); // 查看结果，
+
 			if($result){
 				$result = $user->findAll($conditions); 
 				//dump($result); // 查看结果，
@@ -173,11 +173,13 @@ class cuser extends spController
     	$phone=$this->spArgs("phone"); // 用spArgs接收spUrl传过来的email// 用spArgs接收spUrl传过来的email
     	$account=$this->spArgs("account");//提现账号
 		$type=$this->spArgs("type");//身份类型
+		$payment=$this->spArgs("payment");//身份类型
     	$conditions = array("id"=>$id); // 查找email是$email的记录
         $newrow = array(
                 'mobilephone' => $phone,  // 然后将这条记录的name改成“喜羊羊”
                 'account' => $account,
                 'type' => $type,
+                'payment'=>$payment,
         );
         $checkconditions = array("mobilephone" => $phone);
 		$result = $user->findAll($checkconditions); 
@@ -189,6 +191,7 @@ class cuser extends spController
 		        $_SESSION['user']['mobilephone'] = $phone;
 		        $_SESSION['user']['account'] = $account;
 		        $_SESSION['user']['type'] = $type;
+		        $_SESSION['user']['payment']=$payment;
 		        echo "1"; // 首页
 	        }
 	    }else{
@@ -196,6 +199,7 @@ class cuser extends spController
 		        $_SESSION['user']['mobilephone'] = $phone;
 		        $_SESSION['user']['account'] = $account;
 		        $_SESSION['user']['type'] = $type;
+		        $_SESSION['user']['payment']=$payment;
 	        	echo "1"; // 首页
 	    }
         

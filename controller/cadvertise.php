@@ -10,6 +10,22 @@ class cadvertise extends spController
 	       
       	function AddAdvertise(){//添加广告项目
       		$advertise = spClass("advertise");
+          //手续费规则：(0,1000)=10%，[1000,3000)=9%，[3000,5000)=8%，[5000,8000)=7%，[8000,10000)=6%,[10000,+]=5%;
+          $price=intval($this->spArgs('advertisePrice'));
+          $fee=10;
+          if($price<1000){
+            $fee=10;
+          }else if($price<3000){
+            $fee=9;
+          }else if($price<5000){
+            $fee=8;
+          }else if($price<8000){
+            $fee=7;
+          }else if($price<10000){
+            $fee=6;
+          }else{
+            $fee=5;
+          }
       		$newrow = array(
                               'project' => $this->spArgs('advertiseProject'),
                               'title' => $this->spArgs('advertiseName'),
@@ -18,6 +34,7 @@ class cadvertise extends spController
                               'width'=> $this->spArgs('advertiseWidth'),
                               'height'=> $this->spArgs('advertiseHeight'),
                               'price'=> $this->spArgs('advertisePrice')*100,
+                              'fee'=>$fee,
 
                       );
                       $result=$advertise->create($newrow);
@@ -87,6 +104,8 @@ class cadvertise extends spController
         }
         
         function GetADCode(){
+          ob_clean();
+          header('Content-type:application/x-javascript');
           //查询广告位基本信息
           $ip;
             if (getenv("HTTP_CLIENT_IP"))

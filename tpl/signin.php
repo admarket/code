@@ -110,7 +110,13 @@
              if(data){
               //$("#alert-msg").hide();
               if($("#cookieCheck").attr("checked")){//添加cookie
-                document.cookie="email="+$("#txt-email").val();
+                //document.cookie="email="+$("#txt-email").val();
+                var Days = 30;   
+                var exp = new Date();  
+                var name="email";
+                var value=  $("#txt-email").val();
+                exp.setTime(exp.getTime() + Days*24*60*60*1000);   
+                document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();   
               }
               $.msg("验证成功！正在跳转中...",'color:green;');
               history.go(-1);
@@ -126,6 +132,38 @@
            });
           
       });
+    document.onkeydown=function(event){
+      e = event ? event :(window.event ? window.event : null);
+      if(e.keyCode==13){
+       //执行的方法
+       $("#btn-login").button('loading');
+          $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
+           function(data){
+             if(data){
+              //$("#alert-msg").hide();
+              if($("#cookieCheck").attr("checked")){//添加cookie
+                //document.cookie="email="+$("#txt-email").val();
+                var Days = 30;   
+                var exp = new Date();  
+                var name="email";
+                var value=  $("#txt-email").val();
+                exp.setTime(exp.getTime() + Days*24*60*60*1000);   
+                document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();   
+              }
+              $.msg("验证成功！正在跳转中...",'color:green;');
+              history.go(-1);
+                //window.location.href="<{spUrl c=sub a=dashboard}>";
+             }else{
+              $.msg("用户名或密码错误！",function(){
+                alert();
+              });
+              //$("#alert-msg").show();
+              $('#btn-login').button('toggle');
+              $('#btn-login').button('reset');
+             }
+           });
+      }
+     }
     </script>
   </body>
 </html>

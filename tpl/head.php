@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
-          <div class="span3 offset1">
+          <div class="span4" style="padding:15px 40px;">
             如果您有疑问，请联系我们的<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>客服</a>,与我们进行互动。
           </div>
           <div class="span3 offset1">

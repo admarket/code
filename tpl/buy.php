@@ -41,20 +41,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
 
               <div class="row-fluid" style="padding:0 0px 10px 30px;vertical-align:bottom;font-size:12px;">
                    <h5>绑定产品与广告位：</h5> 
-                  <div class="span6 row-fluid" style="border:dashed 1px #ccc;padding:10px;border-radius:5px;">
-                    <div class="span4" style="text-align:center;">
-                      <img class="img-rounded img-polaroid" style="width:60px;height:60px;" src="/img/ads/<{$ad.base.logo}>" alt="">
-                      <h6  style="color:#555;"><{$ad.base.name}></h6>
-                    </div>
-                    
-                    <div class="span8">
-                        <h6><{$ad.title}></h6>
-                        <div><{$ad.content}></div>
-                        <div><strong>价格：</strong><{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;&nbsp;<strong>大小：</strong><{$ad.width}>*<{$ad.height}>&nbsp;像素</div>
-                    </div> 
-                    
-                  </div>
-                  <div class="span5 row-fluid" style="border:dashed 1px #ccc;padding:10px 30px;border-radius:5px;">
+                  
+                  <div id="bindProduct" class="span5 row-fluid" style="border:dashed 1px #ccc;padding:10px 30px;border-radius:5px;">
                       <h6>请选择推广产品：</h6> 
                       <{if $products eq ""}>
                          <div>
@@ -70,12 +58,28 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                             </label>
                       <{/foreach}>
                   </div>
+                  <div class="span6 row-fluid" style="border:dashed 1px #ccc;padding:10px;border-radius:5px;">
+                    <div class="span4" style="text-align:center;">
+                      <img class="img-rounded img-polaroid" style="width:60px;height:60px;" src="/img/ads/<{$ad.base.logo}>" alt="">
+                      <h6  style="color:#555;"><{$ad.base.name}></h6>
+                    </div>
+                    
+                    <div class="span8">
+                        <h6><{$ad.title}></h6>
+                        <div><{$ad.content}></div>
+                        <div><strong>价格：</strong><{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;&nbsp;<strong>大小：</strong><{$ad.width}>*<{$ad.height}>&nbsp;像素</div>
+                        <div style="padding:10px 0px;"><strong>最近三个月平均展示次数：</strong>
+                          <span class="red-color"><{$adCount|number_format}> </span>&nbsp;次/月
+                        </div>
+                    </div> 
+                    
+                  </div>
               </div>
               <div class="row-fluid" style="padding:0 0px 10px 30px;vertical-align:bottom;font-size:12px;">
                         <br/>
                         
                         <h5>选择购买时间：</h5>
-                        <div >
+                        <div id="day">
                          <label class="radio inline"  style="font-size:12px;">
                               <input  type="radio" class="number" name="number"  value="7">
                               &nbsp;7天&nbsp;
@@ -112,10 +116,10 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                           </a>
                           &nbsp;&nbsp;价格总计：<span class="finalNumber">1</span>
                           &nbsp;*&nbsp;<span class="finalPrice">
-                          <{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}>
+                          <{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}>
                           </span>&nbsp;=&nbsp;
                           <span class="sumPrice" class="red-color" style="font-size:16px;font-weight:bold;color: #EC4F4F;">
-                            <{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}> &yen;
+                            <{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;
                           </span>&nbsp;&nbsp;
                         </div>
                </div>
@@ -146,7 +150,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                     <{$ad.title}>
                 </p>
                 <p>
-                  <div><strong>价格：</strong><{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;&nbsp;
+                  <div><strong>价格：</strong><{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>大小：</strong><{$ad.width}>*<{$ad.height}>&nbsp;像素</div>
                 </p>
                 <div class="row-fluid">
@@ -174,10 +178,10 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
   <div class="modal-footer">
     价格总计：<span class="finalNumber">1</span>
                           &nbsp;*&nbsp;<span class="finalPrice">
-                          <{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}>
+                          <{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}>
                           </span>&nbsp;=&nbsp;
                           <span class="sumPrice" class="red-color" style="font-size:16px;font-weight:bold;color: #EC4F4F;">
-                            <{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)|number_format}> &yen;
+                            <{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;
                           </span>&nbsp;&nbsp;
     <a class="btn btn-success"  id="btn-pay" data-toggle="button"  data-loading-text="正在付款...">确认购买</a>
     <a class="btn" id="btn-back">返回修改</a>
@@ -193,7 +197,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
         currentNumber=$(this).val();
         $(".finalNumber").html($(this).val());
         $('#modal-number').html($(this).val()+"&nbsp;天");
-        $(".sumPrice").html(parseInt($(this).val())*parseInt(<{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)}>)+"&nbsp;&yen;");
+        $(".sumPrice").html(parseInt($(this).val())*parseInt(<{(0.01*(0.01*$ad.fee+1)*$ad.price)}>)+"&nbsp;&yen;");
       }); 
     $(".product").change(function() { 
         productFlag=true;
@@ -206,8 +210,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
         var txtURI="";//文字资源地址
         var targetURL="";//广告跳转地址
             txtURI=$(this).attr('data-txt');
-            imageURI=baseURL+"img/adcontent/image/"+$(this).attr('data-image');;
-            videoURI=baseURL+"img/adcontent/video/"+$(this).attr('data-video');;
+            imageURI=baseURL+"img/adcontent/image/"+$(this).attr('data-image');
+            videoURI=baseURL+"img/adcontent/video/"+$(this).attr('data-video');
             targetURL=baseURL+'?c=cadvertise&a=clicked&aid='+<{$ad.id}>;
             //加载广告内容
             if(<{$ad.format}>==0){
@@ -230,8 +234,14 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
         $('#modal-product').html($(this).attr('data-name'));
 
       }); 
-     $("#btn-buy").click(function() { 
-        $("#form-verify").modal();
+     $("#btn-buy").click(function() {
+         if(!productFlag){
+          $.msg('请先选择推广产品');
+        }else if(!numberFlag){
+          $.msg('请先选择购买天数');
+        }else{
+          $("#form-verify").modal();
+        }
       });
      $("#btn-back").click(function() { 
         $("#form-verify").modal('hide');
@@ -247,7 +257,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           //$.loading("正在支付");
           $("#btn-save").button('loading');
           
-            $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$smarty.session.user.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>},
+            $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>},
              function(data){
                if(data==1){
                   $.msg('购买成功！','color:green;');

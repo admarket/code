@@ -112,7 +112,7 @@
                     <span>&nbsp;</span>                
                   </div> 
                    <div class="span10">
-                    <div class=" title">&nbsp;即将到期：</div>
+                    <div class=" title">&nbsp;已经到期：</div>
                     <p><{$expire|number_format}></p>
                   </div>
                   
@@ -177,10 +177,15 @@
                         </div>
                      </div>
                      <div class="span3" style="padding-top:30px;z-index:-1;border-bottom:dashed 2px #555;">
-                      <marquee direction=right scrollamount=5>
+                      <{if $trade.state==0}>
+                       <marquee direction=right scrollamount=5>
                           <i class="icon-user" ></i>
                           <i class="icon-group" style="margin-left:100%;"></i>
                         </marquee>
+                        <{else}>
+                           <i class="icon-user" ></i>
+                          <i class="icon-group" style="margin-left:10%;"></i>
+                        <{/if}>
                       </div>
                       <div style="padding:15px 0;text-align:center;" class="span2">
                         <div>
@@ -193,22 +198,22 @@
                      </div>
                      <div style="padding:25px 0;text-align:center;" class="span2">
                         <div>
-                            <p><i class="icon-eye-open icon-large"></i>&nbsp; &nbsp;浏览：
+                            <p><i class="icon-eye-open icon-large"></i>&nbsp; &nbsp;浏览效果：
                              </p>
                               <h4 class="blue-color" >
                               
-                              <{($trade.product.impression)|number_format}> 
+                              <{($trade.impression)|number_format}> 
                               </h4>
                         </div>
                         
                      </div>
                       <div style="padding:25px 0;text-align:center;" class="span2">
                         <div>
-                             <p><i class="icon-user icon-large"></i>&nbsp; &nbsp;点击：
+                             <p><i class="icon-user icon-large"></i>&nbsp; &nbsp;点击效果：
                              </p>
                               <h4 class="red-color" >
                               
-                              <{($trade.product.click)|number_format}>
+                              <{($trade.click)|number_format}>
                               </h4>
                         </div>
                         
@@ -221,28 +226,28 @@
                           <td style="padding:10px 20px;">
                               <p>购买价格：
                              </p>
-                              <h4 class="red-color" >
+                              <h5 class="red-color" >
                                <{(0.01*$trade.price)|number_format}> &yen;/天
                               
-                              </h4>
+                              </h5>
                           </td>
                            <td>
                               <p>购买数量：
                              </p>
-                              <h4 class="green-color" >
+                              <h5 class="green-color" >
                               
                               <{$trade.number|number_format}>天
-                              </h4>
+                              </h5>
                            </td>
                           
                          
                           <td>
                             <p>推广费用：
                              </p>
-                              <h4 class="blue-color" >
+                              <h5 class="blue-color" >
                               
                               <{(0.01*($trade.price*$trade.number))|number_format}> &yen; 
-                              </h4>
+                              </h5>
                           </td>
                          
                       </tr>
@@ -250,24 +255,24 @@
                           <td>
                             <p>状态：
                              </p>
-                              <h4 class="red-color" >
+                              <h5 class="red-color" >
                               
                                 <{if $trade.state == 0}>
                                   <span class="label label-success"> 
                                     正常显示
                                   </span>
                                    <{else}>
-                                  <span class="label label-warning"> 
-                                    即将到期
+                                  <span class="label label-danger"> 
+                                    已经到期
                                   </span>
                                   <{/if}>
-                              </h4>
+                              </h5>
                             
                           </td>
                           <td>
                              <p>格式：
                              </p>
-                              <h4 class="orange-color" >
+                              <h5 class="orange-color" >
                               
                                <{if $trade.advertise.format==0}>
                                   <i class="icon-text icon-large tip" title="文字"></i>
@@ -276,17 +281,17 @@
                                <{else}>
                                   <i class="icon-film icon-large tip" title="Flash视频"></i>                            
                                <{/if}>
-                              </h4>
+                              </h5>
                             
                           </td>
                           
                           <td>
                             <p>到期时间：
                              </p>
-                              <h4 class="orange-color" >
+                              <h5 class="orange-color" >
                               
                                <{$trade.endTime|date_format:'%Y-%m-%d'}>
-                              </h4>
+                              </h5>
                             
                           </td>
                          
@@ -296,14 +301,14 @@
                             <p>推广进度：
                              </p>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$trade.process}>%">
-                               <{if $trade.process < 90}>
+                               <{if $trade.process < 90 &&  $trade.state==0}>
                               <div class="bar bar-success" style="width: <{$trade.process}>%;">
                                 <{elseif ($trade.process >=90 && $trade.process < 100)}>
                                 <div class="bar bar-warning" style="width: <{$trade.process}>%;">
                                  <{else}> 
-                                 <div class="bar bar-danger" style="width: <{$trade.process}>%;">
+                                 <div class="bar bar-danger" style="width: 100%;">
                                 <{/if}>
-                               <{$trade.process}>%
+                                <{$trade.process}>%
                              </div>
                                
                             </div>

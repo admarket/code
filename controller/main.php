@@ -98,6 +98,18 @@ class main extends spController
         $ad=$advertise->spLinker()->find($conditions);
         $this->ad=$ad;
         
+        //查询该广告位的最近三个月的真实浏览次数/月
+        $report=spClass('report');
+        $startTime = time();  // 当前时间戳
+        $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳 
+        $showtime=date("Y-m-d H:i:s",$endTime);
+        $reportConditions=" (advertise=".$id." and impression=1) and date>'".$showtime."'";
+        $reports=$report->findAll($reportConditions);
+        if($reports){
+            $this->adCount=floor(count($reports)/3);
+        }else{
+            $this->adCount=0;
+        }
         $product=spClass('product');
         if(isset($_SESSION['user'])){
             $productConditions =" owner=". $_SESSION['user']['id'];

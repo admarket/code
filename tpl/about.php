@@ -51,7 +51,7 @@
                   <span style="font-weight:bold;">联系我们：</span><br/>
                     公司地址：北京市昌平区青年创业大厦A座<br/>
                     联系电话：010-60739009<br/>
-                    客服QQ: <a href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>4006776</a><br/>
+                    客服QQ: <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>4006776</a><br/>
                     企业邮箱：support@eadmarket.com
                 </p>
                   <!--百度地图容器-->

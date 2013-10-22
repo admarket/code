@@ -272,7 +272,10 @@ class sub extends spController
     function effect(){
         $trade = spClass("trade");
         $project = spClass("project");
-        $conditions = array("buyer" => $_SESSION['user']['id'],"state"=>0);
+        $startTime = time();  // 当前时间戳
+        $endTime =$startTime + (365 * 24 * 60 * 60);  // N天后的时间戳 
+        $showtime=date("Y-m-d H:i:s",$endTime);
+        $conditions = array("buyer" => $_SESSION['user']['id'],"startTime>".$showtime);//查询一年以内的交易记录
         $trades = $trade->spLinker()->findAll($conditions,'id DESC');
         $this->tradeCount=count($trades);//交易总数
         $this->sumFee=0;//总推广费用
@@ -281,17 +284,42 @@ class sub extends spController
         $this->picNum=0;//图片广告
         $this->expire=0;//即将到期
         foreach ($trades as &$trade) { 
+            //计算交易进度
             $condition = array("id" => $trade['advertise']['project']);
             $tempProject=$project->find($condition);
             $trade['project']=$tempProject;
             if($trade['state']==0){
                 $process=floor((time()-strtotime($trade['startTime']))/(strtotime($trade['endTime'])-strtotime($trade['startTime']))*100);//计算广告出售进度
             }else{
-                $process=0;
+                $process=100;
             }
             $trade['process']=$process;
+
+            //计算浏览次数和点击次数
+            $impression=0;
+            $click=0;
+            $report=spClass("report");
+            $impressionCondition=array(
+                "trade" => $trade['id'],
+                "impression"=>1,
+                );
+            $clickCondition=array(
+                "trade" => $trade['id'],
+                "click"=>1,
+                );
+            $reports=$report->findAll($impressionCondition);
+            if($reports){
+                $impression=count($reports);
+            }
+            
+            $reports=$report->findAll($clickCondition);
+            if($reports){
+                $click=count($reports);
+            }
+            $trade['impression']=$impression;
+            $trade['click']=$click;
             $this->sumFee+=$trade['price']*$trade['number'];
-            if($trade['process']>=90){
+            if($trade['state']==1){
                 $this->expire+=1;
             }
             if($trade['advertise']['format']==0){

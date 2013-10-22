@@ -176,13 +176,9 @@
                       <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                       &nbsp;支付宝&nbsp;
                     </label>
+                   
                     <label class="radio" style="font-size:12px;">
-                      <img src="/img/tenpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
-                      <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
-                      &nbsp;财付通&nbsp;
-                    </label>
-                    <label class="radio" style="font-size:12px;">
-                    <input type="radio" name="payment" id="payment3" value="2"  disabled="disabled">
+                    <input type="radio" name="payment" id="payment3" value="1">
                     <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                     &nbsp;银联卡&nbsp;
                     </label>

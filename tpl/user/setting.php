@@ -228,19 +228,23 @@
                         </p>
                         <div>
                           <label>提现方式：</label>
-                          <div class="span5 tip" title="目前仅支持支付宝">
+                          <div class="span5">
                            <label class="radio" style="font-size:12px;">
-                              <input type="radio" name="payment" id="payment1" value="0" checked>
+                               <{if $user.payment==0}>
+                              <input type="radio" name="payment" id="payment1" value="0" checked/>
+                               <{else}>
+                               <input type="radio" name="payment" id="payment1" value="0"/>
+                              <{/if}>
+                              
                               <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                               &nbsp;支付宝&nbsp;
                             </label>
                             <label class="radio" style="font-size:12px;">
-                              <img src="/img/tenpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
-                              <input type="radio" name="payment" id="payment2" value="1" disabled="disabled">
-                              &nbsp;财付通&nbsp;
-                            </label>
-                            <label class="radio" style="font-size:12px;">
-                            <input type="radio" name="payment" id="payment3" value="2"  disabled="disabled">
+                             <{if $user.payment==1}>
+                              <input type="radio" name="payment" id="payment1" value="1" checked/>
+                               <{else}>
+                               <input type="radio" name="payment" id="payment1" value="1"/>
+                              <{/if}>
                             <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                             &nbsp;银联卡&nbsp;
                             </label>
@@ -459,7 +463,7 @@ $("#btn-save").click(function(){
       if(phonecheck&&accountcheck){//如果检查通过
           $("#btn-save").button('loading');
           
-            $.post("<{spUrl c=cuser a=save}>", {  phone:$.trim($("#phone").val()),account: $.trim($("#account").val()),type: $('input[name="type"]:checked').val()},
+            $.post("<{spUrl c=cuser a=save}>", {  phone:$.trim($("#phone").val()),account: $.trim($("#account").val()),type: $('input[name="type"]:checked').val(),payment: $('input[name="payment"]:checked').val()},
              function(data){
                if(data.indexOf("操作失败")<0){
                   $.msg('保存成功！','color:green;');
