@@ -31,17 +31,8 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span3 left-bar">
-            <div class="row-fluid category">
-                  <div class="span4" align="center">
-                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
-                    <p class="title"><{$smarty.session.user.name}></p>               
-                  </div> 
-                  <div class="span8" style="padding:10px;">
-                    <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
-                  </div>
-                
-              </div>
+              <!-- load user tpl -->
+            <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
             <div class="categories">
               <div class="row-fluid category">
@@ -375,8 +366,7 @@
                         <input type="hidden" name="id" value="" class="currentProduct"/>
                         <div>
                           <object style="background-color:#fff;padding:5px;border:solid 1px #ccc;border-radius:5px;" id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
-                             <param name="Play" value="false" />
-                             <embed autostart="false" play="false" id="video-content-emb" play=false src="/img/adcontent/video/default.swf" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+                             <embed  id="video-content-emb"  src="/img/adcontent/video/default.swf" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
                              <div>浏览器插件缺失导致播放失败，请联系管理人员</div>
                           </object>
                         </div>
@@ -628,7 +618,7 @@ $("#file-video").change(function(){
                   var fullName=prefix+"video/"+data;
                   fullName=fullName.replace(/[\r\n]/g,"");
                   var newNode=' <object id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="'
-                  +fullName+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> <param name="Play" value="false" /><embed autostart="false" play="false" id="video-content-emb" play=false src="'
+                  +fullName+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> <embed id="video-content-emb" play=false src="'
                   +fullName+'" pluginspage="http://www.macromedia.com/go/getflashplayer"/><div>浏览器插件缺失导致播放失败，请联系管理人员</div></object>';
                   var parent=$("#video-content-obj").parent();
                   parent.empty();

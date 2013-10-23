@@ -120,7 +120,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                           </span>&nbsp;=&nbsp;
                           <span class="sumPrice" class="red-color" style="font-size:16px;font-weight:bold;color: #EC4F4F;">
                             <{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;
-                          </span>&nbsp;&nbsp;
+                          </span>&nbsp;&nbsp;(当前余额：<span id="balance">正在加载...</span>&nbsp;&yen;)
                         </div>
                </div>
               
@@ -186,18 +186,86 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     <a class="btn btn-success"  id="btn-pay" data-toggle="button"  data-loading-text="正在付款...">确认购买</a>
     <a class="btn" id="btn-back">返回修改</a>
   </div>
+</div>
+<div class="modal hide fade" id="form-income">
+   
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4>您的账户余额不足，请先充值</h4>
+  </div>
+  
+  <div class="modal-body" style="padding:10px 20px;">
+    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
+        <div>
+                <p>
+                  <label>充值方式：</label>
+                  <div class="row-fluid tip" style="width:90%;" title="目前仅支持支付宝">
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 2px green;box-shadow:0px 0px 2px #ccc;">
+                      <input type="radio" name="payment" id="payment1" value="0" checked/>
+                      <img src="/img/alipay.ico" width="20" height="20"/>
+                      &nbsp;支付宝&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                      <input type="radio" name="payment" id="payment2" value="1" disabled="disabled"/>
+                      <img src="/img/tenpay.ico" width="20" height="20"/>
+                      &nbsp;财付通&nbsp;
+                    </label>
+                    <label class="radio-inline span4" style="font-size:12px;background-color:#e9e9e9;
+                   border-radius:5px;padding:10px;border:solid 1px #ccc;">
+                    <input type="radio" name="payment" id="payment3" value="2" disabled="disabled"/>
+                    <img src="/img/Unionpay.jpg" width="20" height="20"/>
+                    &nbsp;银联卡&nbsp;
+                    </label>
+                  </div>
+                  <label>充值金额：</label>
+                </p>
+                <p>
+                    <input size="30" id="recharge-txt" class="input-large" name="cash" />
+                        <span id="recharge-msg">必填，请输入大于0的整数</span>
+                </p>
+                <p>
+                  <button class="btn btn-success" type="submit" id="btn-recharge">确 认</button>
+                </p>
+        </div>
+          </form>
+  </div>
+
+  <div class="modal-footer">
+    
+  </div>
+  
+</div>
 <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
     var numberFlag=false;
     var productFlag=false;
+    var balanceFlag=false;
     var currentProduct="0";
     var currentNumber=0;
+    var user;
+     $.post("<{spUrl c=cuser a=getUserJsonBySessionID}>",
+                 function(data){
+                   if(data!="0"){
+                     user=stringToJSON(data);
+                     $("#balance").html(parseInt(user.balance)*0.01);
+                   }
+                 });
+    function stringToJSON(obj){   
+      return eval('(' + obj + ')');   
+    } 
     $(".number").change(function() { 
         numberFlag=true;
         currentNumber=$(this).val();
+        var sumPrice=parseInt($(this).val())*parseInt(<{(0.01*(0.01*$ad.fee+1)*$ad.price)}>);
+        var balance=parseInt(user.balance)*0.01;
+        if(sumPrice<=balance){
+          balanceFlag=true;
+        }
         $(".finalNumber").html($(this).val());
         $('#modal-number').html($(this).val()+"&nbsp;天");
-        $(".sumPrice").html(parseInt($(this).val())*parseInt(<{(0.01*(0.01*$ad.fee+1)*$ad.price)}>)+"&nbsp;&yen;");
+        $(".sumPrice").html(sumPrice+"&nbsp;&yen;");
       }); 
     $(".product").change(function() { 
         productFlag=true;
@@ -239,6 +307,9 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           $.msg('请先选择推广产品');
         }else if(!numberFlag){
           $.msg('请先选择购买天数');
+        }else if(!balanceFlag){
+          $.msg('账户余额不足，请先充值');
+          $("#form-income").modal();
         }else{
           $("#form-verify").modal();
         }
@@ -272,6 +343,27 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
         $('#btn-pay').button('reset');  
         
       });
+      //验证充值金额
+$("#btn-recharge").click(function(){
+    var reg= /^[0-9]*$/;
+  if($.trim($("#recharge-txt").val())==""){
+            $("#recharge-msg").html("充值金额不能为空");
+            $("#recharge-msg").css("color","red");
+            return false;
+        }else{
+           if(!reg.test($.trim($("#recharge-txt").val()))){
+            $("#recharge-msg").html("充值金额必须为整数，且大于0");
+            $("#recharge-msg").css("color","red");
+            return false;
+            }else{
+                    $("#recharge-msg").html("验证通过！");
+                    $("#recharge-msg").css("color","green");
+                    return true;
+            }
+        }
+
+
+});
     </script>
   </body>
 </html>

@@ -31,17 +31,8 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span3 left-bar">
-            <div class="row-fluid category">
-                  <div class="span4" align="center">
-                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
-                    <p class="title"><{$smarty.session.user.name}></p>               
-                  </div> 
-                  <div class="span8" style="padding:10px;">
-                    <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
-                  </div>
-                
-              </div>
+             <!-- load user tpl -->
+            <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
             <div class="categories">
               <div class="row-fluid category">

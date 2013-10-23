@@ -1,9 +1,16 @@
 <?php
 class cuser extends spController
 {
-
-	function index(){
-		$this->display("index.php"); // 首页
+	function getUserJsonBySessionID(){
+		$user = spClass("user");
+		$conditions = array("id" => $_SESSION['user']['id']);
+		$records = $user->find($conditions); 
+		if($records){
+			echo json_encode($records);
+		}else{
+			echo "0";
+		}
+		
 	}
 
 	//登录
@@ -188,18 +195,10 @@ class cuser extends spController
 				echo "操作失败：该手机号码已经被注册！";
 	        }else{
 	        	$user->update($conditions, $newrow); // 更新记录
-		        $_SESSION['user']['mobilephone'] = $phone;
-		        $_SESSION['user']['account'] = $account;
-		        $_SESSION['user']['type'] = $type;
-		        $_SESSION['user']['payment']=$payment;
 		        echo "1"; // 首页
 	        }
 	    }else{
 	    		$user->update($conditions, $newrow); // 更新记录
-		        $_SESSION['user']['mobilephone'] = $phone;
-		        $_SESSION['user']['account'] = $account;
-		        $_SESSION['user']['type'] = $type;
-		        $_SESSION['user']['payment']=$payment;
 	        	echo "1"; // 首页
 	    }
         

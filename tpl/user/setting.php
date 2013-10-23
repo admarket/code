@@ -14,7 +14,7 @@
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico"> 
-    
+    <script src="/js/jquery-1.9.1.min.js"></script>
   </head>
   <body>
     <!-- load head tpl -->
@@ -25,22 +25,8 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span3 left-bar">
-            <div class="row-fluid category">
-                  <div class="span4" align="center">
-                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
-                    <p class="title">
-                      <{$smarty.session.user.name}>
-
-                    </p>
-                                
-                  </div> 
-                  <div class="span8" style="padding:10px;" >
-                    <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;" >
-                    <{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
-                  </div>
-                
-              </div>
+             <!-- load user tpl -->
+            <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
             <div class="categories">
               <div class="row-fluid category">
@@ -52,7 +38,7 @@
                   <div class="span10">
                     <div class=" title">&nbsp;当前身份：</div>
                     <p>
-                       <{if $smarty.session.user.type==0}>
+                       <{if $user.type==0}>
                          广告客户
                          <{else}>
                          广告商
@@ -151,19 +137,19 @@
                     <label>真实姓名：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-user"></i></span>
-                      <span class="input-xlarge uneditable-input tip" title="如需修改请联系客服人员">
-                        <{$smarty.session.user.name}>
+                      <span id="user-name" class="input-xlarge uneditable-input tip" title="如需修改请联系客服人员">
+                        <{$user.name}>
                       </span>
                     </div>
                     <label>邮箱：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-envelope"></i></span>
-                      <span class="input-xlarge uneditable-input"><{$smarty.session.user.email}></span>
+                      <span  id="user-email" class="input-xlarge uneditable-input"><{$user.email}></span>
                     </div>
                     <label>手机：</label>
                     <div class="input-prepend">
                       <span class="add-on"><i class="icon-mobile-phone icon-large"></i></span>
-                      <input type="text" class="input-xlarge " id="phone" value="<{$smarty.session.user.mobilephone}>"/>
+                      <input type="text" class="input-xlarge " id="phone" value="<{$user.mobilephone}>"/>
                       
                     </div>
                     <p class="help-block" id="phone-msg">请输入有效手机号码</p>
@@ -201,7 +187,7 @@
 
               <div class="span6" align="center">
                 <p>
-                  <img src="/img/head/<{$smarty.session.user.headimg}>" id="head-img" class="img-rounded img-polaroid  thumbnail" style="width:80px;height:80px;">
+                  <img src="/img/head/<{$user.headimg}>" id="head-img" class="img-rounded img-polaroid  thumbnail" style="width:80px;height:80px;">
                   <div>
                     <form id="headimgform" method="post" action="<{spUrl c=cuser a=uploadHeadimg}>" enctype="multipart/form-data"> 
                       <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -221,7 +207,7 @@
                         <label>账号：</label>
                         <div class="input-prepend">
                           <span class="add-on" style="font-weight:bold;">&yen;</span>
-                          <input type="text" id="account" value="<{$smarty.session.user.account}>">
+                          <input type="text" id="account" value="<{$user.account}>">
                         </div>
                         <p>
                           <p class="help-block" id="account-msg">请输入与下面提现方式相应的账号</p>
@@ -304,7 +290,7 @@
   </div>
   
 </div>
-<script src="/js/jquery-1.9.1.min.js"></script>
+
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.form.js"></script>
 <script src="/js/jquery.message.js"></script>
@@ -320,7 +306,7 @@ var repasswordcheck=false;
 var accountcheck=false;
 var phonecheck=false;
 var ajaxFlag=false;
-$("#head-img").attr("src","/img/head/<{$smarty.session.user.headimg}>");
+$("#head-img").attr("src","/img/head/<{$user.headimg}>");
 $('.tip').tooltip();
 $('#password-msg').show();
 $('#account-msg').hide();

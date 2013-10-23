@@ -32,7 +32,9 @@ class ctrade extends spController
                         "price" => $buyPrice,
                         "originalPrice"=>$price,
                         "number" => $number ,
+                        "startTime"=>date("Y-m-d H:i:s", $startTime), 
                         "endTime" =>date("Y-m-d H:i:s", $endTime), // 格式化日期
+                        "last_transfer_date"=>date("Y-m-d H:i:s", $startTime), 
                         "buyer" => $buyer,
                         "seller"=>$seller
                 );

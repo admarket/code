@@ -187,7 +187,7 @@ class cproduct extends spController
                 $product->update($conditions, $newrow); // 更新记录
              echo $firstName.".".$ext;
             }else {
-             echo "0".$msg."123";
+             echo "操作失败：".$msg;
             }
         
     }

@@ -62,18 +62,19 @@
 			}
 			//检测文件大小
 			if($size > $this->max_size){
-				$this->errmsg = '上传文件<font color=red>'.$name.'</font>太大，最大支持<font color=red>'.ceil($this->max_size/1024).'</font>kb的文件';
+				$this->errmsg = '文件'.$name.'太大，最大支持'.ceil($this->max_size/1024).'kb的文件';
 				return FALSE;
 			}
 			$this->set_save_path();//设置文件存放路径
 			$new_name = $this->file_name != 'date' ? $this->file_name.'.'.$this->ext : date('YmdHis').'.'.$this->ext;//设置新文件名
 			$this->uploaded = $this->save_path.$new_name;//上传后的文件名
 			//移动文件
-			if(move_uploaded_file($tmp_name,$this->uploaded)){
-				$this->errmsg = '文件<font color=red>'.$this->uploaded.'</font>上传成功！';
+			$result=move_uploaded_file($tmp_name,$this->uploaded);
+			if($result){
+				$this->errmsg = '文件'.$this->uploaded.'上传成功！';
 				return TRUE;
 			}else{
-				$this->errmsg = '文件<font color=red>'.$this->uploaded.'</font>上传失败！';
+				$this->errmsg = '文件'.$this->uploaded.'上传失败！';
 				return FALSE;
 			}
 

@@ -1,13 +1,7 @@
 <?php
 class cadvertise extends spController
 {
-   public function __construct(){
-        parent::__construct(); // 要先启动父类的构造函数
-        if($_SESSION['user']==""){
-            $this->jump(spUrl('main', 'login'));
-        }
-    }
-	       
+    
       	function AddAdvertise(){//添加广告项目
       		$advertise = spClass("advertise");
           //手续费规则：(0,1000)=10%，[1000,3000)=9%，[3000,5000)=8%，[5000,8000)=7%，[8000,10000)=6%,[10000,+]=5%;
@@ -150,6 +144,19 @@ class cadvertise extends spController
             echo "var trade=";
             echo json_encode($result);
             echo ";";
+          }else{
+            $report=spClass('report');//添加数据统计信息
+            $newrow = array(
+                        'advertise' => $this->spArgs('aid'),
+                        'product' => -1,
+                        'trade' => -1,
+                        'impression' => 1,
+                        'click' => 0,
+                        'buyer' => -1,
+                        'seller' => -1,
+                        'ip' => $ip,
+                        );
+            $report->create($newrow);
           }
           
         }
@@ -167,27 +174,32 @@ class cadvertise extends spController
             $conditions = array("advertise"=>$this->spArgs('aid')); // 根据id查找指定的广告位
             $result=$trade->spLinker()->find($conditions);
 
-            $report=spClass('report');//添加数据统计信息
-            $newrow = array(
-                        'advertise' => $this->spArgs('aid'),
-                        'product' => $result['product']['id'],
-                        'trade' => $result['id'],
-                        'impression' => 0,
-                        'click' => 1,
-                        'buyer' => $result['buyer'],
-                        'seller' => $result['seller'],
-                        'ip' => $ip,
-                        );
-            $report->create($newrow);
+            if($result){
+              $report=spClass('report');//添加数据统计信息
+              $newrow = array(
+                          'advertise' => $this->spArgs('aid'),
+                          'product' => $result['product']['id'],
+                          'trade' => $result['id'],
+                          'impression' => 0,
+                          'click' => 1,
+                          'buyer' => $result['buyer'],
+                          'seller' => $result['seller'],
+                          'ip' => $ip,
+                          );
+              $report->create($newrow);
 
-            $product=spClass('product');//更新产品统计信息
-            $productConditions = array("id"=>$result['product']['id']); // 查找email是$email的记录
-            $newrow = array(
-                    'click' => $result['product']['click']+1,  // 点击次数+1
-            );
-            $product->update($productConditions, $newrow); // 更新记录
+              $product=spClass('product');//更新产品统计信息
+              $productConditions = array("id"=>$result['product']['id']); // 查找email是$email的记录
+              $newrow = array(
+                      'click' => $result['product']['click']+1,  // 点击次数+1
+              );
+              $product->update($productConditions, $newrow); // 更新记录
 
-            $this->jump($result['product']['url']);//跳转到产品url
+              $this->jump($result['product']['url']);//跳转到产品url
+            }else{
+               $this->jump(spUrl('main', 'index'));
+            }
+            
         }
     
 }

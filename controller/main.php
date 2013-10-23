@@ -114,8 +114,11 @@ class main extends spController
         if(isset($_SESSION['user'])){
             $productConditions =" owner=". $_SESSION['user']['id'];
             $this->products=$product->findAll($productConditions);
+            $this->display("buy.php"); // 注册 
+        }else{
+            $this->jump(spUrl('main', 'login'));
         }
-        $this->display("buy.php"); // 注册 
+        
     }
     function help(){
         $this->display("help.php"); // 注册 

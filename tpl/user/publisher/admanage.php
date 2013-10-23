@@ -23,7 +23,6 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-fileupload.min.js"></script>
     <script src="/js/bootstrap-editable.js"></script>
-    <script src="/js/jquery.validate.min.js"></script>
   </head>
   <body>
      <!-- load head tpl -->
@@ -34,17 +33,8 @@
       <div class="container">
         <div class="row-fluid">
           <div class="span3 left-bar">
-            <div class="row-fluid category">
-                  <div class="span4" align="center">
-                     <img src="/img/head/<{$smarty.session.user.headimg}>" class="img-rounded img-polaroid" style="margin:0;height:50px;width:50px;">
-                    <p class="title"><{$smarty.session.user.name}></p>               
-                  </div> 
-                  <div class="span8" style="padding:10px;">
-                    <div class="title">&nbsp;账户余额：</div>
-                    <h4 style="color:#50B432;"><{(0.01*$smarty.session.user.balance)|number_format}> &yen;</h4>
-                  </div>
-                
-              </div>
+              <!-- load user tpl -->
+            <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
             <div class="categories">
               <div class="row-fluid category">
@@ -218,7 +208,7 @@
                           <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertisePrice"><span class="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
-                             <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$smarty.session.user.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
+                             <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
                           <td>
                              <{if $advertise.state == 0}>
                             <span class="label label-success"> 
