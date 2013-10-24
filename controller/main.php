@@ -27,7 +27,7 @@ class main extends spController
              $conditions =$conditions." and category=".$category;
         }
         $this->keyword=trim($keyword);
-        if(!isset($keyword)){
+        if(isset($keyword)){
             $conditions = $conditions.' and (name like '.$project->escape('%'.$this->keyword.'%');
             $conditions= $conditions." or description like ".$project->escape('%'.$this->keyword.'%').')';
         }

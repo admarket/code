@@ -102,40 +102,7 @@
       
        $("#txt-email").val(GetName);
     } 
-    
-      $("#btn-login").click(function(){
-          $("#btn-login").button('loading');
-          $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
-           function(data){
-             if(data){
-              //$("#alert-msg").hide();
-              if($("#cookieCheck").attr("checked")){//添加cookie
-                //document.cookie="email="+$("#txt-email").val();
-                var Days = 30;   
-                var exp = new Date();  
-                var name="email";
-                var value=  $("#txt-email").val();
-                exp.setTime(exp.getTime() + Days*24*60*60*1000);   
-                document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();   
-              }
-              $.msg("验证成功！正在跳转中...",'color:green;');
-              history.go(-1);
-                //window.location.href="<{spUrl c=sub a=dashboard}>";
-             }else{
-              $.msg("用户名或密码错误！",function(){
-                alert();
-              });
-              //$("#alert-msg").show();
-              $('#btn-login').button('toggle');
-              $('#btn-login').button('reset');
-             }
-           });
-          
-      });
-    document.onkeydown=function(event){
-      e = event ? event :(window.event ? window.event : null);
-      if(e.keyCode==13){
-       //执行的方法
+    function login(){
        $("#btn-login").button('loading');
           $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
            function(data){
@@ -151,17 +118,30 @@
                 document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();   
               }
               $.msg("验证成功！正在跳转中...",'color:green;');
-              history.go(-1);
-                //window.location.href="<{spUrl c=sub a=dashboard}>";
+              if(document.referrer!=""){
+                window.history.go(-1);
+              }
+              else{
+                window.location.href="<{spUrl c=main a=index}>";
+              }
+                
              }else{
               $.msg("用户名或密码错误！",function(){
-                alert();
               });
               //$("#alert-msg").show();
               $('#btn-login').button('toggle');
               $('#btn-login').button('reset');
              }
            });
+    }
+      $("#btn-login").click(function(){
+         login();  
+      });
+    document.onkeydown=function(event){
+      e = event ? event :(window.event ? window.event : null);
+      if(e.keyCode==13){
+       //执行的方法
+        login();
       }
      }
     </script>

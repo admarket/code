@@ -18,7 +18,7 @@ class sub extends spController
     function logout(){
     	unset($_SESSION["user"]);
     	session_destroy();
-        echo "<script type='text/javascript'>history.go(-1)</script>";
+        echo "<script type='text/javascript'>window.history.go(-1)</script>";
     	//$this->jump(spUrl('main', 'index')); // 跳转到首页 // 退出   
     }
     function setting(){
