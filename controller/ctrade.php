@@ -22,12 +22,14 @@ class ctrade extends spController
 		$price=intval($this->spArgs("price"))*100;
 		$buyPrice=intval($this->spArgs("buyPrice"))*100;
 		$number=intval($this->spArgs("number"));
+		$adcontentNumber=intval($this->spArgs("adcontentNumber"));
 		$startTime = time();  // 当前时间戳
    		$endTime =$startTime + ($number * 24 * 60 * 60);  // N天后的时间戳 
 		$buyer=$_SESSION['user']['id'];
 		$seller=$this->spArgs("seller");
 		$newTrade = array(
                         "advertise" => $advertiseID , 
+                        "adcontentNumber"=>$adcontentNumber,
                         "product" => $product,
                         "price" => $buyPrice,
                         "originalPrice"=>$price,
@@ -51,9 +53,15 @@ class ctrade extends spController
 			//检查广告位出售状态
 			$trade->query("BEGIN");
 			$advertise = spClass("advertise");
-			$conditions=array("id" => $advertiseID);
-			$adCheck=$user->find($conditions);
-			if($adCheck["state"]==1){
+			$conditions=array(
+				"id" => $advertiseID,
+				);
+			$conditions2=array(
+				"id" => $advertiseID,
+				"state"=>1,
+				);
+			$adCheck=$advertise->find($conditions2);
+			if($adCheck){
 				echo '该广告位已经出售，请选择其他广告位';
 			}else if($product=""||$product==0){
 				echo '请先添加您的产品！';

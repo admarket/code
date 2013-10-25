@@ -31,9 +31,11 @@
               </p>
               <h5>知识产权声明：</h5>
              <p>
-              <span class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></span>
-                             <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=54"></script>
-                             <script type="text/javascript" id="admarket_js_54" src="http://www.eadmarket.com/js/ad.js?aid=54"></script>
+<div class="admarket_ad" style="display:inline;" aid="87" id="admarket_box_87"></div>
+                             <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=87"></script>
+                             <script type="text/javascript" id="admarket_js_87" src="http://www.eadmarket.com/js/ad.js?aid=87"></script>
+                             
+                             
                              广告市场拥有本网站内所有资料的版权，各分频道权利声明有特殊规定的，从其规定。任何被授权的浏览、复制、打印和传播属于本网站内的资料必须符合以下条件：
               <br/>
               所有的资料和图象均以获得信息为目的；<br/>

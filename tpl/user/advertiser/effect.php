@@ -266,7 +266,7 @@
                               <h5 class="orange-color" >
                               
                                <{if $trade.advertise.format==0}>
-                                  <i class="icon-text icon-large tip" title="文字"></i>
+                                  <i class="icon-font icon-large tip" title="文字"></i>
                                <{elseif $trade.advertise.format==1}>     
                                   <i class="icon-picture icon-large tip" title="图片"></i>
                                <{else}>
@@ -289,6 +289,16 @@
                         </tr>
                         <tr>
                           <td colspan="3">
+                            <p>广告位效果预览：(如果效果不佳，可在产品管理页面更换广告内容)</p>
+                            <div>
+                              <div class="admarket_ad" style="display:inline;" aid="<{$trade.advertise.id}>" id="admarket_box_<{$trade.advertise.id}>"></div>
+                                 <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=<{$trade.advertise.id}>"></script>
+                                 <script type="text/javascript" id="admarket_js_<{$trade.advertise.id}>" src="http://www.eadmarket.com/js/ad.js?aid=<{$trade.advertise.id}>"></script>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">
                             <p>推广进度：
                              </p>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$trade.process}>%">
@@ -307,7 +317,7 @@
                         </tr>
                      
                   </table>
-
+                  
                 </div>
                  <{/foreach}>   
                      

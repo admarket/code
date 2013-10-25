@@ -13,8 +13,12 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     <link href="/css/style2.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+
+     <style>
+    #image-shortcut{height: 100px;width:90%;}
+    #image-shortcut .active img{border:solid 2px #7ab900;width: 50px;height: 50px;}
+    #image-shortcut  img{border-radius:10px;margin:10px;}
+    </style>
   </head>
   <body>
      <!-- load head tpl -->
@@ -39,10 +43,10 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           </div>
           <div class="content">
 
-              <div class="row-fluid" style="padding:0 0px 10px 30px;vertical-align:bottom;font-size:12px;">
+              <div class="row-fluid" style="padding:0 0px 10px 10px;vertical-align:bottom;font-size:12px;">
                    <h5>绑定产品与广告位：</h5> 
                   
-                  <div id="bindProduct" class="span5 row-fluid" style="border:dashed 1px #ccc;padding:10px 30px;border-radius:5px;">
+                  <div id="bindProduct" class="span6 row-fluid" style="border:dashed 1px #ccc;padding:10px 30px;border-radius:5px;">
                       <h6>请选择推广产品：</h6> 
                       <{if $products eq ""}>
                          <div>
@@ -51,35 +55,80 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                         </div>     
                       <{/if}>
                       <{foreach from=$products item=product}>
-                            <label class="radio" style="font-size:12px;">
-                              <input style="margin-top:10px;" class="product" type="radio" name="product" id="product<{$product.id}>" value="<{$product.id}>" data-show="<{$product.show}>" data-name="<{$product.name}>" data-txt="<{$product.txt}>" data-image="<{$product.image}>" data-video="<{$product.video}>">
+                            <label class="radio span5" style="font-size:12px;">
+                              <input style="margin-top:10px;" class="product" type="radio" name="product" id="product<{$product.id}>" value="<{$product.id}>" data-show="<{$product.show}>" data-name="<{$product.name}>" data-url="<{$product.url}>"  data-txt="<{$product.txt}>" data-image="<{$product.image}>" data-video="<{$product.video}>">
                               <img src="/img/show/<{$product.shown}>" width="40" height="40" style="width:40px;height:40px;"/>
                               &nbsp;<{$product.name}>&nbsp;
                             </label>
                       <{/foreach}>
                   </div>
-                  <div class="span6 row-fluid" style="border:dashed 1px #ccc;padding:10px;border-radius:5px;">
+                   
+                  <div class="span5 row-fluid" style="border:dashed 1px #ccc;padding:10px;border-radius:5px;">
                     <div class="span4" style="text-align:center;">
                       <img class="img-rounded img-polaroid" style="width:60px;height:60px;" src="/img/ads/<{$ad.base.logo}>" alt="">
                       <h6  style="color:#555;"><{$ad.base.name}></h6>
                     </div>
                     
-                    <div class="span8">
+                    <div class="span8" style="line-height:25px;">
                         <h6><{$ad.title}></h6>
                         <div><{$ad.content}></div>
-                        <div><strong>价格：</strong><{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;&nbsp;<strong>大小：</strong><{$ad.width}>*<{$ad.height}>&nbsp;像素</div>
-                        <div style="padding:10px 0px;"><strong>最近三个月平均展示次数：</strong>
+                        <div><strong>价格：</strong><{(0.01*(0.01*$ad.fee+1)*$ad.price)|number_format}> &yen;/天&nbsp;</div>
+                         <div> <{if $ad.format==0}>
+                              <strong>字体大小：</strong><{$ad.width}>&nbsp;像素
+                              &nbsp;<strong>字数：</strong><{$ad.height}>
+                          <{else}>
+                              <strong>大小：</strong><{$ad.width}>*<{$ad.height}>&nbsp;像素
+                          <{/if}>
+                          </div>
+                        <div><strong>最近三个月平均展示次数：</strong>
                           <span class="red-color"><{$adCount|number_format}> </span>&nbsp;次/月
                         </div>
                     </div> 
                     
                   </div>
               </div>
-              <div class="row-fluid" style="padding:0 0px 10px 30px;vertical-align:bottom;font-size:12px;">
+              <div class="row-fluid" style="padding:0 0px 10px 10px;vertical-align:bottom;font-size:12px;">
                         <br/>
                         
+                        <{if $ad.format==0}>
+                            <h5>选择广告内容：</h5>
+                            <div id="txt-shortcut" class=" row-fluid tip" title="点击切换广告文字" style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;padding:10px;width:90%;">
+
+                              <label class="radio" style="font-size:12px;">
+                              <input class="txt-preview"  type="radio" name="txt-adcontent" checked="checked">
+                              &nbsp;广告位招租&nbsp;
+                              </label>
+                           
+                            </div>
+                        <{elseif $ad.format==1}>
+                            <h5>选择广告内容：</h5>
+                            <div id="image-shortcut" class=" row-fluid tip" title="点击切换图片" style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;">
+                              <a class="span2 active image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                           
+                            </div>
+                        <{elseif $ad.format==2}>
+                            
+                        <{else}>
+                            <h5>选择广告内容：</h5>
+                            <p>无法识别的广告格式！请选择其他的广告位购买</p>
+                        <{/if}>
+                         
                         <h5>选择购买时间：</h5>
-                        <div id="day">
+                        <div id="day" style="padding:0 20px;">
                          <label class="radio inline"  style="font-size:12px;">
                               <input  type="radio" class="number" name="number"  value="7">
                               &nbsp;7天&nbsp;
@@ -102,8 +151,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                           </label>
                         </div>
                         <br/>
-                        <h5>广告位效果预览：(如果效果不佳，可以在购买后自行更换产品广告内容)</h5>
-                        <div>
+                        <h5>广告位效果预览：(请留意广告位要求。效果不佳可在购买后自行更换广告内容)</h5>
+                        <div style="padding:10px 20px;">
                           <span class="admarket_ad" style="display:inline;" aid="<{$ad.id}>" id="admarket_box_<{$ad.id}>"></span>
                              <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=<{$ad.id}>"></script>
                              <script type="text/javascript" id="admarket_js_<{$ad.id}>" src="http://www.eadmarket.com/js/ad.js?aid=<{$ad.id}>"></script>
@@ -237,6 +286,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
   </div>
   
 </div>
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
     var numberFlag=false;
@@ -244,7 +295,9 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     var balanceFlag=false;
     var currentProduct="0";
     var currentNumber=0;
+    var contentNumber=0;
     var user;
+    $('.tip').tooltip();
      $.post("<{spUrl c=cuser a=getUserJsonBySessionID}>",
                  function(data){
                    if(data!="0"){
@@ -255,6 +308,14 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     function stringToJSON(obj){   
       return eval('(' + obj + ')');   
     } 
+    $("#image-shortcut .image-preview").click(function(){
+        //$("#image-content").attr("src",$(this).children(0).attr("src"));
+        $(this).parent().children().each(function(){
+          $(this).attr('class','span1 image-preview');
+        });
+        $(this).attr('class','span2 active image-preview');
+    });
+
     $(".number").change(function() { 
         numberFlag=true;
         currentNumber=$(this).val();
@@ -270,33 +331,81 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
     $(".product").change(function() { 
         productFlag=true;
         currentProduct=$(this).attr('value');
+        currentTxtContent=$(this).attr('data-txt');
+        currentImageContent=$(this).attr('data-image');
+        currentVideoContent=$(this).attr('data-video'); 
         var baseURL="http://www.eadmarket.com/";
         var adBox=document.getElementById("admarket_box_"+<{$ad.id}>);//广告位容器
         var adcontent="";//广告位内容
         var imageURI="";//图片资源地址
         var videoURI="";//视频资源地址
         var txtURI="";//文字资源地址
-        var targetURL="";//广告跳转地址
-            txtURI=$(this).attr('data-txt');
-            imageURI=baseURL+"img/adcontent/image/"+$(this).attr('data-image');
-            videoURI=baseURL+"img/adcontent/video/"+$(this).attr('data-video');
-            targetURL=baseURL+'?c=cadvertise&a=clicked&aid='+<{$ad.id}>;
+        var targetURL=currentVideoContent=$(this).attr('data-url');//广告跳转地址
+            txtURI=$(this).attr('data-txt').split('\n')[0];
+            imageURI=baseURL+"img/adcontent/image/"+$(this).attr('data-image').split(';')[0];
+            videoURI=baseURL+"img/adcontent/video/"+$(this).attr('data-video').split(';')[0];
+            //targetURL=baseURL+'?c=cadvertise&a=clicked&aid='+<{$ad.id}>;
             //加载广告内容
             if(<{$ad.format}>==0){
-                adcontent=txtURI;
+                adcontent='<a id="txt-content" style="font-size:'+advertise.width+'px;" target="_blank" href="'+targetURL+'">'+txtURI.substring(0,parseInt(advertise.height))+'</a>';
+                $("#txt-shortcut").empty();
+                var count=0;
+                if(currentTxtContent.split('\n').length>1){
+                  count=currentTxtContent.split('\n').length - 1;
+                }
+                for (var i = 0; i <= count; i++) {
+                  var shortcut='<label class="radio  inline span3" style="font-size:12px;"><input  data-index="'+i+'"  type="radio" class="txt-preview" name="txt-adcontent" data-value="'+currentTxtContent.split('\n')[i]+'"';
+                  if(i==0){
+                    shortcut+=' checked="checked"';
+                  }
+                  shortcut+='>&nbsp;'+currentTxtContent.split('\n')[i]+'&nbsp;</label>';
+                  $("#txt-shortcut").append(shortcut);
+                };
+                 $("#txt-shortcut .txt-preview").bind("change",function(){
+                  contentNumber=$(this).attr('data-index');
+                  $("#txt-content").html($(this).attr("data-value").substring(0,parseInt(advertise.height)));
+                  
+                });
+                adBox.setAttribute('style',"");
+                adBox.removeAttribute('onclick');
             }
             else if(<{$ad.format}>==1){
-                adcontent='<img  width="'+<{$ad.width}>+'" height="'+<{$ad.height}>+'"  style="width:'+<{$ad.width}>+'px;height:'+<{$ad.height}>+'px;"  src="'+imageURI+'"/>';
+               adcontent='<img id="image-content"  width="'+advertise.width+'" height="'+advertise.height+'"  style="width:'+advertise.width+'px;height:'+advertise.height+'px;"  src="'+imageURI+'"/>';
+                // adcontent='<img id="image-content"  width="'+<{$ad.width}>+'" height="'+<{$ad.height}>+'"  style="width:'+<{$ad.width}>+'px;height:'+<{$ad.height}>+'px;"  src="'+imageURI+'"/>';
+                $("#image-shortcut").empty();
+                var count=0;
+                if(currentImageContent.split(';').length>1){
+                  count=currentImageContent.split(';').length - 1;
+                }
+                for (var i = 0; i <= count; i++) {
+                  var shortcut='<a class="span1 image-preview"  data-index="'+i+'"><img src="/img/adcontent/image/'+currentImageContent.split(';')[i]+'"  class="img-rounded img-polaroid  thumbnail "/></a> '
+                  $("#image-shortcut").append(shortcut);
+                };
+                $("#image-shortcut").children().first().attr('class','span2 active image-preview');
+                $("#image-shortcut .image-preview").bind("click",function(){
+                  contentNumber=$(this).attr('data-index');
+                  $("#image-content").attr("src",$(this).children(0).attr("src"));
+                  $(this).parent().children().each(function(){
+                    $(this).attr('class','span1 image-preview');
+                  });
+                  $(this).attr('class','span2 active image-preview');
+                });
+
             }
             else if(<{$ad.format}>==2){
                 adcontent='<object style="display:inline-block;" width="'+<{$ad.width}>+'" height="'+<{$ad.height}>+'" type="application/x-shockwave-flash" data="'+videoURI+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">';
                 adcontent+='<embed  style="display:inline-block;" src="'+videoURI+'"  width="'+<{$ad.width}>+'" height="'+<{$ad.height}>+'"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
                 adcontent+='<span>浏览器插件缺失导致播放失败，请联系管理人员</span></object>';
+                
+                //adBox.setAttribute('onclick','goto(this)');
+                //adBox.setAttribute('onmouseover','changeBGColor(this)');
+                //adBox.setAttribute('style',style);
             }
+        // adBox.setAttribute('url',targetURL);
+        // adBox.setAttribute('onclick','goto(this)');
+        // //adBox.setAttribute('onmouseover','changeBGColor(this)');
+        // adBox.setAttribute('style',style);
         adBox.setAttribute('url',targetURL);
-        adBox.setAttribute('onclick','goto(this)');
-        //adBox.setAttribute('onmouseover','changeBGColor(this)');
-        adBox.setAttribute('style',style);
         adBox.innerHTML=adcontent;
 
         $('#modal-product').html($(this).attr('data-name'));
@@ -328,7 +437,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           //$.loading("正在支付");
           $("#btn-save").button('loading');
           
-            $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>},
+            $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
              function(data){
                if(data==1){
                   $.msg('购买成功！','color:green;');

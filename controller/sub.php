@@ -244,9 +244,9 @@ class sub extends spController
     function product(){
         $product = spClass("product");
         $conditions = array("owner" => $_SESSION['user']['id']);
-        $this->products = $product->spLinker()->findAll($conditions);
-         if($this->products){
-             $this->productCount=count($this->products);//产品总数
+        $results = $product->spLinker()->findAll($conditions);
+         if(results){
+             $this->productCount=count(results);//产品总数
          }
         else{
             $this->productCount=0;
@@ -256,16 +256,24 @@ class sub extends spController
         $this->sumClick=0;//总点击次数
         $this->impressPrice=0;//累计总收益
         $this->clickPrice=0;
-        foreach ($this->products as $product) { 
+        foreach ($results as &$product) { 
+           $product['canRemove']=1;
            $this->sumFee=$this->sumFee+$product['fee'];
             $this->sumImpression=$this->sumImpression+$product['impression'];
             $this->sumClick=$this->sumClick+$product['click'];
+            foreach ($product['trades'] as $trade) {
+                if($trade.state==0){
+                    $product['canRemove']=0;
+                    break;
+                }
+            }
         }
         $this->impressPrice=$this->sumFee/$this->sumImpression;
         $this->clickPrice=$this->sumFee/$this->sumClick;
 
 
         $this->current="product";//设置当前导航状态
+        $this->products=$results;
         $this->display("user/advertiser/product.php"); // 用户面板   
     }
 

@@ -212,6 +212,7 @@
       </div>
       <div class="modal-footer">
         <a href="#" id="verifyAddress" class="btn btn-primary">立刻去验证</a>
+        <a href="<{spUrl c=main a=login}>"  class="btn btn-success">先登录再说</a>
       </div>
     </div>
    <script src="/js/jquery-1.9.1.min.js"></script>

@@ -6,7 +6,7 @@ class main extends spController
         $project=spClass('project');
         $this->types = $type->spLinker()->findAll();
         $this->currentCategory=1;
-        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 12)->findAll();
+        $this->projects = $project->spLinker()->spPager($this->spArgs('page', 1), 12)->findAll(null,"id desc");
         $this->pager = $project->spPager()->getPager();
         $this->hots =  $project -> findAll(null,'alexa ASC',null,"0,12");
         $this->display("index.php"); // 首页

@@ -34,6 +34,11 @@ class cuser extends spController
 				$unReadMessages=$message->findAll($conditions2);
 		        $unRead=count($unReadMessages);
 		        $_SESSION['unread'] = $unRead;
+		        $currentTime=time();
+		        $newrow = array(
+                'last_login_time' => date("Y-m-d H:i:s", $currentTime),  // 然后将这条记录的name改成“喜羊羊”
+		        );
+		        $user->update($conditions, $newrow); // 更新记录
 				echo "1";
 				return;
 			}else{

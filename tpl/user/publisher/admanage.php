@@ -199,11 +199,21 @@
                               <{/if}>
                               </a>
                           </td>
-                          <td>
-                            <a class="number-editable" data-pk="<{$advertise.id}>"
+                          <td style="min-width:80px;">
+                             <{if $advertise.format == 0}>
+                             字体大小：
+                             <a class="number-editable" data-pk="<{$advertise.id}>"
+                               data-name="advertiseWidth"><{$advertise.width}></a><br/>
+                             最多字数：<a  class="number-editable" data-pk="<{$advertise.id}>"
+                               data-name="advertiseHeight"><{$advertise.height}>
+                             </a>
+                              <{else}>
+                              <a class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertiseWidth"><{$advertise.width}></a> * <a  class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertiseHeight"><{$advertise.height}>
                              </a>
+                              <{/if}>
+                            
                           </td>
                           <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
@@ -243,7 +253,7 @@
                           <td>
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
-                             data-content='<textarea class="textarea"><span class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></span>
+                             data-content='<textarea class="textarea"><div class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
                              <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
                              <script type="text/javascript" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>
@@ -301,11 +311,25 @@
             </div>
             <div id="advertiseName-msg" class="msg">不能为空，长度小于10</div>
           </div>
-          
+          <label class="control-label" for="input01">广告格式：</label>
+          <p class="controls">
+            <label class="radio inline">
+              <input type="radio" onclick="changeName()" name="format" id="format0" value="0">  
+              <i class="icon-font tip" title="文字"></i>
+            </label>
+            <label class="radio inline">
+              <input type="radio" onclick="changeNameBack()" name="format" id="format1" value="1" checked> 
+              <i class="icon-picture tip" title="图片"></i>
+            </label>
+            <label class="radio inline">
+              <input type="radio" onclick="changeNameBack()" name="format" id="format2" value="2"> 
+              <i class="icon-film tip" title="视频"></i>
+            </label>
+          </p>
           <div class="controls row-fluid">
             <div class="span3">
                <div class="input-prepend">
-                 <label class="control-label">宽：</label>
+                 <label class="control-label"><span id="width-name">宽：</span></label>
                  <span class="add-on"><i class="icon-exchange tip" title="广告位宽度"></i></span>
                  <input class="input-mini"   id="advertiseWidth" name="advertiseWidth" type="text" placeholder="0">
               </div>
@@ -313,7 +337,7 @@
             </div>
             <div class="span3  offset1">
               <div class="input-prepend">
-                 <label class="control-label">高：</label>
+                 <label class="control-label"><span id="height-name">高：</span></label>
                  <span class="add-on"><i class="icon-sort tip" title="广告位高度"></i></span>
                  <input class="input-mini"  id="advertiseHeight" name="advertiseHeight"  type="text" placeholder="0">
               </div>
@@ -329,21 +353,7 @@
                <div id="advertisePrice-msg" class="msg">不能为空，正数数字</div>
             </div>
           </div> 
-          <label class="control-label" for="input01">广告格式：</label>
-          <p class="controls">
-            <label class="radio inline">
-              <input type="radio" name="format" id="format0" value="0">  
-              <i class="icon-font tip" title="文字"></i>
-            </label>
-            <label class="radio inline">
-              <input type="radio" name="format" id="format1" value="1" checked> 
-              <i class="icon-picture tip" title="图片"></i>
-            </label>
-            <label class="radio inline">
-              <input type="radio" name="format" id="format2" value="2"> 
-              <i class="icon-film tip" title="视频"></i>
-            </label>
-          </p>
+          
           <label class="control-label">所属网站：</label>
           <div class="controls">
             <div class="input-prepend">
@@ -393,7 +403,14 @@
 <script src="/js/jquery.message.js"></script>
 <script type="text/javascript">
 $('.tip').tooltip();
-
+function changeName(){
+  $('#width-name').html('字体大小(像素)：');
+  $('#height-name').html('字数：');
+}
+function changeNameBack(){
+  $('#width-name').html('宽度：');
+  $('#height-name').html('高度：');
+}
 $('.select-editable').editable({
         disabled:true,  
         url: '<{spUrl c=cadvertise a=UpdateAdvertise}>',

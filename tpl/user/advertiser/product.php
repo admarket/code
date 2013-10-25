@@ -21,6 +21,11 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-fileupload.min.js"></script>
     <script src="/js/bootstrap-editable.js"></script>
+    <style>
+    #image-shortcut{height: 100px;}
+    #image-shortcut .active img{border:solid 2px #7ab900;width: 50px;height: 50px;}
+    #image-shortcut  img{border-radius:10px;margin:10px;}
+    </style>
   </head>
   <body>
      <!-- load head tpl -->
@@ -194,9 +199,9 @@
                                 </a>
                               </p>
                               <p data-pk="<{$product.id}>"><strong>广告内容：</strong>
-                                <a href="#txt-content" class="btn btn-mini tip btn-adcontent" title="文字格式"><i class="icon-font icon-small"></i></a>
-                                <a href="#video-content-obj" class="btn btn-mini tip btn-adcontent" title="图片格式"><i class="icon-picture icon-small"></i></a>
-                                <a href="#txt-content" class="btn btn-mini tip btn-adcontent" title="视频格式"><i class="icon-film icon-small"></i></a>
+                                <a href="#txt-content" class="btn btn-mini tip btn-txt-content" title="文字格式"><i class="icon-font icon-small"></i></a>
+                                <a href="#image-content-obj" class="btn btn-mini tip btn-image-content" title="图片格式"><i class="icon-picture icon-small"></i></a>
+                                <a href="#video-content" class="btn btn-mini tip btn-video-content" title="视频格式"><i class="icon-film icon-small"></i></a>
                               </p>
                           </td>
                           <td>
@@ -219,7 +224,7 @@
                             <{(0.01*$product.fee/$product.click)|string_format:'%.2f'}> &yen;/次
                           </td>
                           <td>
-                           <{if $product.trades|@count eq 0}>
+                           <{if $product.canRemove==1}>
                            
                              <a url="<{spUrl c=cproduct a=removeProduct productID=$product.id}>"
                               class="btn btn-mini btn-danger tip remove" title="删除">
@@ -309,7 +314,7 @@
   </form>
 </div>
 
-<div class="modal hide fade" id="form-confirm" style="top:20%;">
+<div class="modal hide fade" id="form-confirm" style="top:10%;">
   <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h5>是否确认删除数据？</h5>
@@ -331,38 +336,110 @@
     </div>
   
 </div>
-<div class="modal hide fade" id="form-adcontent" style="top:20%;">
+<div class="modal hide fade" id="form-txt-content" style="top:10%;">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h5>广告显示内容管理</h5>
+      <h5>文字广告内容管理</h5>
+    </div>
+    <div class="modal-body">
+      
+                  <div>
+                    <form id="txtform" method="post" action="<{spUrl c=cproduct a=upDateAdTxt}>" enctype="multipart/form-data"> 
+                       <h6>
+                        广告文字预览：
+                      </h6>
+                      <div style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
+                          <input type="hidden" name="id" value="" class="currentProduct"/>
+                          <textarea id="txt-content" name="txt" style="width:90%;height:200px;" ></textarea>
+                          <div>
+                            <a class="btn btn-success btn-small" id="btn-txt">
+                              保存修改
+                            </a>
+                            <span style="margin-left:20px;"><i class="icon-exclamation-sign"></i>&nbsp;
+                              <strong>提示：</strong>多个广告词，以换行分隔，总长度不超过300
+                            </span>
+                          </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+    </div>
+    <div class="modal-footer row" style="text-align:left;margin:-10px 0;" align="left">
+
+      
+
+    </div>
+</div>
+<div class="modal hide fade" id="form-image-content" style="top:10%;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>图片广告内容管理</h5>
     </div>
     <div class="modal-body">
       
                   <div>
                     <form id="imageform" method="post" action="<{spUrl c=cproduct a=uploadAdImage}>" enctype="multipart/form-data"> 
-                      
-                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
-                        <p>
-                        图片广告预览板：
-                      </p>
+                       <h6>
+                        图片缩略图：
+                      </h6>
+                      <div id="image-shortcut" class=" row-fluid tip" title="点击切换图片" style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;">
+                              <a class="span2 active image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                              <a class="span1 image-preview">
+                                <img src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail " data-index="0">
+                              </a>
+                           
+                      </div>
+                       <h6>
+                        图片预览：
+                      </h6>
+                      <div style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
+                        
                       <input type="hidden" name="id" value="" class="currentProduct"/>
                         <div><img id="image-content" src="/img/adcontent/image/default.jpg"  class="img-rounded img-polaroid  thumbnail"></div>
                         <div class="fileupload fileupload-new" data-provides="fileupload"></div>
                         <div>
-                          <span class="btn btn-file btn-small" id="btn-upload">
+                          <span class="btn btn-success btn-file btn-small" id="btn-upload">
                             <span class="fileupload-new">更换广告图片</span>                   
                             <input type="file" name="file" id="file-image" />
                           </span>
                         </div>
                       </div>
-                      
+                      <input type="hidden" value="0" name="adcontentNumber" id="image-adcontentNumber"/>
                     </form>
+                  </div>
+    </div>
+    <div class="modal-footer row" style="text-align:left;margin:-10px 0;" align="left">
+
+      
+
+    </div>
+</div>
+<div class="modal hide fade" id="form-video-content" style="top:20%;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>视频广告内容管理</h5>
+    </div>
+    <div class="modal-body">
+      
+                  <div>
+                    
                     <form id="videoform" method="post" action="<{spUrl c=cproduct a=uploadAdVideo}>" enctype="multipart/form-data"> 
-                     
-                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:20px;margin:10px 0;">
-                        <p>
-                          视频广告预览板：
-                        </p>
+                      <h6>
+                          广告视频预览：
+                      </h6>
+                      <div style="background-color:#eee;border:dashed 1px #ccc;border-radius:5px;padding:20px;margin:10px 0;">
+                        
                         <input type="hidden" name="id" value="" class="currentProduct"/>
                         <div>
                           <object style="background-color:#fff;padding:5px;border:solid 1px #ccc;border-radius:5px;" id="video-content-obj"  play="false"  type="application/x-shockwave-flash" data="/img/adcontent/video/default.swf"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> 
@@ -372,26 +449,11 @@
                         </div>
                         <div class="fileupload fileupload-new" data-provides="fileupload"></div>
                         <div>
-                          <span class="btn btn-file btn-small" id="btn-upload">
+                          <span class="btn btn-success btn-file btn-small" id="btn-upload">
                             <span class="fileupload-new">更换广告视频</span>                   
                             <input type="file" name="file" id="file-video" />
                           </span>
                         </div>
-                      </div>
-                      
-                    </form>
-                    <form id="txtform" method="post" action="<{spUrl c=cproduct a=upDateAdTxt}>" enctype="multipart/form-data"> 
-                      <div style="background-color:#eee;border:solid 1px #ccc;border-radius:5px;padding:10px;margin:10px 0;">
-                          <p>
-                            文字广告预览板：
-                          </p>
-                          <input type="hidden" name="id" value="" class="currentProduct"/>
-                          <textarea id="txt-content" name="txt" style="width:90%;" ></textarea>
-                          <div>
-                            <a class="btn btn-file btn-small" id="btn-txt">
-                              更换广告文字
-                            </a>
-                          </div>
                       </div>
                       
                     </form>
@@ -588,7 +650,8 @@ $("#file-image").change(function(){
                 $.msg('上传成功！','color:green;'); 
                 var fullName=prefix+"image/"+data;
                 fullName=fullName.replace(/[\r\n]/g,"");
-                $("#image-content").attr("src",fullName);  
+                $("#image-content").attr("src",fullName); 
+                $('#image-shortcut').children('.span2').children('img').attr("src",fullName); 
               }else{
                 $.msg(data); 
               }
@@ -599,6 +662,8 @@ $("#file-image").change(function(){
             }  
         };  
         if(validateImage(obj)) {
+          var adcontentNumber=$('#image-shortcut').children('.span2').attr('data-index');
+          $('#image-adcontentNumber').val(adcontentNumber);
             $('#imageform').ajaxSubmit(options);
         }
         else{
@@ -653,15 +718,22 @@ $("#btn-txt").click(function(){
                 $.msg('保存失败！'+result);  
             }  
         };
-       if(txt.length<20&&txt.length>1) {
+       if(txt.length<300&&txt.length>1) {
             $('#txtform').ajaxSubmit(options);
         }
         else{
-            $.msg("广告字数是2-20之间！");
+            $.msg("广告字数是2-300之间！");
         }
   });
+$(".image-preview").click(function(){
+    $("#image-content").attr("src",$(this).children(0).attr("src"));
+    $(this).parent().children().each(function(){
+      $(this).attr('class','span1 image-preview');
+    });
+    $(this).attr('class','span2 active image-preview');
+});
 //管理广告内容
-$(".btn-adcontent").click(function(){
+$(".btn-txt-content").click(function(){
   var prefix="/img/adcontent/";
   var key=$(this).parent().attr("data-pk");
   $(".currentProduct").val(key);
@@ -669,16 +741,66 @@ $(".btn-adcontent").click(function(){
   $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
     currentProduct=stringToJSON(data);//数据转换为json格式
     if(currentProduct){//加载产品信息到弹出窗口
-        $("#image-content").attr("src",prefix+"image/"+currentProduct.image);
-        $("#video-content-obj").attr("data",prefix+"video/"+currentProduct.video);
-        $("#video-content-emb").attr("src",prefix+"video/"+currentProduct.video);
         $("#txt-content").html(currentProduct.txt);
     }
     else{
       $.msg("未能加载当前产品信息！");
     }
   });
-  $('#form-adcontent').modal();
+  $('#form-txt-content').modal();
+});
+//管理广告内容
+$(".btn-image-content").click(function(){
+  var prefix="/img/adcontent/";
+  var key=$(this).parent().attr("data-pk");
+  $(".currentProduct").val(key);
+  var currentProduct;
+  $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
+    currentProduct=stringToJSON(data);//数据转换为json格式
+    if(currentProduct){//加载产品信息到弹出窗口
+        $("#image-shortcut").empty();
+        $("#image-content").attr("src",prefix+"image/"+currentProduct.image.split(';')[0]);
+        var count=0;
+        if(currentProduct.image.split(';').length>1){
+          count=currentProduct.image.split(';').length - 1;
+        }
+        for (var i = 0; i <= count; i++) {
+          var shortcut='<a class="span1 image-preview"  data-index="'+i+'"><img src="/img/adcontent/image/'+currentProduct.image.split(';')[i]+'"  class="img-rounded img-polaroid  thumbnail "/></a> '
+          $("#image-shortcut").append(shortcut);
+        };
+        $("#image-shortcut").children().first().attr('class','span2 active image-preview');
+        $(".image-preview").bind("click",function(){
+          $("#image-content").attr("src",$(this).children(0).attr("src"));
+          $(this).parent().children().each(function(){
+            $(this).attr('class','span1 image-preview');
+          });
+          $(this).attr('class','span2 active image-preview');
+        });
+        
+    }
+    else{
+      $.msg("未能加载当前产品信息！");
+    }
+  });
+  $('#form-image-content').modal();
+});
+//管理video广告内容
+$(".btn-video-content").click(function(){
+  var prefix="/img/adcontent/";
+  var key=$(this).parent().attr("data-pk");
+  $(".currentProduct").val(key);
+  var currentProduct;
+  $.post("<{spUrl c=cproduct a=getJsonProduct}>",{id:key},function(data,status){
+    currentProduct=stringToJSON(data);//数据转换为json格式
+    if(currentProduct){//加载产品信息到弹出窗口
+        $("#video-content-obj").attr("data",prefix+"video/"+currentProduct.video);
+        $("#video-content-emb").attr("src",prefix+"video/"+currentProduct.video);
+    }
+    else{
+      $.msg("未能加载当前产品信息！");
+    }
+  });
+  $('#form-video-content').modal();
 });
 
 

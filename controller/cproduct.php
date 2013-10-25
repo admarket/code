@@ -122,21 +122,25 @@ class cproduct extends spController
         $endName=explode('.', $filename);
         $ext=end($endName);
         $firstName=$productID;
+        $adcontentNumber=intval($this->spArgs('adcontentNumber'));
         $product = spClass("product");
         $conditions = array("id"=>$productID); // 查找email是$email的记录
         $result=$product->find($conditions);
-        $pos=strpos($result['image'],'a'); 
+        $imageArray=explode(';', $result['image']);
+        $pos=strpos($imageArray[$adcontentNumber],'a'); 
         if($pos){
-             $firstName=$firstName.'b';
+             $firstName=$firstName.'b'.$adcontentNumber;
         }          
         else{
-            $firstName=$firstName.'a';
+            $firstName=$firstName.'a'.$adcontentNumber;
         }
 
         $arg = array(
         APP_PATH.'/img/adcontent/image',
         $firstName
         );
+        $imageArray[$adcontentNumber]=$firstName.".".$ext;
+        $secondName=implode(';',$imageArray);
         $upFlie=spClass("uploadFile", $arg); // 注意第二个参数是数组
         $result=$upFlie->upload_file($_FILES['file']);
         $msg=$upFlie->errmsg;
@@ -144,10 +148,10 @@ class cproduct extends spController
                 $product = spClass("product");
                 $conditions = array("id"=>$productID); // 查找email是$email的记录
                 $newrow = array(
-                        'image' => $firstName.".".$ext,  // 然后将这条记录的name改成“喜羊羊”    
+                        'image' => $secondName,  // 然后将这条记录的name改成“喜羊羊”    
                 );
                 $product->update($conditions, $newrow); // 更新记录
-             echo $firstName.".".$ext;
+             echo $imageArray[$adcontentNumber];
             }else {
              echo "操作失败：".$msg;
             }
