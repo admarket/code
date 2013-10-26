@@ -170,7 +170,7 @@
                 <div>
                   <p></p>
                   <label>提现方式：</label>
-                  <div class="span5 tip" title="目前仅支持支付宝">
+                  <div class="span5">
                     <label class="radio" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
                       <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>

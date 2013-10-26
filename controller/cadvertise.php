@@ -82,8 +82,24 @@ class cadvertise extends spController
                         );
                   break;
                 case "advertisePrice":
+                   $price=intval($this->spArgs('value'));
+                    $fee=10;
+                    if($price<1000){
+                      $fee=10;
+                    }else if($price<3000){
+                      $fee=9;
+                    }else if($price<5000){
+                      $fee=8;
+                    }else if($price<8000){
+                      $fee=7;
+                    }else if($price<10000){
+                      $fee=6;
+                    }else{
+                      $fee=5;
+                    }
                   $newrow = array(
                          'price'=> 100*$this->spArgs('value'),
+                         'fee'=>$fee,
                         );
                   break;
                 default:

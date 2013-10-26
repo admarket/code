@@ -4,7 +4,7 @@
     <title>广告市场 - 全球首家中文网络广告位交易平台 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
+    <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理,广告位购买，广告位交易，广告交易"/>
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <!-- Bootstrap -->

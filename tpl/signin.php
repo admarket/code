@@ -118,11 +118,12 @@
                 document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();   
               }
               $.msg("验证成功！正在跳转中...",'color:green;');
-              if(document.referrer!=""){
-                window.history.go(-1);
+              if(document.referrer==""||document.referrer=="undefined"){
+                 window.location.href="<{spUrl c=main a=index}>";
+                
               }
               else{
-                window.location.href="<{spUrl c=main a=index}>";
+                window.history.go(-1);
               }
                 
              }else{

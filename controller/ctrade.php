@@ -132,7 +132,10 @@ class ctrade extends spController
                         "content"=>$msgContent,
                         "type" => 1,
 				);
-			$result=$message->create($newMessage); 
+				$result=$message->create($newMessage); 
+
+
+
 				//更新推广费用
 				$product = spClass("product");
 		        $conditions=array("id" => $this->spArgs("product"));
@@ -149,6 +152,23 @@ class ctrade extends spController
 					$trade->query("ROLLBACK");
 					echo "操作失败！未知原因导致购买失败！";
 				}
+
+				//发送邮件通知
+
+				$conditions=array("id" => $seller);
+				$emailAccount=$user->find($conditions);
+				if($emailAccount){
+					$tool=spClass('tool');
+	                $email=$emailAccount['email']; // 用spArgs接收spUrl传过来的email
+	                $addition="<p>此邮件为系统自动发送的系统通知邮件，请勿直接回复</p>";
+	                $mailsubject = "广告位出售成功！";//邮件主题
+	                $msgContent="买家购买时间为：".$this->spArgs("number")."天。<br/>预计本次广告收入：".$profit."￥。<br/>";
+	                $mailbody = '<h4> <span style="font-weight:bold;">恭喜您：</span></h4>
+	                			<p>您的广告位已经成功出售！</p>'.$msgContent.$addition;//邮件内容
+	                $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
+	                $result=$tool->sendEmail($email, $mailsubject, $mailbody);
+				}
+				
 			}
 			
 		}
