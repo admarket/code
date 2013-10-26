@@ -4,7 +4,7 @@
            <div class="span2">
             <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
           </div>
-          <div class="span2 offset1" style="padding-top:5px;">
+          <div class="span1 offset1" style="padding-top:5px;">
               <{if $smarty.session.user.type==1}>
                   <a  class="btn btn-mini btn-primary tip"  data-placement="bottom" title="点击切换为买家"    href="<{spUrl c=cuser a=changeIdentity}>">
                     <i class="icon-user"></i>&nbsp;卖家
@@ -15,8 +15,8 @@
                 </a>
                <{/if}>
           </div>
-          <div class="span7">
-              <ul class="nav nav-pills nav-head">
+          <div class="span8">
+              <ul class="nav nav-pills nav-head" style="text-align:right;">
                 <li>
                   <a style="margin-right:20px;" href="<{spUrl c=main a=index}>">网站首页</a>
                 </li>

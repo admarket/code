@@ -7,6 +7,51 @@ class cmessage extends spController
             $this->jump(spUrl('main', 'login'));
         }
     }
+    function removeMessage(){
+    	$message = spClass("message");
+		$conditions=" id=".$this->spArgs('id');
+		$result=$message->delete($conditions);
+		if($result) {
+			echo 1;
+		}
+		else{
+			echo 0;
+		}
+    }
+     function removeAll(){
+    	$message = spClass("message");
+		$receiver=0;
+		if($_SESSION['user']['id']!=""){
+			$receiver=$_SESSION['user']['id'];
+		}
+		$conditions=" receiver=".$receiver;
+		$result=$message->delete($conditions);
+		if($result) {
+			echo 1;
+			$_SESSION['unread']=0;
+		}
+		else{
+			echo 0;
+		}
+    }
+    //全部设为已读
+    function readAll(){
+		$message = spClass("message");
+		$receiver=0;
+		if($_SESSION['user']['id']!=""){
+			$receiver=$_SESSION['user']['id'];
+		}
+		$conditions=" receiver=".$receiver;
+		$row = array('state'=>'1');
+		$result=$message->update($conditions, $row);
+		if($result) {
+			echo 1;
+            $_SESSION['unread']=0;
+		}
+		else{
+			echo 0;
+		}
+	}
 	function updateUnread(){
 		$message = spClass("message");
 		$conditions=" id=".$this->spArgs('id');

@@ -149,7 +149,7 @@ class sub extends spController
 
         $messages = $message->spLinker()->spPager($this->spArgs('page', 1), 8)->findAll($conditions," id desc ");
         $this->messages=$messages;
-
+        
         $this->pager = $message->spPager()->getPager();
 
         $this->current="inbox";//设置当前导航状态

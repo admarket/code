@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 站内信箱（<{$smarty.session.unread}>未读信息）</title>
+    <title>广告市场 - 用户中心 - 站内信箱（<{$unread}>未读信息）</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -132,7 +132,7 @@
                     <a class="btn btn-small" id="btn-unread">未读</a>
                   <{/if}>
                 </div>
-                 <div class="btn-group" data-toggle="buttons-checkbox" style="position:absolute;right:10px;top:0px;">
+                <div class="btn-group" data-toggle="buttons-checkbox" >
                    <{if $type eq ""||$type==0}>
                     <a class="btn btn-small tip" id="btn-notice" title="系统通知">
                       <i class="icon-info-sign"></i>
@@ -174,6 +174,14 @@
                       <i class="icon-volume-up" ></i>
                     </a>
                   <{/if}>
+                </div>
+                 <div class="btn-group"  style="position:absolute;right:20px;top:0px;">
+                    <a class="btn btn-small  tip" url="<{spUrl c=cmessage a=readAll}>" id="btn-readAll" title="全部设为已读">
+                      <i class="icon-eye-open"></i>
+                    </a>
+                    <a class="btn btn-small btn-danger tip" url="<{spUrl c=cmessage a=removeAll}>" id="btn-removeAll" title="清空站内信">
+                      <i class="icon-trash" ></i>
+                    </a>
                 </div>
              </div>
             <div class="accordion" id="accordion2">
@@ -284,9 +292,72 @@
     <!-- load foot tpl -->
     <{include file="foot.php"}>
 
-
+<div class="modal hide fade" id="form-confirm" style="top:10%;">
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h5>是否清空站内信箱？</h5>
+  </div>
+  <form action="<{spUrl c=cproduct a=removeProduct}>" id="form-delete" method="post">
+    <div class="modal-body">
+      
+       <a  class="btn btn-small btn-danger" id="btn-confirm">
+        <i class="icon-ok"></i> 确认
+      </a>
+      <a  class="btn btn-small cancel" id="btn-cancel">
+        <i class="icon-remove"></i> 取消
+      </a>
+      
+    </div>
+   </form> 
+    <div class="modal-footer" style="margin:0;top:-20px;">
+      
+    </div>
+  
+</div>
+<script src="/js/jquery.form.js"></script>
+<script src="/js/jquery.message.js"></script>
 <script type='text/javascript'>//<![CDATA[ 
  $('.tip').tooltip();
+ $("#btn-removeAll").click(function(){
+  var obj=this;//这时this指的就是$("#zz")对象 
+  $("#form-delete").attr('action',$(obj).attr('url'));
+  $('#form-confirm').modal();
+});
+ $("#btn-readAll").click(function(){
+  var obj=this;//这时this指的就是$("#zz")对象 
+  $("#form-delete").attr('action',$(obj).attr('url'));
+  var options = {  
+            success : function(data) {  
+                if(data==1){
+                   location.reload();
+                } 
+                $.msg('操作成功！','color:green;'); 
+            },  
+            error : function(result) {  
+                $.msg(result);  
+            }  
+        }; 
+  $('#form-delete').ajaxSubmit(options);
+
+});
+ $("#btn-confirm").click(function(){
+  var options = {  
+            success : function(data) {  
+                if(data==1){
+                   location.reload();
+                } 
+                $.msg('删除成功！','color:green;'); 
+            },  
+            error : function(result) {  
+                $.msg(result);  
+            }  
+        }; 
+  $('#form-delete').ajaxSubmit(options);
+  $('#form-confirm').modal('hide');
+});
+ $(".cancel").click(function(){
+  $('#form-confirm').modal('hide');
+});
  $("#btn-all").click(function(){
     window.location.href="<{spUrl c=sub a=inbox}>";
  });

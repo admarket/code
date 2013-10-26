@@ -158,13 +158,25 @@ class ctrade extends spController
 				$conditions=array("id" => $seller);
 				$emailAccount=$user->find($conditions);
 				if($emailAccount){
+					$advertise=spClass('advertise');
+					$conditions=array("id" => $advertiseID);
+					$adAccount=$advertise->spLinker()->find($conditions);
+					if($adAccount){
+
+					}
 					$tool=spClass('tool');
 	                $email=$emailAccount['email']; // 用spArgs接收spUrl传过来的email
 	                $addition="<p>此邮件为系统自动发送的系统通知邮件，请勿直接回复</p>";
 	                $mailsubject = "广告位出售成功！";//邮件主题
 	                $msgContent="买家购买时间为：".$this->spArgs("number")."天。<br/>预计本次广告收入：".$profit."￥。<br/>";
 	                $mailbody = '<h4> <span style="font-weight:bold;">恭喜您：</span></h4>
-	                			<p>您的广告位已经成功出售！</p>'.$msgContent.$addition;//邮件内容
+	                			<p>您的广告位已经成功出售！</p>
+	                			<p>网站：&nbsp;<span style="font-weight:bold;">'.$adAccount['base']['name'].'</span>
+	                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                			广告位：&nbsp;<span style="font-weight:bold;">'.$adAccount['title'].'</span><br/>
+	                			买家购买时间：<span style="font-weight:bold;">'.$this->spArgs("number").'天</span><br/>
+	                			预计本次广告收入： <span style="font-weight:bold;">'.$profit.'&nbsp;￥</span>
+	                			</p>'.$addition;//邮件内容
 	                $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
 	                $result=$tool->sendEmail($email, $mailsubject, $mailbody);
 				}

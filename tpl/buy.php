@@ -439,6 +439,7 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
           
             $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
              function(data){
+              //alert(data);
                if(data.indexOf("操作失败")<0){
                   $.msg('购买成功！','color:green;');
                    window.location.href='<{spUrl c=sub a=effect}>';
