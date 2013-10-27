@@ -128,6 +128,17 @@ class cadvertise extends spController
           $advertise = spClass("advertise");
           $conditions = array("id"=>$this->spArgs('aid')); // 根据id查找指定的广告位
           $result=$advertise->spLinker()->find($conditions);
+
+          //激活广告位状态
+          $row=array('verify'=>'1');
+          // echo $_SERVER['HTTP_REFERER'];
+          // echo ";";
+          $signUrl= str_replace("http://","",$result['base']['url']);
+          $signUrl= str_replace("www.","",$signUrl);
+          if(strpos($_SERVER['HTTP_REFERER'],$signUrl))
+          {
+            $advertise->update($conditions, $row);
+          }
           echo "var advertise=";
           echo json_encode($result);
           echo ";";

@@ -155,19 +155,25 @@
                           
                           <td>
                            <div style="padding:10px;">
-                            <{if $advertise.state == 0}>
-                              <{if $smarty.session.user eq '' }>
-                              <a class="btn btn-small btn-success disabled tip"   title="请先登录">
-                               <{else}>
-                               <a class="btn btn-small btn-success" href="<{spUrl c=main a=buy id=$advertise.id}>">
+                             <{if $advertise.verify!=0}>
+                                <{if $advertise.state == 0}>
+                                  <{if $smarty.session.user eq '' }>
+                                  <a class="btn btn-small btn-success disabled tip"   title="请先登录">
+                                   <{else}>
+                                   <a class="btn btn-small btn-success" href="<{spUrl c=main a=buy id=$advertise.id}>">
+                                    <{/if}>
+                                  <i class=" icon-shopping-cart"></i>&nbsp;购买
+                                </a>
+                                 <{else}>
+                                 <a url="<{spUrl c=cadvertise a=BuyAdvertise advertiseID=$advertise.id seller=$advertise.project.owner }>" class="btn btn-small btn-danger disabled tip" title="已出售广告位无法购买">
+                                  <i class=" icon-shopping-cart"></i>&nbsp;已售
+                                </a>
                                 <{/if}>
-                              <i class=" icon-shopping-cart"></i>&nbsp;购买
-                            </a>
-                             <{else}>
-                             <a url="<{spUrl c=cadvertise a=BuyAdvertise advertiseID=$advertise.id seller=$advertise.project.owner }>" class="btn btn-small btn-danger disabled tip" title="已出售广告位无法购买">
-                              <i class=" icon-shopping-cart"></i>&nbsp;已售
-                            </a>
-                            <{/if}>
+                            <{else}>
+                                <a url="<{spUrl c=cadvertise a=BuyAdvertise advertiseID=$advertise.id seller=$advertise.project.owner }>" class="btn btn-small btn-primary disabled tip" title="该广告位尚未添加代码激活">
+                                  &nbsp;未激活
+                                </a>
+                            <{/if}>  
                             </div>
                           </td>
                         </tr>

@@ -36,9 +36,13 @@
         </div>
         <div class="span9 offset3 box" style="margin-top:0px;border-radius:5px;box-shadow:0px 1px 1px #ddd;padding:20px;line-height:2;">
             <div id="privacy">
-              <p> <span class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></span>
+              <p> <div class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></div>
+                             <script type="text/javascript" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=54"></script>
+                             <script type="text/javascript" id="admarket_js_54" src="http://localhost/js/ad.js?aid=54"></script>
+                             <div class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></div>
                              <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=54"></script>
                              <script type="text/javascript" id="admarket_js_54" src="http://www.eadmarket.com/js/ad.js?aid=54"></script>
+                             
                              我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
 <h5>我们承诺做到如下几点：</h5>
 <p>1、严格遵守正确收集和使用用户个人信息条款；履行法律责任，明确使用用户信息目的；数据特殊保护说明中明确规定要保护用户个人信息；根据网站所需依法正确收集和处理用户个人信息；确保个人信息的正确；审核决定保存用户信息的时间限度；确保用户能依法行使个人权利；实施技术和组织安全措施保护用户个人信息。</p>

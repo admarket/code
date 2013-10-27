@@ -7,6 +7,7 @@
     <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理,广告位购买，广告位交易，广告交易"/>
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
+    <meta name="baidu-site-verification" content="bVy9Kj2D0T" />
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
      <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -196,6 +197,7 @@
     </div>
     <!--footer content-->
     <{include file="foot.php"}>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=28253866" charset="UTF-8"></script>
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>

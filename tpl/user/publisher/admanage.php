@@ -220,15 +220,21 @@
                                data-name="advertisePrice"><span class="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
                              <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
                           <td>
-                             <{if $advertise.state == 0}>
-                            <span class="label label-success"> 
-                              未出售
-                            </span>
+                             <{if $advertise.verify!=0}>
+                               <{if $advertise.state == 0}>
+                              <span class="label label-success"> 
+                                未出售
+                              </span>
+                               <{else}>
+                              <span class="label label-important"> 
+                                已出售
+                              </span>
+                              <{/if}>
                              <{else}>
-                            <span class="label label-important"> 
-                              已出售
-                            </span>
-                            <{/if}>
+                              <span class="label label-primary tip" title="该广告位尚未添加代码激活"> 
+                                未激活
+                              </span>
+                            <{/if}> 
                           </td>
                           <td>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;"
