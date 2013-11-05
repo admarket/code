@@ -2,9 +2,19 @@
     <div class="header" style="padding-bottom:0;margin-bottom:0;">
       <div class="container">
         <div class="row-fluid">
-          <div class="span4"><a href="/" title="网站首页"><img class="logo" src="/img/logo.png"/></a></div>
-          <div class="span4" style="padding:15px 40px;">
-            如果您有疑问，请联系我们的<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>客服</a>,与我们进行互动。
+          <div class="span4"><a href="/" title="网站首页"><img class="logo" border="0" title="广告位市场" alt="广告位市场" src="/img/logo.png"/></a></div>
+          <div class="span4 input-append" style="padding:15px 20px;">
+
+             <form id="search-form" name="search-form" action="<{spUrl c=main a=result}>" method="get">
+                      <input id="keyword"  name="keyword" style="width:100%;" type="text"  placeholder="输入关键词查找广告位…" value="<{$keyword}>"/>
+                      <input id="currentCategory"  name="category"  type="hidden" value="<{$currentCategory}>"/>
+                      <input id="currentPrice"  name="price"  type="hidden" value="<{$currentPrice}>"/>
+                      <input id="currentAlexa"  name="alexa"  type="hidden" value="<{$currentAlexa}>"/>
+                      <input id="currentState"  name="state"  type="hidden" value="<{$currentState}>"/>
+                      <input id="currentPage"   type="hidden" value="<{$currentPage}>"/>
+                      <button class="btn" ><i class="icon-search"></i></button>
+              </form>
+
           </div>
           <div class="span3 offset1">
             <{if $smarty.session.user eq '' }>
@@ -19,19 +29,7 @@
           </div>
         </div>
         <!--nav-head content-->
-        <ul class="nav nav-tabs nav-head">
-           <{foreach from=$types item=type name=typeCount}>
-               <{if $smarty.foreach.typeCount.index == 0}>
-                    <li  class="active">
-                      <a   style="font-weight:bold;background-color:#fdfdfd;" 
-                       href="#"><{$type.name}></a>
-                    </li>
-                  <{else}>
-                      <li><a  href="#"><{$type.name}></a></li>
-                  <{/if}>
-           <{/foreach}>  
-         
-        </ul>
+        
       </div>
     </div>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=28253866" charset="UTF-8"></script>
+    

@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
@@ -21,7 +28,11 @@
     </style>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/bootstrap-fileupload.min.js"></script>
+     <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js" defer></script>
+    <![endif]-->
+    <script src="/js/bootstrap-fileupload.min.js" defer></script>
     <script src="/js/bootstrap-editable.js"></script>
   </head>
   <body>
@@ -32,7 +43,7 @@
     <div class="section">
       <div class="container">
         <div class="row-fluid">
-          <div class="span3 left-bar">
+          <div class="span3 left-bar" >
               <!-- load user tpl -->
             <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
@@ -106,20 +117,13 @@
                   </div> 
                    <div class="span10">
                     <div class=" title">&nbsp;收益：</div>
-                    <p><{(0.01*$profits)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$profits)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
               </div>
             <!-- Bootstrap -->
-              <div style="padding-left:0px;">
-                <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+              
             </div>
           </div>
           <div class="span9 main-body" >
@@ -154,13 +158,14 @@
                   <{else}>
                       <div class="tab-pane" id="tab<{$smarty.foreach.projectCount.index}>">
                   <{/if}>
-                  <table class="table table-hover">
+                  <table class="table">
                     <thead>
                       <tr>
-                        <th>序号</th>
+                        
                         <th>广告位</th>
                         <th>格&nbsp;式</th>
                         <th>宽&nbsp;*&nbsp;高</th>
+                        <th>样式代码</th>
                         <th>价格 &yen;/天</th>
                         <th>状态</th>
                         <th>交易进度</th>
@@ -173,7 +178,6 @@
                       <{foreach from=$project.detail item=advertise name=adCount}> 
                         <{if $advertise.project == $project.id}>
                         <tr>
-                          <td><{$smarty.foreach.adCount.index+1}></td>
                           <td>
                               <p class="title" ><a class="editable"
                                data-pk="<{$advertise.id}>"
@@ -199,12 +203,12 @@
                               <{/if}>
                               </a>
                           </td>
-                          <td style="min-width:80px;">
+                          <td>
                              <{if $advertise.format == 0}>
                              字体大小：
                              <a class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertiseWidth"><{$advertise.width}></a><br/>
-                             最多字数：<a  class="number-editable" data-pk="<{$advertise.id}>"
+                             字数：<a  class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertiseHeight"><{$advertise.height}>
                              </a>
                               <{else}>
@@ -215,22 +219,27 @@
                               <{/if}>
                             
                           </td>
+                          <td style="width:50px;"> <a  class="textarea-editable"
+                               data-pk="<{$advertise.id}>"
+                               data-type="textarea"
+                               data-name="advertiseStyle"><{$advertise.style}>
+                                </a>
+
+                          </td>
                           <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a  class="number-editable" data-pk="<{$advertise.id}>"
                                data-name="advertisePrice"><span class="signPrice"><{(0.01*$advertise.price)}></span></a>&nbsp;&yen;  
-                             <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}></span>&yen; </div></td>
+                             <div>+<span class="fee"><{$advertise.fee}></span>%&nbsp;手续费&nbsp;=&nbsp;<span class="realPrice"><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|string_format:"%.2f"}></span>&yen; </div></td>
                           <td>
-                             <{if $advertise.verify!=0}>
                                <{if $advertise.state == 0}>
                               <span class="label label-success"> 
                                 未出售
                               </span>
-                               <{else}>
+                               <{elseif $advertise.state == 1}>
                               <span class="label label-important"> 
                                 已出售
                               </span>
-                              <{/if}>
-                             <{else}>
+                               <{else}>
                               <span class="label label-primary tip" title="该广告位尚未添加代码激活"> 
                                 未激活
                               </span>
@@ -254,14 +263,14 @@
                           </td>
                           <td>
                              
-                            <{(0.01*$advertise.profit)|number_format}> &yen; 
+                            <{(0.01*$advertise.profit)|string_format:"%.2f"}> &yen; 
                           </td>
                           <td>
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
                              data-content='<textarea class="textarea"><div class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
-                             <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
-                             <script type="text/javascript" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>
                               <i class="icon-shopping-cart"></i> 
                             </a>
@@ -290,7 +299,13 @@
                  <{/foreach}>   
                
               </div>
-            
+            <div style="position:relative;font-size:12px;padding:20px;border-top:solid 1px #eee;">
+                  
+                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;怎样激活广告位？</strong> 点击出售代码列的&nbsp;
+                  <a class="btn btn-mini btn-success">
+                    <i class="icon-shopping-cart"></i>
+                  </a>&nbsp;按钮，复制代码到您需要添加广告位的位置即可。
+           </div>
           </div>
           
         </div>
@@ -404,9 +419,10 @@
     </div>
   
 </div>
-<script src="/js/highcharts.js"></script>
-<script src="/js/jquery.form.js"></script>
-<script src="/js/jquery.message.js"></script>
+
+<script src="/js/highcharts.js" defer></script>
+<script src="/js/jquery.form.js" defer></script>
+<script src="/js/jquery.message.js" defer></script>
 <script type="text/javascript">
 $('.tip').tooltip();
 function changeName(){
@@ -427,7 +443,7 @@ $('.select-editable').editable({
         source: {
                 0:"文字",
                  1:"图片",
-                2:"视频",
+                2:"视频"
            }
     }); 
  $('.textarea-editable').editable({
@@ -440,13 +456,13 @@ $('.select-editable').editable({
             $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
-        if($.trim(value) == '') {
-            return '该字段不能为空';
-        }
-        else if($.trim(value).length>50) {
-            return '长度不能超过50';
-        }
-    }
+          if($.trim(value) == '') {
+              return '该字段不能为空';
+          }
+          else if($.trim(value).length>200) {
+              return '长度不能超过200';
+          }
+      }
   });
   $('.number-editable').editable({
         type: 'text',
@@ -456,15 +472,15 @@ $('.select-editable').editable({
         success: function(response, newValue) {
           if(!response.success) 
             $.msg("编辑成功！",'color:green;');
-          var fee=parseInt($(this).parent().find('.fee').html());
-          newValue=parseInt(newValue);
-          $(this).parent().find('.realPrice').html((0.01*fee+1)*newValue);
+          var fee=parseFloat($(this).parent().find('.fee').html()).toFixed(2);
+          newValue=parseFloat(newValue).toFixed(2);
+          $(this).parent().find('.realPrice').html(parseFloat((0.01*fee+1)*newValue).toFixed(2));
         },
         validate: function(value) {
             if(isNaN($.trim(value))) {
                 return '该字段必须是数字';
             }
-            else if($.trim(value)<0||$.trim(value)>100000000) {
+            else if($.trim(value)<=0||$.trim(value)>100000000) {
                 return '该字段必须是数字，且为正数';
             }
         }
@@ -479,23 +495,23 @@ $('.select-editable').editable({
             $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
-          var reg="^((https|http|ftp|rtsp|mms)?://)"  
-        +"?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?"//ftp的user@  
-        +"(([0-9]{1,3}\.){3}[0-9]{1,3}"// IP形式的URL- 199.194.52.184  
-        +"|"// 允许IP和DOMAIN（域名） 
-        +"([0-9a-z_!~*'()-]+\.)*"// 域名- www.  
-        +"([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\."// 二级域名  
-        +"[a-z]{2,6})"// first level domain- .com or .museum  
-        +"(:[0-9]{1,4})?"// 端口- :80  
-        +"((/?)|"// a slash isn't required if there is no file name  
-        +"(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
-        if(isNaN($.trim(value))) {
-            return '该字段必须是数字';
-        }
-        else if(!reg.test($.trim(value))) {
-            return '该字段url格式不正确';
-        }
-    }
+            var reg="^((https|http|ftp|rtsp|mms)?://)"  
+          +"?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?"//ftp的user@  
+          +"(([0-9]{1,3}\.){3}[0-9]{1,3}"// IP形式的URL- 199.194.52.184  
+          +"|"// 允许IP和DOMAIN（域名） 
+          +"([0-9a-z_!~*'()-]+\.)*"// 域名- www.  
+          +"([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\."// 二级域名  
+          +"[a-z]{2,6})"// first level domain- .com or .museum  
+          +"(:[0-9]{1,4})?"// 端口- :80  
+          +"((/?)|"// a slash isn't required if there is no file name  
+          +"(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+          if(isNaN($.trim(value))) {
+              return '该字段必须是数字';
+          }
+          else if(!reg.test($.trim(value))) {
+              return '该字段url格式不正确';
+          }
+      }
   });
  //enable / disable
 $('#editable').click(function() {
@@ -632,10 +648,10 @@ function loadData(jsonData){
         }
         
         for(var j in records[i].detail){
-           records[i].detail[j].profit=0.01*parseFloat(records[i].detail[j].profit);
+           records[i].detail[j].profit=0.01*records[i].detail[j].profit;
           var dataDetail={
             name:records[i].detail[j].title,
-            y:parseInt(records[i].detail[j].profit)
+            y:records[i].detail[j].profit
           };
           profits.data.push(dataDetail);
           //profits.data=dataDetail;
@@ -674,7 +690,7 @@ $(function () {
                 $('#chart').highcharts({
                     chart: {
                       layout: 'vertical',
-                      type:'column',
+                      type:'column'
                     },
                     title: {
                         text: '广告位收入',

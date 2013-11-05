@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
@@ -19,6 +26,11 @@
 
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+     <script src="/js/bootstrap.min.js"></script>
+     <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
     <script src="/js/bootstrap-fileupload.min.js"></script>
     <script src="/js/bootstrap-editable.js"></script>
   </head>
@@ -30,7 +42,7 @@
     <div class="section">
       <div class="container">
         <div class="row-fluid">
-          <div class="span3 left-bar">
+          <div class="span3 left-bar" >
              <!-- load user tpl -->
             <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
@@ -68,7 +80,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;最高收益：</div>
-                    <p><{(0.01*$maxProfit)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$maxProfit)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -79,7 +91,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;最低收益：</div>
-                    <p><{(0.01*$minProfit)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$minProfit)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -93,7 +105,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;平均收益：</div>
-                    <p><{(0.01*$avgProfit)|number_format}>&nbsp;&yen;/站</p>
+                    <p><{(0.01*$avgProfit)|string_format:"%.2f"}>&nbsp;&yen;/站</p>
                   </div>
                   
                 </div>
@@ -104,20 +116,13 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总收益：</div>
-                    <p><{(0.01*$sumProfit)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumProfit)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
               </div>
             <!-- Bootstrap -->
-              <div style="padding-left:0px;">
-                <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+             
             </div>
           </div>
           <div class="span9 main-body" >
@@ -349,6 +354,7 @@
     </div>
   
 </div>
+
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
 <script src="/js/jquery.message.js"></script>
@@ -593,9 +599,9 @@ function loadData(jsonData){
       for(var i in records){  
         var sum=0;
         for(var j in records[i].detail){
-          records[i].detail[j].profit=0.01*parseFloat(records[i].detail[j].profit);
-          sum +=parseInt(records[i].detail[j].profit);
-          sums+=parseInt(records[i].detail[j].profit);
+          records[i].detail[j].profit=0.01*records[i].detail[j].profit;
+          sum +=records[i].detail[j].profit;
+          sums+=records[i].detail[j].profit;
         }
         var data1={
             name: records[i].name,

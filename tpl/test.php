@@ -8,6 +8,13 @@
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
      <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
@@ -31,9 +38,10 @@
               </p>
               <h5>知识产权声明：</h5>
              <p>
-<div class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></div>
-                             <script type="text/javascript" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=54"></script>
-                             <script type="text/javascript" id="admarket_js_54" src="http://localhost/js/ad.js?aid=54"></script>
+<div class="admarket_ad" style="display:inline;" aid="87" id="admarket_box_87"><a href="http://localhost/?c=main&a=detail&project=50" style="display:none;">广告位招租</a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=87"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_87" src="http://localhost/js/ad.js?aid=87"></script>
+                             
                              
                              
                              广告市场拥有本网站内所有资料的版权，各分频道权利声明有特殊规定的，从其规定。任何被授权的浏览、复制、打印和传播属于本网站内的资料必须符合以下条件：

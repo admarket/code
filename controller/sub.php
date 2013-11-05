@@ -49,6 +49,7 @@ class sub extends spController
         $this->display("user/setting.php"); // 设置
     }
     function admanage(){
+        $_SESSION['user']['type']=1;
         $project = spClass("project");
         $conditions = array("owner" => $_SESSION['user']['id']);
         $category = spClass("category");
@@ -64,7 +65,7 @@ class sub extends spController
         foreach ($records as &$project) { 
             $adCount=$adCount+count($project['detail']);
             foreach ($project['detail'] as  &$ad) {
-                if($ad[state]=="1"){
+                if($ad['state']==1&&$ad['verify']==1){
                     $trade=spClass("trade");
                     $condition = array("advertise" => $ad['id'],"state"=>0);
                     $result=$trade->find($condition);
@@ -157,6 +158,7 @@ class sub extends spController
         
     }
     function sitemanage(){
+        $_SESSION['user']['type']=1;
         $project = spClass("project");
         $conditions = array("owner" => $_SESSION['user']['id']);
         $this->projects = $project->spLinker()->findAll($conditions);
@@ -242,6 +244,7 @@ class sub extends spController
     }
     
     function product(){
+        $_SESSION['user']['type']=0;
         $product = spClass("product");
         $conditions = array("owner" => $_SESSION['user']['id']);
         $results = $product->spLinker()->findAll($conditions);
@@ -278,6 +281,7 @@ class sub extends spController
     }
 
     function effect(){
+        $_SESSION['user']['type']=0;
         $trade = spClass("trade");
         $project = spClass("project");
         $startTime = time();  // 当前时间戳

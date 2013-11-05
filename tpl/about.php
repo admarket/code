@@ -8,6 +8,13 @@
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
      <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>

@@ -8,6 +8,13 @@
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--<link rel="stylesheet" href="/css/font-awesome.min.css">-->
@@ -91,6 +98,10 @@
     <{include file="foot.php"}>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
     <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
     var CookieStr = document.cookie;

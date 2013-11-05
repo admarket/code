@@ -7,6 +7,20 @@ class cmessage extends spController
             $this->jump(spUrl('main', 'login'));
         }
     }
+    function getUnreadJsonBySessionID(){
+		$message = spClass("message");
+		$conditions = array(
+			"receiver" => $_SESSION['user']['id'],
+			"state"=>0,
+			);
+		$records = $message->findAll($conditions); 
+		if($records){
+			echo count($records);
+		}else{
+			echo "0";
+		}
+		
+	}
     function removeMessage(){
     	$message = spClass("message");
 		$conditions=" id=".$this->spArgs('id');

@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -19,6 +26,10 @@
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
     <script src="/js/bootstrap-fileupload.min.js"></script>
     <script src="/js/bootstrap-editable.js"></script>
     <style>
@@ -35,7 +46,7 @@
     <div class="section">
       <div class="container">
         <div class="row-fluid">
-          <div class="span3 left-bar">
+          <div class="span3 left-bar" >
               <!-- load user tpl -->
             <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
@@ -59,7 +70,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;推广费用：</div>
-                    <p><{(0.01*$sumFee)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumFee)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -109,20 +120,13 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;点击单价：</div>
-                    <p><{(0.01*$clickPrice)|number_format}>&nbsp;&yen;/次</p>
+                    <p><{(0.01*$clickPrice)|string_format:"%.2f"}>&nbsp;&yen;/次</p>
                   </div>
                   
                 </div>
               </div>
             <!-- Bootstrap -->
-              <div style="padding-left:0px;">
-                <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+             
             </div>
           </div>
           <div class="span9 main-body" >
@@ -217,7 +221,7 @@
                           </td>
                           <td>
                            
-                            <{(0.01*$product.fee)|number_format}>&yen;
+                            <{(0.01*$product.fee)|string_format:"%.2f"}>&yen;
                           </td>
                           <td>
                            
@@ -465,6 +469,7 @@
 
     </div>
 </div>
+
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
 <script src="/js/jquery.message.js"></script>
@@ -882,9 +887,9 @@ function loadData(jsonData){
         datas1.push(parseInt(records[i].impression));
         datas2.push(parseInt(records[i].click));
         products.push(records[i].name);
-        var data3=[records[i].name,records[i].fee];
+        var data3=[records[i].name,parseFloat(records[i].fee)];
         datas3.push(data3);
-        sums=sums+parseInt(records[i].fee);
+        sums=sums+parseFloat(records[i].fee);
       }//end for
       var tempSum=0;
       for(var k in datas3){

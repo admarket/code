@@ -9,6 +9,13 @@
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
@@ -28,34 +35,8 @@
         <!--intro content-->
        
         <div class="row-fluid">
-          <div class="span3  nav-bar" >
-            <div style="border-bottom:solid 1px #eee;">
-                    <div class="input-append"  style="width:90%;margin:10px;">
-                      <form action="<{spUrl c=main a=result}>" method="post">
-                      <input  style="width:80%;" name="keyword"  type="text"  placeholder="输入关键词查找…" value="<{$keyword}>">
-                      <input  name="category"  type="hidden" value="<{$currentCategory}>">
-                      <button class="btn" type="submit"><i class="icon-search"></i></button>
-                    </div>
-                </div>
-            <!--nav-bar content-->
-              <ul class="nav nav-list side-bar" id="nav-bar">
-                
-                 <{foreach from=$types item=type name=typeCount}>
-                    <{foreach from=$type.categories item=category name=categoryCount}>
-                         <{if $currentCategory==$category.id}>
-                           
-                        <li class="active">
-                           <{else}>
-                            <li>
-                          <{/if}>
-                          <a href="<{spUrl c=main a=result type=$type.id category=$category.id}>">
-                            <{$category.name}></a></li>
-
-                    <{/foreach}>  
-                <{/foreach}>  
-                
-              </ul>
-          </div>
+         <!-- load head tpl -->
+            <{include file="side-bar.php"}>
           <div class="span9 main-body">
             <!--Body content-->
             
@@ -148,7 +129,7 @@
                           </td>
                           <td>
                             <div style="padding:10px;">
-                           <{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}> &yen;
+                           <{(0.01*(0.01*$advertise.fee+1)*$advertise.price)|string_format:"%.2f"}> &yen;
                               </div>
                             </td>
                           
@@ -197,6 +178,10 @@
     <!--script content-->
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
     <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
       $('.tip').tooltip();

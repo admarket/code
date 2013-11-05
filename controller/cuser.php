@@ -277,17 +277,20 @@ class cuser extends spController
 		if($result){
 			$mail = spClass('spEmail');
 	        $email=$this->spArgs("email"); // 用spArgs接收spUrl传过来的email
-	        $addition="<p>此邮件为系统自动发送的邮件，请勿直接回复</p>";
-	        $mailsubject = "广告市场-找回密码";//邮件主题
+	       
+	        
 	        $password = $this->create_password(12);
 		    $newPassword=$this->hashPass($password);
 		    $newrow = array(
 	                'password' => $newPassword,  // 然后将这条记录的name改成“喜羊羊”    
 	        );
 	        $user->update($conditions, $newrow); // 更新记录
-	        $mailbody = "<h4> 您的账户当前密码是：</h4>"."<p> <a>".$password."<a></p>".$addition;//邮件内容
-	        $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
-	        $result=$mail->sendmail($email, $mailsubject, $mailbody, $mailtype);
+	        $tool = spClass('tool');
+            $addition='<p>此密码是由系统随机生成，请尽快<a href="http://www.eadmarket.com/main/login.html">登录系统</>后重新修改密码</p>';
+            $mailsubject = "广告市场-找回密码";//邮件主题
+            $mailbody = '<h4><span style="font-weight:bold;"> 您的账户当前密码是：</span></h4><p> <span style="color:red;">'.$password.'</span></p>'.$addition;//邮件内容
+            $result=$tool->sendEmail($email, $mailsubject, $mailbody);
+	        
 	        if($result){
 	        	echo "successful";
 	        }else{

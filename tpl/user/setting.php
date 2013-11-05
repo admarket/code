@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
      <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
@@ -15,6 +22,12 @@
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico"> 
     <script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+  <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js" defer></script>
+    <![endif]-->
+<script src="/js/jquery.form.js"  defer></script>
   </head>
   <body>
     <!-- load head tpl -->
@@ -116,14 +129,7 @@
                 </div>
               </div>
             <!-- Bootstrap -->
-             <div style="padding-left:0px;">
-                 <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+      
             </div>
           </div>
           <div class="span9 main-body">
@@ -291,9 +297,7 @@
   
 </div>
 
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.form.js"></script>
-<script src="/js/jquery.message.js"></script>
+<script src="/js/jquery.message.js"  defer></script>
 <script type="text/javascript">
 $('#share').popover({
   placement:'right',

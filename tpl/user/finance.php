@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
@@ -15,7 +22,10 @@
     <link rel="shortcut icon" href="/favicon.ico">  
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/highcharts.js"></script>
+      <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
   </head>
   <body>
      <!-- load head tpl -->
@@ -38,7 +48,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;广告收益：</div>
-                    <p><{(0.01*$adIncome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$adIncome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -49,7 +59,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;广告支出：</div>
-                    <p><{(0.01*$adOutcome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$adOutcome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -63,7 +73,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;累计充值：</div>
-                    <p><{(0.01*$handIncome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$handIncome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -74,7 +84,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;累计提现：</div>
-                    <p><{(0.01*$handOutcome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$handOutcome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -88,7 +98,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总收入：</div>
-                    <p><{(0.01*$sumIncome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumIncome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -99,20 +109,13 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;总支出：</div>
-                    <p><{(0.01*$sumOutcome)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumOutcome)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
               </div>
             <!-- Bootstrap -->
-             <div style="padding-left:0px;">
-                 <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+            
             </div>
           </div>
           <div class="span9 main-body" >
@@ -175,7 +178,7 @@
                             <{else}>
                             未知类型
                              <{/if}>
-                          <{(0.01*$record.number)|number_format}> &yen;
+                          <{(0.01*$record.number)|string_format:"%.2f"}> &yen;
                         </td>
                         <td><{$record.time}></td>
                         <td><{$record.remark}></td>
@@ -203,7 +206,7 @@
                                <{elseif  $record.type == "01"}>
                               <td>充值</td>
                                <{/if}>
-                              <td>+ <{(0.01*$record.number)|number_format}> &yen;</td>
+                              <td>+ <{(0.01*$record.number)|string_format:"%.2f"}> &yen;</td>
                               <td><{$record.time}></td>
                               <td><{$record.remark}></td>
                           </tr>
@@ -233,7 +236,7 @@
                              <{elseif  $record.type == "11"}>
                               <td>提现</td>
                              <{/if}>
-                            <td>- <{(0.01*$record.number)|number_format}> &yen;</td>
+                            <td>- <{(0.01*$record.number)|string_format:"%.2f"}> &yen;</td>
                             <td><{$record.time}></td>
                             <td><{$record.remark}></td>
                           </tr>
@@ -389,6 +392,8 @@
 
   </div>
 </div>
+
+    <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.message.js"></script>
 <script type='text/javascript'>//<![CDATA[ 
  $('.tip').tooltip();
@@ -415,15 +420,14 @@ $("#btn-outcome").click(function(){
 //验证提现金额
 $("#btn-cash").click(function(){
   var flag=false;
-  var reg= /^[0-9]*$/;
+  var reg= / ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$ /;
   if($.trim($("#cash-txt").val())==""){
             $("#cash-msg").html("提现金额不能为空");
             $("#cash-msg").css("color","red");
             flag=false;
         }else{
-             
-            if(!reg.test($.trim($("#cash-txt").val()))){
-                  $("#cash-msg").html("提现金额必须为整数，且大于0");
+            if(isNaN($.trim($("#cash-txt").val()))||$.trim($("#cash-txt").val())<=0){
+                  $("#cash-msg").html("提现金额必须大于0");
                   $("#cash-msg").css("color","red");
                   flag=false;
               }else{
@@ -438,10 +442,18 @@ $("#btn-cash").click(function(){
                          flag=true;
                          if(flag){
                              $.post("<{spUrl c=ccash a=addCash}>",{amount:$.trim($("#cash-txt").val())},function(data,status){
-                                         if(data=="1"){
+                                         if(data==1){
+                                              $("#cash-msg").html("验证通过！");
+                                              $("#cash-msg").css("color","green");
+                                              var balance=parseFloat($("#user-balance").html());
+                                              var cold=parseFloat($("#user-cold").html());
+                                              var amount=parseFloat($.trim($("#cash-txt").val()));
+                                              $("#user-balance").html(balance-amount);
+                                              $("#user-cold").html(cold+amount);
                                               $.msg('申请提现成功，请耐心等待1-3个工作日。','color:green;');
+
                                          }else{
-                                              $.msg('网络异常导致提现申请失败');
+                                              $.msg(data);
                                          }
                                       });
                          }
@@ -462,8 +474,8 @@ $("#btn-recharge").click(function(){
             $("#recharge-msg").css("color","red");
             return false;
         }else{
-           if(!reg.test($.trim($("#recharge-txt").val()))){
-            $("#recharge-msg").html("充值金额必须为整数，且大于0");
+           if(isNaN($.trim($("#recharge-txt").val()))||$.trim($("#recharge-txt").val())<=0){
+            $("#recharge-msg").html("充值金额必须大于0的数字");
             $("#recharge-msg").css("color","red");
             return false;
             }else{
@@ -483,25 +495,25 @@ function loadData(data){
       records[i].number=0.01*parseFloat(records[i].number);
         if(records[i].type.substring(0,1)=="0"){
 
-          income+=parseFloat(records[i].number);
-          incomes.push(parseFloat(records[i].number));
+          income+=records[i].number;
+          incomes.push(records[i].number);
           // if(i>0){
           //   outcomes.push(parseFloat(outcomes[i-1]));
           // }else{
           //   outcomes.push(0);
           // }
-          sum+=parseFloat(records[i].number);
+          sum+=records[i].number;
           
         }
         else if(records[i].type.substring(0,1)=="1"){
-          outcome+=parseFloat(records[i].number);
+          outcome+=records[i].number;
           // if(i>0){
           //   incomes.push(parseFloat(incomes[i-1]));
           // }else{
           //   incomes.push(0);
           // }
-          outcomes.push(0-parseFloat(records[i].number));
-          sum-=parseFloat(records[i].number);
+          outcomes.push(0-records[i].number);
+          sum-=records[i].number;
           
         }
         sums.push(sum);

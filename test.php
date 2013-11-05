@@ -36,12 +36,22 @@
         </div>
         <div class="span9 offset3 box" style="margin-top:0px;border-radius:5px;box-shadow:0px 1px 1px #ddd;padding:20px;line-height:2;">
             <div id="privacy">
-              <p> <div class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></div>
-                             <script type="text/javascript" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=54"></script>
-                             <script type="text/javascript" id="admarket_js_54" src="http://localhost/js/ad.js?aid=54"></script>
-                             <div class="admarket_ad" style="display:inline;" aid="54" id="admarket_box_54"></div>
-                             <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=54"></script>
-                             <script type="text/javascript" id="admarket_js_54" src="http://www.eadmarket.com/js/ad.js?aid=54"></script>
+              <p> 
+<div class="admarket_ad" style="display:inline;" aid="87" id="admarket_box_87"></div>
+<script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=87"></script>
+<script type="text/javascript" charset="utf-8" id="admarket_js_87" src="http://localhost/js/ad.js?aid=87"></script>
+<!--Eadmarket ad code-->
+<script type="text/javascript" charset="utf-8">
+(function(){
+  var eadmarket=document.createElement('script');
+  eadmarket.type="text/javascript";
+  eadmarket.async=true;
+  eadmarket.charset="utf-8";
+  eadmarket.src="http://localhost/js/ad.js?aid=87";
+});
+</script>             
+                            </div>
+                             
                              
                              我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
 <h5>我们承诺做到如下几点：</h5>

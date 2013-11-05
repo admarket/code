@@ -6,6 +6,13 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/bootstrap-fileupload.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -17,9 +24,13 @@
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
-
-    <script src="/js/jquery-1.9.1.min.js"></script>
+     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
+
 
   </head>
   <body>
@@ -30,7 +41,7 @@
     <div class="section">
       <div class="container">
         <div class="row-fluid">
-          <div class="span3 left-bar">
+          <div class="span3 left-bar" >
               <!-- load user tpl -->
             <{include file="./user/inner-user.php"}>
             <!-- Bootstrap -->
@@ -54,7 +65,7 @@
                   </div> 
                   <div class="span10">
                     <div class=" title">&nbsp;交易总额：</div>
-                    <p><{(0.01*$sumFee)|number_format}>&nbsp;&yen;</p>
+                    <p><{(0.01*$sumFee)|string_format:"%.2f"}>&nbsp;&yen;</p>
                   </div>
                   
                 </div>
@@ -110,14 +121,7 @@
                 </div>
               </div>
             <!-- Bootstrap -->
-              <div style="padding-left:0px;">
-                <p class="btn-group">
-                  <a id="share" class="btn  btn-danger tip"  title="分享我们的网站"><i class=" icon-heart icon-white"></i></a>
-                  <a class="btn tip" title="切换身份" href="<{spUrl c=cuser a=changeIdentity}>"><i class="icon-refresh"></i></a>
-                  <a class="btn tip" title="设置" href="<{spUrl c=sub a=setting}>"><i class="icon-cog"></i></a>
-                  <a class="btn tip" title="退出" href="<{spUrl c=sub a=logout}>"><i class="icon-off"></i></a>
-                </p>
-              </div>
+              
             </div>
           </div>
           <div class="span9 main-body" >
@@ -169,7 +173,7 @@
                      </div>
                      <div class="span3" style="padding-top:30px;z-index:-1;border-bottom:dashed 2px #555;">
                       <{if $trade.state==0}>
-                       <marquee direction=right scrollamount=5>
+                        <marquee direction=right scrollamount=5>
                           <i class="icon-user" ></i>
                           <i class="icon-group" style="margin-left:100%;"></i>
                         </marquee>
@@ -218,7 +222,7 @@
                               <p>购买价格：
                              </p>
                               <h5 class="red-color" >
-                               <{(0.01*$trade.price)|number_format}> &yen;/天
+                               <{(0.01*$trade.price)|string_format:"%.2f"}> &yen;/天
                               
                               </h5>
                           </td>
@@ -227,7 +231,7 @@
                              </p>
                               <h5 class="green-color" >
                               
-                              <{$trade.number|number_format}>天
+                              <{$trade.number}>天
                               </h5>
                            </td>
                           
@@ -237,7 +241,7 @@
                              </p>
                               <h5 class="blue-color" >
                               
-                              <{(0.01*($trade.price*$trade.number))|number_format}> &yen; 
+                              <{(0.01*($trade.price*$trade.number))|string_format:"%.2f"}> &yen; 
                               </h5>
                           </td>
                          
@@ -252,10 +256,14 @@
                                   <span class="label label-success"> 
                                     正常显示
                                   </span>
-                                   <{else}>
+                                   <{elseif $trade.state == 1}>
                                   <span class="label label-danger"> 
                                     已经到期
                                   </span>
+                                  <{else}>
+                                    <span class="label label-warning"> 
+                                      正在预订 
+                                    </span>
                                   <{/if}>
                               </h5>
                             
@@ -292,8 +300,8 @@
                             <p>广告位效果预览：(如果效果不佳，可在产品管理页面更换广告内容)</p>
                             <div>
                               <div class="admarket_ad" style="display:inline;" aid="<{$trade.advertise.id}>" id="admarket_box_<{$trade.advertise.id}>"></div>
-                                 <script type="text/javascript" id="admarket_shell" src="http://www.eadmarket.com/?c=cadvertise&a=GetADCode&aid=<{$trade.advertise.id}>"></script>
-                                 <script type="text/javascript" id="admarket_js_<{$trade.advertise.id}>" src="http://www.eadmarket.com/js/ad.js?aid=<{$trade.advertise.id}>"></script>
+                                 <script type="text/javascript" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$trade.advertise.id}>&active=0"></script>
+                                 <script type="text/javascript" id="admarket_js_<{$trade.advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$trade.advertise.id}>"></script>
                             </div>
                           </td>
                         </tr>
@@ -302,12 +310,12 @@
                             <p>推广进度：
                              </p>
                             <div class="progress tip" style="margin-top:20px;border:solid 1px #ddd;color:#ccc;" title="<{$trade.process}>%">
-                               <{if $trade.process < 90 &&  $trade.state==0}>
+                               <{if $trade.process < 100 &&  $trade.state==0}>
                               <div class="bar bar-success" style="width: <{$trade.process}>%;">
-                                <{elseif ($trade.process >=90 && $trade.process < 100)}>
-                                <div class="bar bar-warning" style="width: <{$trade.process}>%;">
-                                 <{else}> 
-                                 <div class="bar bar-danger" style="width: 100%;">
+                                 <{elseif $trade.state==2}> 
+                                 <div class="bar bar-warning" style="width: 50%;">
+                                  <{else}>
+                                  <div class="bar bar-danger" style="width: 100%;">
                                 <{/if}>
                                 <{$trade.process}>%
                              </div>
@@ -333,7 +341,7 @@
     <!--footer content-->
      <!-- load foot tpl -->
     <{include file="foot.php"}>
-    
+
 <script src="/js/highcharts.js"></script>
 <script src="/js/jquery.form.js"></script>
 <script type="text/javascript">

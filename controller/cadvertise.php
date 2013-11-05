@@ -1,7 +1,7 @@
 <?php
 class cadvertise extends spController
 {
-    
+      
       	function AddAdvertise(){//添加广告项目
       		$advertise = spClass("advertise");
           //手续费规则：(0,1000)=10%，[1000,3000)=9%，[3000,5000)=8%，[5000,8000)=7%，[8000,10000)=6%,[10000,+]=5%;
@@ -66,6 +66,11 @@ class cadvertise extends spController
                          'content' => $this->spArgs('value'),
                         );
                   break;
+                case "advertiseStyle":
+                   $newrow = array(
+                         'style' => $this->spArgs('value'),
+                        );
+                  break;
                 case "format":
                   $newrow = array(
                         'format' =>  $this->spArgs('value'),
@@ -126,64 +131,113 @@ class cadvertise extends spController
             $ip = getenv("REMOTE_ADDR");
             //else $ip = "Unknow";
           $advertise = spClass("advertise");
+          $active=$this->spArgs('active');
           $conditions = array("id"=>$this->spArgs('aid')); // 根据id查找指定的广告位
           $result=$advertise->spLinker()->find($conditions);
 
-          //激活广告位状态
-          $row=array('verify'=>'1');
-          // echo $_SERVER['HTTP_REFERER'];
-          // echo ";";
           $signUrl= str_replace("http://","",$result['base']['url']);
           $signUrl= str_replace("www.","",$signUrl);
-          if(strpos($_SERVER['HTTP_REFERER'],$signUrl))
-          {
-            $advertise->update($conditions, $row);
+
+          //激活广告位状态
+           $trade = spClass("trade");
+           $bookCondition=array(
+            "advertise"=>$this->spArgs('aid'),
+            "state"=>2,
+            );
+
+          $bookResult=$trade->find($bookCondition);
+          $bookFlag=false;
+          //dump($active);
+          if($bookResult&&$active==""){//如果该广告位已经被预订
+              $bookFlag=true;
+              if(strpos($_SERVER['HTTP_REFERER'],$signUrl)){
+               $startTime = time();  // 当前时间戳
+                $endTime =$startTime + ($bookResult['number'] * 24 * 60 * 60);  // N天后的时间戳 
+                $bookRow = array(
+                  'state' => 0,
+                 "startTime"=>date("Y-m-d H:i:s", $startTime), 
+                  "endTime" =>date("Y-m-d H:i:s", $endTime), // 格式化日期
+                  "last_transfer_date"=>date("Y-m-d H:i:s", $startTime), 
+                 );
+              $upResult=$trade->update($bookCondition ,$bookRow);//更新交易状态，激活交易
+              }
           }
-          echo "var advertise=";
+
+          // echo $_SERVER['HTTP_REFERER'];
+          // echo ";";
+         //更新广告位状态
+
+          if($result['state']==2&&$active==""){//如果广告位之前是未激活的
+            $row=array('state'=>'0');
+             if(strpos($_SERVER['HTTP_REFERER'],$signUrl)){
+               $advertise->update($conditions, $row);
+            }
+          }
+            
+         
+          echo "var admarket_advertise=";
           echo json_encode($result);
           echo ";";
           ////如果广告位状态为已经出售，查询交易信息
-          if($result['state']!='0'){
-            $trade = spClass("trade");
+          if($result['state']=='1'){
+           
             $conditions = array("advertise"=>$this->spArgs('aid')); // 根据id查找指定的广告位
-            $result=$trade->spLinker()->find($conditions);
+            $result=$trade->spLinker()->find($conditions,"id desc");
 
-            $report=spClass('report');//添加数据统计信息
-            $newrow = array(
-                        'advertise' => $this->spArgs('aid'),
-                        'product' => $result['product']['id'],
-                        'trade' => $result['id'],
-                        'impression' => 1,
-                        'click' => 0,
-                        'buyer' => $result['buyer'],
-                        'seller' => $result['seller'],
-                        'ip' => $ip,
-                        );
-            $report->create($newrow);
+            $bookFlag=true;
+            if(!$bookFlag){
+                $report=spClass('report');//添加数据统计信息
+                $newrow = array(
+                            'advertise' => $this->spArgs('aid'),
+                            'product' => $result['product']['id'],
+                            'trade' => $result['id'],
+                            'impression' => 1,
+                            'click' => 0,
+                            'buyer' => $result['buyer'],
+                            'seller' => $result['seller'],
+                            'ip' => $ip,
+                            );
+                $report->create($newrow);
 
-            $product=spClass('product');//更新产品统计信息
-            $productConditions = array("id"=>$result['product']['id']); // 查找email是$email的记录
-            $newrow = array(
-                    'impression' => $result['product']['impression']+1,  // 浏览次数+1
-            );
-            $product->update($productConditions, $newrow); // 更新记录
+                $product=spClass('product');//更新产品统计信息
+                $productConditions = array("id"=>$result['product']['id']); // 查找email是$email的记录
+                $newrow = array(
+                        'impression' => $result['product']['impression']+1,  // 浏览次数+1
+                );
+                $product->update($productConditions, $newrow); // 更新记录
+            }
+            
 
-            echo "var trade=";
+            echo "var admarket_trade=";
             echo json_encode($result);
             echo ";";
           }else{
             $report=spClass('report');//添加数据统计信息
-            $newrow = array(
-                        'advertise' => $this->spArgs('aid'),
-                        'product' => -1,
-                        'trade' => -1,
-                        'impression' => 1,
-                        'click' => 0,
-                        'buyer' => -1,
-                        'seller' => -1,
-                        'ip' => $ip,
-                        );
-            $report->create($newrow);
+            $reportCondition=array('ip' => $ip,'advertise'=>$this->spArgs('aid'));
+            $repResult=$report->find($reportCondition);
+            if($repResult){
+                $uprow=array(
+                  'impression'=>$repResult['impression']+1,
+                );
+                $upCondition=array(
+                    'id'=>$repResult['id'],
+                  );
+                $report->update($upCondition,$uprow);
+            }else{
+                $newrow = array(
+                          'advertise' => $this->spArgs('aid'),
+                          'product' => -1,
+                          'trade' => -1,
+                          'impression' => 1,
+                          'click' => 0,
+                          'buyer' => -1,
+                          'seller' => -1,
+                          'ip' => $ip,
+                          );
+              
+              $report->create($newrow);
+            }
+            
           }
           
         }

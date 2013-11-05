@@ -4,7 +4,14 @@ http-equiv="Content-Type" content="text/html; charset=utf-8" />     <meta
 name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>     <meta
 name="description"
 content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">     
+<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
+  <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->    
 <link href="/css/bootstrap-responsive.css" rel="stylesheet">     
  <link rel="stylesheet" href="/css/font-awesome.min.css">     <!--[if IE 7]>
 <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">     <![endif]-->
@@ -15,6 +22,10 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
 
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
   </head>
   <body>
      <!-- load head tpl -->
@@ -129,6 +140,8 @@ content="广告市场是全球首家中文网络广告位交易平台，在此�
                     <p>一般申请支付宝方式提现，在用户账户的钱款扣除后会立刻到账。而申请银联卡方式提现，由于跨行汇款一般需要1个工作日，所以请耐心等待。如果超过一个工作日钱款未能到账，请联系我们的客服人员。</p>
                     <h5>7、为什么选择的文件无法上传？</h5>
                     <p>文件无法上传，一般是文件类型不符合要求，或者文件过大导致的，具体请查看系统提示信息。如果系统没有任何提示，请联系我们的客服人员。</p>
+                    <h5>8、怎样激活广告位？</h5>
+                    <p>进入广告位管理页面，点击出售代码列的按钮，复制代码到您的网站添加广告的位置即可激活。</p>
                   </div>
                 </div>
               </div>

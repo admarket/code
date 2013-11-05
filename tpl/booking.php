@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html>   <head>     <title>广告市场  - 购买此广告位</title>     <meta
+<!DOCTYPE html> <html>   <head>     <title>广告市场  - 预订此广告位</title>     <meta
 name="viewport" content="width=device-width, initial-scale=1.0">      <meta
 http-equiv="Content-Type" content="text/html; charset=utf-8" />     <meta
 name="keywords" content="广告位市场,广告位招租,广告位出售,广告位管理"/>     <meta
@@ -33,18 +33,18 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
               
 <div class="section" align="center">
       <div class="container box std-container" align="left" style="padding:20px 40px;position:relative;">
-          <h3 class="title">广告位购买</h3>
+          <h3 class="title">广告位预订（预订可能会失败！预订结果将在1-3日内通知）</h3>
           <div class="progress active" style="border:solid 1px #aaa;height:40px;border-radius:15px;">
-            <div class="bar bar-success" style="width:15%;text-align:center;padding:10px;">
+            <div class="bar bar-warning" style="width:15%;text-align:center;padding:10px;">
               1.&nbsp;选择广告位&nbsp;<i class="icon-double-angle-right icon-large"></i>
             </div>
-            <div class="bar bar-success" style="width:55%;text-align:center;padding:10px;">
+            <div class="bar bar-warning" style="width:55%;text-align:center;padding:10px;">
               2.&nbsp;绑定推广产品&nbsp;<i class="icon-double-angle-right icon-large"></i>
             </div>
-            <div class="bar bar-success" style="width:15%;text-align:center;padding:10px;opacity:0.3;">
-              3.&nbsp;支付购买&nbsp;<i class="icon-double-angle-right icon-large"></i>
+            <div class="bar bar-warning" style="width:15%;text-align:center;padding:10px;opacity:0.3;">
+              3.&nbsp;支付订金&nbsp;<i class="icon-double-angle-right icon-large"></i>
             </div>
-            <div class="bar bar-success" style="width:15%;text-align:center;padding:10px;opacity:0.3;border-radius:0 15px 15px 0;">
+            <div class="bar bar-warning" style="width:15%;text-align:center;padding:10px;opacity:0.3;border-radius:0 15px 15px 0;">
               4.&nbsp;完成&nbsp;<i class="icon-double-angle-right icon-large"></i>
             </div>
           </div>
@@ -134,10 +134,10 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                             
                         <{else}>
                             <h5>选择广告内容：</h5>
-                            <p>无法识别的广告格式！请选择其他的广告位购买</p>
+                            <p>无法识别的广告格式！请选择其他的广告位预订</p>
                         <{/if}>
                          
-                        <h5>选择购买时间：</h5>
+                        <h5>选择预订时间：</h5>
                         <div id="day" style="padding:0 20px;">
                          <label class="radio inline"  style="font-size:12px;">
                               <input  type="radio" class="number" name="number"  value="7">
@@ -161,7 +161,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                           </label>
                         </div>
                         <br/>
-                        <h5>广告位效果预览：(请留意广告位要求。效果不佳可在购买后自行更换广告内容)</h5>
+                        <h5>广告位效果预览：(请留意广告位要求。效果不佳可在预订成功后自行更换广告内容)</h5>
                         <div style="padding:10px 20px;">
                           <div class="admarket_ad" style="display:inline;" aid="<{$ad.id}>" id="admarket_box_<{$ad.id}>"><a href="http://<{$smarty.server.HTTP_HOST}>/?c=main&a=detail&project=<{$project.id}>" style="display:none;">广告位招租</a></div>
                              <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$ad.id}>&active=0"></script>
@@ -170,8 +170,8 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                         <br/>
                         <div class="controls" align="center" style="padding:20px;">
                           
-                          <a class="btn btn-success" id="btn-buy" style="width:100px;"  >
-                            确认购买
+                          <a class="btn btn-warning" id="btn-buy" style="width:100px;"  >
+                            确认预订
                           </a>
                           &nbsp;&nbsp;价格总计：<span class="finalNumber">1</span>
                           &nbsp;*&nbsp;<span class="finalPrice">
@@ -196,7 +196,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
    
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4>确认购买信息</h4>
+    <h4>确认预订信息</h4>
   </div>
   
   <div class="modal-body" style="padding:10px 20px;">
@@ -223,7 +223,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                   </div>
                   <div class="span4">
                     <p>
-                      <h5>购买时间:</h5>
+                      <h5>预订时间:</h5>
                     </p>
                     <p>
                       <span id="modal-number" class="red-color">尚未选择</span>
@@ -429,7 +429,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
          if(!productFlag){
           $.msg('请先选择推广产品');
         }else if(!numberFlag){
-          $.msg('请先选择购买天数');
+          $.msg('请先选择预订天数');
         }else if(!balanceFlag){
           $.msg('账户余额不足，请先充值');
           $("#form-income").modal();
@@ -446,17 +446,17 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
           $.msg('请先选择推广产品');
         }else if(!numberFlag){
           $("#form-verify").modal('hide');
-          $.msg('请先选择购买天数');
+          $.msg('请先选择预订天数');
         }else{
           //$.loading("正在支付");
           $("#btn-save").button('loading');
           
-            $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
+            $.post("<{spUrl c=ctrade a=BookingAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
              function(data){
               //alert(data);
                if(data==1){
-                 $("#btn-pay").attr('class','btn btn-success disabled');
-                  $.msg('购买成功！','color:green;');
+                $("#btn-pay").attr('class','btn btn-success disabled');
+                  $.msg('预订成功！','color:green;');
 
                    window.location.href='<{spUrl c=sub a=effect}>';
                }

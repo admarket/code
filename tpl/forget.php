@@ -8,7 +8,15 @@
     <meta name="description" 
     content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!--[if lte IE 6]>
+  <!-- bsie css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+
+  <!-- bsie 额外的 css 补丁文件 -->
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--<link rel="stylesheet" href="/css/font-awesome.min.css">-->
     <!--[if IE 7]>
@@ -34,7 +42,7 @@
                    <div class="input-prepend">
                     <span class="add-on"><i class="icon-envelope"></i></span>
                     <input type="text" placeholder="输入您的邮箱地址" class="input-xlarge" id="email">
-                    <a class="btn btn-primary" data-toggle="button"  data-loading-text="正在发送..." > 立刻找回</a>
+                    <a id="btn-forget" class="btn btn-primary" data-toggle="button"  data-loading-text="正在发送..." > 立刻找回</a>
                     
                   </div>
                   <div  style="display:block;padding:20px 0px;font-size:14px;">
@@ -54,11 +62,15 @@
     <{include file="foot.php"}>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+    <!-- bsie js 补丁只在IE6中才执行 -->
+    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+    <![endif]-->
     <script src="/js/jquery.message.js"></script>
     <script type="text/javascript">
-      $(".btn").click(function(){
+      $("#btn-forget").click(function(){
           if(checkEmail()){
-            $(".btn").button('loading');
+            $("#btn-forget").button('loading');
             $.post("<{spUrl c=cuser a=forget}>", { email: $("#email").val()},
              function(data){
               //alert(data);
@@ -70,12 +82,12 @@
                 //$("#alert-msg").show();
                 
                }
-               $('.btn').button('toggle');
-               $('.btn').button('reset');
+               $('#btn-forget').button('toggle');
+               $('#btn-forget').button('reset');
              });
           }else{
-              $('.btn').button('toggle');
-               $('.btn').button('reset');
+              $('#btn-forget').button('toggle');
+               $('#btn-forget').button('reset');
           }
           
           
