@@ -55,6 +55,15 @@ class recharge extends spModel
               $this->query("ROLLBACK");
               return false;
           }
+
+          $finance = spClass("finance");
+
+          $finance->create(
+              array('user_id'=>$rechargeDO['user_id'],
+                    'type'=>'10', 'number'=>$totalFee,
+                    'remark'=>'充值', 'time'=>date("Y-m-d H:i:s"))
+          );
+
           $this->query("COMMIT");
           return true;
       }
