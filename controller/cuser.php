@@ -91,7 +91,7 @@ class cuser extends spController
 		$payment=$this->spArgs("payment");
 		$invite_code=$this->spArgs("invite");
 
-		$invite_user=$this->decryptEmail($invite_code);
+		$invite_user=intval($this->decryptEmail($invite_code));
 
 		$conditions = array("email" => $email);
 
