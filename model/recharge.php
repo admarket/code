@@ -60,7 +60,7 @@ class recharge extends spModel
 
           $finance->create(
               array('user_id'=>$rechargeDO['user_id'],
-                    'type'=>'10', 'number'=>$totalFee,
+                    'type'=>'01', 'number'=>$totalFee,
                     'remark'=>'充值', 'time'=>date("Y-m-d H:i:s"))
           );
 
