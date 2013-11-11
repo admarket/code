@@ -5,7 +5,12 @@ class cuser extends spController
 		$user = spClass("user");
 		$conditions = array("id" => $_SESSION['user']['id']);
 		$records = $user->find($conditions); 
+		$invite_code=$this->encryptEmail($_SESSION['user']['id']);
+		//$invent_code=mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", $_SESSION['user']['id'], MCRYPT_MODE_CBC,"8105547186756005");
+		//dump($invent_code);
 		if($records){
+
+			$records['code']=$invite_code;
 			echo json_encode($records);
 		}else{
 			echo "0";
@@ -13,6 +18,15 @@ class cuser extends spController
 		
 	}
 
+	 function encryptEmail($orginalEmail) {
+        $date = date("Ymd H:i:s",time());
+        $orginalEmail = $orginalEmail."&".$date;
+        $encrypttedEmail = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", $orginalEmail, MCRYPT_MODE_CBC,"8105547186756005");
+        //$encrypttedEmail = $orginalEmail;
+        $encrypttedEmail = base64_encode($encrypttedEmail);
+        $encrypttedEmail = urlencode($encrypttedEmail);
+        return $encrypttedEmail;
+    }
 	//登录
 	function login(){
 		$user = spClass("user");
@@ -75,6 +89,9 @@ class cuser extends spController
 		$name=$this->spArgs("name");
 		$account=$this->spArgs("account");
 		$payment=$this->spArgs("payment");
+		$invite_code=$this->spArgs("invite");
+
+		$invite_user=$this->decryptEmail($invite_code);
 
 		$conditions = array("email" => $email);
 
@@ -87,6 +104,7 @@ class cuser extends spController
                         "account" => $account ,
                         "mobilephone"=>$phone,
                         "payment" => $payment,
+                        "invite_user"=>$invite_user,
                 );
 		
 		$result = $user->findAll($conditions); //查询该邮箱是否已经被注册
@@ -166,7 +184,7 @@ class cuser extends spController
     }
     //解密获取加密字符串中的email
     function decryptEmail($crypttedEmail) {
-    	$emailContainer = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", urldecode(base64_decode($crypttedEmail)), MCRYPT_MODE_CBC,"8105547186756005");
+    	$emailContainer = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "6461772803150152", base64_decode(urldecode($crypttedEmail)), MCRYPT_MODE_CBC,"8105547186756005");
     	$elements = explode("&", $emailContainer);
     	return $elements[0];
     }

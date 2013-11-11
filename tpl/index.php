@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wb="http://open.weibo.com/wb">
   <head>
     <title>广告位市场 - 全球首家中文网络广告位发布、管理平台 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <meta name="keywords" content="广告市场,广告位招租,广告位出售,网络广告位,广告位购买，广告位发布"/>
     <meta name="description" 
     content="广告位市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-
+  <meta name="chinaz-site-verification" content="081e7651-48c6-4c2f-a569-99321685eab1" />
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
      <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -110,7 +110,11 @@
                 </ul>
             </div> 
 
-
+            <p style="text-align:center;">
+                <a href="<{spUrl c=main a=result  category=1}>" class="btn">
+                  <i class="icon-eye-open"></i>&nbsp;查看更多广告位
+                </a>
+            </p>
           </div>
 
         </div>

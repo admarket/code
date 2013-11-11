@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 -  <{$project.name}>的所有广告位</title>
+    <title>广告位市场 -  <{$project.name}>的所有广告位</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
@@ -136,7 +136,7 @@
                           
                           <td>
                            <div style="padding:10px;">
-                             <{if $advertise.verify!=0}>
+
                                 <{if $advertise.state == 0}>
                                   <{if $smarty.session.user eq '' }>
                                   <a class="btn btn-small btn-success disabled tip"   title="请先登录">
@@ -145,16 +145,16 @@
                                     <{/if}>
                                   <i class=" icon-shopping-cart"></i>&nbsp;购买
                                 </a>
-                                 <{else}>
+                                 <{elseif $advertise.state == 1}>
                                  <a url="<{spUrl c=cadvertise a=BuyAdvertise advertiseID=$advertise.id seller=$advertise.project.owner }>" class="btn btn-small btn-danger disabled tip" title="已出售广告位无法购买">
                                   <i class=" icon-shopping-cart"></i>&nbsp;已售
                                 </a>
+                                 <{elseif $advertise.state == 2}>
+                                    <a  class="btn btn-small btn-warning tip"  href="<{spUrl c=main a=booking id=$advertise.id}>" class="btn btn-small btn-danger  tip" title="预订的购买成功率为80%">
+                                      <i class=" icon-shopping-cart"></i>&nbsp;预订
+                                    </a>
                                 <{/if}>
-                            <{else}>
-                                <a url="<{spUrl c=cadvertise a=BuyAdvertise advertiseID=$advertise.id seller=$advertise.project.owner }>" class="btn btn-small btn-primary disabled tip" title="该广告位尚未添加代码激活">
-                                  &nbsp;未激活
-                                </a>
-                            <{/if}>  
+ 
                             </div>
                           </td>
                         </tr>

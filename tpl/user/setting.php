@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 基本设置</title>
+    <title>广告位市场 - 用户中心 - 基本设置</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->

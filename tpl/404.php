@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场  - 错误页面</title>
+    <title>广告位市场  - 错误页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>

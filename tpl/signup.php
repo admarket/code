@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场  - 用户注册</title>
+    <title>广告位市场  - 用户注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
@@ -99,7 +99,7 @@
                     <p class="help-block" id="repassword-msg">与上面的密码保持一致</p>
                   </div>
                 </div>
-
+               
           <div class="control-group">
 
                 <!-- Textarea -->
@@ -154,7 +154,8 @@
                     
               </div>
             </div>
-            <div class="span5 offset1 box" style="padding:20px;border-radius:5px;">
+            <div class="span5 offset1" style="padding:20px;border-radius:5px;">
+              <div class="box">
                 <legend><h5>提现账户</h5></legend>
                 <label>真实姓名：</label>
                 <div class="input-prepend">
@@ -174,10 +175,9 @@
                 <p>
                   <span class="help-block" id="account-msg">请输入与下面提现方式相应的账号</span>
                 </p>
-                <div>
-                  <p></p>
+
                   <label>提现方式：</label>
-                  <div class="span5">
+
                     <label class="radio" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
                       <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
@@ -189,10 +189,21 @@
                     <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                     &nbsp;银联卡&nbsp;
                     </label>
-                  </div>
-                </div>
-            </div>
 
+
+              </div>
+                <div style="padding:0 10px;">
+                    <h5>邀请码（可选）：</h5>
+                    <div class="input-prepend">
+                      <span class="add-on" ><i class="icon-hand-right"></i></span>
+                      <input type="text" id="invite-code" placeholder="输入邀请码">
+                    </div>
+                    <p>
+                      <span class="help-block" id="account-msg">请输入邀请人为您提供的邀请码</span>
+                    </p>
+                  </div>
+            </div>
+               
               
             </div>
         </form>
@@ -430,7 +441,7 @@
                     width: "66%"
                   }, 1000 );
              $("#second").attr("class",'badge badge-success');
-            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val()},
+            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val(),invite: $.trim($("#invite-code").val().replace(/[\r\n]/g,""))},
              function(data){
                if(data){
                   $('#btn-register').attr('class',"btn btn-success disabled");

@@ -105,7 +105,7 @@ class main extends spController
 
         $pageSize=12;
         $startIndex=($currentPage-1)*$pageSize;
-        $sql="select ad.*,pro.name,pro.url,pro.logo,pro.alexa  from advertise ad,project pro where ad.project=pro.id and ".$conditions." limit ".$startIndex.",".$pageSize;
+        $sql="select ad.*,pro.name,pro.url,pro.logo,pro.alexa  from advertise ad,project pro where ad.project=pro.id and ".$conditions." order by id desc limit ".$startIndex.",".$pageSize;
         $results=$advertise->findSql($sql);
         foreach ($results as &$ad) {
             $pro=array(

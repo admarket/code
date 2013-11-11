@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html>   <head>     <title>广告市场  - 购买此广告位</title>     <meta
+<!DOCTYPE html> <html>   <head>     <title>广告位市场  - 购买此广告位</title>     <meta
 name="viewport" content="width=device-width, initial-scale=1.0">      <meta
 http-equiv="Content-Type" content="text/html; charset=utf-8" />     <meta
 name="keywords" content="广告位市场,广告位招租,广告位出售,广告位管理"/>     <meta
@@ -55,7 +55,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                   
                   <div id="bindProduct" class="span6 row-fluid" style="border:dashed 1px #ccc;padding:10px 30px;border-radius:5px;">
                       <h6>请选择推广产品：</h6> 
-                      <{if $products eq ""}>
+                      <{if $products|@count eq 0 }>
                          <div>
                             <i class="icon-info-sign"></i>&nbsp;&nbsp;您尚未添加推广产品，请先产品管理页面
                             <a class="btn btn-danger" href="<{spUrl c=sub a=product}>">添加推广产品</a>。
@@ -139,14 +139,8 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                          
                         <h5>选择购买时间：</h5>
                         <div id="day" style="padding:0 20px;">
-                         <label class="radio inline"  style="font-size:12px;">
-                              <input  type="radio" class="number" name="number"  value="7">
-                              &nbsp;7天&nbsp;
-                         </label>
-                          <label class="radio inline"  style="font-size:12px;">
-                              <input  type="radio" class="number"  name="number"  value="15">
-                              &nbsp;15天&nbsp;
-                          </label>
+                        
+                         
                           <label class="radio inline"  style="font-size:12px;">
                               <input  type="radio" class="number"  name="number"  value="30">
                               &nbsp;30天&nbsp;
@@ -158,6 +152,14 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
                           <label class="radio inline"  style="font-size:12px;">
                               <input  type="radio" class="number"  name="number" value="90">
                               &nbsp;90天&nbsp;
+                          </label>
+                           <label class="radio inline"  style="font-size:12px;">
+                              <input  type="radio" class="number"  name="number" value="120">
+                              &nbsp;120天&nbsp;
+                          </label>
+                           <label class="radio inline"  style="font-size:12px;">
+                              <input  type="radio" class="number"  name="number" value="150">
+                              &nbsp;150天&nbsp;
                           </label>
                         </div>
                         <br/>

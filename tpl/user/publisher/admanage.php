@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 广告位管理</title>
+    <title>广告位市场 - 用户中心 - 广告位管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->
@@ -268,7 +268,7 @@
                           <td>
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
-                             data-content='<textarea class="textarea"><div class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"></div>
+                             data-content='<textarea class="textarea"><div class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"><a href="http://www.eadmarket.com/?c=main&a=detail&project=<{$project.id}>"></a></div>
                              <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
                              <script type="text/javascript" charset="utf-8" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>
@@ -283,10 +283,15 @@
                               class="btn btn-mini btn-danger tip remove" title="删除">
                               <i class=" icon-trash"></i>
                             </a>
-                             <{else}>
+                             <{else if $advertise.state == 1}>
                              <a url="<{spUrl c=cadvertise a=RemoveAdvertise advertiseID=$advertise.id}>" class="btn btn-mini btn-danger disabled tip" title="已出售广告位无法删除">
                               <i class=" icon-trash"></i>
                             </a>
+                             <{else}>
+                              <a url="<{spUrl c=cadvertise a=RemoveAdvertise advertiseID=$advertise.id}>"
+                              class="btn btn-mini btn-danger tip remove" title="删除">
+                                <i class=" icon-trash"></i>
+                              </a>
                             <{/if}>
                             
                           </td>
@@ -459,8 +464,8 @@ $('.select-editable').editable({
           if($.trim(value) == '') {
               return '该字段不能为空';
           }
-          else if($.trim(value).length>200) {
-              return '长度不能超过200';
+          else if($.trim(value).length>100) {
+              return '长度不能超过100';
           }
       }
   });

@@ -24,10 +24,10 @@
                   <div><span class="title">字号：&nbsp;</span><{$advertise.width}></div>
                 <{elseif $advertise.format==1}>
                   <div><span class="title">格式：&nbsp;</span><i class="icon-picture tip" title="图片"></i>&nbsp;图片</div>
-                  <div><span class="title">大小：&nbsp;</span><{$advertise.width}>*<{$advertise.width}></div>
+                  <div><span class="title">大小：&nbsp;</span><{$advertise.width}>*<{$advertise.height}></div>
                 <{else}>
                    <div><span class="title">格式：&nbsp;</span><i class="icon-film tip" title="视频"></i>视频</div>
-                   <div><span class="title">大小：&nbsp;</span> <{$advertise.width}>*<{$advertise.width}></div>
+                   <div><span class="title">大小：&nbsp;</span> <{$advertise.width}>*<{$advertise.height}></div>
                 <{/if}>
                  <div><span class="title">价格：&nbsp;</span><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)}> &nbsp;&yen;/天</div>
                 

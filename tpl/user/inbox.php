@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告市场 - 用户中心 - 站内信箱（<{$unread}>未读信息）</title>
+    <title>广告位市场 - 用户中心 - 站内信箱（<{$unread}>未读信息）</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Bootstrap -->

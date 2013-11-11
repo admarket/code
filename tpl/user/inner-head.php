@@ -2,7 +2,7 @@
       <div class="container">
         <div class="row-fluid">
            <div class="span2">
-            <a href="/" title="网站首页"><img class="logo-small" src="/img/logo-small.png"/></a>
+            <a href="/" title="网站首页"><img class="logo-small" alt="广告位市场-logo" src="/img/logo-small.png"/></a>
           </div>
           <div class="span9 offset1">
               <ul class="nav nav-pills nav-head" style="text-align:right;">

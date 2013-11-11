@@ -132,6 +132,7 @@ class cadvertise extends spController
             //else $ip = "Unknow";
           $advertise = spClass("advertise");
           $active=$this->spArgs('active');
+          $aid=$this->spArgs('aid');
           $conditions = array("id"=>$this->spArgs('aid')); // 根据id查找指定的广告位
           $result=$advertise->spLinker()->find($conditions);
 
@@ -173,6 +174,11 @@ class cadvertise extends spController
                $advertise->update($conditions, $row);
             }
           }
+          if($result['activeUrl']!=$_SERVER['HTTP_REFERER']&&active==""){
+            $row=array('activeUrl'=>$_SERVER['HTTP_REFERER']);
+            $advertise->update($conditions, $row);
+          }
+          
             
          
           echo "var admarket_advertise=";
