@@ -7,7 +7,9 @@
             <div class="row-fluid">
               <div class="span3" align="center">
                 <img class="img-rounded img-polaroid" src="/img/ads/<{$advertise.base.logo}>" alt="">
-                <h6 align="center" style="color:#0088cc;white-space:nowrap;"><{$advertise.base.name}></h6>
+                <h6 align="center" style="color:#0088cc;white-space:nowrap;">
+                  <a href="<{spUrl c=main a=detail project=$advertise.base.id}>" class="blue-color"><{$advertise.base.name}></a>
+                </h6>
               </div>
               
               <div class="span6 offset1">

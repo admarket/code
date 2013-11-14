@@ -11,34 +11,16 @@
                 </li>
               
                  
-                <li class="dropdown">
-                  <a class="dropdown-toggle" id="sellLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+               
                     <{if $smarty.session.user.type==1}>
-                    <strong>我是站长</strong>
+                      <li <{if $current=="sitemanage"}>class="active"<{/if}>><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
+                      <li <{if $current=="admanage"}>class="active"<{/if}>><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
                      <{else }>
-                     我是站长
+                        <li <{if $current=="product"}>class="active"<{/if}>><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
+                        <li <{if $current=="effect"}>class="active"<{/if}>><a href="<{spUrl c=sub a=effect}>">购买记录</a></li>
                       <{/if}>
-                    <b class="caret" style="color:#000;"></b>
-                  </a>
-                  <ul class="dropdown-menu" style="width:100px;text-align:left;left:20px;" role="menu" aria-labelledby="dLabel">
-                    <li><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
-                    <li><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" id="buyLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                    <{if $smarty.session.user.type==0}>
-                    <strong>我是买家</strong>
-                     <{else }>
-                     我是买家
-                      <{/if}>
-                    <b class="caret" style="color:#000;"></b>
-                  </a>
-                  <ul class="dropdown-menu" style="width:100px;text-align:left;left:20px;" role="menu" aria-labelledby="dLabel">
-                    <li><a href="<{spUrl c=sub a=product}>">产品管理</a></li>
-                    <li><a href="<{spUrl c=sub a=effect}>">购买记录</a></li>
-                  </ul>
-                </li>
+                   
+              
                 <li <{if $current=="inbox"}>class="active"<{/if}>>
                   <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title" >(<span id="unread-number">0</span>)</span>
                   </a>

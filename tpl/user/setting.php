@@ -165,24 +165,24 @@
                       <span class="input uneditable-input">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
                       <a id="btn-changePwd" class="btn btn-primary">修改密码</a>
                     </div>
-                   <label>默认界面：</label>
-                    <div class="box tip" style="width:70%;" title="选择登录后默认界面">
+                   <h5>我的身份：</h5>
+                    <div class="box tip" style="width:70%;" title="修改个人身份">
                       
-                      <label class="radio" style="font-size:12px;">
+                      <label class="radio inline  blue-color" >
                         <{if $user.type==0}>
                         <input type="radio" name="type" id="type1" value="0" checked>
                          <{else}>
                          <input type="radio" name="type" id="type1" value="0">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;我是买家 - 购买广告位&nbsp;
+                        <i class="icon-user"></i>&nbsp;我是买家 &nbsp;
                       </label>
-                      <label class="radio"  style="font-size:12px;">
+                      <label class="radio inline  green-color"  style="margin-left:20px;">
                         <{if $user.type==1}>
                         <input type="radio" name="type" id="type1" value="1" checked>
                          <{else}>
                          <input type="radio" name="type" id="type1" value="1">
                         <{/if}>
-                        <i class="icon-user"></i>&nbsp;我是卖家 - 出售广告位 &nbsp;
+                        <i class="icon-user"></i>&nbsp;我是站长 &nbsp;
                       </label>
                       
                     </div>

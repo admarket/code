@@ -154,7 +154,7 @@
                     
               </div>
             </div>
-            <div class="span5 offset1" style="padding:20px;border-radius:5px;">
+            <div class="span5" style="padding-left:40px;border-radius:5px;">
               <div class="box">
                 <legend><h5>提现账户</h5></legend>
                 <label>真实姓名：</label>
@@ -178,13 +178,13 @@
 
                   <label>提现方式：</label>
 
-                    <label class="radio" style="font-size:12px;">
+                    <label class="radio inline" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
                       <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                       &nbsp;支付宝&nbsp;
                     </label>
                    
-                    <label class="radio" style="font-size:12px;">
+                    <label class="radio inline" style="font-size:12px;">
                     <input type="radio" name="payment" id="payment3" value="1">
                     <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
                     &nbsp;银联卡&nbsp;
@@ -193,13 +193,28 @@
 
               </div>
                 <div style="padding:0 10px;">
+                   <h5>您的身份：</h5>
+                    <div style="padding:0 0 10px 10px;">
+                      <label class="radio inline  blue-color tip" title="购买广告位">
+                         <input type="radio" name="type" id="type1" value="0">
+                        <i class="icon-user"></i>&nbsp;我是买家 &nbsp;
+                      </label>
+                      <label class="radio  inline  green-color tip" title="发布、出售广告位">
+                         <input type="radio" name="type" id="type1" value="1">
+                        <i class="icon-user"></i>&nbsp;我是站长  &nbsp;
+                      </label>
+                     
+                    </div>
+                     <p>
+                      <span class="help-block red-color" style="display:none;color:red;" id="type-msg">请选择您的身份</span>
+                    </p>
                     <h5>邀请码（可选）：</h5>
                     <div class="input-prepend">
                       <span class="add-on" ><i class="icon-hand-right"></i></span>
-                      <input type="text" id="invite-code" placeholder="输入邀请码">
+                      <input type="text" id="invite-code" placeholder="输入邀请码，获得本站分红">
                     </div>
                     <p>
-                      <span class="help-block" id="account-msg">请输入邀请人为您提供的邀请码</span>
+                      <span class="help-block" id="code-msg">请输入邀请人为您提供的邀请码</span>
                     </p>
                   </div>
             </div>
@@ -247,6 +262,7 @@
       var namecheck=false;
       var accountcheck=false;
       var phonecheck=false;
+      var typecheck=false;
       function checkEmail(){
         if($.trim($("#email").val())==""){
                       $("#email-msg").html("邮箱不能为空！");
@@ -375,6 +391,18 @@
             return true;
           }
       }
+       function checkType(){
+        typecheck=false;
+         if($('input[name="type"]:checked').val()==undefined){
+              $("#type-msg").show();
+               return false;
+          }
+          else{
+           $("#type-msg").hide();
+            typecheck=true;
+            return true;
+          }
+      }
       $("#email").blur(function(){//验证
         checkEmail();
       }); 
@@ -434,14 +462,15 @@
           checkName();
           checkAccount();
           checkPhone();
-          if(emailcheck&&phonecheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck){//如果检查通过
+          checkType();
+          if(emailcheck&&phonecheck&&passwordcheck&&repasswordcheck&&namecheck&&accountcheck&&typecheck){//如果检查通过
             
             $("#btn-register").button('loading');
             $(".bar").animate({ 
                     width: "66%"
                   }, 1000 );
              $("#second").attr("class",'badge badge-success');
-            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val(),invite: $.trim($("#invite-code").val().replace(/[\r\n]/g,""))},
+            $.post("<{spUrl c=cuser a=register}>", { email: $.trim($("#email").val()),phone: $.trim($("#phone").val()), password:$.trim($("#password").val()),name: $.trim($("#name").val()),account: $.trim($("#account").val()),payment: $('input[name="payment"]:checked').val(),type: $('input[name="type"]:checked').val(),invite: $.trim($("#invite-code").val().replace(/[\r\n]/g,""))},
              function(data){
                if(data){
                   $('#btn-register').attr('class',"btn btn-success disabled");

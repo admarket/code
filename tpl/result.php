@@ -81,7 +81,7 @@
                           <a class="state" data-range="" style="margin-left:20px;" ><span class="condition">全部</span></a>
                           <a class="state" data-range="0" style="margin-left:20px;" ><span class="condition">未出售</span></a>
                           <a class="state" data-range="1" style="margin-left:20px;" ><span class="condition">已出售</span></a>
-                          <a class="state" data-range="2" style="margin-left:20px;" ><span class="condition">未激活</span></a>
+                          <a class="state" data-range="2" style="margin-left:20px;" ><span class="condition">可预订</span></a>
                         </div>
                     </div>
                      <div class="row-fluid " style="padding:0px;margin:0;">

@@ -297,6 +297,9 @@ class main extends spController
     function privacy(){
         $this->display("privacy.php"); // 注册 
     }
+    function partner(){
+        $this->display("partner.php"); // 注册 
+    }
     function question(){
         $this->display("question.php"); // 注册 
     }

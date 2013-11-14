@@ -89,7 +89,9 @@ class cuser extends spController
 		$name=$this->spArgs("name");
 		$account=$this->spArgs("account");
 		$payment=$this->spArgs("payment");
+		$type=$this->spArgs("type");
 		$invite_code=$this->spArgs("invite");
+
 
 		$invite_user=intval($this->decryptEmail($invite_code));
 
@@ -104,6 +106,7 @@ class cuser extends spController
                         "account" => $account ,
                         "mobilephone"=>$phone,
                         "payment" => $payment,
+                        "type" => $type,
                         "invite_user"=>$invite_user,
                 );
 		
@@ -218,10 +221,12 @@ class cuser extends spController
 				echo "操作失败：该手机号码已经被注册！";
 	        }else{
 	        	$user->update($conditions, $newrow); // 更新记录
+	        	$_SESSION['user']['type']=$type;
 		        echo "1"; // 首页
 	        }
 	    }else{
 	    		$user->update($conditions, $newrow); // 更新记录
+	    		$_SESSION['user']['type']=$type;
 	        	echo "1"; // 首页
 	    }
         
