@@ -124,10 +124,26 @@ class main extends spController
         
         
         $sumPage=ceil($this->resultsCount/$pageSize);
+        $maxPage=15;
+
+        if($maxPage>=$sumPage){
+            $maxPage=$sumPage;
+        }
+        $minPage=1;
         $allpages=array();
-        for ($i=1; $i <=$sumPage ; $i++) { 
+        if($sumPage>$maxPage&&$currentPage>($maxPage/2)){
+            $minPage=$minPage+$currentPage-1;
+            $maxPage=$maxPage+$currentPage-1;
+            if($maxPage>$sumPage){
+                $maxPage=$sumPage;
+                $minPage=$maxPage-15+1;
+            }
+        }
+        for ($i=$minPage; $i<=$maxPage ; $i++) { 
             $allpages[]=$i;
         }
+        //dump($allpages);
+        //dump($maxPage);
         $pager = array(
             'first_page' => 1, 
             'current_page'=>$currentPage,

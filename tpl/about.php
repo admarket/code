@@ -59,7 +59,8 @@
                     公司地址：北京市昌平区青年创业大厦A座<br/>
                     联系电话：010-60739009<br/>
                     客服QQ: <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes"><img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" alt="点击联系我们" title="点击联系我们"/>4006776</a><br/>
-                    企业邮箱：support@eadmarket.com
+                    企业邮箱：support@eadmarket.com<br/>
+                    法律顾问：北京市首信律师事务所 赵霞<br/>
                 </p>
                   <!--百度地图容器-->
                 <div class="well span7 offset1" style="height:250px;border:#ccc solid 1px;" id="dituContent">

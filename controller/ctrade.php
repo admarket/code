@@ -322,7 +322,7 @@ class ctrade extends spController
 
 				if($result){
 					$trade->query("COMMIT");
-					echo 1;
+					echo "预定成功！";
 				}else{
 					$trade->query("ROLLBACK");
 					echo "操作失败！未知原因导致预订失败！";

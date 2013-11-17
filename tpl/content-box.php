@@ -3,11 +3,11 @@
         <div><{$adCount.index}>
        <{/if}>
         <li class="span4" style="padding:0;">
-          <div class="ad"   href="<{spUrl c=main a=detail project=$advertise.base.id}>">
+          <div class="ad" style="height:160px;position:relative;"   href="<{spUrl c=main a=detail project=$advertise.base.id}>">
             <div class="row-fluid">
-              <div class="span3" align="center">
-                <img class="img-rounded img-polaroid" src="/img/ads/<{$advertise.base.logo}>" alt="">
-                <h6 align="center" style="color:#0088cc;white-space:nowrap;">
+              <div class="span4" align="center">
+                <img class="img-rounded img-polaroid" src="/img/ads/<{$advertise.base.logo}>" alt="<{$advertise.base.name}>" title="<{$advertise.base.name}>">
+                <h6 align="center" style="color:#0088cc;">
                   <a href="<{spUrl c=main a=detail project=$advertise.base.id}>" class="blue-color"><{$advertise.base.name}></a>
                 </h6>
               </div>
@@ -36,7 +36,7 @@
               </div>
              
             </div>
-             <div style="padding-left:5%;margin-bottom:10px;"> 
+             <div style="position:absolute;left:0;bottom:0;padding-left:5%;margin-bottom:10px;"> 
                 <i class="icon-globe icon-large icon-spin" style="color:#058DC7;"></i>
                 <span>&nbsp;&nbsp;<span class="title">全球排名：&nbsp;</span><{$advertise.base.alexa|number_format}></span>
             </div>

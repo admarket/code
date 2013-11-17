@@ -456,7 +456,7 @@ content="广告位市场是全球首家中文网络广告位交易平台，在�
             $.post("<{spUrl c=ctrade a=BookingAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
              function(data){
               //alert(data);
-               if(data==1){
+               if(data.indexOf("预定成功")>-1){
                 $("#btn-pay").attr('class','btn btn-success disabled');
                   $.msg('预订成功！','color:green;');
 
