@@ -7,7 +7,7 @@
               <img class="logo" border="0" title="广告位市场" alt="广告位市场" src="/img/logo.png"/>
             </a>
           </div>
-          <div class="span4 input-append" style="padding:15px 20px;">
+          <div class="span4 input-append" style="padding:15px 20px;margin-left:-30px;">
 
              <form id="search-form" name="search-form" action="<{spUrl c=main a=result}>" method="get">
                       <input id="keyword"  name="keyword" style="width:100%;" type="text"  placeholder="输入关键词查找广告位…" value="<{$keyword}>"/>

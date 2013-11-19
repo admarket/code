@@ -18,10 +18,10 @@
         <div class="row-fluid">
             <!-- load head tpl -->
             <{include file="side-bar.php"}>
-          <div class="span9  main-body">
+          <div class="span8  main-body" >
             <!--Body content-->
 
-            <div class="page-header"  style="position:relative;">
+            <div class="page-header" >
               <h5><span class="badge badge-important"><i class="icon-thumbs-up"></i></span>&nbsp; 推荐广告位</h5>
                <div class="btn-group" style="position:absolute;right:20px;top:0px;">
                 <a class="btn btn-mini" href="<{spUrl c=main a=result  category=1}>">
@@ -29,8 +29,8 @@
                 </a>
               </div>
             </div>
-            <div  class="row-fluid" style="padding:0px;margin:0px;">
-              <ul class="ads slideshow"  style="width:100%;padding:0;"> 
+            <div  class="row-fluid" style="padding:0 15px;margin:0px;">
+              <ul class="ads slideshow"  style="width:100%;"> 
                     <{if $hots eq ""}>
                         暂无数据
                     <{/if}>
@@ -40,7 +40,7 @@
               </ul>
             </div>
 
-             <div class="page-header"  style="position:relative;">
+             <div class="page-header">
               <h5><span class="badge badge-warning">&yen;</span> 刚刚售出</h5>
               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
                 <a class="btn btn-mini" href="<{spUrl c=main a=result  category=1}>">
@@ -49,7 +49,7 @@
               </div>
             </div>
             <!--footer content-->
-             <div class="row-fluid" style="padding:0px;margin:0px;">
+             <div class="row-fluid" style="padding:0 15px;margin:0px;">
               <ul class="ads">
                 <{if $solds eq ""}>
                     暂无数据
@@ -61,7 +61,7 @@
                 </ul>
             </div> 
 
-            <div class="page-header"  style="position:relative;">
+            <div class="page-header"  style="position:relative;padding:0 10px;">
               <h5><span class="badge badge-success"><i class="icon-random"></i></span>&nbsp;最新加入</h5>
               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
                 <a class="btn btn-mini" href="<{spUrl c=main a=result  category=1}>">
@@ -70,7 +70,7 @@
               </div>
             </div>
             <!--footer content-->
-             <div class="row-fluid" style="padding:0px;margin:0px;">
+             <div class="row-fluid" style="padding:0 15px;margin:0px;">
               <ul class="ads">
                 <{if $advertises eq ""}>
                     暂无数据

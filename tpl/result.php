@@ -16,14 +16,14 @@
         <!--intro content-->
         <{include file="intro.php"}>
            <!-- load head tpl -->
-          <div class="row" style="padding-top:10px;padding-left:20px;">
+          <div class="row-fluid" >
             <{include file="side-bar.php"}>
 
-            <div class="span9 main-body">
+            <div class="span8 main-body">
               <!--Body content-->
-              <div class="page-header" style="position:relative;font-size:12px;">
-                <h5 style="border-bottom:solid 1px #eee;padding:10px 0;">筛选条件：</h5>
-                <div class="conditions" style="padding:0 10px;line-height:30px;">
+              <div class="page-header">
+                <h5 style="border-bottom:solid 1px #eee;padding:10px">筛选条件：</h5>
+                <div class="conditions" style="padding:0 10px;line-height:30px;font-size:12px;">
                     <div class="row-fluid" style="padding:0px;margin:0;">
                         <div class="span2 title" style="width:13%;">
                           全球排名：
@@ -84,7 +84,7 @@
                 </div>
               </div>
                <!-- content box tpl-->  
-               <div  class="row-fluid" style="padding:0px;margin:0px;">
+               <div  class="row-fluid" style="padding:0px 15px;margin:0px;">
                 <ul class="ads"  style="width:100%;padding:0;"> 
                       <{if $results eq ""}>
                           暂无数据
