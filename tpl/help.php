@@ -1,31 +1,10 @@
-<!DOCTYPE html> <html>   <head>     <title>广告位市场  - 用户使用帮助</title>     <meta
-name="viewport" content="width=device-width, initial-scale=1.0">      <meta
-http-equiv="Content-Type" content="text/html; charset=utf-8" />     <meta
-name="keywords" content="广告位市场,广告位招租,广告位出售,广告位管理"/>     <meta
-name="description"
-content="广告位市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
-  <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
-
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->    
-<link href="/css/bootstrap-responsive.css" rel="stylesheet">     
- <link rel="stylesheet" href="/css/font-awesome.min.css">     <!--[if IE 7]>
-<link rel="stylesheet" href="/css/font-awesome-ie7.min.css">     <![endif]-->
-<!-- Bootstrap -->
-    
-    <link href="/css/style2.css" rel="stylesheet" media="screen">
-    <link rel="shortcut icon" href="/favicon.ico">
-
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <!--[if lte IE 6]>
-    <!-- bsie js 补丁只在IE6中才执行 -->
-    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
-    <![endif]-->
+<!DOCTYPE html> 
+<html>   
+<head>     
+  <title>广告位市场  - 用户使用帮助</title>     
+    <{include file="meta.php"}>
+    <{include file="style.php"}>
+    <{include file="script.php"}>
   </head>
   <body>
      <!-- load head tpl -->

@@ -2,7 +2,7 @@
        <{if $adCount.index%3==0}>
         <div><{$adCount.index}>
        <{/if}>
-        <li class="span4" style="padding:0;">
+        <li class="span4" style="padding:0;width:30%;">
           <div class="ad" style="height:160px;position:relative;"   href="<{spUrl c=main a=detail project=$advertise.base.id}>">
             <div class="row-fluid">
               <div class="span4" align="center">

@@ -9,7 +9,7 @@
               </span>
               <span class="span3" style="padding:0px;">
                 <a class="red-color" target="_blank"  href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes">
-                  <i class="icon-phone"></i> &nbsp;广告投放及代理请直接联系客服。
+                  <i class="icon-phone"></i> &nbsp;如有使用方面的疑问请联系客服。
                 </a>
               </span> 
               <span class="span4" style="padding-left:40px;">

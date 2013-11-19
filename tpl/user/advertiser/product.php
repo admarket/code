@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>广告位市场 - 用户中心 - 产品管理</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <{include file="meta.php"}>
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -26,10 +26,7 @@
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <!--[if lte IE 6]>
-    <!-- bsie js 补丁只在IE6中才执行 -->
-    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
-    <![endif]-->
+
     <script src="/js/bootstrap-fileupload.min.js"></script>
     <script src="/js/bootstrap-editable.js"></script>
     <style>

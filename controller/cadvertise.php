@@ -191,7 +191,7 @@ class cadvertise extends spController
             $result=$trade->spLinker()->find($conditions,"id desc");
 
             $bookFlag=true;
-            if(!$bookFlag){
+            if($bookFlag){
                 $report=spClass('report');//添加数据统计信息
                 $newrow = array(
                             'advertise' => $this->spArgs('aid'),

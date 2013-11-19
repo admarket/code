@@ -2,28 +2,9 @@
 <html>
   <head>
     <title>广告位市场  - 法律声明及隐私保护</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="广告位市场,广告位招租,广告位出售,广告位管理"/>
-    <meta name="description" 
-    content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-      <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
+   <{include file="meta.php"}>
+    <{include file="style.php"}>
 
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <!-- Bootstrap -->
-    
-    <link href="/css/style2.css" rel="stylesheet" media="screen">
-    <link rel="shortcut icon" href="/favicon.ico">
 
   </head>
   <body>
@@ -80,7 +61,7 @@
                  以上声明仅代表九尾狐科技有限公司做出的初步法律声明，最终解释权归九尾狐科技有限公司。<br/>
                  另外，请不要抄袭我们，种其因者须食其果。
              </p>
-              <img src="/img/seal.png" style="position:absolute;top:10px;right:20px;"/>
+              <img src="/img/seal.png" title="北京九尾狐科技有限公司印章" alt="北京九尾狐科技有限公司" style="position:absolute;top:10px;right:20px;"/>
           </div>
               
       </div>

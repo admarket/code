@@ -1,38 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html>
   <head>
     <title>广告位市场 - 网络广告位交易、发布、管理平台 </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="广告位,广告位招商,广告位招租,网站广告位,网络广告投放,网络广告代理,网络广告位,网络广告交易，网络广告发布，网络广告，网站广告位"/>
-    <meta name="description" 
-    content="广告位市场是首家网络广告位交易平台，发布、管理、交易网络广告位，广告位招租、网络广告交易买卖，并进行网络广告的投放和代理平台。"/>
-    <meta name="chinaz-site-verification" content="081e7651-48c6-4c2f-a569-99321685eab1" />
-    <meta name="majestic-site-verification" content="MJ12_6179f3d6-7681-4383-bcf8-3e00bf06e31a">
-    <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-     <link rel="stylesheet" href="/css/font-awesome.min.css" media="screen"> 
-
-  <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
-
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <!--I definition-->
-    <link href="/css/style2.css" rel="stylesheet" media="screen">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <!--[if lte IE 6]>
-    <!-- bsie js 补丁只在IE6中才执行 -->
-    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
-    <![endif]-->
+    <{include file="meta.php"}>
+    <{include file="style.php"}>
+    <{include file="script.php"}>
   </head>
   <body>
     <!--header content-->

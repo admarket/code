@@ -323,7 +323,7 @@ class main extends spController
         $this->display("forget.php"); // 找回密码 
     }
      function go(){
-        $url=$this->spArgs("url");
+        $url=strip_tags($this->spArgs("url"));
         //dump($url);
         $this->jump($url);
     }

@@ -1,11 +1,11 @@
-<div class="span3  nav-bar" style="border-radius:10px;">
+<div class="span3  nav-bar" style="border-radius:10px;width:24%;">
 <!--nav-bar content-->
   <p></p>
   <ul class="nav nav-list side-bar" id="nav-bar" style="margin:10px 0;padding:10px;">
     <li><a></a></li>
   </ul>
 </div>
-<script src="/js/jquery-1.9.1.min.js"></script>
+
 <script  type="text/javascript">
 var categories;
  $.post("<{spUrl c=ccategory a=getCategoryJsonByType type=1}>",

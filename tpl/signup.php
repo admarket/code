@@ -2,28 +2,9 @@
 <html>
   <head>
     <title>广告位市场  - 用户注册</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="广告市场,广告位招租,广告位出售,广告位管理"/>
-    <meta name="description" 
-    content="广告市场是全球首家中文网络广告位交易平台，在此发布、管理网站广告位，进行广告位招租、交易买卖，并进行科学的分析和管理。"/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-      <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
-
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <!-- Bootstrap -->
-    
-    <link href="/css/style2.css" rel="stylesheet" media="screen">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <{include file="meta.php"}>
+    <{include file="style.php"}>
+    <{include file="script.php"}>
   </head>
   <body>
      <!-- load head tpl -->
@@ -180,13 +161,13 @@
 
                     <label class="radio inline" style="font-size:12px;">
                       <input type="radio" name="payment" id="payment1" value="0" checked>
-                      <img src="/img/alipay.ico" width="20" height="20" style="width:20px;height:20px;"/>
+                      <img src="/img/alipay.ico" alt="支付宝" width="20" height="20" style="width:20px;height:20px;"/>
                       &nbsp;支付宝&nbsp;
                     </label>
                    
                     <label class="radio inline" style="font-size:12px;">
                     <input type="radio" name="payment" id="payment3" value="1">
-                    <img src="/img/Unionpay.ico" width="20" height="20" style="width:20px;height:20px;"/>
+                    <img src="/img/Unionpay.ico"  alt="银联" width="20" height="20" style="width:20px;height:20px;"/>
                     &nbsp;银联卡&nbsp;
                     </label>
 
@@ -248,12 +229,7 @@
         <a href="<{spUrl c=main a=login}>"  class="btn btn-success">先登录再说</a>
       </div>
     </div>
-   <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <!--[if lte IE 6]>
-    <!-- bsie js 补丁只在IE6中才执行 -->
-    <script type="text/javascript" src="/js/bootstrap-ie.js"></script>
-    <![endif]-->
+
     <script type="text/javascript">
     $('.tip').tooltip();
       var emailcheck=false;
