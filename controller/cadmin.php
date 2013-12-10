@@ -14,7 +14,7 @@ class cadmin extends spController
     }
 	function news(){
 		 $news = spClass("news");
-		 $results=$news->spPager($this->spArgs('page', 1), 8)->findAll();
+		 $results=$news->spPager($this->spArgs('page', 1), 8)->findAll(null,"id desc");
 		 $this->pager = $news->spPager()->getPager();
 		 $this->records=$results;
 		 $this->display("user/admin/news.php"); // 新闻管理中心

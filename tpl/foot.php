@@ -11,7 +11,6 @@
           <div style="position:relative;">
             友情链接：
             &nbsp;&nbsp;<a href="http://www.whqyw.com/" target="_blank">芜湖企业网</a>
-            &nbsp;&nbsp;<a href="http://www.jandou.com/" target="_blank">煎豆网</a>
             &nbsp;&nbsp;<a href="http://www.paipk.com/" target="_blank">创意家居用品</a>
             &nbsp;&nbsp;<a href="http://www.lisude.com/" target="_blank">自强网</a>
             <span style="position:absolute;right:20px;top:0px;">

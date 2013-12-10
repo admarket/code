@@ -58,17 +58,17 @@
                         <!--在当前页不是第一页的时候，显示前页和上一页-->
                         <{if $pager.current_page != $pager.first_page}>
                         <li>
-                          <a href="<{spUrl c=sub a=finance page=$pager.first_page}>">首页</a>
+                          <a href="<{spUrl  c=main a=newslist page=$pager.first_page}>">首页</a>
                         </li> 
                         <li>
-                          <a href="<{spUrl c=sub a=finance page=$pager.prev_page}>">上一页</a> 
+                          <a href="<{spUrl  c=main a=newslist page=$pager.prev_page}>">上一页</a> 
                         </li>
                         <{/if}>
                         <!--开始循环页码，同时如果循环到当前页则不显示链接-->
                         <{foreach from=$pager.all_pages item=thepage}>
                                 <{if $thepage != $pager.current_page}>
                                         <li>
-                                          <a href="<{spUrl c=sub a=finance page=$thepage}>"><{$thepage}></a>
+                                          <a href="<{spUrl  c=main a=newslist page=$thepage}>"><{$thepage}></a>
                                         </li>
                                 <{else}>
                                         <li><a><b><{$thepage}></b></a></li>
@@ -77,10 +77,10 @@
                         <!--在当前页不是最后一页的时候，显示下一页和后页-->
                         <{if $pager.current_page != $pager.last_page}> 
                         <li>
-                          <a href="<{spUrl c=sub a=finance page=$pager.next_page}>">下一页</a>
+                          <a href="<{spUrl c=main a=newslist page=$pager.next_page}>">下一页</a>
                         </li>
                         <li>
-                          <a href="<{spUrl c=sub a=finance page=$pager.last_page}>">末页</a>
+                          <a href="<{spUrl c=main a=newslist page=$pager.last_page}>">末页</a>
                         </li>
                         <{/if}>
                         <{/if}>

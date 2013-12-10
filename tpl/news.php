@@ -17,7 +17,7 @@
         <div class="row-fluid">
          <!-- load head tpl -->
             <{include file="side-bar.php"}>
-          <div class="span8 main-body" style="padding:10px;">
+          <div class="span8 main-body" style="padding:10px 30px;">
             <!--Body content-->
             
             <div class="page-header" style="margin-bottom:0px;border-bottom:dashed 1px #eee;font-size:12px;">
@@ -27,9 +27,9 @@
                 </div>
               
             </div>
-                <div style="padding:10px;border-bottom:dashed 1px #eee;font-size:12px;margin:0px 0px 10px 0px;">
-                  <span>作者：<{$news.author.name}> &nbsp;&nbsp;发布时间：<{$news.createTime}></span>
-                  <span style="float:right;">新闻来源：<a href="<{$news.src}>" target="_blank"><{$news.src}></a></span>
+                <div style="padding:10px;border-bottom:dashed 1px #eee;font-size:12px;margin:0px 0px 10px 0px;position:relative;">
+                  <span>作者：<{$news.author.name}> &nbsp;&nbsp;</span><span style="float:right;">发布时间：<{$news.createTime}></span><br/>
+                  
                 </div>
                 <p>
                             <i class="icon-quote-left" ></i>
@@ -42,7 +42,7 @@
                 </p>
                   
                 <div style="padding:10px;border-top:dashed 1px #eee;font-size:12px;margin:0px 0px 10px 0px;">
-                       
+                       <span>新闻来源：<a href="<{$news.src}>" target="_blank"><{$news.src}></a></span>
                 </div> 
                 <div class="alert" style="border:solid 1px #c09853;display:block;width:92%;position:relative;left:0;font-size:12px;">
                   

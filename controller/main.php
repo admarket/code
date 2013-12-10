@@ -20,11 +20,18 @@ class main extends spController
 
 
         //最新的行业新闻三则
-        $this->newsList = $news->findAll(null,"id desc",null,"0,3");
+        $newsList = $news->findAll(null,"id desc",null,"0,3");
+        foreach ($newsList as &$news) {
+            if(strlen($news['content'])>40){
+                $news['content']=mb_substr(strip_tags($news['content']), 0,40,"UTF-8");  //hp点
+                $news['content'].="...";
+            }    
+        }
+        $this->newsList=$newsList;
+
 
         //刚刚售出的广告位
         $trades =  $trade->spLinker()->findAll(null,'id DESC',null,"0,3");
-
         $solds=array();
 
 
@@ -227,6 +234,7 @@ class main extends spController
 
         $conditions =" id=".strip_tags($this->spArgs("id"));
         $result = $news->spLinker()->find($conditions);
+
         $this->news=$result;
         $this->currentCategory=1;
         $this->display("news.php"); // 注册 
@@ -234,7 +242,7 @@ class main extends spController
     }
     function newslist(){
         $news = spClass('news');
-        $results=$news->spLinker()->spPager($this->spArgs('page', 1), 8)->findAll();
+        $results=$news->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll(null,"id desc");
         $this->pager = $news->spPager()->getPager();
         $this->records=$results;
         $this->currentCategory=1;

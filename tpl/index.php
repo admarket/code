@@ -91,7 +91,7 @@
             <div class="page-header">
               <h5><span class="badge badge-warning"><i class="icon-cloud"></i></span> &nbsp;行业新闻</h5>
               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
-                <a class="btn btn-mini" href="<{spUrl c=main a=newslist  category=1}>">
+                <a class="btn btn-mini" href="<{spUrl c=main a=newslist }>">
                   <i class="icon-circle-arrow-right"></i>&nbsp; 更多
                 </a>
               </div>
