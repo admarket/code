@@ -15,12 +15,14 @@ class sub extends spController
         }
     	
     }
+    //退出
     function logout(){
     	unset($_SESSION["user"]);
     	session_destroy();
         echo "<script type='text/javascript'>window.history.go(-1)</script>";
     	//$this->jump(spUrl('main', 'index')); // 跳转到首页 // 退出   
     }
+    //基本设置
     function setting(){
         $user = spClass("user");
         $project = spClass("project");
@@ -48,6 +50,7 @@ class sub extends spController
         $this->current="setting";//设置当前导航状态
         $this->display("user/setting.php"); // 设置
     }
+    //广告位管理
     function admanage(){
         $_SESSION['user']['type']=1;
         $project = spClass("project");
@@ -100,6 +103,7 @@ class sub extends spController
         $this->current="admanage";//设置当前导航状态
         $this->display("user/publisher/admanage.php"); // 广告管理
     }
+    //站内信箱
     function inbox(){
         $message = spClass("message");
         $conditions=" receiver=".$_SESSION['user']['id'];
@@ -157,6 +161,7 @@ class sub extends spController
         $this->display("user/inbox.php"); // 广告管理
         
     }
+    //网站管理
     function sitemanage(){
         $_SESSION['user']['type']=1;
         $project = spClass("project");
@@ -198,6 +203,7 @@ class sub extends spController
         $this->current="sitemanage";//设置当前导航状态
         $this->display("user/publisher/sitemanage.php"); // 广告管理
     }
+    //财务管理
     function finance(){
         $finance = spClass("finance");
         $conditions = array("user_id" => $_SESSION['user']['id']);
@@ -243,6 +249,7 @@ class sub extends spController
         $this->display("user/finance.php"); // 财务统计
     }
     
+    //产品管理
     function product(){
         $_SESSION['user']['type']=0;
         $product = spClass("product");
@@ -277,9 +284,10 @@ class sub extends spController
 
         $this->current="product";//设置当前导航状态
         $this->products=$results;
+        $this->productCount=count($this->products);
         $this->display("user/advertiser/product.php"); // 用户面板   
     }
-
+    //广告效果
     function effect(){
         $_SESSION['user']['type']=0;
         $trade = spClass("trade");
@@ -349,6 +357,40 @@ class sub extends spController
 
         $this->current="effect";//设置当前导航状态
         $this->display("user/advertiser/effect.php"); // 广告管理
+    }
+
+    //广告素材
+    function material(){
+        $_SESSION['user']['type']=0;
+        $product = spClass("product");
+        $conditions = array("owner" => $_SESSION['user']['id']);
+        $results = $product->spLinker()->findAll($conditions);
+         if(results){
+             $this->productCount=count(results);//产品总数
+         }
+        else{
+            $this->productCount=0;
+        }
+        $this->sumTxt=0;//总推广费用
+        
+        $this->sumImpress=0;//累计总收益
+        $this->sumClick=0;
+        foreach ($results as &$product) { 
+           $product['canRemove']=1;
+           $product['images']=explode(';',$product['image']);
+           $product['txts']=explode(PHP_EOL,$product['txt']);
+           $this->sumImpress+=$product['impression'];
+           $this->sumClick+=$product['click'];
+           $this->sumTxt+=count($product['txts']);
+        }
+
+
+        $this->current="material";//设置当前导航状态
+        $this->products=$results;
+        $this->productCount=count($this->products);
+        $this->sumImage=$this->productCount*10;//总展示次数
+        $this->sumVideo=$this->productCount*1;//总点击次数
+        $this->display("user/advertiser/material.php"); // 用户面板   
     }
    
 }

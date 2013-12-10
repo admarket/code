@@ -1,10 +1,10 @@
  <!--header content-->
     <div class="header" style="padding-bottom:0;margin-bottom:0;">
       <div class="container">
-        <div class="row-fluid">
+        <div class="row-fluid" style="padding:0px;margin:0;" >
           <div class="span4">
             <a href="/" title="网站首页">
-              <img class="logo" border="0" title="广告位市场" alt="广告位市场" src="/img/logo.png"/>
+              <img  border="0" width="264px" height="69px" title="广告位市场" alt="广告位市场" src="/img/logo.jpg"/>
             </a>
           </div>
           <div class="span4 input-append" style="padding:15px 20px;margin-left:-30px;">

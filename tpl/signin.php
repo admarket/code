@@ -10,7 +10,7 @@
     <!-- load head tpl -->
     <{include file="head.php"}>
     <div class="section">
-      <div class="container"  style="width:500px; padding:60px 0 100px 0;">
+      <div class="container"  style="width:500px; padding:60px 0 100px 0;text-align:center;">
          <form class="form-horizontal" action="<{spUrl c=user a=login}>" method="POST">
           <fieldset>
             <div id="legend" align="center">
@@ -19,14 +19,12 @@
             
 
           <div class="control-group">
-                <div id="alert-msg" class="alert alert-error ">
-                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;验证失败！</strong> 用户邮箱或密码错误!请重新输入.
-                </div>
                 <!-- Text input-->
-                <label class="control-label" for="input01">邮箱：</label>
+                
                 <div class="controls">
+                  <span style="margin-left:-60px;margin-right:10px;">邮箱：</span>
                    <div class="input-prepend">
-                    <span class="add-on"><i class="icon-envelope"></i></span>
+                   <span class="add-on"><i class="icon-envelope"></i></span>
                     <input type="text" placeholder="输入您的邮箱地址" class="input-xlarge" id="txt-email">
                     <p class="help-block"></p>
                   </div>
@@ -35,8 +33,8 @@
               <div class="control-group">
 
                 <!-- Prepended text-->
-                <label class="control-label">密码：</label>
                 <div class="controls">
+                  <span style="margin-left:-60px;margin-right:10px;">密码：</span>
                   <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>
                     <input class="input-xlarge" placeholder="输入您的登录密码" id="txt-password" type="password">

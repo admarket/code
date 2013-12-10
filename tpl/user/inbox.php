@@ -6,19 +6,11 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-      <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
-
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
     <![endif]-->
-
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">  
     <script src="/js/jquery-1.9.1.min.js"></script>
@@ -118,6 +110,7 @@
             </div>
           </div>
           <div class="span9 main-body" >
+          <h4 style="border-bottom:solid 1px #eee;padding:10px;margin:0;">站内信箱</h4>
            <div style="position:relative;"  class="btn-toolbar">
                 <div class="btn-group" data-toggle="buttons-radio">
                    <{if $state eq ""||$state==2}>
@@ -198,7 +191,7 @@
                   
                         <i class="icon-info-sign"></i>&nbsp;&nbsp;暂无数据内容。
                         </div>     
-              <{/if}>
+                <{/if}>
               <{foreach from=$messages item=message}>
               <div class="  row-fluid">
                    <div class="span1" align="center">

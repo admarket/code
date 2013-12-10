@@ -13,7 +13,7 @@
             &nbsp;&nbsp;<a href="http://www.whqyw.com/" target="_blank">芜湖企业网</a>
             &nbsp;&nbsp;<a href="http://www.jandou.com/" target="_blank">煎豆网</a>
             &nbsp;&nbsp;<a href="http://www.paipk.com/" target="_blank">创意家居用品</a>
-            &nbsp;&nbsp;<a href="http://www.vv00.cn/" target="_blank">鼎立汽车网</a>
+            &nbsp;&nbsp;<a href="http://www.lisude.com/" target="_blank">自强网</a>
             <span style="position:absolute;right:20px;top:0px;">
               站内导航：
               <span style="position:relative;">
@@ -33,13 +33,13 @@
             </span>
           </div>
           <div align="center"  style="position:relative;">
-            <p>
+            <!--<p>
                 <img  alt="可信网站" title="可信网站认证" oncontextmenu="return false;" style="border:none;border:0;width:60px;height:21px" src="/img/seallogo.jpg">
                 <a  title="360安全网站认证" href="http://webscan.360.cn/index/checkwebsite/url/www.eadmarket.com">
                   <img border="0" style="border:none;border:0;width:60px;height:21px" alt="360安全认证"  src="http://img.webscan.360.cn/status/pai/hash/7f3a5bedd004ee5e0c0853176ba2d770/?size=74x27"/>
                 </a>
                
-            </p>
+            </p>-->
           </div>
         
       </div>

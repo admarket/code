@@ -6,13 +6,7 @@
     
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-      <!--[if lte IE 6]>
-  <!-- bsie css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.css">
 
-  <!-- bsie 额外的 css 补丁文件 -->
-  <link rel="stylesheet" type="text/css" href="/css/ie.css">
-  <![endif]-->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!--[if IE 7]>
     <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">

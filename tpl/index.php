@@ -39,7 +39,7 @@
                    <{/foreach}>
               </ul>
             </div>
-
+              <!--
              <div class="page-header">
               <h5><span class="badge badge-warning">&yen;</span> 刚刚售出</h5>
               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
@@ -48,7 +48,7 @@
                 </a>
               </div>
             </div>
-            <!--footer content-->
+            
              <div class="row-fluid" style="padding:0 15px;margin:0px;">
               <ul class="ads">
                 <{if $solds eq ""}>
@@ -60,7 +60,7 @@
       
                 </ul>
             </div> 
-
+            -->
             <div class="page-header"  style="position:relative;padding:0 10px;">
               <h5><span class="badge badge-success"><i class="icon-random"></i></span>&nbsp;最新加入</h5>
               <div class="btn-group" style="position:absolute;right:20px;top:0px;">
@@ -87,6 +87,29 @@
                   <i class="icon-eye-open"></i>&nbsp;查看更多广告位
                 </a>
             </p>
+            <{if $solds|count neq 0}>
+            <div class="page-header">
+              <h5><span class="badge badge-warning"><i class="icon-cloud"></i></span> &nbsp;行业新闻</h5>
+              <div class="btn-group" style="position:absolute;right:20px;top:0px;">
+                <a class="btn btn-mini" href="<{spUrl c=main a=newslist  category=1}>">
+                  <i class="icon-circle-arrow-right"></i>&nbsp; 更多
+                </a>
+              </div>
+            </div>
+            
+             <div class="row-fluid" style="padding:0 15px;margin:0px;">
+              <ul class="ads">
+                
+                <{foreach from=$newsList item=news name=newsCount}>
+                  <{include file="news-box.php"}>
+                <{/foreach}>
+      
+                </ul>
+              </div> 
+            <{/if}>
+             
+
+
           </div>
 
         </div>
@@ -95,8 +118,6 @@
     <!--footer content-->
     <{include file="foot.php"}>
     <!--script content-->
-
-
     
   </body>
 </html>

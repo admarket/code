@@ -17,7 +17,7 @@
         <div class="row-fluid">
          <!-- load head tpl -->
             <{include file="side-bar.php"}>
-          <div class="span9 main-body">
+          <div class="span8 main-body" style="padding:10px;">
             <!--Body content-->
             
             <div class="page-header" style="margin-bottom:0px;border-bottom:dashed 1px #eee;font-size:12px;">

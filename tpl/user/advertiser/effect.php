@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 用户中心 - 购买记录</title>
+    <title>广告位市场 - 广告主 - 购买记录</title>
    <{include file="meta.php"}>
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">

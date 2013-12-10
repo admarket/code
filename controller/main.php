@@ -6,6 +6,7 @@ class main extends spController
         $type = spClass('type');
         $advertise=spClass('advertise');
         $trade=spClass('trade');
+        $news=spClass('news');
         $this->types = $type->spLinker()->findAll();
         $this->currentCategory=1;
 
@@ -16,6 +17,10 @@ class main extends spController
         //推荐的广告位
         $advertise->linker[0]['condition']='alexa>0';
         $this->hots =  $advertise->spLinker() -> findAll($conditions,null,null,"0,3");
+
+
+        //最新的行业新闻三则
+        $this->newsList = $news->findAll(null,"id desc",null,"0,3");
 
         //刚刚售出的广告位
         $trades =  $trade->spLinker()->findAll(null,'id DESC',null,"0,3");
@@ -216,6 +221,24 @@ class main extends spController
         $this->fee=$result['fee'];
         $this->display("detail.php"); // 注册 
 
+    }
+    function news(){
+        $news = spClass('news');
+
+        $conditions =" id=".strip_tags($this->spArgs("id"));
+        $result = $news->spLinker()->find($conditions);
+        $this->news=$result;
+        $this->currentCategory=1;
+        $this->display("news.php"); // 注册 
+
+    }
+    function newslist(){
+        $news = spClass('news');
+        $results=$news->spLinker()->spPager($this->spArgs('page', 1), 8)->findAll();
+        $this->pager = $news->spPager()->getPager();
+        $this->records=$results;
+        $this->currentCategory=1;
+        $this->display("newsList.php"); // 注册 
     }
     function buy(){
         $advertise=spClass('advertise');

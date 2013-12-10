@@ -85,16 +85,22 @@
               </div>
                <!-- content box tpl-->  
                <div  class="row-fluid" style="padding:0px 15px;margin:0px;">
-                <ul class="ads"  style="width:100%;padding:0;"> 
-                      <{if $results eq ""}>
-                          暂无数据
+                <ul class="ads"  style="width:100%;padding:0;margin-bottom:10px;"> 
+
+                      <{if $results|@count eq 0}>
+                        <div style="font-size:12px;border:dashed 1px #ccc;padding:10px 20px;border-radius:5px;width:80%;background-color:#eee;">
+                          没有找到合适的广告位？
+                          <a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes">
+                            联系我们为您量身订购
+                          </a>
+                        </div>
                       <{/if}>
                      <{foreach from=$results item=advertise name=adCount}>
                          <{include file="content-box.php"}>
                      <{/foreach}>
                 </ul>
               </div>  
-                
+                 <{if $results|@count neq 0}>
                 <div class="pagination pagination-small" align="center" > 
                           <ul>
                           <{if $pager}>
@@ -108,7 +114,7 @@
                           </li>
                           <{/if}>
                           <!--开始循环页码，同时如果循环到当前页则不显示链接-->
-                          <{foreach from=$pager.all_pages item=thepage}>
+                          <{foreach from=$pager.all_pages item=thepage name=pageCount}>
                                   <{if $thepage != $pager.current_page}>
                                           <li>
                                             <a class="newpage" data-value="<{$thepage}>"><{$thepage}></a>
@@ -116,9 +122,14 @@
                                   <{else}>
                                           <li><a id="current-Page" class="disabled" style="color:#777;cursor:text;"><{$thepage}></a></li>
                                   <{/if}>
+                                 
                           <{/foreach}>
                           <!--在当前页不是最后一页的时候，显示下一页和后页-->
+
                             <{if $pager.current_page != $pager.last_page}> 
+                            <li>
+                              <a class="newpage" data-value="<{$pager.all_pages[$pager.all_pages|@count-1]}>">...</a>
+                            </li>
                             <li>
                               <a class="newpage" data-value="<{$pager.next_page}>">下一页</a>
                             </li>
@@ -129,6 +140,7 @@
                           <{/if}>
                           </ul>
                 </div> 
+                 <{/if}>
 
             </div>
 

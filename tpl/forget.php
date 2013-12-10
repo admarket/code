@@ -10,14 +10,15 @@
     <!-- load head tpl -->
     <{include file="head.php"}>
     <div class="section">
-      <div class="container"  style="width:600px; padding:60px 0 100px 0;">
-         <form class="form-horizontal" >
+      <div class="container"  style="width:500px; padding:60px 0 100px 0;text-align:center;">
+         <form class="form-horizontal" action="<{spUrl c=user a=login}>" method="POST">
           <h3 align='center'>找回密码</h3>
           <div class="control-group">
               
                 <!-- Text input-->
-                <label class="control-label" for="input01">邮箱：</label>
+                
                 <div class="controls">
+                  <span style="margin-left:-60px;margin-right:10px;">邮箱：</span>
                    <div class="input-prepend">
                     <span class="add-on"><i class="icon-envelope"></i></span>
                     <input type="text" placeholder="输入您的邮箱地址" class="input-xlarge" id="email">

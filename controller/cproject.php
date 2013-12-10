@@ -59,11 +59,11 @@ class cproject extends spController
         	
 	}
     function getAlexa(){
-        $prefixUrl='http://data.alexa.com/data/ezdy01DOo100QI?cli=10&dat=snba&ver=7.0&cdt=alx_vw=20&wid=16865&act=00000000000&ss=1024x768&bw=775&t=0&ttl=1125&vis=1&rq=2&url='.$this->spArgs('projectUrl');
+        $prefixUrl='http://data.alexa.com/data?cli=10&dat=snbamz&url='.$this->spArgs('projectUrl');
         $data = file_get_contents($prefixUrl);
         $result=simplexml_load_string($data);
         if(!is_null($result->SD[1])){
-             $alexa=(array)$result->SD[1]->REACH['RANK'];
+             $alexa=(array)$result->SD[1]->POPULARITY['TEXT'];
              $local=(array)$result->SD[1]->COUNTRY['RANK'];
         }
         else{

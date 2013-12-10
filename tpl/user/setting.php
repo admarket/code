@@ -167,9 +167,9 @@
                       
                       <label class="radio inline  blue-color" >
                         <{if $user.type==0}>
-                        <input type="radio" name="type" id="type1" value="0" checked>
+                        <input type="radio" name="type" id="type0" value="0" checked>
                          <{else}>
-                         <input type="radio" name="type" id="type1" value="0">
+                         <input type="radio" name="type" id="type0" value="0">
                         <{/if}>
                         <i class="icon-user"></i>&nbsp;我是买家 &nbsp;
                       </label>
@@ -454,6 +454,7 @@ $("#btn-save").click(function(){
              function(data){
                if(data.indexOf("操作失败")<0){
                   $.msg('保存成功！','color:green;');
+                  window.location.reload();
                }
                else{
                   $.msg(data);

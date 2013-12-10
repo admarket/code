@@ -6,13 +6,13 @@
           <div class="ad" style="height:160px;position:relative;"   href="<{spUrl c=main a=detail project=$advertise.base.id}>">
             <div class="row-fluid">
               <div class="span4" align="center">
-                <img class="img-rounded img-polaroid" src="/img/ads/<{$advertise.base.logo}>" alt="<{$advertise.base.name}>" title="<{$advertise.base.name}>">
+                <img class="img-rounded img-polaroid" src="/img/ads/<{$advertise.base.logo}>" alt="<{$advertise.base.name}>广告位招租" title="<{$advertise.base.name}>广告位招租">
                 <h6 align="center" style="color:#0088cc;">
                   <a href="<{spUrl c=main a=detail project=$advertise.base.id}>" class="blue-color"><{$advertise.base.name}></a>
                 </h6>
               </div>
               
-              <div class="span6 offset1">
+              <div class="span7">
                  <h6>
                     <span class="title">状态：</span>
                       <{if $advertise.state==1}>
@@ -21,17 +21,32 @@
                         <span class="label label-success">未售</span>
                       <{/if}>
                  </h6>
-                <{if $advertise.format==0}>
-                  <div><span class="title">格式：</span><i class="icon-font tip" title="文字"></i>&nbsp;文字</div>
-                  <div><span class="title">字号：&nbsp;</span><{$advertise.width}></div>
-                <{elseif $advertise.format==1}>
-                  <div><span class="title">格式：&nbsp;</span><i class="icon-picture tip" title="图片"></i>&nbsp;图片</div>
-                  <div><span class="title">大小：&nbsp;</span><{$advertise.width}>*<{$advertise.height}></div>
+                
+                <{if $smarty.session.user eq '' }>
+                  <{if $advertise.format==0}>
+                    <div><span class="title">格式：</span><i class="icon-font tip" title="文字"></i>&nbsp;文字</div>
+                  <{elseif $advertise.format==1}>
+                    <div><span class="title">格式：&nbsp;</span><i class="icon-picture tip" title="图片"></i>&nbsp;图片</div>
+                  <{else}>
+                     <div><span class="title">格式：&nbsp;</span><i class="icon-film tip" title="视频"></i>视频</div>
+                  <{/if}>
+                    <div><span class="title">市场价：&nbsp;</span><{((1+0.1*rand(1,10))*0.01*(0.01*$advertise.fee+1)*$advertise.price)|number_format}>&yen;/天</div>
+                    <div><span class="title">会员价：&nbsp;</span>登录可见</div>
                 <{else}>
-                   <div><span class="title">格式：&nbsp;</span><i class="icon-film tip" title="视频"></i>视频</div>
-                   <div><span class="title">大小：&nbsp;</span> <{$advertise.width}>*<{$advertise.height}></div>
+                  <{if $advertise.format==0}>
+                    <div><span class="title">格式：</span><i class="icon-font tip" title="文字"></i>&nbsp;文字</div>
+                    <div><span class="title">字号：&nbsp;</span><{$advertise.width}></div>
+                  <{elseif $advertise.format==1}>
+                    <div><span class="title">格式：&nbsp;</span><i class="icon-picture tip" title="图片"></i>&nbsp;图片</div>
+                    <div><span class="title">大小：&nbsp;</span><{$advertise.width}>*<{$advertise.height}></div>
+                  <{else}>
+                     <div><span class="title">格式：&nbsp;</span><i class="icon-film tip" title="视频"></i>视频</div>
+                     <div><span class="title">大小：&nbsp;</span> <{$advertise.width}>*<{$advertise.height}></div>
+                  <{/if}>
+                  <div><span class="title">会员价：&nbsp;</span><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)}>&yen;/天</div>
                 <{/if}>
-                 <div><span class="title">价格：&nbsp;</span><{(0.01*(0.01*$advertise.fee+1)*$advertise.price)}> &nbsp;&yen;/天</div>
+                 
+                 
                 
               </div>
              

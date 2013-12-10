@@ -40,7 +40,7 @@ width: 98%;margin: 15px 0px;}
 .header{padding:20px; border-bottom:solid 1px #ededed; background-color: #fff;}
 .header .span3{margin-top:15px;}
 .header .btn{ font-weight: bold; width: 50px;}
-.container{ width: 95%;margin:auto;}
+.container{ width: 95%;margin:auto;min-width: 1024px;}
 
 .nav-head{margin-bottom:-1px;margin-top:10px;border:0;padding-bottom: 0px;}
 .nav-head a{ margin-left: 30px; color: #000;}
