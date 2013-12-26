@@ -1,8 +1,9 @@
  <div class="footer">
       <div class="container">
           <div>
-            ©2013 北京九尾狐科技有限公司 — 版权所有.&nbsp; 京ICP备13039390号-1&nbsp;&nbsp; 联系电话：010-60739009&nbsp;&nbsp;&nbsp;
-            QQ客服：<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes">
+            ©2013 北京九尾狐科技有限公司 — 版权所有.&nbsp; 京ICP备13039390号-1&nbsp;&nbsp;
+             QQ客服1：<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=2017308350&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2017308350:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+            QQ客服2：<a class="tip" target="_blank" title="点击联系我们" href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes">
               <img  border="0" src="http://wpa.qq.com/pa?p=2:4006776:52" height="25px"  width="25px" alt="点击联系我们" title="点击联系我们"/>
             </a>&nbsp;&nbsp;&nbsp;法律顾问：北京市首信律师事务所 赵霞律师（18618331012）  
             <!--<a href="http://icp.aizhan.com/" target="_blank"><script type="text/javascript" src="http://icp.aizhan.com/geticp/?host=eadmarket.com&style=1" charset="utf-8"></script></a>&nbsp;-->
@@ -13,6 +14,8 @@
             &nbsp;&nbsp;<a href="http://www.whqyw.com/" target="_blank">芜湖企业网</a>
             &nbsp;&nbsp;<a href="http://www.paipk.com/" target="_blank">创意家居用品</a>
             &nbsp;&nbsp;<a href="http://www.lisude.com/" target="_blank">自强网</a>
+            &nbsp;&nbsp;<a href="http://www.3lsc.com/" target="_blank">三联素材</a>
+             &nbsp;&nbsp;<a href="http://www.sdzzj.net/" target="_blank">失独者 </a>
             <span style="position:absolute;right:20px;top:0px;">
               站内导航：
               <span style="position:relative;">

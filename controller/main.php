@@ -58,6 +58,7 @@ class main extends spController
         $category=strip_tags($this->spArgs("category"));
         $currentPage=strip_tags($this->spArgs("page"));
         $currentAlexa=strip_tags($this->spArgs("alexa"));
+        $currentOrder=strip_tags($this->spArgs("order"));
         
 
         if(trim($currentAlexa)!=""){
@@ -113,11 +114,26 @@ class main extends spController
         if($currentPrice!=""){
             $this->currentPrice=$currentPrice[0].",".$currentPrice[1];
         }
-        
+
+        //增加排序查询
+        $orderCondition=" order by id desc";
+        if($currentOrder!=""){
+            $this->currentOrder=$currentOrder;
+            if($currentOrder==1){//价格升序
+                $orderCondition=" order by price asc,id desc";
+            }else if($currentOrder==2){
+                $orderCondition=" order by price desc,id desc";
+            }
+            
+        }else{
+            $this->currentOrder=0;
+        }
+        $conditions=$conditions.$orderCondition;
+
 
         $pageSize=12;
         $startIndex=($currentPage-1)*$pageSize;
-        $sql="select ad.*,pro.name,pro.url,pro.logo,pro.alexa  from advertise ad,project pro where ad.project=pro.id and ".$conditions." order by id desc limit ".$startIndex.",".$pageSize;
+        $sql="select ad.*,pro.name,pro.url,pro.logo,pro.alexa  from advertise ad,project pro where ad.project=pro.id and ".$conditions." limit ".$startIndex.",".$pageSize;
         $results=$advertise->findSql($sql);
         foreach ($results as &$ad) {
             $pro=array(
@@ -242,7 +258,7 @@ class main extends spController
     }
     function newslist(){
         $news = spClass('news');
-        $results=$news->spLinker()->spPager($this->spArgs('page', 1), 20)->findAll(null,"id desc");
+        $results=$news->spLinker()->spPager($this->spArgs('page', 1), 15)->findAll(null,"id desc");
         $this->pager = $news->spPager()->getPager();
         $this->records=$results;
         $this->currentCategory=1;
@@ -269,13 +285,10 @@ class main extends spController
         $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳 
         $showtime=date("Y-m-d H:i:s",$endTime);
         $reportConditions=" (advertise=".$id." and impression!=0) and date>'".$showtime."'";
-        $reports=$report->findAll($reportConditions);
+        $reports=$report->findSql("select sum(impression) as impression from report where ".$reportConditions);
         $repCount=0;
         if($reports){
-            foreach ($reports as $rep) {
-                # code...
-                $repCount+=intval($rep['impression']);
-            }
+            $repCount=$reports[0]['impression'];
             $this->adCount=floor($repCount/3);
         }else{
             $this->adCount=0;
@@ -311,13 +324,10 @@ class main extends spController
         $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳 
         $showtime=date("Y-m-d H:i:s",$endTime);
         $reportConditions=" (advertise=".$id." and impression!=0) and date>'".$showtime."'";
-        $reports=$report->findAll($reportConditions);
+        $reports=$report->findSql("select sum(impression) as impression from report where ".$reportConditions);
         $repCount=0;
         if($reports){
-            foreach ($reports as $rep) {
-                # code...
-                $repCount+=intval($rep['impression']);
-            }
+            $repCount=$reports[0]['impression'];
             $this->adCount=floor($repCount/3);
         }else{
             $this->adCount=0;

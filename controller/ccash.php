@@ -72,6 +72,39 @@ class ccash extends spController
         }
         echo $flag;
     }
+
+    //管理人员专用
+    function finishCash(){
+        //查询对应提现记录
+        $cash = spClass("cash");
+        $id=intval($this->spArgs("id"));
+        $cashRecord=$cash->spLinker()->find("id=".$id);
+        //用户冻结金额变更
+        $user = spClass("user");
+        $newCold=$cashRecord['user']['cold']-$cashRecord['amount'];
+        $newUserRow = array('cold' => $newCold);
+        if($newCold<0){
+            echo "操作失败:账户提现异常，金额超出冻结金额！";
+        }else{
+            $user->update("id=".intval($cashRecord['user']['id']),$newUserRow); 
+            //提现记录状态变更
+            $newCashRow = array('state' => 1);
+            $cash->update("id=".$id,$newCashRow);
+            //添加站内提醒信息
+            $message = spClass("message");
+            $newMessageRow = array(
+                 'sender' =>0 , 
+                 'receiver' =>intval($cashRecord['user']['id']), 
+                 'title' =>"提现成功！", 
+                 'type'=>1,
+                 'content' =>"您在".$cashRecord['createtime']."申请提现"
+                            .$cashRecord['amount']."￥已经成功划到您的提现账户中，请及时查收。", 
+                );
+            $message->create($newMessageRow);
+            echo 1;
+        }
+        
+    }
 	
 
     

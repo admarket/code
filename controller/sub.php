@@ -327,14 +327,14 @@ class sub extends spController
                 "trade" => $trade['id'],
                 "click"=>1,
                 );
-            $reports=$report->findAll($impressionCondition);
-            if($reports){
-                $impression=count($reports);
-            }
-            
-            $reports=$report->findAll($clickCondition);
-            if($reports){
-                $click=count($reports);
+            $Sql="select sum(impression) as impression,sum(click) as click from report where trade=".intval($trade['id']);
+
+            $sumRecord = $report->findSql($Sql);
+            $impression=0;
+            $click=0;
+            if($sumRecord){
+                $impression=$sumRecord[0]['impression'];
+                $click=$sumRecord[0]['click'];
             }
             $trade['impression']=$impression;
             $trade['click']=$click;

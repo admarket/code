@@ -15,7 +15,13 @@
                     <li>
                       <a   href="<{spUrl c=cadmin a=news}>" style="font-weight:bold;color:red;">新闻中心</a>
                     </li>
-                   <{/if}>
+                     <li>
+                      <a   href="<{spUrl c=cadmin a=trades}>" style="font-weight:bold;color:green;">交易中心</a>
+                    </li>
+                     <li>
+                      <a   href="<{spUrl c=cadmin a=finance}>" style="font-weight:bold;color:blue;">财务中心</a>
+                    </li>
+                   <{else}>
                     <{if $smarty.session.user.type==1}>
                       <li <{if $current=="sitemanage"}>class="active"<{/if}>><a href="<{spUrl c=sub a=sitemanage}>">网站管理</a></li>
                       <li <{if $current=="admanage"}>class="active"<{/if}>><a href="<{spUrl c=sub a=admanage}>">广告位管理</a></li>
@@ -24,8 +30,7 @@
                         <li <{if $current=="effect"}>class="active"<{/if}>><a href="<{spUrl c=sub a=effect}>">购买记录</a></li>
                          <li <{if $current=="material"}>class="active"<{/if}>><a href="<{spUrl c=sub a=material}>">广告素材</a></li>
                       <{/if}>
-                   
-              
+                   <{/if}>
                 <li <{if $current=="inbox"}>class="active"<{/if}>>
                   <a href="<{spUrl c=sub a=inbox}>">站内信箱<span class="title">(<span id="unread-number">0</span>)</span>
                   </a>

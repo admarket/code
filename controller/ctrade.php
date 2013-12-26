@@ -16,6 +16,36 @@ class ctrade extends spController
 		echo json_encode($records);
 	}
 	
+	function undoTrade(){
+		$trade = spClass("trade");
+		$user = spClass("user");
+		$finance = spClass("finance");
+		$advertise = spClass("advertise");
+		$conditions = array("id" => $this->spArgs("id"));
+		
+		//恢复广告位状态
+		$newrow= array('state' => 2);
+		$advertise->update($newrow,"id=".$result['advertise']);
+		//挂起交易状态
+		$newrow = array('state' => 4);
+		$trade->update($newrow,$conditions);
+		//广告费用退还买家账户
+		$userCondition="id=".$result['buyer'];
+		$userResult=$user->find($userCondition);
+		$newrow = array('balance' => $userResult+$result['price']*$result['number']);
+		$user->update($newrow,$userCondition);
+		//删除财务记录
+		
+		$result=$trade->find($conditions);
+		echo 1;
+	}
+	function removeTrade(){
+		$trade = spClass("trade");
+		$conditions = array("id" => $this->spArgs("id"));
+		$newrow = array('state' => 4);
+		$trade->update($newrow,$conditions);
+		echo 1;
+	}
 	//带有事务支持！！！
 	function BuyAd(){
 		$trade = spClass("trade");
@@ -149,7 +179,7 @@ class ctrade extends spController
 
 				if($result){
 					$trade->query("COMMIT");
-					echo 1;
+					echo "购买成功！";
 				}else{
 					$trade->query("ROLLBACK");
 					echo "操作失败！未知原因导致购买失败！";

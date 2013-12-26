@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 管理员后台 - 新闻管理中心</title>
+    <title>广告位市场 - 管理员后台 - 财务管理中心</title>
    <{include file="meta.php"}>
     
     <!-- Bootstrap -->
@@ -118,7 +118,7 @@
             <div class="tabbable"> <!-- Only required for left/right tabs -->
               
               <ul class="nav nav-tabs" style="position:relative;">
-                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">全部新闻</a></li>
+                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">提现申请</a></li>
                 <span class="btn-group" style="position:absolute;right:0;">
                         
                 </span>
@@ -128,20 +128,52 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>标题</th>
-                        <th>时间</th>
+                        <th>编号</th>
+                        <th>提现申请人</th>
+                        <th>金额</th>
+                        <th>申请时间</th>
+                        <th>状态</th>
                         <th>操作</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <{foreach from=$records item=news}>
+                      <{foreach from=$records item=cash}>
                         <tr>
+                        
                         <td>
-                           <a href="<{spUrl c=main a=news}>?id=<{$news.id}>" class="blue-color" target="_blank"><{$news.title}></a>
+                           <{$cash.id}>
                         </td>
 
-                        <td><{$news.createTime}></td>
-                        <td><a class="btn btn-mini btn-danger tip" href="<{spUrl c=cnews a=removeNews}>?id=<{$news.id}>" title="删除"><i class=" icon-trash"></i></a></td>
+                        
+                        <td>
+                           <a class="tip" style="text-decoration:underline;color:#333;" title="手机：<{$cash.user.mobilephone}>">
+                            <{$cash.user.name}>
+                           </a>
+                        </td>
+                        <td>
+                           <{0.01*$cash.amount}>&yen;
+                        </td>
+                        <td>
+                          <{$cash.createtime}>
+                        </td>
+                        <td>
+                          <{if $cash.state==0}>
+                              <span class="label label-success">等待处理</span>
+                          <{elseif $cash.state==1}>
+                               <span class="label ">已处理</span>
+                          <{elseif $cash.state==2}>
+                               <span class="label label-warning">异常</span>
+                          <{else}>
+                          <{/if}>
+                        </td>
+                        <td>
+
+                          <{if $cash.state==0}>
+                          <a class="btn btn-mini btn-danger tip btn-finish" data-key="<{$cash.id}>" href="#" title="完成提现后点击">
+                            提现完成</a>
+
+                          <{/if}>
+                        </td>
                       </tr>
                       <{/foreach}>  
                     </tbody>
@@ -181,79 +213,7 @@
                         <{/if}>
                         </ul>
                       </div>  
-                        <div class="modal-body" style="padding:10px 20px;border-top:dashed 1px #ccc">
-    <form name="alipayment" action="<{spUrl c=crecharge a=createRecharge}>" method="post" target="_blank">
-        <div>
-                <p>
-                  <label>标题：</label>
-                </p>
-                <p>
-                    <input placeholder="请输入标题，长度5-40之间" type="text" class="input-xxlarge " id="txt-title"/>
-                </p>
-                <p>
-                  <label>来源：</label>
-                </p>
-                <p>
-                    <input placeholder="请输入新闻来源，拒绝盗用" type="text" class="input-xxlarge " id="txt-src" value="http://www.eadmarket.com/"/>
-                </p>
-                <p>
-                  <label>内容：</label>
-                </p>
-                <p>
-                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-      <div class="btn-group">
-        <a class=" btn  btn-mini dropdown-toggle" data-toggle="dropdown" title="字体"><i class="icon-font"></i><b class="caret"></b></a>
-          <ul class="dropdown-menu">
-          </ul>
-        </div>
-      <div class="btn-group">
-        <a class="btn  btn-mini dropdown-toggle" data-toggle="dropdown" title="字号"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-          <li><a data-edit="fontSize 5"><font size="5">大</font></a></li>
-          <li><a data-edit="fontSize 3"><font size="3">中</font></a></li>
-          <li><a data-edit="fontSize 1"><font size="1">小</font></a></li>
-          </ul>
-      </div>
-      <div class="btn-group">
-        <a class="btn btn-mini" data-edit="bold" title="加粗 (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-        <a class="btn btn-mini" data-edit="italic" title="斜体 (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-        <a class="btn btn-mini" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-        <a class="btn btn-mini" data-edit="underline" title="下划线 (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
-      </div>
-      <div class="btn-group">
-        <a class="btn btn-mini" data-edit="insertunorderedlist" title="加点"><i class="icon-list-ul"></i></a>
-        <a class="btn btn-mini" data-edit="insertorderedlist" title="编号"><i class="icon-list-ol"></i></a>
-        <a class="btn btn-mini" data-edit="outdent" title="减少缩进 (Shift+Tab)"><i class="icon-indent-left"></i></a>
-        <a class="btn btn-mini" data-edit="indent" title="缩进 (Tab)"><i class="icon-indent-right"></i></a>
-      </div>
-      <div class="btn-group">
-        <a class="btn btn-mini" data-edit="justifyleft" title="左对齐 (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-        <a class="btn btn-mini" data-edit="justifycenter" title="居中对齐 (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-        <a class="btn btn-mini" data-edit="justifyright" title="右对齐 (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-        <a class="btn btn-mini" data-edit="justifyfull" title="自适应 (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
-      </div>
-      <div class="btn-group">
-      <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" title="超链接"><i class="icon-link"></i></a>
-        <div class="dropdown-menu input-append">
-          <input class="span2" placeholder="URL" width="100px" type="text" data-edit="createLink"/>
-          <button class="btn" type="button">Add</button>
-        </div>
-        <a class="btn btn-mini" data-edit="unlink" title="移除超链接"><i class="icon-cut"></i></a>
-
-      </div>
-    </div>
-    <div id="editor">
-      请输入新闻内容&hellip;
-    </div>
-                </p>
-                <p>
-                  <a id="btn-publish" class="btn btn-small btn-success tip" id="btn-addAdvertise" title="发布新闻">
-                          <i class="icon-plus"></i> 发布新闻
-                        </a>
-                </p>
-        </div>
-      </form>
-  </div>
+                       
               </div>
             </div>
           </div>
@@ -270,49 +230,11 @@
 
 
 <script src="/js/jquery.message.js"></script>
-<script src="/js/jquery.hotkeys.js"></script>
-<script src="/js/bootstrap-wysiwyg.js"></script>
 <script>
-  $(function(){
-    function initToolbarBootstrapBindings() {
-      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
-            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
-            'Times New Roman', 'Verdana'],
-            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-      $.each(fonts, function (idx, fontName) {
-          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
-      });
-      $('a[title]').tooltip({container:'body'});
-      $('.dropdown-menu input').click(function() {return false;})
-        .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
-        .keydown('esc', function () {this.value='';$(this).change();});
-
-      $('[data-role=magic-overlay]').each(function () { 
-        var overlay = $(this), target = $(overlay.data('target')); 
-        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-      });
-      $('#voiceBtn').hide();
-      // if ("onwebkitspeechchange"  in document.createElement("input")) {
-      //   var editorOffset = $('#editor').offset();
-      //   $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
-      // } else {
-      //   $('#voiceBtn').hide();
-      // }
-    };
-    initToolbarBootstrapBindings();  
-    $('#editor').wysiwyg();
-     $('.tip').tooltip();
-    //window.prettyPrint && prettyPrint();
-  });
-$("#btn-publish").click(function(){
-    var title=$("#txt-title").val().replace("'","");
-    var src=$("#txt-src").val();
-    var content=$("#editor").html().replace("'","");
-    var creator=<{$smarty.session.user.id}>;
-    if(title.length<5||title.length>40){
-        $.msg("标题长度必须为5-40之间！");
-    }else{
-        $.post("<{spUrl c=cnews a=addNews}>", {  title:$.trim(title),src: $.trim(src),content:content,creator:creator},
+$(".btn-finish").click(function(){
+    var id=$(this).attr('data-key');
+  
+        $.post("<{spUrl c=ccash a=finishCash}>", {  id:$.trim(id)},
              function(data){
                if(data.indexOf("操作失败")<0){
                   $.msg('发布成功！','color:green;');
@@ -320,9 +242,9 @@ $("#btn-publish").click(function(){
                }
                else{
                   $.msg(data);
+                  window.location.reload();
                }
              });
-    }
 });
 </script>
   </body>

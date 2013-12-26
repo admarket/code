@@ -4,6 +4,12 @@
   <ul class="nav nav-list side-bar" id="nav-bar" style="margin:10px 0;padding:10px;">
     <li><a></a></li>
   </ul>
+  <div class="box" style="width:100%;border-radius:20px;padding:0px;font-size:14px;background-color:#88c300;box-shadow:1px 1px 1px #ccc;">
+    <a href="http://www.eadmarket.com/apps/site.apk" style="color:#fff;text-decoration:none;">
+      <img src="/img/apps/android.png" width="40px" height="40px" border="0" />
+      <span style="margin-left:10px;">站长查询工具（Android 4.1）</span>
+    </a>
+  </div>
 </div>
 
 <script  type="text/javascript">

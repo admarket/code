@@ -23,7 +23,7 @@
     <link href="/css/user.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/css/bootstrap-editable.css" rel="stylesheet">
-     <script src="/js/jquery-1.9.1.min.js"></script>
+     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
 
@@ -497,9 +497,10 @@ $(function () {
     var today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
     var startTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())+" 00:00:00";
     var endTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)+" 00:00:00";
+
     currentTrade=$("#first-trade").attr("data-key");
     $.ajax({
-       url: "<{spUrl c=creport a=GetJsonDataByTime}>", 
+       url: "<{spUrl c=creport a=GetJsonDataByHour}>", 
        data:{'startTime':startTime,'endTime':endTime,'trade':currentTrade},
         success: function(data){
           loadDataByHours(stringToJSON(data));
@@ -605,10 +606,10 @@ $(function () {
     currentType="day";
     var today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
     var startTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())+" 00:00:00";
-    var endTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)+" 00:00:00";
-
+    var nextDate=new Date(date.getTime()+24*3600*1000);
+    var endTime=nextDate.getFullYear()+"-"+(nextDate.getMonth()+1)+"-"+(nextDate.getDate())+" 00:00:00";
     $.ajax({
-       url: "<{spUrl c=creport a=GetJsonDataByTime}>", 
+       url: "<{spUrl c=creport a=GetJsonDataByHour}>", 
        data:{'startTime':startTime,'endTime':endTime,'trade':currentTrade},
         success: function(data){
           loadDataByHours(stringToJSON(data));
@@ -624,7 +625,8 @@ $(function () {
     days=[0,0,0,0,0,0,0];
     var today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
     var startTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-6)+" 00:00:00";
-    var endTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)+" 00:00:00";
+    var nextDate=new Date(date.getTime()+24*3600*1000);
+    var endTime=nextDate.getFullYear()+"-"+(nextDate.getMonth()+1)+"-"+(nextDate.getDate())+" 00:00:00";
     currentDatas=[1,2,3,4,5,6,7];
     var date=new Date();
 
@@ -632,7 +634,7 @@ $(function () {
       days[days.length-i]=date.getFullYear()+"-"+AddZero(date.getMonth()+1)+"-"+AddZero(date.getDate()-i+1);
     }
     $.ajax({
-       url: "<{spUrl c=creport a=GetJsonDataByTime}>", 
+       url: "<{spUrl c=creport a=GetJsonDataByDay}>", 
        data:{'startTime':startTime,'endTime':endTime,'trade':currentTrade},
         success: function(data){
           loadDataByDays(stringToJSON(data));
@@ -649,10 +651,13 @@ $(function () {
     days.length=31;
     var startTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(1)+" 00:00:00";
     var nextMonth=1;
+    var nextYear=date.getFullYear();
     if(date.getMonth()!=11){
       nextMonth=date.getMonth()+2;
+    }else{
+      nextYear+=1;
     }
-    var endTime=date.getFullYear()+"-"+(nextMonth)+"-"+1+" 00:00:00";
+    var endTime=(nextYear)+"-"+(nextMonth)+"-"+1+" 00:00:00";
     currentDatas=[1,2,3,4,5,6,7];
     var date=new Date();
     for(var i=0;i<date2.getDate();i++){
@@ -660,7 +665,7 @@ $(function () {
     }
 
     $.ajax({
-       url: "<{spUrl c=creport a=GetJsonDataByTime}>", 
+       url: "<{spUrl c=creport a=GetJsonDataByDay}>", 
        data:{'startTime':startTime,'endTime':endTime,'trade':currentTrade},
         success: function(data){
           loadDataByMonths(stringToJSON(data));
@@ -677,14 +682,10 @@ $(function () {
     var date=new Date();
     var today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
     var startTime=date.getFullYear()+"-01-"+(1)+" 00:00:00";
-    var nextMonth=1;
-    if(date.getMonth()!=11){
-      nextMonth=date.getMonth()+2;
-    }
     
     var endTime=date.getFullYear()+1+"-"+(1)+"-"+(1)+" 00:00:00";
     $.ajax({
-       url: "<{spUrl c=creport a=GetJsonDataByTime}>", 
+       url: "<{spUrl c=creport a=GetJsonDataByMonth}>", 
        data:{'startTime':startTime,'endTime':endTime,'trade':currentTrade},
         success: function(data){
           loadDataByYear(stringToJSON(data));

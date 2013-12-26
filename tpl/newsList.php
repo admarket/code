@@ -33,7 +33,6 @@
                     <thead>
                       <tr>
                         <th>标题</th>
-                        <th>作者</th>
                         <th>时间</th>
                       </tr>
                     </thead>
@@ -44,7 +43,6 @@
                            <a href="<{spUrl c=main a=news}>?id=<{$news.id}>" class="blue-color" target="_blank"><{$news.title}></a>
                         </td>
 
-                       <td><{$news.author.name}></td>
                         <td><{$news.createTime}></td>
                         
                       </tr>
@@ -52,7 +50,7 @@
                     </tbody>
                   </table>   
                 </div>
-                      <div class="pagination" align="center" > 
+                      <div class="pagination pagination-mini" align="center" > 
                         <ul>
                         <{if $pager}>
                         <!--在当前页不是第一页的时候，显示前页和上一页-->

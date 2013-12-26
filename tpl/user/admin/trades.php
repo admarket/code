@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 管理员后台 - 新闻管理中心</title>
+    <title>广告位市场 - 管理员后台 - 交易管理中心</title>
    <{include file="meta.php"}>
     
     <!-- Bootstrap -->
@@ -118,7 +118,7 @@
             <div class="tabbable"> <!-- Only required for left/right tabs -->
               
               <ul class="nav nav-tabs" style="position:relative;">
-                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">全部新闻</a></li>
+                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">全部交易</a></li>
                 <span class="btn-group" style="position:absolute;right:0;">
                         
                 </span>
@@ -128,20 +128,78 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>标题</th>
-                        <th>时间</th>
+                        <th>编号</th>
+                        <th>买家</th>
+                        <th>推广产品</th>
+                        <th>购买价格</th>
+                        <th>原始价格</th>
+                        <th>卖家</th>
+                        <th>网站</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>交易状态</th>
                         <th>操作</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <{foreach from=$records item=news}>
+                      <{foreach from=$records item=trade}>
                         <tr>
+                        
                         <td>
-                           <a href="<{spUrl c=main a=news}>?id=<{$news.id}>" class="blue-color" target="_blank"><{$news.title}></a>
+                           <{$trade.id}>
                         </td>
 
-                        <td><{$news.createTime}></td>
-                        <td><a class="btn btn-mini btn-danger tip" href="<{spUrl c=cnews a=removeNews}>?id=<{$news.id}>" title="删除"><i class=" icon-trash"></i></a></td>
+                        
+                        <td>
+                           <a class="tip" style="text-decoration:underline;color:#333;" title="手机：<{$trade.buyer.mobilephone}>">
+                            <{$trade.buyer.name}>
+                            </a>
+                        </td>
+                        <td align="center">
+                           <a target="_blank" class="blue-color" href="<{$trade.product.url}>">
+                            <img src="/img/adcontent/image/<{$trade.currentContent}>" width="50px" height="50px" border="0"/>
+                            <br/>
+                            <{$trade.product.name}>
+                          </a>
+                        </td>
+                        <td>
+                           <{$trade.price/100}>&yen;/天
+                        </td>
+                        <td>
+                           <{$trade.originalPrice/100}>&yen;/天
+                        </td>
+                        <td>
+                           <a class="tip" style="text-decoration:underline;color:#333;" title="手机：<{$trade.seller.mobilephone}> ">
+                            <{$trade.seller.name}>
+                          </a>
+                        </td>
+                        <td>
+                           <a target="_blank" class="blue-color" href="<{$trade.siteUrl}>">
+                            <{$trade.siteName}>
+                          </a>
+                        </td>
+                        <td><{$trade.startTime}></td>
+                        <td><{$trade.endTime}></td>
+                        <td>
+                          <{if $trade.state==0}>
+                              <span class="label label-success">正常</span>
+                          <{elseif $trade.state==1}>
+                               <span class="label ">已过期</span>
+                          <{elseif $trade.state==2}>
+                               <span class="label label-warning">等待确认</span>
+                          <{else}>
+                          <{/if}>
+                        </td>
+                        <td>
+
+                          <{if $trade.state==2}>
+                          <a class="btn btn-mini btn-danger tip" href="<{spUrl c=ctrade a=undoTrade}>?id=<{$trade.id}>" title="撤销交易">
+                            <i class=" icon-reply"></i></a>
+                          <{elseif $trade.state==1}>
+                             <a class="btn btn-mini btn-danger tip" href="<{spUrl c=ctrade a=removeTrade}>?id=<{$trade.id}>" title="删除交易">
+                            <i class=" icon-trash"></i></a>
+                          <{/if}>
+                        </td>
                       </tr>
                       <{/foreach}>  
                     </tbody>

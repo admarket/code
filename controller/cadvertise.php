@@ -185,8 +185,8 @@ class cadvertise extends spController
           echo json_encode($result);
           echo ";";
           ////如果广告位状态为已经出售，查询交易信息
-          if($result['state']=='1'){
-           
+          if($result['state']==1){
+            
             $conditions = array("advertise"=>$this->spArgs('aid')); // 根据id查找指定的广告位
             $result=$trade->spLinker()->find($conditions,"id desc");
 
@@ -199,8 +199,8 @@ class cadvertise extends spController
                             'trade' => $result['id'],
                             'impression' => 1,
                             'click' => 0,
-                            'buyer' => $result['buyer'],
-                            'seller' => $result['seller'],
+                            'buyer' => $result['buyer']['id'],
+                            'seller' => $result['seller']['id'],
                             'ip' => $ip,
                             );
                 $report->create($newrow);
@@ -219,7 +219,7 @@ class cadvertise extends spController
             echo ";";
           }else{
             $report=spClass('report');//添加数据统计信息
-            $reportCondition=array('ip' => $ip,'advertise'=>$this->spArgs('aid'));
+            $reportCondition=array('ip' => $ip,'advertise'=>intval($this->spArgs('aid')));
             $repResult=$report->find($reportCondition);
             if($repResult){
                 $uprow=array(
@@ -269,8 +269,8 @@ class cadvertise extends spController
                           'trade' => $result['id'],
                           'impression' => 0,
                           'click' => 1,
-                          'buyer' => $result['buyer'],
-                          'seller' => $result['seller'],
+                           'buyer' => $result['buyer']['id'],
+                            'seller' => $result['seller']['id'],
                           'ip' => $ip,
                           );
               $report->create($newrow);

@@ -437,7 +437,7 @@
             $.post("<{spUrl c=ctrade a=BuyAd}>", {  advertise:<{$ad.id}>,price: <{0.01*$ad.price}>,buyPrice: <{(0.01*(0.01*$ad.fee+1)*$ad.price)}>,product:currentProduct,number:currentNumber,seller:<{$ad.base.owner}>,adcontentNumber:contentNumber},
              function(data){
               //alert(data);
-               if(data==1){
+               if(data.indexOf("购买成功")>-1){
                  $("#btn-pay").attr('class','btn btn-success disabled');
                   $.msg('购买成功！','color:green;');
 

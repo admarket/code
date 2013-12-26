@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 全球首家中文网络广告位交易平台 </title>
+    <title>广告位市场 - 网络广告位交易、发布、管理平台  </title>
      <{include file="meta.php"}>
     <{include file="style.php"}>
     <{include file="script.php"}>
@@ -61,6 +61,20 @@
                           <a class="state" data-range="0" style="margin-left:20px;" ><span class="condition">未出售</span></a>
                           <a class="state" data-range="1" style="margin-left:20px;" ><span class="condition">已出售</span></a>
                           <a class="state" data-range="2" style="margin-left:20px;" ><span class="condition">可预订</span></a>
+                        </div>
+                    </div>
+                    <div class="row-fluid" style="padding:0px;margin:0;">
+                        <div class="span2 title" style="width:13%;">
+                          排序方式：
+                        </div>
+                        <div class="span10 order-box" style="padding:0;margin:0;">
+                          <a class="order" data-range="0" style="margin-left:20px;" ><span class="condition">默认</span></a>
+                          <a class="order" data-range="1" style="margin-left:20px;" >
+                            <span class="condition">价格升序&nbsp;<i class=" icon-arrow-up"></i></span>
+                          </a>
+                          <a class="order" data-range="2" style="margin-left:20px;" >
+                            <span class="condition">价格降序&nbsp;<i class=" icon-arrow-down"></i></span>
+                          </a>
                         </div>
                     </div>
                      <div class="row-fluid " style="padding:0px;margin:0;">
@@ -201,6 +215,9 @@
                if($('#currentState').val()!=""){
                   alexaBaseUrl+='&state='+$('#currentState').val();
               }
+              if($('#currentOrder').val()!=""){
+                  alexaBaseUrl+='&order='+$('#currentOrder').val();
+              }
            $('.alexa-box').children().each(function(){
               if($(this).attr('data-range')!=""){
                 var currentAlexaBaseUrl=alexaBaseUrl+'&alexa='+$(this).attr('data-range');
@@ -222,6 +239,9 @@
                if($('#currentState').val()!=""){
                   priceBaseUrl+='&state='+$('#currentState').val();
               }
+              if($('#currentOrder').val()!=""){
+                  priceBaseUrl+='&order='+$('#currentOrder').val();
+              }
            $('.price-box').children().each(function(){
               if($(this).attr('data-range')!=""){
                 var currentPriceBaseUrl=priceBaseUrl+'&price='+$(this).attr('data-range');
@@ -242,6 +262,9 @@
                if($('#currentPrice').val()!=""){
                   stateBaseUrl+='&price='+$('#currentPrice').val();
               }
+              if($('#currentOrder').val()!=""){
+                  stateBaseUrl+='&order='+$('#currentOrder').val();
+              }
            $('.state-box').children().each(function(){
               if($(this).attr('data-range')!=""){
                 var currentStateBaseUrl=stateBaseUrl+'&state='+$(this).attr('data-range');
@@ -250,6 +273,27 @@
                 $(this).attr('href',stateBaseUrl);
               }
                if($(this).attr('data-range')==$('#currentState').val()){
+                  $(this).attr('class','label condition');
+                }
+            });
+           var orderBaseUrl=keywordUrl;
+            if($('#currentAlexa').val()!=""){
+                  orderBaseUrl+='&alexa='+$('#currentAlexa').val();
+              }
+               if($('#currentPrice').val()!=""){
+                  orderBaseUrl+='&price='+$('#currentPrice').val();
+              }
+              if($('#currentState').val()!=""){
+                  orderBaseUrl+='&state='+$('#currentState').val();
+              }
+           $('.order-box').children().each(function(){
+              if($(this).attr('data-range')!=""){
+                var currentOrderBaseUrl=orderBaseUrl+'&order='+$(this).attr('data-range');
+                $(this).attr('href',currentOrderBaseUrl);
+              }else{
+                $(this).attr('href',orderBaseUrl);
+              }
+               if($(this).attr('data-range')==$('#currentOrder').val()){
                   $(this).attr('class','label condition');
                 }
             });
