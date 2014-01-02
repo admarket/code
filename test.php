@@ -37,21 +37,10 @@
         <div class="span9 offset3 box" style="margin-top:0px;border-radius:5px;box-shadow:0px 1px 1px #ddd;padding:20px;line-height:2;">
             <div id="privacy">
               <p> 
-<div class="admarket_ad" style="display:inline;" aid="87" id="admarket_box_87"></div>
-<script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://localhost/?c=cadvertise&a=GetADCode&aid=87"></script>
-<script type="text/javascript" charset="utf-8" id="admarket_js_87" src="http://localhost/js/ad.js?aid=87"></script>
-<!--Eadmarket ad code-->
-<script type="text/javascript" charset="utf-8">
-(function(){
-  var eadmarket=document.createElement('script');
-  eadmarket.type="text/javascript";
-  eadmarket.async=true;
-  eadmarket.charset="utf-8";
-  eadmarket.src="http://localhost/js/ad.js?aid=87";
-});
-</script>             
-                            </div>
-                             
+<div class="admarket_ad" style="display:inline-block;" aid="111" id="admarket_box_111"></div>
+<script type="text/javascript" charset="utf-8"  src="http://localhost?c=cadvertise&a=GetADCode&aid=111"></script> 
+<script type="text/javascript" charset="utf-8"  src="http://localhost/js/ad.js"></script>
+                          
                              
                              我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
 <h5>我们承诺做到如下几点：</h5>
@@ -71,30 +60,5 @@
     </div>
     <!--footer content-->
     <{include file="foot.php"}>
-
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $(".btn").click(function(){
-          $(".btn").button('loading');
-          $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
-           function(data){
-             if(data){
-              $("#alert-msg").hide();
-                window.location.href="<{spUrl c=sub a=dashboard}>";
-             }else{
-              $("#alert-msg").show();
-              $('.btn').button('toggle');
-              $('.btn').button('reset');
-             }
-           });
-          
-      });
-      $(".nav-stacked li a").click(function(){
-        $(".nav-stacked li a.active").removeClass("active");
-          $(this).addClass("active");
-          
-      });
-    </script>
   </body>
 </html>

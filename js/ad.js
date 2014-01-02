@@ -64,16 +64,19 @@ var style='width:'+admarket_advertise.width+'px;height:'+admarket_advertise.heig
                 //videoURI=baseURL+"img/adcontent/video/selling.swf";
 
                 admarket_adBox.setAttribute('style',style);
-                if(admarket_advertise.style!=""&&admarket_advertise.style!="undefined"){
-                    admarket_adBox.setAttribute('style',style+admarket_advertise.style);
-                }
+                
                 admarket_adBox.setAttribute('title',txtURI);
                 admarket_adBox.setAttribute('admarket_url',targetURL);
                 admarket_adBox.setAttribute('onclick','admarket_goto(this);');
             }else{
                 admarket_adcontent='<a href="'+targetURL+'" target="_blank" style="font-size:'+admarket_advertise.width+'px">'+txtURI+'</a>'
             }
-           
+           if(admarket_advertise.default_display_content!=""&&admarket_advertise.default_display_content!=undefined){
+                admarket_adBox.setAttribute('style',"");
+                admarket_adBox.setAttribute('title',"");
+                admarket_adBox.setAttribute('onclick','');
+                admarket_adcontent=admarket_advertise.default_display_content;
+            }
             
         }
 
@@ -126,7 +129,16 @@ var style='width:'+admarket_advertise.width+'px;height:'+admarket_advertise.heig
        // adBox.setAttribute('onclick','goto(this);');
         //adBox.setAttribute('onmouseover','changeBGColor(this)');
         //adBox.setAttribute('style',style);
+        while(admarket_adcontent.indexOf("<script")>-1){
+            var startIndex=admarket_adcontent.indexOf("<script");
+            var endIndex=admarket_adcontent.indexOf("</script>");
+            var scriptStr=admarket_adcontent.substring(startIndex,endIndex+9);
+            document.write(scriptStr);
+            admarket_adcontent=admarket_adcontent.replace(scriptStr,"");
+        }
         admarket_adBox.innerHTML=admarket_adcontent;
-        
+
+        //document.write(admarket_adcontent);
     }  
 }
+

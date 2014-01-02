@@ -216,10 +216,13 @@
                               <{/if}>
                             
                           </td>
-                          <td style="width:50px;"> <a  class="textarea-editable"
+                          <td style="width:50px;overflow:hidden;"> 
+                            <a  class="textarea-editable"
                                data-pk="<{$advertise.id}>"
                                data-type="textarea"
-                               data-name="advertiseStyle"><{$advertise.style}>
+                               data-name="defaultDisplay"
+                               data-value=" <{$advertise.default_display_content}>">
+                               <{$advertise.default_display_content|truncate:30}></span>
                                 </a>
 
                           </td>
@@ -461,10 +464,10 @@ $('.select-editable').editable({
           if($.trim(value) == '') {
               return '该字段不能为空';
           }
-          else if($.trim(value).length>100) {
-              return '长度不能超过100';
+          else if($.trim(value).length>1000) {
+              return '长度不能超过1000';
           }
-      }
+        }
   });
   $('.number-editable').editable({
         type: 'text',

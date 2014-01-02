@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 网络广告位交易、发布、管理平台 </title>
+    <title>广告位市场 - 网络广告位交易、发布、投放、管理平台 </title>
     <{include file="meta.php"}>
     <{include file="style.php"}>
     <{include file="script.php"}>

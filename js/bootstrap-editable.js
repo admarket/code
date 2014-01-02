@@ -33,6 +33,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
             //set initial value
             //todo: may be add check: typeof str === 'string' ? 
             this.value = this.input.str2value(this.options.value); 
+            //this.value = this.input.str2value(this.options.value); 
         },
         initTemplate: function() {
             this.$form = $($.fn.editableform.template); 

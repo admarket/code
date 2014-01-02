@@ -59,7 +59,7 @@
                 <div style="padding:20px;position:relative;overflow-hidden;">
                   <div align="left">
                     <h6><{$advertise.title}></h6>
-                    <div><{$advertise.content}></div>
+                    <div><{$advertise.content|truncate:30}></div>
                   </div>
                   <p style="padding:10px;">
                     <a class="btn btn-small  btn-primary" target="_blank" href="<{spUrl c=main a=go}>?url=<{$advertise.base.url}>">浏览网站</a>

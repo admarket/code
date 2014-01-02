@@ -47,31 +47,34 @@ class main extends spController
         $this->solds=$solds;
         $this->display("index.php"); // 首页
 	}
-
+    function replaceStr($str){
+        $result=strip_tags($str);
+        $result=str_replace('(',"",$result);
+        $result=str_replace(')',"",$result);
+        $result=str_replace('&quot;',"",$result);
+        $result=str_replace('"',"",$result);
+        return $result;
+    }
     //条件筛选广告位
     function result(){
         $type = spClass('type');
         $advertise=spClass('advertise');
         spClass('advertise')->pk = 'ad.id';
 
-        $keyword=strip_tags(urldecode($this->spArgs("keyword")));
-        $category=strip_tags($this->spArgs("category"));
-        $currentPage=strip_tags($this->spArgs("page"));
-        $currentAlexa=strip_tags($this->spArgs("alexa"));
-        $currentOrder=strip_tags($this->spArgs("order"));
-        
+        $keyword=$this->replaceStr(urldecode($this->spArgs("keyword")));
+        $category=$this->replaceStr($this->spArgs("category"));
+        $currentPage=$this->replaceStr($this->spArgs("page"));
+        $currentAlexa=$this->replaceStr($this->spArgs("alexa"));
+        $currentOrder=$this->replaceStr($this->spArgs("order"));
+        $currentPrice=$this->replaceStr($this->spArgs("price"));
+        $currentState=$this->replaceStr($this->spArgs("state"));
 
         if(trim($currentAlexa)!=""){
              $currentAlexa=explode(',', $currentAlexa);
         }
-            
-        $currentPrice=strip_tags($this->spArgs("price"));
          if(trim($currentPrice)!=""){
              $currentPrice=explode(',', $currentPrice);
-        }
-
-        $currentState=strip_tags($this->spArgs("state"));
-
+        }      
         if($keyword==''){
             $keyword="";
         }
@@ -96,29 +99,29 @@ class main extends spController
         if($currentState!=""){
             $conditions =$conditions." and ad.state=".$advertise->escape($currentState);
         }
-        $this->keyword=trim($keyword);
+        $this->keyword=strip_tags(trim($keyword));
         //dump($category);
         if(isset($keyword)&&$keyword!=""){
             $conditions = $conditions.' and (pro.name like '.$advertise->escape('%'.$this->keyword.'%');
             $conditions= $conditions." or pro.description like ".$advertise->escape('%'.$this->keyword.'%').')';
         }
-        $this->currentCategory=$category;
+        $this->currentCategory=strip_tags($category);
         //dump($conditions);
-        $this->currentPage=$currentPage;
+        $this->currentPage=strip_tags($currentPage);
         if($currentAlexa!=""){
-            $this->currentAlexa=$currentAlexa[0].",".$currentAlexa[1];
+            $this->currentAlexa=strip_tags($currentAlexa[0].",".$currentAlexa[1]);
         }
         if($currentState!=""){
-            $this->currentState=$currentState[0];
+            $this->currentState=strip_tags($currentState[0]);
         }
         if($currentPrice!=""){
-            $this->currentPrice=$currentPrice[0].",".$currentPrice[1];
+            $this->currentPrice=strip_tags($currentPrice[0].",".$currentPrice[1]);
         }
 
         //增加排序查询
         $orderCondition=" order by id desc";
         if($currentOrder!=""){
-            $this->currentOrder=$currentOrder;
+            $this->currentOrder=strip_tags($currentOrder);
             if($currentOrder==1){//价格升序
                 $orderCondition=" order by price asc,id desc";
             }else if($currentOrder==2){
@@ -248,7 +251,7 @@ class main extends spController
     function news(){
         $news = spClass('news');
 
-        $conditions =" id=".strip_tags($this->spArgs("id"));
+        $conditions =" id=".$news->escape(strip_tags($this->spArgs("id")));
         $result = $news->spLinker()->find($conditions);
 
         $this->news=$result;

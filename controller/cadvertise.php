@@ -66,9 +66,9 @@ class cadvertise extends spController
                          'content' => $this->spArgs('value'),
                         );
                   break;
-                case "advertiseStyle":
+                case "defaultDisplay":
                    $newrow = array(
-                         'style' => $this->spArgs('value'),
+                         'default_display_content' => $this->spArgs('value'),
                         );
                   break;
                 case "format":

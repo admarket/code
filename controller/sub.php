@@ -75,6 +75,7 @@ class sub extends spController
                     $process=floor((time()-strtotime($result['startTime']))/(strtotime($result['endTime'])-strtotime($result['startTime']))*100);//计算广告出售进度
                     $ad['startTime']=$result['startTime'];
                     $ad['endTime']=$result['endTime'];
+                    $ad['default_display_content']=htmlspecialchars($ad['default_display_content']);
                 }else{
                     $process=0;
                 }

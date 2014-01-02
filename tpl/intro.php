@@ -8,7 +8,7 @@
                 </a>
               </span>
               <span class="span3" style="padding:0px;">
-                <a class="red-color" target="_blank"  href="http://wpa.qq.com/msgrd?v=3&uin=4006776&site=qq&menu=yes">
+                <a class="red-color" target="_blank"  href="http://wpa.qq.com/msgrd?v=3&uin=2017308350&site=qq&menu=yes">
                   <i class="icon-phone"></i> &nbsp;如有使用方面的疑问请联系客服。
                 </a>
               </span> 
