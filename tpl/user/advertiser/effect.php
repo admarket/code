@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 广告主 - 购买记录</title>
+    <title>广告位市场 - 广告主 - 效果统计</title>
    <{include file="meta.php"}>
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -284,8 +284,11 @@
                             <p>到期时间：
                              </p>
                               <h5 class="orange-color" >
-                              
+                              <{if $trade.state == 2}>
+                                尚未开始计费
+                              <{else}>
                                <{$trade.endTime|date_format:'%Y-%m-%d'}>
+                               <{/if}>
                               </h5>
                             
                           </td>
@@ -624,14 +627,16 @@ $(function () {
     var date=new Date();
     days=[0,0,0,0,0,0,0];
     var today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
-    var startTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-6)+" 00:00:00";
+    var startDate=new Date(date.getTime()-7*24*3600*1000);
+    var startTime=startDate.getFullYear()+"-"+(startDate.getMonth()+1)+"-"+(startDate.getDate())+" 00:00:00";
+    //var startTime=new Date(date.getTime()-7*24*3600*1000);
     var nextDate=new Date(date.getTime()+24*3600*1000);
     var endTime=nextDate.getFullYear()+"-"+(nextDate.getMonth()+1)+"-"+(nextDate.getDate())+" 00:00:00";
     currentDatas=[1,2,3,4,5,6,7];
     var date=new Date();
-
-    for(var i=days.length;i>=0;i--){
-      days[days.length-i]=date.getFullYear()+"-"+AddZero(date.getMonth()+1)+"-"+AddZero(date.getDate()-i+1);
+    for(var i=0;i<days.length;i++){
+      var startDate=new Date(date.getTime()-(7-i-1)*24*3600*1000);
+      days[i]=startDate.getFullYear()+"-"+AddZero(startDate.getMonth()+1)+"-"+AddZero(startDate.getDate());
     }
     $.ajax({
        url: "<{spUrl c=creport a=GetJsonDataByDay}>", 

@@ -76,9 +76,9 @@
                          <div><strong>加入时间：</strong>
                           <span class="red-color"><{$joinDate}> </span>&nbsp;
                         </div>
-                        <div><strong>月平均展示：</strong>
+                        <!--<div><strong>月平均展示：</strong>
                           <span class="red-color"><{$adCount|number_format}> </span>&nbsp;次/月
-                        </div>
+                        </div>-->
                     </div> 
                     
                   </div>

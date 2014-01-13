@@ -311,6 +311,9 @@
             if($('#currentAlexa').val()!=""){
                 conditionUrl+='&alexa='+$('#currentAlexa').val();
             }
+            if($('#currentOrder').val()!=""){
+                conditionUrl+='&order='+$('#currentOrder').val();
+            }
             $('.newpage').each(function(){
               var value=$(this).attr('data-value');
               $(this).attr('href',conditionUrl+'&page='+value);

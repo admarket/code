@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>广告位市场 - 管理员后台 - 交易管理中心</title>
+    <title>广告位市场 - 管理员后台 - 审核中心</title>
    <{include file="meta.php"}>
     
     <!-- Bootstrap -->
@@ -118,7 +118,7 @@
             <div class="tabbable"> <!-- Only required for left/right tabs -->
               
               <ul class="nav nav-tabs" style="position:relative;">
-                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">全部交易</a></li>
+                <li class="active"><a href="#sec-sum" data-toggle="tab" id="tab-sum">广告位审核</a></li>
                 <span class="btn-group" style="position:absolute;right:0;">
                         
                 </span>
@@ -128,78 +128,46 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>编号</th>
-                        <th>买家</th>
-                        <th>推广产品</th>
-                        <th>购买价格</th>
-                        <th>原始价格</th>
-                        <th>卖家</th>
+                        <th>标题</th>
+                        <th >简介</th>
                         <th>网站</th>
-                        <th>开始时间</th>
-                        <th>结束时间</th>
-                        <th>交易状态</th>
-                        <th>操作</th>
+                        <th>状态</th>
+                        <th style="width:100px;">操作</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <{foreach from=$records item=trade}>
+                      <{foreach from=$records item=ad}>
                         <tr>
                         
                         <td>
-                           <{$trade.id}>
+                           <{$ad.title}>
                         </td>
 
-                        
-                        <td>
-                           <a class="tip" style="text-decoration:underline;color:#333;" title="手机：<{$trade.buyer.mobilephone}>">
-                            <{$trade.buyer.name}>
-                            </a>
-                        </td>
-                        <td align="center">
-                           <a target="_blank" class="blue-color" href="<{$trade.product.url}>">
-                            <img src="/img/adcontent/image/<{$trade.currentContent}>" width="50px" height="50px" border="0"/>
-                            <br/>
-                            <{$trade.product.name}>
-                          </a>
+                         <td>
+                           <{$ad.content}>
                         </td>
                         <td>
-                           <{$trade.price/100}>&yen;/天
+                           <a class="tip" target="_blank" style="text-decoration:underline;color:#333;" href="<{$ad.base.url}>">
+                            <{$ad.base.name}>
+                           </a>
                         </td>
                         <td>
-                           <{$trade.originalPrice/100}>&yen;/天
-                        </td>
-                        <td>
-                           <a class="tip" style="text-decoration:underline;color:#333;" title="手机：<{$trade.seller.mobilephone}> ">
-                            <{$trade.seller.name}>
-                          </a>
-                        </td>
-                        <td>
-                           <a target="_blank" class="blue-color" href="<{$trade.siteUrl}>">
-                            <{$trade.siteName}>
-                          </a>
-                        </td>
-                        <td><{$trade.startTime}></td>
-                        <td><{$trade.endTime}></td>
-                        <td>
-                          <{if $trade.state==0}>
-                              <span class="label label-success">正常</span>
-                          <{elseif $trade.state==1}>
-                               <span class="label ">已过期</span>
-                          <{elseif $trade.state==2}>
-                               <span class="label label-warning">等待确认</span>
-                          <{elseif $trade.state==-1}>
-                               <span class="label label-important">已撤销</span>
+                          <{if $ad.verify==0}>
+                              <span class="label ">待审核</span>
+                          <{elseif $ad.verify==1}>
+                               <span class="label  label-success">已通过</span>
                           <{else}>
+                               <span class="label label-important">未通过</span>
                           <{/if}>
                         </td>
                         <td>
 
-                          <{if $trade.state==2}>
-                          <a class="btn btn-mini btn-danger tip undo" data-url="<{spUrl c=ctrade a=undoTrade}>?id=<{$trade.id}>" title="撤销交易">
-                            <i class=" icon-reply"></i></a>
-                          <{elseif $trade.state==1}>
-                             <a class="btn btn-mini btn-danger tip" href="<{spUrl c=ctrade a=removeTrade}>?id=<{$trade.id}>" title="删除交易">
-                            <i class=" icon-trash"></i></a>
+                          <{if $ad.verify!=1}>
+                          <a class="btn btn-mini btn-success tip btn-pass" data-key="<{$ad.id}>">
+                            通过</a>
+                          <a class="btn btn-mini btn-danger tip btn-refuse" data-key="<{$ad.id}>">
+                            拒绝</a>
+
                           <{/if}>
                         </td>
                       </tr>
@@ -213,17 +181,17 @@
                         <!--在当前页不是第一页的时候，显示前页和上一页-->
                         <{if $pager.current_page != $pager.first_page}>
                         <li>
-                          <a href="<{spUrl  c=main a=newslist page=$pager.first_page}>">首页</a>
+                          <a href="<{spUrl  c=cadmin a=verify page=$pager.first_page}>">首页</a>
                         </li> 
                         <li>
-                          <a href="<{spUrl  c=main a=newslist page=$pager.prev_page}>">上一页</a> 
+                          <a href="<{spUrl  c=cadmin a=verify page=$pager.prev_page}>">上一页</a> 
                         </li>
                         <{/if}>
                         <!--开始循环页码，同时如果循环到当前页则不显示链接-->
                         <{foreach from=$pager.all_pages item=thepage}>
                                 <{if $thepage != $pager.current_page}>
                                         <li>
-                                          <a href="<{spUrl  c=main a=newslist page=$thepage}>"><{$thepage}></a>
+                                          <a href="<{spUrl  c=cadmin a=verify page=$thepage}>"><{$thepage}></a>
                                         </li>
                                 <{else}>
                                         <li><a><b><{$thepage}></b></a></li>
@@ -232,16 +200,16 @@
                         <!--在当前页不是最后一页的时候，显示下一页和后页-->
                         <{if $pager.current_page != $pager.last_page}> 
                         <li>
-                          <a href="<{spUrl c=main a=newslist page=$pager.next_page}>">下一页</a>
+                          <a href="<{spUrl c=cadmin a=verify page=$pager.next_page}>">下一页</a>
                         </li>
                         <li>
-                          <a href="<{spUrl c=main a=newslist page=$pager.last_page}>">末页</a>
+                          <a href="<{spUrl c=cadmin a=verify page=$pager.last_page}>">末页</a>
                         </li>
                         <{/if}>
                         <{/if}>
                         </ul>
                       </div>  
-                        
+                       
               </div>
             </div>
           </div>
@@ -259,16 +227,33 @@
 
 <script src="/js/jquery.message.js"></script>
 <script>
-$(".undo").click(function(){
-  var url=$(this).attr('data-url');
-        $.post(url, {  a:1},
+$(".btn-pass").click(function(){
+    var id=$(this).attr('data-key');
+  
+        $.post("<{spUrl c=cadvertise a=verify}>", {  id:$.trim(id)},
              function(data){
-               if(data.indexOf("操作失败")<0){
-                  $.msg('操作成功！','color:green;');
+               if(data==1){
+                  $.msg('审核成功！','color:green;');
                   window.location.reload();
                }
                else{
                   $.msg(data);
+                  //window.location.reload();
+               }
+             });
+});
+$(".btn-refuse").click(function(){
+    var id=$(this).attr('data-key');
+  
+        $.post("<{spUrl c=cadvertise a=refuse}>", {  id:$.trim(id)},
+             function(data){
+               if(data==1){
+                  $.msg('审核成功！','color:green;');
+                  window.location.reload();
+               }
+               else{
+                  $.msg(data);
+                  //window.location.reload();
                }
              });
 });

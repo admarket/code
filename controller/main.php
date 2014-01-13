@@ -11,8 +11,8 @@ class main extends spController
         $this->currentCategory=1;
 
         //最新的广告位
-        $this->advertises = $advertise->spLinker()->findAll(null,"id desc",null,"0,9");
-        $conditions="state=0";
+        $this->advertises = $advertise->spLinker()->findAll("verify=1","id desc",null,"0,9");
+        $conditions="verify=1 and state=0";
 
         //推荐的广告位
         $advertise->linker[0]['condition']='alexa>0';
@@ -86,7 +86,7 @@ class main extends spController
         }
         //dump($currentPrice);
 
-        $conditions=" 1=1";
+        $conditions=" ad.verify=1";
         if($category!=1){
              $conditions =$conditions." and pro.category=".$advertise->escape($category);
         }

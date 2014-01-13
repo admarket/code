@@ -10,7 +10,7 @@ class advertise extends spModel
                         'map' => 'base',    // 关联的标识
                         'mapkey' => 'project', // 本表与对应表关联的字段名
                         'fclass' => 'project', // 对应表的类名
-                        'fkey' => 'id',    // 对应表中关联的字段名
+                        'fkey' => 'id',
                         'enabled' => true     // 启用关联
                 ),
                 'trade'=>array(

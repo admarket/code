@@ -288,5 +288,31 @@ class cadvertise extends spController
             }
             
         }
+      //审核广告位
+      function verify(){
+        $advertise = spClass("advertise");
+        $conditions=" id=".$this->spArgs('id');
+        $row = array('verify'=>'1');
+        $result=$advertise->update($conditions, $row);
+        if($result) {
+          echo 1;  
+        }
+        else{
+          echo 0;
+        }
+      }
+      //拒绝广告位
+      function refuse(){
+        $advertise = spClass("advertise");
+        $conditions=" id=".$this->spArgs('id');
+        $row = array('verify'=>'-1');
+        $result=$advertise->update($conditions, $row);
+        if($result) {
+          echo 1;  
+        }
+        else{
+          echo 0;
+        }
+      }
     
 }

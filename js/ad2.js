@@ -31,10 +31,13 @@ function admarket_getsmall(a,b){
 }
 
 
-var admarket_baseURL="http://www.eadmarket.com/";
-var admarket_adcontentURL="http://192.168.0.101:8080/advertise/view_advertise.htm?aid=";
-load_eadmarket_data();
-window.onload=load_eadmarekt_adcontent;
+var admarket_baseURL="http://www.eadmarket.com";
+
+var admarket_adcontentURL=admarket_baseURL+":8080/advertise/view_advertise.htm?aid=";
+//var admarket_adcontentURL="http://192.168.0.101:8080/advertise/view_advertise.htm?aid=";
+//load_eadmarket_data();
+
+load_eadmarket_adcontent();
  /** 
  * 向服务器请求广告数据
  **/ 
@@ -50,18 +53,21 @@ function load_eadmarket_data(){
              **/  
             var eadmarket_shell=document.createElement('script');
             eadmarket_shell.type="text/javascript";
-            eadmarket_shell.async=true;
+            eadmarket_shell.async=false;
             eadmarket_shell.charset="utf-8";
+            eadmarket_shell.onload=load_eadmarket_adcontent;
             eadmarket_shell.src=admarket_adcontentURL+aid;
-            var eadmarket_node = document.getElementsByTagName('script')[0];   
-            eadmarket_node.parentNode.appendChild(eadmarket_shell);//自己决定要引入JS文件的位置          
+            var eadmarket_node = document.getElementsByTagName('head')[0];   
+            eadmarket_node.appendChild(eadmarket_shell);//自己决定要引入JS文件的位置          
         }  
     }
 }
+
+ 
 /** 
  * 根据服务器返回数据加载广告内容
  **/ 
-function load_eadmarekt_adcontent(){
+function load_eadmarket_adcontent(){
     
     //获取页面内的所有广告位
     var admarket_ads=document.getElementsByClassName("admarket_ad");
@@ -97,25 +103,32 @@ function load_eadmarekt_adcontent(){
                         }
                         adcontainer.innerHTML=defaultContent; 
                     }else{
-                        //根据广告格式加载广告内容代码
-                        if(adcontent.type=="0"){//文字广告
-                            adcontent.content=adcontent.content.substring(0,parseInt(adcontent.height)-1);
-                            var textContent='<a style="font-size:'+adcontent.width+'px" href="'+adcontent.clickUrl+'" target="_blank">'+adcontent.content+'</a>';
-                            adcontainer.innerHTML=textContent;
-                        }else if(adcontent.type=="1"){//图片广告
-                            var imageContent='<a href="'+adcontent.clickUrl+'" target="_blank">';
-                            imageContent+='<img src="'+adcontent.content+'" width="'+adcontent.width+'px" height="'+adcontent.height+'px" border="0"/></a>';
-                            adcontainer.innerHTML=imageContent;
-                        }else if(adcontent.type=="2"){//视频广告
-                            var videoContent='';
-                             videoContent+='<object style="display:inline-block;cursor:pointer;" width="'+adcontent.width+'px" height="'+adcontent.height+'px" type="application/x-shockwave-flash" data="'+adcontent.content+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> ';
-                            videoContent+='<param name="movie" value="fla/xxx.swf" /><!--此处添加flash--> '; 
-                            videoContent+='<embed  style="display:inline-block;cursor:pointer;" src="'+adcontent.content+'"  width="'+adcontent.width+'px" height="'+adcontent.height+'px"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
-                            videoContent+='</object>';
-                            adcontainer.innerHTML=videoContent;
-                            //adcontainer.setAttribute('admarket_url',adcontent.clickUrl);
-                            //adcontainer.setAttribute('onclick','admarket_goto(this);');
+                        if(adcontent.status==1){//如果广告位未出售
+                             //根据广告格式加载广告内容代码
+                            if(adcontent.type=="0"){//文字广告
+                                adcontent.content=adcontent.content.substring(0,parseInt(adcontent.height)-1);
+                                var textContent='<a style="font-size:'+adcontent.width+'px" href="'+adcontent.clickUrl+'" target="_blank">'+adcontent.content+'</a>';
+                                adcontainer.innerHTML=textContent;
+                            }else if(adcontent.type=="1"){//图片广告
+                                var imageContent='<a href="'+adcontent.clickUrl+'" target="_blank">';
+                                imageContent+='<img src="'+adcontent.content+'" width="'+adcontent.width+'px" height="'+adcontent.height+'px" border="0"/></a>';
+                                adcontainer.innerHTML=imageContent;
+                            }else if(adcontent.type=="2"){//视频广告
+                                var videoContent='';
+                                 videoContent+='<object style="display:inline-block;cursor:pointer;" width="'+adcontent.width+'px" height="'+adcontent.height+'px" type="application/x-shockwave-flash" data="'+adcontent.content+'"  codebase="../../../download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"> ';
+                                videoContent+='<param name="movie" value="fla/xxx.swf" /><!--此处添加flash--> '; 
+                                videoContent+='<embed  style="display:inline-block;cursor:pointer;" src="'+adcontent.content+'"  width="'+adcontent.width+'px" height="'+adcontent.height+'px"  pluginspage="http://www.macromedia.com/go/getflashplayer"/>';
+                                videoContent+='</object>';
+                                adcontainer.innerHTML=videoContent;
+                                //adcontainer.setAttribute('admarket_url',adcontent.clickUrl);
+                                //adcontainer.setAttribute('onclick','admarket_goto(this);');
+                            }
+                        }else{
+                            var responseContent=decodeURIComponent(adcontent.content);
+                            document.write(responseContent);
+                            
                         }
+                       
                     } 
                 }else{//获取广告内容失败
                     //alert("loaded failed");

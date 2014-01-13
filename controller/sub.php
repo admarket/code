@@ -75,7 +75,7 @@ class sub extends spController
                     $process=floor((time()-strtotime($result['startTime']))/(strtotime($result['endTime'])-strtotime($result['startTime']))*100);//计算广告出售进度
                     $ad['startTime']=$result['startTime'];
                     $ad['endTime']=$result['endTime'];
-                    $ad['default_display_content']=htmlspecialchars($ad['default_display_content']);
+                    $ad['default_display_content']=$ad['default_display_content'];
                 }else{
                     $process=0;
                 }
@@ -296,7 +296,7 @@ class sub extends spController
         $startTime = time();  // 当前时间戳
         $endTime =$startTime + (365 * 24 * 60 * 60);  // N天后的时间戳 
         $showtime=date("Y-m-d H:i:s",$endTime);
-        $conditions = array("buyer" => $_SESSION['user']['id'],"startTime>".$showtime);//查询一年以内的交易记录
+        $conditions = array("buyer" => $_SESSION['user']['id'],"startTime>".$showtime." state>-1");//查询一年以内的交易记录
         $trades = $trade->spLinker()->findAll($conditions,'id DESC');
         $this->tradeCount=count($trades);//交易总数
         $this->sumFee=0;//总推广费用

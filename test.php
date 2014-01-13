@@ -37,10 +37,27 @@
         <div class="span9 offset3 box" style="margin-top:0px;border-radius:5px;box-shadow:0px 1px 1px #ddd;padding:20px;line-height:2;">
             <div id="privacy">
               <p> 
-<div class="admarket_ad" style="display:inline-block;" aid="111" id="admarket_box_111"></div>
-<script type="text/javascript" charset="utf-8"  src="http://localhost?c=cadvertise&a=GetADCode&aid=111"></script> 
-<script type="text/javascript" charset="utf-8"  src="http://localhost/js/ad.js"></script>
+<div class="admarket_ad" style="display:inline;" aid="1289" id="admarket_box_1289"><a href="http://www.eadmarket.com/?c=main&a=detail&project=345"></a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://www.eadmarket.com:8080/advertise/view_advertise.htm?aid=1289"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_1289" src="http://www.eadmarket.com/js/adshell.js?aid=1289"></script>
+                             <br>
+<div class="admarket_ad" style="display:inline;" aid="1288" id="admarket_box_1288"><a href="http://www.eadmarket.com/?c=main&a=detail&project=345"></a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://www.eadmarket.com:8080/advertise/view_advertise.htm?aid=1288"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_1288" src="http://www.eadmarket.com/js/adshell.js?aid=1288"></script>
+                             <br>
+<div class="admarket_ad" style="display:inline;" aid="1287" id="admarket_box_1287"><a href="http://www.eadmarket.com/?c=main&a=detail&project=345"></a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://www.eadmarket.com:8080/advertise/view_advertise.htm?aid=1287"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_1287" src="http://www.eadmarket.com/js/adshell.js?aid=1287"></script>
+                             <br>
+<div class="admarket_ad" style="display:inline;" aid="1286" id="admarket_box_1286"><a href="http://www.eadmarket.com/?c=main&a=detail&project=345"></a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://www.eadmarket.com:8080/advertise/view_advertise.htm?aid=1286"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_1286" src="http://www.eadmarket.com/js/adshell.js?aid=1286"></script>
+                             <br>
+<div class="admarket_ad" style="display:inline;" aid="1065" id="admarket_box_1065"><a href="http://www.eadmarket.com/?c=main&a=detail&project=345"></a></div>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://www.eadmarket.com:8080/advertise/view_advertise.htm?aid=1065"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_1065" src="http://www.eadmarket.com/js/adshell.js?aid=1065"></script>
                           
+                   
                              
                              我们保证我们的雇员和我方服务人员依法正确获得、使用和处理用户个人信息。为此，我们保证严格遵守国际通行隐私保护标准。除当地法律对此有更严格的限制条款外，此条款适用于全球范围。</p>
 <h5>我们承诺做到如下几点：</h5>
@@ -54,11 +71,11 @@
                 <h5>联系我们</h5>
                 公司地址：北京市昌平区青年创业大厦A座3A26<br/>
                 联系电话：010-60739009<br/>
+               
             </p>
         </div>
       </div>
     </div>
     <!--footer content-->
-    <{include file="foot.php"}>
   </body>
 </html>

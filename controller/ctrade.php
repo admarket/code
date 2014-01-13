@@ -21,23 +21,78 @@ class ctrade extends spController
 		$user = spClass("user");
 		$finance = spClass("finance");
 		$advertise = spClass("advertise");
-		$conditions = array("id" => $this->spArgs("id"));
-		
-		//恢复广告位状态
-		$newrow= array('state' => 2);
-		$advertise->update($newrow,"id=".$result['advertise']);
-		//挂起交易状态
-		$newrow = array('state' => 4);
-		$trade->update($newrow,$conditions);
-		//广告费用退还买家账户
-		$userCondition="id=".$result['buyer'];
-		$userResult=$user->find($userCondition);
-		$newrow = array('balance' => $userResult+$result['price']*$result['number']);
-		$user->update($newrow,$userCondition);
-		//删除财务记录
-		
+		$message= spClass("message");
+		$conditions = array("id" => $this->spArgs("id"),"state"=>2);
 		$result=$trade->find($conditions);
-		echo 1;
+		if(!$result){
+			echo '操作失败：不存在可撤销的交易！';
+			return false;
+		}else{
+			$trade->query("BEGIN");
+			//恢复广告位状态
+			$newrow= array('state' => 2);
+			$adFlag=$advertise->update("id=".$result['advertise'],$newrow);
+
+			if(!$adFlag){
+
+					$trade->query("ROLLBACK");
+					return false;
+			}
+			$advertiseResult=$advertise->spLinker()->find("id=".$result['advertise']);
+			//挂起交易状态
+			$newrow = array('state' => -1);
+			$tradeFlag=$trade->update($conditions,$newrow);
+			if(!$tradeFlag){
+
+					$trade->query("ROLLBACK");
+					return false;
+			}
+			//广告费用退还买家账户
+			$userCondition="id=".$result['buyer'];
+			$userResult=$user->find($userCondition);
+			$newrow = array(
+				'balance' => intval($userResult['balance'])+intval($result['price'])*intval($result['number'])
+				);
+			$userFlag=$user->update($userCondition,$newrow);
+			if(!$userFlag){
+
+					$trade->query("ROLLBACK");
+					return false;
+			}
+			//增加财务记录
+			$newFinance = array(
+				'user_id' => $result['buyer'], 
+				'type'=>'03',
+				'number'=>$result['price']*$result['number'],
+				'remark'=>'广告位预定失败通知！'
+				);
+			$financeFlag=$finance->create($newFinance);
+			if(!$financeFlag){
+
+					$trade->query("ROLLBACK");
+					return false;
+			}
+			//增加站内信通知
+			$newMessage = array(
+				'sender' => 0,
+				'receiver'=> $result['buyer'],
+				'title'=>'广告位预订失败退费',
+				'content'=>'很遗憾，您在'.$result['startTime'].'预定的网站‘'.$advertiseResult['base']['name']
+							.'’编号为'.$result['advertise']
+							.'的广告位预订失败，预定费用‘'.(intval($result['price'])*intval($result['number'])/100).'￥’已经退回到您的账户，请注意查收，如有疑问请及时联系客服',
+				'type'=>1,
+				);
+			$messageFlag=$message->create($newMessage);
+			if(!$messageFlag){
+					$trade->query("ROLLBACK");
+					return false;
+			}else{
+				$trade->query("COMMIT");
+				echo 1;
+			}
+			
+		}
+		
 	}
 	function removeTrade(){
 		$trade = spClass("trade");
@@ -50,7 +105,7 @@ class ctrade extends spController
 	function BuyAd(){
 		$trade = spClass("trade");
 		$advertiseID=$this->spArgs("advertise"); // 用spArgs接收spUrl传过来的ID
-		$product=$this->spArgs("product");
+		$productID=$this->spArgs("product");
 		$price=intval(floatval($this->spArgs("price"))*100);
 		$buyPrice=intval(floatval($this->spArgs("buyPrice"))*100);
 		$number=intval($this->spArgs("number"));
@@ -62,7 +117,7 @@ class ctrade extends spController
 		$newTrade = array(
                         "advertise" => $advertiseID , 
                         "adcontentNumber"=>$adcontentNumber,
-                        "product" => $product,
+                        "product" => $productID,
                         "price" => $buyPrice,
                         "originalPrice"=>$price,
                         "number" => $number ,
@@ -95,7 +150,7 @@ class ctrade extends spController
 			$adCheck=$advertise->find($conditions2);
 			if($adCheck){
 				echo '该广告位已经出售，请选择其他广告位';
-			}else if($product=""||$product==0){
+			}else if($productID=""||$productID==0){
 				echo '请先添加您的产品！';
 			}else{
 				//更新广告位状态为出售
@@ -134,6 +189,49 @@ class ctrade extends spController
 
 		        //添加交易记录
 				$result = $trade->create($newTrade); //添加交易记录
+				$newTradeID=$result;
+				if(!$result){
+					$trade->query("ROLLBACK");
+					return false;
+				}
+
+				//查询广告位相关信息
+				$advertiseResult=$advertise->find("id=".$advertiseID);
+
+				//查询产品相关信息
+				$prod=spClass("product");
+				//echo $product."123";
+				$product_url="null";
+				$display_content="null";
+				$productResult=$prod->find("id=".$this->spArgs("product"));
+				if($productResult){
+					$product_url=$productResult['url'];
+					$product_content="null";
+					if($advertiseResult['format']==0){
+						$product_content=explode("\n",$productResult['txt']);
+					}else if($advertiseResult['format']==1){
+						$product_content=explode(";",$productResult['image']);
+					}else if($advertiseResult['format']==2){
+						$product_content=explode(";",$productResult['video']);
+					}
+					$display_content=$product_content[$adcontentNumber];
+				}
+				
+
+				//添加合约记录
+				$contract=spClass("contract");
+				$newContract= array(
+					'advertise_id'=>$advertiseID,
+					'trade_id'=>$newTradeID,
+                	'status' => 1,  //默认状态为正常（1）
+                	'product_url'=>$product_url,
+                	'display_content'=>$display_content,
+                	'gmt_create'=>date("Y-m-d H:i:s", $startTime), 
+                	'gmt_modified'=>date("Y-m-d H:i:s", $startTime)
+		        );
+
+
+				$result = $contract->create($newContract); //添加合约记录
 				if(!$result){
 					$trade->query("ROLLBACK");
 					return false;
@@ -307,6 +405,48 @@ class ctrade extends spController
 
 		        //添加交易记录
 				$result = $trade->create($newTrade); //添加交易记录
+				$newTradeID=$result;
+				if(!$result){
+					$trade->query("ROLLBACK");
+					return false;
+				}
+
+								//查询广告位相关信息
+				$advertiseResult=$advertise->find("id=".$advertiseID);
+
+				//查询产品相关信息
+				$prod=spClass("product");
+				$product_url="null";
+				$display_content="null";
+				$productResult=$prod->find("id=".$this->spArgs("product"));
+				if($productResult){
+					$product_url=$productResult['url'];
+					$product_content="null";
+					if($advertiseResult['format']==0){
+						$product_content=explode("\n",$productResult['txt']);
+					}else if($advertiseResult['format']==1){
+						$product_content=explode(";",$productResult['image']);
+					}else if($advertiseResult['format']==2){
+						$product_content=explode(";",$productResult['video']);
+					}
+					$display_content=$product_content[$adcontentNumber];
+				}
+				
+
+				//添加合约记录
+				$contract=spClass("contract");
+				$newContract= array(
+					'advertise_id'=>$advertiseID,
+					'trade_id'=>$newTradeID,
+                	'status' => 1,  //默认状态为正常（1）
+                	'product_url'=>$product_url,
+                	'display_content'=>$display_content,
+                	'gmt_create'=>date("Y-m-d H:i:s", $startTime), 
+                	'gmt_modified'=>date("Y-m-d H:i:s", $startTime)
+		        );
+
+
+				$result = $contract->create($newContract); //添加合约记录
 				if(!$result){
 					$trade->query("ROLLBACK");
 					return false;

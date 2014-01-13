@@ -162,7 +162,7 @@
                         <th>广告位</th>
                         <th>格&nbsp;式</th>
                         <th>宽&nbsp;*&nbsp;高</th>
-                        <th>样式代码</th>
+                        <th>空闲代码</th>
                         <th>价格 &yen;/天</th>
                         <th>状态</th>
                         <th>交易进度</th>
@@ -269,8 +269,8 @@
                             <a class="btn btn-mini btn-success copy"
                              data-title="复制以下代码到您的网站" data-placement="top" data-html="true" 
                              data-content='<textarea class="textarea"><div class="admarket_ad" style="display:inline;" aid="<{$advertise.id}>" id="admarket_box_<{$advertise.id}>"><a href="http://www.eadmarket.com/?c=main&a=detail&project=<{$project.id}>"></a></div>
-                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>/?c=cadvertise&a=GetADCode&aid=<{$advertise.id}>"></script>
-                             <script type="text/javascript" charset="utf-8" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/ad.js?aid=<{$advertise.id}>"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_shell" src="http://<{$smarty.server.HTTP_HOST}>:8080/advertise/view_advertise.htm?aid=<{$advertise.id}>"></script>
+                             <script type="text/javascript" charset="utf-8" id="admarket_js_<{$advertise.id}>" src="http://<{$smarty.server.HTTP_HOST}>/js/adshell.js?aid=<{$advertise.id}>"></script>
                              </textarea>'>
                               <i class="icon-shopping-cart"></i> 
                             </a>
@@ -309,8 +309,11 @@
                   <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;怎样激活广告位？</strong> 点击出售代码列的&nbsp;
                   <a class="btn btn-mini btn-success">
                     <i class="icon-shopping-cart"></i>
-                  </a>&nbsp;按钮，复制代码到您需要添加广告位的位置即可。
+                  </a>&nbsp;按钮，复制代码到您需要添加广告位的位置即可。<br/>
+                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;设置广告空闲时展示内容：</strong> 点击编辑按钮，
+                  复制您希望展示的代码到“空闲代码列”即可，<span class="red-color">支持广告联盟代码</span>。
            </div>
+           
           </div>
           
         </div>
@@ -461,10 +464,7 @@ $('.select-editable').editable({
             $.msg("编辑成功！",'color:green;');
         },
         validate: function(value) {
-          if($.trim(value) == '') {
-              return '该字段不能为空';
-          }
-          else if($.trim(value).length>1000) {
+          if($.trim(value).length>1000) {
               return '长度不能超过1000';
           }
         }

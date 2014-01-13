@@ -48,5 +48,14 @@ class cadmin extends spController
          $this->display("user/admin/finance.php"); // 财务管理中心
     }
 
+     function verify(){
+         $advertise = spClass("advertise");
+         $results=$advertise->spPager($this->spArgs('page', 1), 10)->findAll("verify!=1","id desc");
+         $this->pager = $advertise->spPager()->getPager();
+         $results = $advertise->spLinker()->run($results);
+         $this->records=$results;
+         $this->display("user/admin/verify.php"); // 审核管理中心
+    }
+
     
 }
