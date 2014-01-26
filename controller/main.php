@@ -285,10 +285,11 @@ class main extends spController
         //查询该广告位的最近三个月的真实浏览次数/月
         $report=spClass('report');
         $startTime = time();  // 当前时间戳
-        $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳 
+        $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳
+
         $showtime=date("Y-m-d H:i:s",$endTime);
-        $reportConditions=" (advertise=".$id." and impression!=0) and date>'".$showtime."'";
-        $reports=$report->findSql("select sum(impression) as impression from report where ".$reportConditions);
+        $reportConditions=" advertise_id=".$id." and time_type=3 and time_value>unix_timestamp('".$showtime."')";
+        $reports=$report->findSql("select sum(display_num) as impression from report_comp where ".$reportConditions);
         $repCount=0;
         if($reports){
             $repCount=$reports[0]['impression'];
@@ -326,8 +327,8 @@ class main extends spController
         $startTime = time();  // 当前时间戳
         $endTime =$startTime - (90 * 24 * 60 * 60);  // N天后的时间戳 
         $showtime=date("Y-m-d H:i:s",$endTime);
-        $reportConditions=" (advertise=".$id." and impression!=0) and date>'".$showtime."'";
-        $reports=$report->findSql("select sum(impression) as impression from report where ".$reportConditions);
+        $reportConditions=" advertise_id=".$id." and time_type=3 and time_value>unix_timestamp('".$showtime."')";
+        $reports=$report->findSql("select sum(display_num) as impression from report_comp where ".$reportConditions);
         $repCount=0;
         if($reports){
             $repCount=$reports[0]['impression'];
